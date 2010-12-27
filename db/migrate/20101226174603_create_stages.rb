@@ -4,8 +4,7 @@ class CreateStages < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.integer :position
-      t.integer :project_id
-
+      t.references :project
       t.timestamps
     end
   end

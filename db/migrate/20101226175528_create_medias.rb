@@ -1,11 +1,8 @@
 class CreateMedias < ActiveRecord::Migration
   def self.up
     create_table :medias do |t|
-      t.string :label
-      t.string :link
-      t.integer :project_id
-      t.integer :statusupdate_id
-
+      t.string :label, :link
+      t.references :project, :statusupdate
       t.timestamps
     end
   end

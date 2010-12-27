@@ -2,8 +2,7 @@ class CreateJobs < ActiveRecord::Migration
   def self.up
     create_table :jobs do |t|
       t.string :name
-      t.integer :project_id
-
+      t.references :project
       t.timestamps
     end
   end
