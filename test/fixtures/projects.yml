@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  description: MyText
+  picture: 1
+  isInternal: false
+  status: MyString
+  visibility: MyString
+  link: MyString
+  owner: 1
+
+two:
+  title: MyString
+  description: MyText
+  picture: 1
+  isInternal: false
+  status: MyString
+  visibility: MyString
+  link: MyString
+  owner: 1
