@@ -1,4 +1,8 @@
 Gitrepo::Application.routes.draw do
+  resources :posts
+
+  devise_for :ldap_users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
