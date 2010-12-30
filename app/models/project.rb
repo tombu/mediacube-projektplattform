@@ -1,6 +1,8 @@
 class Project < ActiveRecord::Base
-  has_many :stages, :medias, :statusupdates, :jobs
-  has_and_belongs_to_many :categories, :users
+  attr_accessible :title, :status, :link, :description, :picture
   
-  validates :status, :inclusion => { :in => %w( idea inprogress completed ) }
+  has_and_belongs_to_many :categories
+  has_many :jobs
+  has_many :roles
+  has_many :users, :through => :roles
 end

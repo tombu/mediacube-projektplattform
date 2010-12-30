@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Gitrepo::Application.load_tasks
+Projektplattform::Application.load_tasks

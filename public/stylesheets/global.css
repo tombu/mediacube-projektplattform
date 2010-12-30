@@ -1,0 +1,1479 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* Global Settings Start */
+
+html {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #e6e6e6;
+	margin: 0;
+	padding: 0;
+	font-family: "Calibri", sans-serif;
+	background-image: url(../images/logo_bg.png);
+	background-repeat: none;
+	background-position: center -400px;
+}
+
+#wrapper {
+	width: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+#wrapper header {
+	width: 960px;
+	height: 200px;
+	left: 50%;
+	margin-left: -480px;
+	padding: 0 10px;
+	overflow: hidden;
+	float: left;
+	position: relative;
+}
+
+#logo {
+	height: 117px;
+	width: 460px;
+	margin: 25px 0 0 24px;
+	position: absolute;
+}
+
+#profilemenu {
+	width: 317px;
+	height: 35px;
+	background-color: #ffffff;
+	position: absolute;
+	-moz-border-radius: 0 0 7px 7px;
+	border-radius: 0 0 7px 7px;
+	margin: 0 0 0 645px;
+}
+
+#profilemenuborder {
+	width: 311px;
+	height: 32px;
+	border-bottom: 1px solid #bbb;
+	border-left: 1px solid #bbb;
+	border-right: 1px solid #bbb;
+	margin: 0 2px 2px 2px;
+	-moz-border-radius: 0 0 7px 7px;
+	border-radius: 0 0 7px 7px;
+}
+
+.user {
+	font-size: 12px;
+	width: 185px;
+	height: 22px;
+	text-align: center;
+	padding-top: 10px;
+	border-right: 1px solid #bbb;
+	float: left;
+}
+
+.icons {
+	width: 70px;
+	height: 33px;
+	border-right: 1px solid #bbb;
+	float: left;
+}
+
+.icons ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.icons ul li {
+	width: 20px;
+	float: left;
+	margin-left: 10px;
+	margin-top: 6px;
+}
+
+.icons ul li a {
+	width: 20px;
+	height: 20px;
+	text-indent: -10000px;
+	float: left;
+}
+/*
+.icons ul li.message {
+	background-image: url(../images/icon_message.png);
+}
+
+.icons ul li.project {
+	background-image: url(../images/icon_project.png);
+}*/
+
+.logout {
+	width: 54px;
+	float: left;
+	height: 22px;
+	text-align: center;
+	font-size: 11px;
+	padding-top: 10px;
+}
+
+.logout a {
+	text-decoration: none;
+	color: #bbb;
+}
+
+.logout a:hover {
+	color: #000000;
+}
+
+#menubar {
+	width: 960px;
+	height: 36px;
+	float: left;
+	margin-top: 165px;
+	position: absolute;
+}
+
+#menu {
+	width: 226px;
+	height: 35px;
+	position: absolute;
+	margin-left: 158px;
+}
+
+#menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	width: 230px;
+}
+
+#menu ul li {
+	width: 110px;
+	height: 35px;
+	float: left;
+	text-align: center;
+	background-color: #ffffff;
+	-moz-border-radius: 7px 0 0 0;
+	border-radius: 7px 0 0 0;
+	padding: 2px 2px 0 2px;
+}
+
+#menu ul li+li {
+	margin-left: 2px;
+	-moz-border-radius: 0 7px 0 0;
+	border-radius: 0 7px 0 0;
+}
+
+#menu ul li a {
+	width: 108px;
+	height: 26px;
+	border-top: 1px solid #bbb;
+	border-right: 1px solid #bbb;
+	border-left: 1px solid #bbb;
+	-moz-border-radius: 7px 0 0 0;
+	border-radius: 7px 0 0 0;
+	display: block;
+	color: #bbb;
+	text-decoration: none;
+	padding-top: 5px;
+}
+
+#menu ul li+li a {
+	-moz-border-radius: 0 7px 0 0;
+	border-radius: 0 7px 0 0;
+}
+
+#menu ul li a:hover, #menu ul li a.active {
+	color: #000000;
+	position: relative;
+	z-index: 1000;
+	background-color: #fff;
+}
+
+#searchbar {
+	margin-left: 645px;
+	position: absolute;
+	width: 313px;
+	height: 33px;
+	padding: 2px 2px 0 2px;
+	background-color: #ffffff;
+	-moz-border-radius: 7px 7px 0 0;
+	border-radius: 7px 7px 0 0;
+}
+
+#searchbar form {
+	width: 303px;
+	height: 23px;
+	border-top: 1px solid #bbb;
+	border-right: 1px solid #bbb;
+	border-left: 1px solid #bbb;
+	-moz-border-radius: 7px 7px 0 0;
+	border-radius: 7px 7px 0 0;
+	padding: 4px;
+	position: relative;
+	z-index: 1000;
+	background-color: #fff;
+}
+
+#searchbar form input.keyword {
+	margin: 0;
+	padding: 0 0 0 10px;
+	width: 178px;
+	height: 22px;
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 0 0 5px;
+	border-radius: 5px 0 0 5px;
+	float: left;
+}
+
+#searchbar form select.category {
+	width: 90px;
+	height: 24px;
+	margin: 0;
+	padding: 3px 0 0 0;
+	border: 0;
+	margin: 0 0 0 -5px;
+	/* background-image: url(../images/search.jpg);
+	background-repeat: no-repeat;*/
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
+	border-left: 1px solid #bbb;
+	float: left;
+}
+
+#searchbar form input.send {
+	width: 28px;
+	height: 24px;
+	float: left;
+	margin-left: 0;
+	text-indent: -10000px;
+	background-image: url(../images/searchicon.jpg);
+	background-position: -2px -1px;
+	background-repeat: no-repeat;
+	border: 1px solid #bbb;
+	-moz-border-radius: 0 5px 5px 0;
+	border-radius: 0 5px 5px 0;
+}
+
+section {
+	width: 100%;
+	background-color: #ffffff;
+	float: left;
+	position: relative;
+	z-index: 1;
+	margin-top: -4px;
+}
+
+#topborder {
+	width: 100%;
+	border-top: 1px solid #bbb;
+	margin-top: 2px;
+	overflow: hidden;
+}
+
+#contentwrapper {
+	width: 950px;
+	left: 50%;
+	margin-left: -470px;
+	padding: 15px 0 15px 10px;
+	float: left;
+	position: relative;
+}
+
+#sidebar {
+	width: 135px;
+	padding: 0;
+	float: left;
+}
+
+#sidebar h2 {
+	margin: 0;
+	padding: 0;
+	padding-bottom: 3px;
+	font-size: 12px;
+	text-transform: uppercase;
+	border-bottom: 1px solid #bbb;
+	font-weight: normal;
+}
+
+#sidebar ul {
+	margin: 15px 0 35px 0;
+	padding: 0;
+	list-style: none;
+	font-size: 12px;
+}
+
+#sidebar ul a {
+	color: #000000;
+	text-decoration: none;
+}
+
+#sidebar ul a:hover, #sidebar ul a.active {
+	font-weight: bold;
+}
+
+#overview {
+	width: 815px;
+	float: left;
+}
+
+.boxcontent {
+	width: 250px;
+	/*height: 327px;*/
+	height: 287px;
+	margin: 0 0 20px 19px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	-moz-box-shadow: 2px 2px 10px #d2d2d2;
+	-webkit-box-shadow: 2px 2px 10px #d2d2d2;
+	box-shadow: 2px 2px 10px #d2d2d2;
+	float: left;
+}
+
+.projectcategory {
+	height: 32px;
+	width: 74px;
+	margin: 10px -5px 0 0;
+	float: right;
+	padding-top: 3px;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	color: #fff;
+}
+
+.mmt {
+	background-image: url(../images/mmt.png);
+	background-repeat: no-repeat;
+}
+
+.mma {
+	background-image: url(../images/mma.png);
+	background-repeat: no-repeat;
+}
+
+.projectstatus {
+	float: right;
+	margin: 10px 10px 0 0;
+	width: 80px;
+	height: 35px;	
+}
+
+.projectstatus span {
+	text-indent: -10000px;
+	width: 25px;
+	height: 25px;
+	margin-left: 2px;
+	float: right;
+}
+
+.projectstatus span.statusconcept {
+	background-image: url(../images/statusconcept.png);
+	background-repeat: no-repeat;
+}
+
+.projectstatus span.statussearch {
+	background-image: url(../images/statussearch.png);
+	background-repeat: no-repeat;
+}
+
+.projectinfo {
+	width: 230px;
+	float: left;
+	margin: 10px 10px 5px 10px;
+}
+	
+.projectinfo h3 {
+	margin: 3px 0 10px 0;
+	padding: 0;
+	font-size: 16px;
+}
+
+.infotxt {
+	font-size: 11px;
+}
+
+.infotxt p {
+	margin: 5px 0 0 0;
+	padding: 0;
+}
+
+.follower {
+	font-size: 11px;
+	color: #00aeef;
+}
+
+.details {
+	float: right;
+}
+
+.details a {
+	font-size: 11px;
+	color: #000;
+}
+
+.details a:hover {
+	color: #666;
+}
+
+.projectadmin {
+	height: 25px;
+	width: 250px;
+	background-color: #f3f3f3;
+	float: left;
+	position: absolute;
+	/*margin-top: 302px;*/
+	margin-top: 262px;
+}
+
+.projectadmin .left, .projectadmin .right {
+	padding: 0;
+	font-size: 11px;
+	color: black;
+	margin: 6px 0 0 10px;
+	float: left;
+}
+.projectadmin .right { float: right; margin: 6px 10px 0 0; }
+
+.projectadmin a {
+	color: #00aeef;
+	text-decoration: none;
+}
+
+.projectadmin a:hover {
+	text-decoration: underline;
+}
+
+#footercontent {
+	width: 950px;
+	left: 50%;
+	margin-left: -470px;
+	padding: 15px 0 30px 10px;
+	overflow: hidden;
+	float: left;
+	position: relative;
+}
+
+.sitemap {
+	width: 150px;
+	margin-right: 10px;
+	float: left;
+}
+
+.sitemap h4 {
+	font-size: 16px;
+	text-transform: uppercase;
+	color: #666;
+	
+	margin-top: 5px;
+}
+
+.sitemap ul {
+	list-style: none;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+.sitemap ul li a {
+	color: #666;
+	text-decoration: none;
+	line-height: 150%;
+}
+
+.sitemap ul li a:hover {
+	color: #000;
+}
+
+#mediacube {
+	width: 400px;
+	float: right;
+	height: 100px;
+}
+
+#mediacube ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	float: right;
+	margin-right: 5px;
+}
+
+#mediacube ul li {
+	width: 90px;
+	height: 33px;
+	float: left;
+}
+
+#mediacube ul li+li {
+	margin-left: 66px;
+}
+
+#mediacube ul li.linkfh {
+	width: 82px;
+	height: 66px;
+}
+
+#mediacube ul li.linkmma {
+	text-indent: -10000px;
+	background-image:  url(../images/mma_logo.png);
+	margin-top: 15px;
+}
+
+#mediacube ul li.linkmmt {
+	text-indent: -10000px;
+	background-image:  url(../images/mmt_logo.png);
+	margin-top: 11px;
+}
+
+
+#mediacube ul li.linkfh {
+	text-indent: -10000px;
+	background-image:  url(../images/fh_logo.png);
+	margin-top: -4px;
+}
+	
+/* Global Setting End */
+
+
+/* projektansicht */
+
+#projectdetails {
+	float: left;
+	width: 550px;
+	padding: 0 5px;
+}
+
+#topbar {
+	width: 550px;
+	float: left;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 15px;
+}
+
+#projectstatus {
+	width: 200px;
+	float: left;
+}
+
+.icon {
+	text-indent: -10000px;
+	float: left;
+	width: 21px;
+	height: 21px;
+	background-color: #000;
+}
+/*
+.idea {
+	background-image: url(../images/icon_idea.png);
+}
+
+.concept {
+	background-image: url(../images/icon_concept.png);
+}
+
+.member {
+	background-image: url(../images/icon_member.png);
+}*/
+
+#projectdetails #projecthead {
+	width: 550px;
+	float: left;
+}
+
+#projectdetails #projecthead h5 {
+	font-size: 16px;
+	text-transform: uppercase;
+	color: #000;
+	font-weight: bold;
+	margin-bottom: 7px;
+	
+}
+
+#projectdetails #projecthead span.category {
+	font-size: 12px;
+	font-weight: normal;
+	margin-bottom: 10px;
+	padding: 3px 0 0 5px;
+}
+
+#projectdetails #projecthead .edit, #projectupdates h5 .edit, #media h5 .edit, #teammember h5 .edit, #follower h5 .edit, #searchingmember h5 .edit, #projectprogress h5 .edit {
+	float: right;
+	width: 21px;
+	height: 21px;
+}
+
+#projectupdates h5 .edit, #media h5 .edit, #teammember h5 .edit, #follower h5 .edit, #searchingmember h5 .edit, #projectprogress h5 .edit {
+	margin-top: -5px;
+}
+
+#projectdetails #projecthead .edit a, #projectupdates h5 .edit a, #media h5 .edit a, #teammember h5 .edit a, #follower h5 .edit a, #searchingmember h5 .edit a, #projectprogress h5 .edit a {
+	text-indent: -10000px;
+	/*background-image: url(../images/icon_edit.png);*/
+	height: 21px;
+	width: 21px;
+	background-color: #666;
+	position: absolute;
+}
+
+#projectdetails #projectinfo {
+	float: left;
+	width: 550px;
+	margin-bottom: 50px;
+}
+
+#projectdetails #projectinfo span.img {
+	float: left;
+	margin-right: 15px;
+}
+
+#projectdetails #projectinfo p {
+	font-size: 12px;
+	text-align: justify;
+	float: left;
+	margin: 0;
+}
+
+#projectdetails #projectupdates {
+	float: left;
+	width: 550px;
+	margin-bottom: 50px;
+}
+
+#projectdetails #projectupdates h5 {
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: normal;
+	display: block;
+	border-bottom: 1px solid #000;
+	padding-bottom: 2px;
+	margin: 0;
+}
+
+#projectdetails #projectupdates .update {
+	width: 550px;
+	padding: 10px 0;
+	border-bottom: 1px solid #000;
+	overflow: hidden;
+}
+
+#projectdetails #projectupdates .update .projectavatar {
+	width: 60px;
+	height: 60px;
+	float: left;
+	margin-right: 10px;
+	background-color: #666;
+}
+
+#projectdetails #projectupdates .update .updatecontent {
+	width: 480px;
+	float: left;
+}
+
+#projectdetails #projectupdates .update h6 {
+	
+	font-weight: bold;
+	font-size: 12px;
+	margin: 0;
+}
+
+#projectdetails #projectupdates .update p {
+	font-size: 12px;
+}
+
+#projectdetails #projectupdates .update p a {
+	font-size: 12px;
+	color: #000;
+	text-decoration: underline;
+}
+
+#projectdetails #projectupdates .update p a:hover {
+	color: #666;
+}
+
+#projectdetails #projectupdates .update .updatemedia img {
+	width: 60px;
+	height: 60px;
+	float: left;
+	margin-right: 10px;
+	background-color: #666;
+}
+	
+#projectdetails #projectupdates .update .updatemember {
+	width: 190px;
+	float: left;
+}
+	
+#projectdetails #projectupdates .update .updatemember img {
+	width: 40px;
+	height: 40px;
+	float: left;
+	margin-right: 10px;
+	background-color: #666;
+}
+
+#projectdetails #projectupdates .update .updatemember p {
+	float: left;
+	margin: 0;
+}
+
+#projectdetails #projectupdates .update .updatestatus img {
+	height: 22px;
+	width: 22px;
+	float: left;
+	margin-right: 10px;
+	background-color: #666;
+}
+
+#projectdetails #projectupdates .update .updatestatus p {
+	float: left;
+	margin: 0;
+}
+
+#projectdetails #media {
+	margin-bottom: 50px;
+	width: 550px;
+	float: left;
+	overflow: hidden;
+}
+
+#projectdetails #media h5 {
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: normal;
+	display: block;
+	border-bottom: 1px solid #000;
+	padding-bottom: 2px;
+	margin: 0;
+}
+
+#projectdetails #media img {
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+	float: left;
+	background-color: #666;
+}
+
+#rightbar {
+	width: 220px;
+	padding-left: 10px;
+	float: left;
+}
+
+#rightbar h5 {
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: normal;
+	display: block;
+	border-bottom: 1px solid #000;
+	padding-bottom: 2px;
+	margin: 0;
+}
+
+#rightbar #projectprogress {
+	margin-bottom: 35px;
+}
+
+#rightbar #searchingmember {
+	margin-bottom: 35px;
+}
+
+#rightbar #searchingmember ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 12px;
+	margin-top: 10px;
+}
+
+#rightbar #teammember {
+	margin-bottom: 35px;
+	overflow: hidden;
+}
+
+#rightbar #teammember #memberlist {
+	margin-top: 10px;
+}
+
+#rightbar #teammember .member {
+	width: 230px;
+	float: left;
+	margin-bottom: 10px;
+}
+
+#rightbar #teammember .member p {
+	font-size: 12px;
+	margin: 0;
+	float: left;
+	width: 180px;
+}
+
+#rightbar #teammember .member p span {
+	font-size: 11px;
+}
+
+#rightbar #teammember .member img {
+	float: left;
+	width: 40px;
+	height: 40px;
+	background-color: #666;
+}
+
+#rightbar #follower #followerlist {
+	margin-top: 10px;
+}
+
+#rightbar #follower #followerlist img {
+	width: 20px;
+	height: 20px;
+	margin-right: 4px;
+	margin-bottom: 10px;
+	float: left;
+	background-color: #666;
+}
+
+
+#projectdetails #editbuttons {
+	float: right;
+	margin-right: 75px;
+}
+
+#projectdetails #editbuttons input {
+	margin-left: 10px;
+}
+
+/*neues Projekt*/
+
+#npformular{
+	width: 560px;
+	margin-left:150px;
+	float: left;
+}
+
+#npformular p {
+	width: 240px;
+	float: right;
+	font-size: 11px;
+	margin-top: 6px;
+}
+	
+#npformular h2 {
+	font-size:12px;
+	margin-bottom:-1px;
+	font-weight:normal;
+	text-transform: uppercase;
+	margin: 0;
+	margin-bottom: 5px;
+}
+	
+#npformular h1{
+	font-size:18px;
+	font-weight:bold;
+}
+
+#npformular .inputfield {
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+
+#npformular form input.projekttitel {
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:24px;
+	padding: 1px 0 0 4px;
+	color:#999999;
+}
+
+#npformular form input.tags {
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:24px;
+	padding: 1px 0 0 4px;
+	margin-bottom:50px;
+	color:#999999;
+}
+
+#npformular form input.titelbild {
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:24px;
+	padding: 1px 0 0 4px;
+	color:#999999;
+}
+
+#npformular form input.name {
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:145px;
+	height:24px;
+	padding: 1px 0 0 4px;
+	color:#999999;
+}
+
+#npformular form input.taetigkeit {
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:145px;
+	height:24px;
+	padding: 1px 0 0 4px;
+	color:#999999;
+}
+
+#npformular form select.category {
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:22px;
+	padding: 4px 0 0 4px;
+	color:#999999;
+}
+
+#npformular form textarea.kurzbeschreibung {
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:120px;
+	padding: 4px 0 0 4px;
+	color:#999999;
+	font-family: "Lucida Sans Unicode","Lucida Grande", sans-serif;
+	font-size: 11px;
+}
+
+#npformular form textarea.beschreibung {
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:120px;
+	padding: 4px 0 0 4px;
+	color:#999999;
+	font-family: "Lucida Sans Unicode","Lucida Grande", sans-serif;
+	font-size: 11px;
+}
+
+#npformular a{
+	text-decoration: none;
+	color:#000000;
+	font-size:11px;
+	border: 1px solid #bbb;
+	-moz-border-radius: 10px 10px 10px 10px;
+	border-radius: 8px 8px 8px 8px;
+	padding:2px 5px 2px 5px;
+	margin-top:3px;
+}
+
+#npformular a:hover{
+	color:#999999;
+}
+
+.btnabbrechenspeichern{
+	float:right;
+	margin-top:-35px;
+}
+
+.btnabbrechenspeichern a {
+	margin-right: 5px;
+}
+
+#dashboard {
+	width: 220px;
+	float: right;
+}
+
+#dashboard h2 {
+	border-bottom:1px solid #bbb;
+	font-size: 12px;
+	font-weight: normal;
+	text-transform: uppercase;
+	padding-bottom: 3px;
+	margin: 0;
+	margin-bottom: 10px;
+}
+
+#dashboard a {	
+	text-decoration: none;
+	color: #000000;
+	font-size: 11px;
+	border: 1px solid #bbb;
+	-moz-border-radius: 10px 10px 10px 10px;
+	border-radius: 8px 8px 8px 8px;
+	padding: 2px 5px 2px 5px;
+	overflow: hidden;
+}
+
+#dashboard a:hover{
+	color:#999999;
+}
+
+#dashboard p {
+	font-size: 11px;
+	float: left;
+	margin: 0;
+}
+
+#dashboard img {
+	float :left;
+	height: 40px;
+	width: 40px;
+	background-color: #666;
+	margin-right: 10px;
+}
+
+#myproject, #followprojects, #dashboardhead {
+	margin-bottom: 35px;
+	overflow: hidden;
+}
+
+#dashboard .project {
+	float: left;
+	margin-bottom: 10px;
+	width: 220px;
+}
+	
+/*neuanmeldung*/
+
+
+#newaccountformular {
+	width: 560px;
+	margin-left:150px;
+}
+
+#newaccountformular p {
+	width:240px;
+	float:right;
+	font-size:11px;
+	margin: 0;
+	margin-top: 6px;
+}
+
+#newaccountformular h2 {
+	font-size:12px;
+	margin-bottom:-1px;
+	font-weight:normal;
+	text-transform: uppercase;
+	margin: 0;
+	margin-bottom: 5px;
+}
+
+#newaccountformular h1 {
+	font-size:18px;
+	font-weight:bold;
+}
+
+#newaccountformular .inputfield {
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+	
+#newaccountformular form input.firma {
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:23px;
+	padding: 1px 0 0 4px;
+	color:#999999;
+}
+
+#newaccountformular form input.ansprechperson {
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:24px;
+	padding: 1px 0 0 4px;
+	color:#999999;
+}
+
+#newaccountformular form textarea.anschrift{
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:120px;
+	padding: 4px 0 0 4px;
+	color:#999999;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 11px;
+}
+	
+#newaccountformular form input.e-mail{
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:24px;
+	padding: 1px 0 0 4px;
+	color:#999999;
+}
+	
+#newaccountformular form input.website{
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:24px;
+	padding: 1px 0 0 4px;
+	color:#999999;
+}
+	
+#newaccountformular form input.handy{
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:24px;
+	padding: 1px 0 0 4px;
+	color:#999999;
+}
+
+#newaccountformular form input.username{
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:24px;
+	padding: 1px 0 0 4px;
+	color:#999999;
+}
+
+#newaccountformular form input.password{
+	border: 1px solid #bbb;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	width:300px;
+	height:24px;
+	padding: 1px 0 0 4px;
+	margin-bottom:20px;
+	color:#999999;
+}
+
+#newaccountformular a{
+	text-decoration: none;
+	color:#000000;
+	font-size:11px;
+	border: 1px solid #bbb;
+	-moz-border-radius: 10px 10px 10px 10px;
+	border-radius: 8px 8px 8px 8px;
+	padding:2px 5px 2px 5px;
+	margin-top:3px;
+}
+
+#newaccountformular a:hover{
+	color:#999999;
+}
+
+/* Profilansicht */
+
+#sidebar #avatar {
+	width: 153px;
+	height: 200px;
+	border: 1px solid #666;
+	margin-left: -10px;
+}
+
+#profildetails {
+	float: left;
+	width: 550px;
+	padding: 0 5px;
+}
+
+#profildetails #profilhead h5 {
+	font-size: 16px;
+	text-transform: uppercase;
+	color: #000;
+	font-weight: bold;
+	margin: 0;
+	
+	margin-bottom: 30px;
+}
+
+#profildetails #profilinfo {
+	margin-bottom: 35px;
+}
+
+#profildetails #profilinfo p {
+	font-size: 12px;
+}
+
+#profildetails #profilcontact {
+	margin-bottom: 35px;
+	overflow: hidden;
+}
+
+#profildetails #profilcontact h5 {
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: normal;
+	display: block;
+	border-bottom: 1px solid #000;
+	padding-bottom: 2px;
+	margin: 0;
+}
+
+#profildetails #profilcontact .contactdiv {
+	float: left;
+	overflow: hidden;
+	width: 550px;
+}
+
+#profildetails #profilcontact .contacttype {
+	display: inline;
+	width: 70px;
+	float: left;
+	font-size: 12px;
+}
+
+#profildetails #profilcontact .contact {
+	width: 300px;
+	float: left;
+	display: inline;
+	font-size: 12px;
+	margin-left: 10px;
+}
+
+#profildetails #profilcontact a {
+	font-size: 12px;
+	color: #000;
+	text-decoration: none;
+}
+
+#profildetails #profilcontact a:hover {
+	text-decoration: underline;
+}
+
+#profildetails #projectportfolio h5 {
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: normal;
+	display: block;
+	border-bottom: 1px solid #000;
+	padding-bottom: 2px;
+	margin: 0;
+}
+
+#profildetails .portfolioentry {
+	border-bottom: 1px solid #666;
+	overflow: hidden;
+}
+
+#profildetails .portfolioentry h6 {
+	
+	font-size: 12px;
+	text-transform: uppercase;
+	margin-bottom: 0;
+	margin-top: 20px;
+}
+
+#profildetails .portfolioentry p {
+	font-size: 12px;
+}
+
+#profildetails .portfolioentry a {
+	color: #000;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+#profildetails .portfolioentry a:hover {
+	text-decoration: underline;
+}
+
+#profildetails .portfolioentry .portfolioimg {
+	float: left;
+	overflow: hidden;
+}
+
+#profildetails .portfolioentry img {
+	width: 150px;
+	height: 150px;
+	float: left;
+	background-color: #666;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+
+/* loginpage */
+
+#loginwrapper {
+	width: 480px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+#loginwrapper header {
+	float: left;
+	width: 470px;
+	height: 170px;
+	margin-right: 10px;
+}
+
+#loginwrapper header h1 {
+	margin: 0;
+	padding: 0;
+	text-indent: -10000px;
+	background-image: url(../images/logo.png);
+	background-repeat: no-repeat;
+	position: relative;
+	height: 145px;
+	margin-top: 25px;
+}
+
+#logininfowrapper {
+	width: 226px;
+	margin: 0 5px;
+	float: left;
+	border: 2px solid #fff;
+	background-color: #fff;
+	-moz-border-radius: 10px 0 0 0;
+	border-radius: 10px 0 0 0;
+	-moz-box-shadow: 0 5px 5px #888;
+	-webkit-box-shadow: 0 5px 5px #888;
+	box-shadow: 0 5px 5px #888;
+	margin-bottom: 10px;
+}
+
+#logininfo {
+	border: 1px solid #656565;
+	width: 204px;
+	-moz-border-radius: 10px 0 0 0;
+	border-radius: 10px 0 0 0;
+	padding: 5px 10px;
+	height: 250px;
+}
+
+#loginformwrapper {
+	width: 226px;
+	margin: 0 5px;
+	overflow: hidden;
+	border: 2px solid #fff;
+	background-color: #fff;
+	-moz-border-radius: 0 10px 0 0;
+	border-radius: 0 10px 0 0;
+	-moz-box-shadow: 0 5px 10px #888;
+	-webkit-box-shadow: 0 5px 10px #888;
+	box-shadow: 0 5px 10px #888;
+	margin-bottom: 10px;
+}
+
+#loginform {
+	border: 1px solid #656565;
+	width: 204px;
+	-moz-border-radius: 0 10px 0 0;
+	border-radius: 0 10px 0 0;
+	padding: 5px 10px;
+	height: 250px;
+}
+
+#logincontent {
+	width: 480px;
+	float: left;
+	overflow: hidden;
+}
+
+#logininfo h2 {
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: normal;
+	margin-top: 5px;	
+}
+
+#logininfo p {
+	font-size: 11px;
+}
+
+#loginform label {
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+#loginform input {
+	margin-left: 3px;
+	width: 195px;	
+	border: 1px solid #666;
+	-moz-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	height: 22px;
+	margin-bottom: 10px;
+}
+
+#loginform input.passwort {
+	margin-bottom: 20px;
+}
+
+#loginform .forgot {
+	width: 110px;
+	float: left;
+}
+
+#loginform .forgot a {
+	font-size: 11px;
+	color: #666;
+	text-decoration: underline;
+}
+
+#loginform .login {
+	border: 2px solid #e6e6e6;
+	-moz-border-radius: 10px 10px 10px 10px;
+	border-radius: 10px 10px 10px 10px;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	float: right;
+	margin-left: 8px;
+}
+
+#loginform .login a {
+	border: 1px solid #666;
+	-moz-border-radius: 10px 10px 10px 10px;
+	border-radius: 10px 10px 10px 10px;
+	padding: 2px 5px;
+	font-size: 11px;
+	width: 70px;
+	height: 14px;
+	margin: 0;
+	color: #000;
+	text-decoration: none;
+	float: left;
+	text-align: center;
+}
+
+#loginform .login a:hover {
+	color: #999;
+}
+
+#loginform p.register {
+	margin-top: 30px;
+	font-size: 12px;
+}
+
+#loginform .formlogin {
+	overflow: hidden;
+	margin-bottom: 30px;
+}
+
+#loginfooter {
+	width: 480px;
+	float: left;
+}
+
+#loginfooter #mediacube {
+	float: left;
+	margin: 0 40px;
+	position: relative;
+}

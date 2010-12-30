@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Gitrepo::Application.config.secret_token = '85928dda106ee98efc40aa2b4a598b432a1eee8dce0fe655bf495046f2b78a080d9a679d9b70d623ae56e76af2f5106d516404b3dff8d9b528d64404d6e99681'
+Projektplattform::Application.config.secret_token = 'dfa2fee59314ad3edcc2c0a43b691a91a30c9b18aa3a2f483077e8794bdca148cd7195524a66059ce9a2dd7dc23e788585e54e62ef0f30a4f083d638f29d9555'

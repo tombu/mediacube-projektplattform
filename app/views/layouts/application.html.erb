@@ -1,14 +1,116 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-  <title>Gitrepo</title>
+  <title>Projektplattform</title>
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-
+  <div id="wrapper">
+    <header>
+      <h1 id="logo"><% link_to :root do %><img src="/images/logo.png" alt="Projektplattform" /><% end %></h1>
+      <div id="profilemenu">
+        <div id="profilemenuborder">
+          <div class="user">Gregor Sams</div>
+          <div class="icons">
+              <ul>
+                  <li class="message"><a href="#">Nachricht</a></li>
+                  <li class="project"><a href="#">Projekte</a></li>
+              </ul>
+          </div>
+          <div class="logout"><a href="#">Logout</a></div>
+        </div>
+      </div>
+      <div id="menubar">
+        <div id="menu">
+          <ul>
+            <li><a href="#" class="active">Projekte</a></li>
+            <li><a href="#">Dashboard</a></li>
+          </ul>
+        </div>
+        <div id="searchbar">
+          <form>
+              <input name="keyword" value="Suche nach" class="keyword">
+              <select name="category" class="category">
+                <option>Projekte</option>
+                <option>Personen</option>
+                <option>Stichwort</option>
+              </select>
+              <input type="submit" value="Suche" class="send">
+          </form>
+        </div>
+      </div>
+    </header>
+    <section>
+            <div id="topborder">
+              <div id="contentwrapper">
+                <div id="sidebar">
+                  <h2>Status</h2>
+                    <ul>
+                      <li><a href="#" class="active">Alle</a></li>
+                      <li><a href="#">Ideenfindung</a></li>
+                        <li><a href="#">Konzept</a></li>
+                        <li><a href="#">Durchführung</a></li>
+                        <li><a href="#">Abgeschlossen</a></li>
+                    </ul>
+                    <h2>Kategorie</h2>
+                    <ul>
+                      <li><a href="#" class="active">Alle</a></li>
+                        <li><a href="#">Mediendesign</a></li>
+                        <li><a href="#">Film</a></li>
+                        <li><a href="#">Animation</a></li>
+                        <li><a href="#">Audio</a></li>
+                        <li><a href="#">Gamedesign</a></li>
+                        <li><a href="#">Web</a></li>
+                    </ul>	
+                </div>
+                <div id="overview">
 <%= yield %>
-
+              </div>
+            </div>
+          </div>
+    </section>
+    <footer>
+      <div id="footercontent">
+          <div class="sitemap">
+              <h4>Kategorien</h4>
+              <ul>
+                  <li><a href="#">Mediendesign</a></li>
+                  <li><a href="#">Film</a></li>
+                  <li><a href="#">Animation</a></li>
+                  <li><a href="#">Audio</a></li>
+                  <li><a href="#">Gamedesign</a></li>
+                  <li><a href="#">Web</a></li>
+              </ul>
+            </div>
+            <div class="sitemap">
+              <h4>Profil</h4>
+              <ul>
+                    <li><a href="#">mein Profil anzeigen</a></li>
+                    <li><a href="#">mein Profil bearbeiten</a></li>
+                    <li><a href="#">Profile suchen</a></li>
+                </ul>
+            </div>
+            <div class="sitemap">
+              <h4>Projekte</h4>
+              <ul>
+                    <li><a href="#">Projekte anzeigen</a></li>
+                    <li><a href="#">Projekte suchen</a></li>
+                    <li><a href="#">Projekt neu anlegen</a></li>
+                    <li><a href="#">meine Projekte anzeigen</a></li>
+                    <li><a href="#">Projekt bearbeiten</a></li>
+                </ul>
+            </div>
+            <div id="mediacube">
+              <ul>
+                    <li class="linkmma"><a href="#">MultiMediaArts</a></li>
+                    <li class="linkmmt"><a href="#">MultiMediaTechnologie</a></li>
+                    <li class="linkfh"><a href="#">Fachhochschule Salzburg</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+  </div>
 </body>
 </html>
