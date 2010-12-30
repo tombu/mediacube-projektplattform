@@ -1,107 +1,87 @@
+<div id="sidebar">
+  <div id="avatar">
+	  <img src="#" />        
+	</div>
+</div>
+
 <div id="profildetails">
 
         <div id="profilhead">
-        
       		<h5><%= @user.name %></h5>
-            
-            
         </div>
         
         <div id="profilinfo">
-           
             <p>Studiengang: MMA-B2009</p>
-            
             <p>Fachbereich: Mediendesign</p>
-        
         </div> 
         
         <div id="profilcontact">       
         	<h5>Kontakt</h5>        
         	<div class="contactdiv">           
-                <p class="contacttype">E-Mail:</p>                
-                <p class="contact"><%= mail_to @user.mail, @user.mail, :encode => "javascript" %></p>
-            
-            </div>           
-            <div class="contactdiv">           
-                <p class="contacttype">Telefon:</p>
-                <p class="contact"><%= @user.telephone %></p>               
-            </div>
-         
+             <p class="contacttype">E-Mail:</p>                
+             <p class="contact"><%= mail_to @user.mail, @user.mail, :encode => "javascript" %></p>
+          </div>           
+          <div class="contactdiv">           
+            <p class="contacttype">Telefon:</p>
+            <p class="contact"><%= @user.telephone %></p>               
+          </div>
+					<div class="contactdiv">           
+            <p class="contacttype">Web:</p>
+            <p class="contact"><%= @user.web %></p>               
+          </div>
         </div> 
-        
-        
-        
+      
         <div id="projectportfolio">
         
         	<h5>Projektportfolio</h5>
             
-<div class="portfolioentry">
-            
-            	<h6>Mediacube Projektplattform</h6>
-                
-                <p><a href="#">http://projekte.fh-salzburg.ac.at</a></p>
-                
-                <div class="portfolioimg">
-                
-                	<img src="#" />
-                
-                	<img src="#" />
-                
-                	<img src="#" />
-                
-            	</div>
-                
+					<div class="portfolioentry">
+            <h6>Mediacube Projektplattform</h6>
+            <p><a href="#">http://projekte.fh-salzburg.ac.at</a></p>
+            <div class="portfolioimg">
+              <img src="#" />
+              <img src="#" />
+              <img src="#" />
             </div>
+          </div>
 
-<div class="portfolioentry">
-            
-            	<h6>Mediacube Projektplattform</h6>
-                
-                <p><a href="#">http://projekte.fh-salzburg.ac.at</a></p>
-                
-                <div class="portfolioimg">
-                
-                	<img src="#" />
-                
-                	<img src="#" />
-                
-                	<img src="#" />
-                
-            	</div>
-
-
-            
+					<div class="portfolioentry">
+            <h6>Mediacube Projektplattform</h6>
+            <p><a href="#">http://projekte.fh-salzburg.ac.at</a></p>
+            <div class="portfolioimg">
+              <img src="#" />
+              <img src="#" />
+              <img src="#" />
+            </div>
+          </div>
         </div>
-        
-        </div>
-    
-        </div>           
-
+      </div>           
 
 <div id="dashboard">
 
     <div id="dashboardhead">
     	<h2>dashboard</h2> 
-<%= link_to "neues Projekt anlegen", new_project_path %>
-</div>
+			<%= link_to "neues Projekt anlegen", new_project_path %>
+		</div>
+		
     <div id="myproject">
         <h2>meine Projekte</h2>
         <% @active_projects.each do |p| %>
           <div class="project"><img src="img/projektimgmin.jpg">
           	<p>
-							<%= p.title %> <br />
+							<%= link_to p.title, p %> <br />
 							<%= p.roles.count %> Mitarbeiter<br/>
 						</p>
 					</div>
    			<% end %>
-</div>
+		</div>
+		
     <div id="followprojects">
         <h2>beobachtete Projekte</h2>
-
         <% @following_projects.each do |p| %>
           <div class="project"><img src="img/projektimgmin.jpg">
           	<p>
-							<%= p.title %> <br />
+							<%= link_to p.title, p %> <br />
 							<%= p.roles.count %> Mitarbeiter<br/>
 						</p>
 					</div>

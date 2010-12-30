@@ -52,7 +52,7 @@
     <%= link_to p, :class =>'details' do image_tag "details-arrow.png" end %>
   </div>
   <div class="projectadmin">
-    <p class="left">von: <%= link_to @owner.name, @owner %></p>
+    <p class="left">von <%= link_to @owner.name, @owner %></p>
     <p class="right"><b><%= p.followers.count %></b> Beobachter</p>
   </div>
 </div>

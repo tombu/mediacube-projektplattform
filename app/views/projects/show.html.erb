@@ -1,4 +1,25 @@
-﻿<div id="projectdetails">
+﻿<div id="sidebar">
+   	<h2>Updates filtern</h2>
+    <ul>
+    	<li><a href="#">neue Teammitglieder</a></li>
+    	<li><a href="#">Projektstatus geändert</a></li>
+    	<li><a href="#">neue Mediadaten</a></li>
+    	<li><a href="#">Lorem Ipsum</a></li>
+    </ul>
+    
+    <h2>Projekte filtern</h2>
+    <ul>
+    	  <li><a href="#">beobachtete Projekte</a></li>
+        <li><a href="#">meine Projekte</a></li>
+        <li><a href="#">Film</a></li>
+        <li><a href="#">Animation</a></li>
+        <li><a href="#">Audio</a></li>
+        <li><a href="#">Gamedesign</a></li>
+        <li><a href="#">Web</a></li>
+    </ul>	
+</div>
+
+<div id="projectdetails">
   <div id="topbar">
     <div id="editbuttons">
         <input type="button" name="Statusupdate" value="Statusupdate" />
@@ -20,10 +41,9 @@
   <div id="media">
 	<h5>Mediadaten</h5>
 	<p>
-	  <img src="#" />
-	  <img src="#" />
-	  <img src="#" />
-	  <img src="#" />
+		<% @project.media.each do |m| %>
+	  	<%= image_tag m.label %>
+		<% end %>
 	</p>
   </div>
 </div>
@@ -46,7 +66,7 @@
   <div id="memberlist">
     <div class="member">
       <%= image_tag "user-40.jpg" %>
-      <p><b><%= @owner.user.name %></b><br><span class="sl"><b style="color:#009ee3;">Gründer</b>, <%=  @owner.job.name %></span></p>
+      <p><b><%= link_to @owner.user.name, @owner.user %></b><br><span class="sl"><b style="color:#009ee3;">Gründer</b>, <%=  @owner.job.name %></span></p>
     </div>
     <hr />
     <% @project.roles.each do |r|
