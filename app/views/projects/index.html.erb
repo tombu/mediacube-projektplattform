@@ -1,3 +1,9 @@
+﻿<% 
+  if @searchQuery 
+    @warning = @projects.size == 0 ? " warning" : ""
+%>
+  <p class="stdNotice <%= @warning %>"><b><%= @projects.size %></b> Suchergebnisse für &#132;<i><%= params[:search] %>&#147;</i></p>
+<% end %>
 <% @projects.each do |p| %>
 <div class="boxcontent">
   <div class="projectcategory mmt"><%= p.categories.first.label %></div>

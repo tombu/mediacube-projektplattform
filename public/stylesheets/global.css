@@ -3,7 +3,7 @@
 
 /* Global Settings Start */
 
-html {
+html, * {
 	margin: 0;
 	padding: 0;
 }
@@ -227,7 +227,7 @@ body {
 	float: left;
 }
 
-#searchbar form select.category {
+#searchbar form select#category {
 	width: 90px;
 	height: 24px;
 	margin: 0;
@@ -1477,4 +1477,20 @@ section {
 	float: left;
 	margin: 0 40px;
 	position: relative;
+}
+
+
+.stdNotice
+{
+  background: #ecffdd;
+  border: 1px solid #97de5d;
+  padding: 10px;
+  margin-bottom: 20px;
+  color: #439600;
+}
+.stdNotice.warning
+{
+  background: #fff3cf;
+  border-color: #e9c34f;
+  color: #957000;
 }

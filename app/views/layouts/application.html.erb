@@ -30,15 +30,13 @@
           </ul>
         </div>
         <div id="searchbar">
-          <form>
-              <input type="text" name="keyword" placeholder="Suche nach" class="keyword">
-              <select name="category" class="category">
-                <option>Projekte</option>
-                <option>Personen</option>
-                <option>Stichwort</option>
-              </select>
-              <input type="submit" value="Suche" class="send">
-          </form>
+          <% form_tag projects_path, :method => 'get' do %>
+            <p>
+              <%= text_field_tag :search, params[:search], :class => "keyword", :placeholder => "Suche nach" %>
+              <%= select_tag "category", options_for_select([['Projekte',1],['User',2]]) %>
+              <%= submit_tag "Search", :class => "send" %>
+            </p>
+          <% end %>
         </div>
       </div>
     </header>

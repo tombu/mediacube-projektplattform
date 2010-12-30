@@ -5,4 +5,12 @@ class Project < ActiveRecord::Base
   has_many :jobs
   has_many :roles
   has_many :users, :through => :roles
+  
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['title LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
 end
