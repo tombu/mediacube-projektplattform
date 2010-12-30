@@ -1,6 +1,7 @@
 Projektplattform::Application.routes.draw do
   resources :projects
-  resources :search
+  resources :users
+  resources :searchs
 
   root :to => "projects#index"
 
