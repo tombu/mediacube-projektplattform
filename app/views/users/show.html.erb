@@ -82,32 +82,29 @@
 
     <div id="dashboardhead">
     	<h2>dashboard</h2> 
-<a href="#" >neues Projekt anlegen</a>
+<%= link_to "neues Projekt anlegen", new_project_path %>
 </div>
-    
     <div id="myproject">
         <h2>meine Projekte</h2>
-        
-        <div class="project"><img src="img/projektimgmin.jpg">
-        <p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
-        
-        <div class="project"><img src="img/projektimgmin.jpg">
-        <p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
-        
-        <div class="project"><img src="img/projektimgmin.jpg">
-        <p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
+        <% @active_projects.each do |p| %>
+          <div class="project"><img src="img/projektimgmin.jpg">
+          	<p>
+							<%= p.title %> <br />
+							<%= p.roles.count %> Mitarbeiter<br/>
+						</p>
+					</div>
+   			<% end %>
 </div>
-    
     <div id="followprojects">
         <h2>beobachtete Projekte</h2>
-        
-        <div class="project"><img src="img/projektimgmin.jpg">
-        <p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
-        
-        <div class="project"><img src="img/projektimgmin.jpg">
-        <p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
-        
-        <div class="project"><img src="img/projektimgmin.jpg">
-        <p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
+
+        <% @following_projects.each do |p| %>
+          <div class="project"><img src="img/projektimgmin.jpg">
+          	<p>
+							<%= p.title %> <br />
+							<%= p.roles.count %> Mitarbeiter<br/>
+						</p>
+					</div>
+   			<% end %>
     </div>
 </div>
