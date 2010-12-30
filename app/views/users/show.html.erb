@@ -2,7 +2,7 @@
 
         <div id="profilhead">
         
-      		<h5>Gregor Sams</h5>
+      		<h5><%= @user.name %></h5>
             
             
         </div>
@@ -15,24 +15,16 @@
         
         </div> 
         
-        <div id="profilcontact">
-        
-        	<h5>Kontakt <div class="edit"><a href="#">Edit</a></div></h5>
-        
-        	<div class="contactdiv">
+        <div id="profilcontact">       
+        	<h5>Kontakt</h5>        
+        	<div class="contactdiv">           
+                <p class="contacttype">E-Mail:</p>                
+                <p class="contact"><%= mail_to @user.mail, @user.mail, :encode => "javascript" %></p>
             
-                <p class="contacttype">E-Mail:</p>
-                
-                <p class="contact"><a href="#">gsams.mma-b2009@fh-salzburg.ac.at</a><br /><a href="#">kontakt@gregorsams.at</a></p>
-            
-            </div>
-            
-            <div class="contactdiv">
-            
+            </div>           
+            <div class="contactdiv">           
                 <p class="contacttype">Telefon:</p>
-                
-                <p class="contact">0664/52 49 655</p>
-                
+                <p class="contact"><%= @user.telephone %></p>               
             </div>
          
         </div> 
@@ -41,7 +33,7 @@
         
         <div id="projectportfolio">
         
-        	<h5>Projektportfolio <div class="edit"><a href="#">Edit</a></div></h5>
+        	<h5>Projektportfolio</h5>
             
 <div class="portfolioentry">
             

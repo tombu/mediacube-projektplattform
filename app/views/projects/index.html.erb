@@ -26,7 +26,10 @@
 </div>
 <div id="overview">
 
-<% @projects.each do |p| %>
+<% 
+  @projects.each do |p| 
+    @owner = p.roles.where(:role => 'owner').first.user
+%>
 <div class="boxcontent">
   <div class="projectcategory mmt"><%= p.categories.first.label %></div>
   <!-- <div class="projectstatus">
@@ -41,13 +44,16 @@
       <% end %>
     </span>
     <span class="infotxt">
-      <p><%= p.description %></p>
+      <p>
+      
+      <%= p.description %>
+      </p>
     </span> 
-    <span class="details"><a href="#"><%= link_to 'Details', p %></a></span>
+    <%= link_to p, :class =>'details' do image_tag "details-arrow.png" end %>
   </div>
   <div class="projectadmin">
-    <p class="left">von: <a href="#">Gregor Sams</a></p>
-    <p class="right"><b><%= p.users.count %></b> Beobachter</p>
+    <p class="left">von: <%= link_to @owner.name, @owner %></p>
+    <p class="right"><b><%= p.followers.count %></b> Beobachter</p>
   </div>
 </div>
 <% end %>

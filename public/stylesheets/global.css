@@ -320,8 +320,7 @@ section {
 
 .boxcontent {
 	width: 250px;
-	/*height: 327px;*/
-	height: 287px;
+	height: 327px;
 	margin: 0 0 20px 19px;
 	border: 1px solid #ccc;
 	background-color: #fff;
@@ -406,7 +405,9 @@ section {
 }
 
 .details {
-	float: right;
+	position: absolute;
+	top: 288px;
+	margin-left: 210px;
 }
 
 .details a {
@@ -424,8 +425,7 @@ section {
 	background-color: #f3f3f3;
 	float: left;
 	position: absolute;
-	/*margin-top: 302px;*/
-	margin-top: 262px;
+	margin-top: 302px;
 }
 
 .projectadmin .left, .projectadmin .right {
@@ -807,13 +807,14 @@ section {
 
 #rightbar #teammember .member p {
 	font-size: 12px;
+	font-weight: bold;
 	margin: 0;
-	float: left;
 	width: 180px;
 }
 
 #rightbar #teammember .member p span {
 	font-size: 11px;
+	font-weight: normal;
 }
 
 #rightbar #teammember .member img {
@@ -821,6 +822,7 @@ section {
 	width: 40px;
 	height: 40px;
 	background-color: #666;
+	margin-right: 5px;
 }
 
 #rightbar #follower #followerlist {

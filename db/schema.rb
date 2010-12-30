@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101230104910) do
+ActiveRecord::Schema.define(:version => 20101230134029) do
 
   create_table "categories", :force => true do |t|
     t.text     "label"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20101230104910) do
     t.integer "project_id"
   end
 
-  create_table "followers", :id => false, :force => true do |t|
+  create_table "followers", :force => true do |t|
     t.integer "project_id"
     t.integer "user_id"
   end

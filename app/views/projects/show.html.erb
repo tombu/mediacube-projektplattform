@@ -139,12 +139,12 @@
 	<div id="memberlist">
 	<% @project.roles.each do |r| %>
 	  <div class="member">
+	  	<img src="#" />
 		  <p>
 		    <%= r.user.name %><br>
 		    <span><%= r.job.name %><br>
 			  <%= r.role %></span>
 		  </p>
-		  <img src="#" />
 		</div>
 	<% end %>	
 	</div>
@@ -152,8 +152,8 @@
   <div id="follower">
 	<h5>Beobachter</h5>
 	<div id="followerlist">
-	<% @project.users.each do |u| %>
-	  <%= u.name %><br/>
+	<% @project.followers.each do |f| %>
+	  <%= f.user.name %><br/>
 	<% end %>
 	</div>
   </div>
