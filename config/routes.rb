@@ -1,6 +1,4 @@
 Projektplattform::Application.routes.draw do
-  get "search/index"
-
   resources :projects
   resources :search
 

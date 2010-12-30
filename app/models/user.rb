@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_and_belongs_to_many :projects
+  has_and_belongs_to_many :projects, :join_table => :followers
   has_many :statusupdates
   has_many :roles
   has_many :projects, :through => :roles

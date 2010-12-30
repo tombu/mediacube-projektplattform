@@ -1,16 +1,38 @@
-﻿<% 
+<% 
   if @searchQuery 
     @warning = @projects.size == 0 ? " warning" : ""
 %>
   <p class="stdNotice <%= @warning %>"><b><%= @projects.size %></b> Suchergebnisse für &#132;<i><%= params[:search] %>&#147;</i></p>
 <% end %>
+<div id="sidebar">
+  <h2>Status</h2>
+	<ul>
+	  <li><a href="#" class="active">Alle</a></li>
+	  <li><a href="#">Ideenfindung</a></li>
+	    <li><a href="#">Konzept</a></li>
+	    <li><a href="#">Durchführung</a></li>
+	    <li><a href="#">Abgeschlossen</a></li>
+	</ul>
+	<h2>Kategorie</h2>
+	<ul>
+	  <li><a href="#" class="active">Alle</a></li>
+	    <li><a href="#">Mediendesign</a></li>
+	    <li><a href="#">Film</a></li>
+	    <li><a href="#">Animation</a></li>
+	    <li><a href="#">Audio</a></li>
+	    <li><a href="#">Gamedesign</a></li>
+	    <li><a href="#">Web</a></li>
+	</ul>	
+</div>
+<div id="overview">
+
 <% @projects.each do |p| %>
 <div class="boxcontent">
   <div class="projectcategory mmt"><%= p.categories.first.label %></div>
-  <!--<div class="projectstatus">
+  <!-- <div class="projectstatus">
     <span class="statusconcept">Konzept</span>
     <span class="statussearch">Gesucht</span>
-  </div>-->
+  </div> -->
   <div class="projectinfo">
     <h3><%= p.title %></h3>
     <span class="projectimg">
@@ -25,7 +47,8 @@
   </div>
   <div class="projectadmin">
     <p class="left">von: <a href="#">Gregor Sams</a></p>
-    <p class="right"><b>12</b> Beobachter</p>
+    <p class="right"><b><%= p.users.count %></b> Beobachter</p>
   </div>
 </div>
 <% end %>
+</div>
