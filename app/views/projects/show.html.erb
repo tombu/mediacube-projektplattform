@@ -6,29 +6,21 @@
       <div class="icon member">Mitarbeiter gesucht</div>
     </div>
     <div id="editbuttons">
-      <form>
         <input type="button" name="Statusupdate" value="Statusupdate" />
-        <input type="button" name="Projekt bearbeiten" value="Projekt bearbeiten" />
-      </form>
+        <%= link_to 'Projekt bearbeiten', edit_project_path %>
     </div>
   </div>
   <div id="projecthead">
-	<h5><%= @project.title %><span class="category">Web</span><div class="edit"><a href="#">Edit</a></div></h5>
+	<h5><%= @project.title %><span class="category">Web</span></h5>
   </div>
   <div id="projectinfo">
 	<span class="img"><img src='../images/projektimg.jpg' alt='' /></span>
 	<p><%= @project.description %></p>
   </div>
   <div id="projectupdates">
-	<h5>
-	  Updates
-	  <div class="edit">
-		<a href="#">Edit</a></div>
-	</h5>
+	<h5>Updates</h5>
 	<div class="update">
-	  <div class="projectavatar">
-		<img src="#" />
-	  </div>
+	  <div class="projectavatar"><img src="#" /></div>
 	  <div class="updatecontent">
 		<h6>
 		  Mediacube Projektplattform</h6>
@@ -100,11 +92,7 @@
 	</div>
   </div>
   <div id="media">
-	<h5>
-	  Mediadaten
-	  <div class="edit">
-		<a href="#">Edit</a></div>
-	</h5>
+	<h5>Mediadaten</h5>
 	<p>
 	  <img src="#" />
 	  <img src="#" />
@@ -115,29 +103,17 @@
 </div>
 <div id="rightbar">
   <div id="projectprogress">
-	<h5>
-	  Projektfortschritt
-	  <div class="edit">
-		<a href="#">Edit</a></div>
-	</h5>
+	<h5>Projektfortschritt</h5>
   </div>
   <div id="searchingmember">
-	<h5>
-	  Auf der Suche nach
-	  <div class="edit">
-		<a href="#">Edit</a></div>
-	</h5>
+	<h5>Auf der Suche nach</h5>
 	<ul>
 	  <li>Web Developer</li>
 	  <li>Webdesigner</li>
 	</ul>
   </div>
   <div id="teammember">
-	<h5>
-	  Team
-	  <div class="edit">
-		<a href="#">Edit</a></div>
-	</h5>
+	<h5>Team</h5>
 	<div id="memberlist">
 	  <div class="member">
 		<p>
@@ -163,11 +139,7 @@
 	</div>
   </div>
   <div id="follower">
-	<h5>
-	  Beobachter
-	  <div class="edit">
-		<a href="#">Edit</a></div>
-	</h5>
+	<h5>Beobachter</h5>
 	<div id="followerlist">
 	  <img src="#" />
 	  <img src="#" />

@@ -1,2 +1,95 @@
-<h1>Projects#new</h1>
-<p>Find me in app/views/projects/new.html.erb</p>
+﻿			<div id="contentwrapper">
+			<div id="npformular">
+			<h1>Neues Projekt anlegen</h1>
+
+				 <span class="btnabbrechenspeichern"><a href="#" >Abbrechen</a><a href="#">Speichern</a></span>
+
+				<div class="inputfield">
+					<h2>Projekttitel</h2>
+					<p>Wird in der Projektübersicht angezeigt</p>
+					<form>
+					   <input name="projekttitel" class="projekttitel" placeholder="Titel für ihr Projekt eingeben">
+					</form>
+				</div>
+
+				<div class="inputfield">
+					<h2>Beschreibung</h2>
+					<p>Beschreibung zum Projekt Max. 300 Wörter</p>
+					<form>
+					   <textarea name="kurzbeschreibung" class="kurzbeschreibung" placeholder="Beschreibung für Ihr Projekt"></textarea>
+					</form>
+				</div>
+
+				<div class="inputfield">
+					<h2>Kategorie</h2>
+					<p>Hauptkategorie für die Projektübersicht</p>
+					<form>
+						<select name="category" class="category">
+						   <option>Web</option>
+						   <option>Print</option>
+						   <option>Film</option>
+						   <option>Audio</option>
+						   <option>3D</option>
+						   <option>Game</option>
+						</select>
+						</form>
+				</div>
+				<div class="inputfield">
+					<h2>Teammitglieder</h2>
+					<p>Name und Tätigkeit eines bereits bestehenden Teammitgliedes. Profil wird automatisch auf dessen Profil verlinkt.</p>
+					<form>
+						<input name="Name" class="name" type="text" placeholder="Name"> <input name="Tätigkeit" class="taetigkeit" type="text" placeholder="Tätigkeit">
+					</form>
+					<a href="#" >hinzufügen</a>
+				</div>
+
+				<div class="inputfield">
+					<h2>Titelbild</h2>
+					<p>Titelbild für die Projektübersicht. Entweder die Url eingeben oder auf der Festplatte suchen.</p>
+					<form>
+						<input name="titelbild" class="titelbild" type="text" placeholder="URL eingeben">	
+					</form>
+				</div>
+
+				<div class="inputfield">
+					<h2>Tags</h2>
+					<p>Stichworte passent zum Projekt für bessere Suchergebnisse</p>
+					<form>
+						<input name="tags" class="tags" type="text" placeholder="Stichworte eingeben">
+					</form>
+				</div>
+			</div>
+			<div id="dashboard">
+
+				<div id="dashboardhead">
+					<h2>dashboard</h2> 
+					<a href="#" >neues Projekt anlegen</a>
+				</div>
+
+				<div id="myproject">
+					<h2>meine Projekte</h2>
+
+					<div class="project"><img src="img/projektimgmin.jpg">
+					<p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
+
+					<div class="project"><img src="img/projektimgmin.jpg">
+					<p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
+
+					<div class="project"><img src="img/projektimgmin.jpg">
+					<p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
+				</div>
+
+				<div id="followprojects">
+					<h2>beobachtete Projekte</h2>
+
+					<div class="project"><img src="img/projektimgmin.jpg">
+					<p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
+
+					<div class="project"><img src="img/projektimgmin.jpg">
+					<p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
+
+					<div class="project"><img src="img/projektimgmin.jpg">
+					<p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
+				</div>
+			</div>
+			</div>

@@ -1,13 +1,17 @@
 <% @projects.each do |p| %>
 <div class="boxcontent">
   <div class="projectcategory mmt"><%= p.categories.first.label %></div>
-  <div class="projectstatus">
+  <!--<div class="projectstatus">
     <span class="statusconcept">Konzept</span>
     <span class="statussearch">Gesucht</span>
-  </div>
+  </div>-->
   <div class="projectinfo">
     <h3><%= p.title %></h3>
-    <span class="projectimg"><img src="images/projektimg.jpg"></span>
+    <span class="projectimg">
+      <%= link_to p do %>
+      <img src="images/projektimg.jpg">
+      <% end %>
+    </span>
     <span class="infotxt">
       <p><%= p.description %></p>
     </span> 
