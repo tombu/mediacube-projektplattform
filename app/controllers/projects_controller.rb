@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @open_jobs = get_open_jobs()
+    @owner = @project.roles.where(:role => 'owner').first
   end
   
   def get_open_jobs

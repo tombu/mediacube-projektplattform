@@ -16,6 +16,7 @@ body {
 	background-image: url(../images/logo_bg.png);
 	background-repeat: none;
 	background-position: center -400px;
+	font-size: 12px;
 }
 
 #wrapper {
@@ -67,8 +68,9 @@ body {
 	font-size: 12px;
 	width: 185px;
 	height: 22px;
-	text-align: center;
+	text-align: left;
 	padding-top: 10px;
+	text-indent: 10px;
 	border-right: 1px solid #bbb;
 	float: left;
 }
@@ -167,7 +169,7 @@ body {
 
 #menu ul li a {
 	width: 108px;
-	height: 26px;
+	height: 31px;
 	border-top: 1px solid #bbb;
 	border-right: 1px solid #bbb;
 	border-left: 1px solid #bbb;
@@ -175,8 +177,9 @@ body {
 	border-radius: 7px 0 0 0;
 	display: block;
 	color: #bbb;
+	font-size: 14px;
 	text-decoration: none;
-	padding-top: 5px;
+	line-height: 31px;
 }
 
 #menu ul li+li a {
@@ -580,24 +583,31 @@ section {
 }*/
 
 #projectdetails #projecthead {
-	width: 550px;
-	float: left;
+	margin-top: 15px;
 }
 
 #projectdetails #projecthead h5 {
-	font-size: 16px;
-	text-transform: uppercase;
-	color: #000;
+	font-size: 20px;
+	color: #009ee3;
 	font-weight: bold;
-	margin-bottom: 7px;
-	
 }
 
-#projectdetails #projecthead span.category {
+#projectdetails #projecthead .category {
 	font-size: 12px;
+	color: black;
 	font-weight: normal;
-	margin-bottom: 10px;
-	padding: 3px 0 0 5px;
+	margin: 5px 0 10px 0;
+	list-style: none;
+	overflow: hidden;
+}
+#projectdetails #projecthead .category li 
+{
+  padding: 3px 6px;
+  border: 1px solid #9ccee4;
+  background: #ecf9ff;
+  float: left;
+  margin-right: 3px;
+  color: #086c92;
 }
 
 #projectdetails #projecthead .edit, #projectupdates h5 .edit, #media h5 .edit, #teammember h5 .edit, #follower h5 .edit, #searchingmember h5 .edit, #projectprogress h5 .edit {
@@ -625,16 +635,16 @@ section {
 	margin-bottom: 50px;
 }
 
-#projectdetails #projectinfo span.img {
+#projectdetails #projectinfo img {
 	float: left;
-	margin-right: 15px;
+	margin: 20px 15px 0 0;
+	border-bottom: 5px solid #009ee3;
 }
 
 #projectdetails #projectinfo p {
 	font-size: 12px;
 	text-align: justify;
-	float: left;
-	margin: 0;
+	margin: 17px 0 0 0;
 }
 
 #projectdetails #projectupdates {
@@ -761,17 +771,20 @@ section {
 #rightbar {
 	width: 220px;
 	padding-left: 10px;
-	float: left;
+	float: right;
 }
 
 #rightbar h5 {
 	font-size: 12px;
 	text-transform: uppercase;
-	font-weight: normal;
 	display: block;
-	border-bottom: 1px solid #000;
-	padding-bottom: 2px;
+	border-left: 2px solid #0ab1f0;
+	background: #f7f7f7;
+	text-indent: 8px;
+	height: 25px;
+	line-height: 25px;
 	margin: 0;
+	color: #666;
 }
 
 #rightbar #projectprogress {
@@ -780,6 +793,7 @@ section {
 
 #rightbar #searchingmember {
 	margin-bottom: 35px;
+	overflow: hidden;
 }
 
 #rightbar #searchingmember ul {
@@ -787,9 +801,17 @@ section {
 	padding: 0;
 	list-style: none;
 	font-size: 12px;
-	margin-top: 10px;
+	margin: 10px 0;
+	overflow: hidden;
 }
-
+#rightbar #searchingmember li {
+  padding: 5px 6px;
+  border: 1px solid #9ccee4;
+  background: #ecf9ff;
+  margin: 0 3px 3px 0;
+  color: #086c92;
+  display: inline-block;
+}
 #rightbar #teammember {
 	margin-bottom: 35px;
 	overflow: hidden;
@@ -799,6 +821,14 @@ section {
 	margin-top: 10px;
 }
 
+#rightbar #teammember #memberlist hr {
+	height: 1px;
+	background: #ddd;
+	border: 0;
+	margin-bottom: 10px;
+}
+
+
 #rightbar #teammember .member {
 	width: 230px;
 	float: left;
@@ -806,15 +836,20 @@ section {
 }
 
 #rightbar #teammember .member p {
-	font-size: 12px;
-	font-weight: bold;
+	font-size: 14px;
 	margin: 0;
 	width: 180px;
+	line-height: 14px;
 }
 
 #rightbar #teammember .member p span {
 	font-size: 11px;
 	font-weight: normal;
+	color: #777;
+}
+
+#rightbar #teammember .member p .sl {
+	font-size: 12px;
 }
 
 #rightbar #teammember .member img {
@@ -830,8 +865,8 @@ section {
 }
 
 #rightbar #follower #followerlist img {
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 	margin-right: 4px;
 	margin-bottom: 10px;
 	float: left;
@@ -1495,4 +1530,28 @@ section {
   background: #fff3cf;
   border-color: #e9c34f;
   color: #957000;
+}
+
+.stdBtn
+{
+  height: 23px;
+  line-height: 23px;
+  font-weight: bold;
+  color: #0ab1f0;
+  font-size: 13px;
+}
+.stdBtn p { margin-right: 4px; }
+.stdBtn p, .stdBtn img { float: left;}
+#stdTooltip
+{
+	width: 108px;
+	height: 32px;
+	position: absolute;
+	top: 188px; right: 86px;
+	background: url('../vis/bg/tooltip.png');
+	color: #393d40;
+	text-decoration: none!important;
+	text-align: center;
+	padding-top: 4px;
+	font-weight: bold;
 }

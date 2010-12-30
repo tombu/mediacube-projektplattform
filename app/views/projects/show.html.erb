@@ -1,116 +1,21 @@
-﻿<div id="sidebar">
-  <h2>Status</h2>
-	<ul>
-	  <li><a href="#" class="active">Alle</a></li>
-	  <li><a href="#">Ideenfindung</a></li>
-	    <li><a href="#">Konzept</a></li>
-	    <li><a href="#">Durchführung</a></li>
-	    <li><a href="#">Abgeschlossen</a></li>
-	</ul>
-	<h2>Kategorie</h2>
-	<ul>
-	  <li><a href="#" class="active">Alle</a></li>
-	    <li><a href="#">Mediendesign</a></li>
-	    <li><a href="#">Film</a></li>
-	    <li><a href="#">Animation</a></li>
-	    <li><a href="#">Audio</a></li>
-	    <li><a href="#">Gamedesign</a></li>
-	    <li><a href="#">Web</a></li>
-	</ul>	
-</div>
-
-<div id="projectdetails">
+﻿<div id="projectdetails">
   <div id="topbar">
-    <div id="projectstatus">
-      <div class="icon idea">Ideenfindung</div>
-      <div class="icon concept">Konzept</div>
-      <div class="icon member">Mitarbeiter gesucht</div>
-    </div>
     <div id="editbuttons">
         <input type="button" name="Statusupdate" value="Statusupdate" />
         <%= link_to 'Projekt bearbeiten', edit_project_path %>
     </div>
   </div>
-  <div id="projecthead">
-	<h5><%= @project.title %><span class="category">Web</span></h5>
-  </div>
   <div id="projectinfo">
-	<span class="img"><img src='../images/projektimg.jpg' alt='' /></span>
-	<p><%= @project.description %></p>
-  </div>
-  <div id="projectupdates">
-	<h5>Updates</h5>
-	<div class="update">
-	  <div class="projectavatar"><img src="#" /></div>
-	  <div class="updatecontent">
-		<h6>
-		  Mediacube Projektplattform</h6>
-		<p>
-		  <a href="#">Gregor Sams</a> hat 3 neue Bilder hochgeladen.</p>
-		<div class="updatemedia">
-		  <img src="#" />
-		  <img src="#" />
-		  <img src="#" />
-		</div>
-	  </div>
-	</div>
-	<div class="update">
-	  <div class="projectavatar">
-		<img src="#" />
-	  </div>
-	  <div class="updatecontent">
-		<h6>
-		  Mediacube Projektplattform</h6>
-		<p>
-		  <a href="#">Tobias Klika</a> ist nun im Projektteam.</p>
-		<div class="updatemember">
-		  <img src="#" />
-		  <p>
-			Tobias Klika<br>
-			MMT-B2009</p>
-		</div>
-	  </div>
-	</div>
-	<div class="update">
-	  <div class="projectavatar">
-		<img src="#" />
-	  </div>
-	  <div class="updatecontent">
-		<h6>
-		  Mediacube Projektplattform</h6>
-		<p>
-		  <a href="#">Hans Christaian Kogler</a> und <a href="#">Thomas Buchöster</a> sind
-		  nun im Projektteam.</p>
-		<div class="updatemember">
-		  <img src="#" />
-		  <p>
-			Hans Christian Kogler<br>
-			MMA-B2009</p>
-		</div>
-		<div class="updatemember">
-		  <img src="#" />
-		  <p>
-			Thomas Buchöster<br>
-			MMT-B2009</p>
-		</div>
-	  </div>
-	</div>
-	<div class="update">
-	  <div class="projectavatar">
-		<img src="#" />
-	  </div>
-	  <div class="updatecontent">
-		<h6>
-		  Mediacube Projektplattform</h6>
-		<p>
-		  <a href="#">Gregor Sams</a> hat den Projektfortschritt auf Konzeption geändert.</p>
-		<div class="updatestatus">
-		  <img src="#" />
-		  <p>
-			Konzeption</p>
-		</div>
-	  </div>
-	</div>
+    <img src='../images/projektimg.jpg' alt='' />
+	  <div id="projecthead">
+      <h5><%= @project.title %></h5>
+      <ul class="category">
+        <% @project.categories.each do |c| %>
+          <li><%= c.label %></li>
+        <% end %>
+      </ul>
+    </div>
+    <p><%= @project.description %></p>
   </div>
   <div id="media">
 	<h5>Mediadaten</h5>
@@ -122,40 +27,45 @@
 	</p>
   </div>
 </div>
+
 <div id="rightbar">
   <div id="projectprogress">
-	<h5>Projektfortschritt</h5>
+  <h5>Projektfortschritt</h5>
   </div>
   <div id="searchingmember">
-	<h5>Auf der Suche nach</h5>
-	<ul>
-	  <% @open_jobs.each do |j| %>
-	  <li><%= j.name %></li>
-	  <% end %>
-	</ul>
+    <h5>Auf der Suche nach</h5>
+    <ul>
+      <% @open_jobs.each do |j| %>
+      <li>» <%= j.name %></li>
+      <% end %>
+    </ul>
+    <a class="stdBtn" href=""><p>Bewerben</p><%= image_tag "details-arrow.png" %></a>
   </div>
   <div id="teammember">
-	<h5>Team</h5>
-	<div id="memberlist">
-	<% @project.roles.each do |r| %>
-	  <div class="member">
-	  	<img src="#" />
-		  <p>
-		    <%= r.user.name %><br>
-		    <span><%= r.job.name %><br>
-			  <%= r.role %></span>
-		  </p>
-		</div>
-	<% end %>	
-	</div>
+  <h5>Team</h5>
+  <div id="memberlist">
+    <div class="member">
+      <%= image_tag "user-40.jpg" %>
+      <p><b><%= @owner.user.name %></b><br><span class="sl"><b style="color:#009ee3;">Gründer</b>, <%=  @owner.job.name %></span></p>
+    </div>
+    <hr />
+    <% @project.roles.each do |r|
+      if r != @owner
+     %>
+    <div class="member">
+      <%= image_tag "user-40.jpg" %>
+      <p><b><%= r.user.name %></b><br><span class="sl"><%= r.job.name %></span></p>
+    </div>
+  <% end end %>	
+  </div>
   </div>
   <div id="follower">
-	<h5>Beobachter</h5>
-	<div id="followerlist">
-	<% @project.followers.each do |f| %>
-	  <%= f.user.name %><br/>
-	<% end %>
-	</div>
+  <h5>Beobachter</h5>
+  <div id="followerlist">
+  <% @project.followers.each do |f| %>
+    <%= image_tag "user-40.jpg", :title=>f.user.name, :class =>"tooltip" %>
+  <% end %>
+  </div>
   </div>
 </div>
 </div>
