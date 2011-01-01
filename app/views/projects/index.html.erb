@@ -31,7 +31,7 @@
     @owner = p.roles.where(:role => 'owner').first.user
 %>
 <div class="boxcontent">
-  <div class="projectcategory mmt"><%= p.categories.first.label %></div>
+  <div class="projectcategory mmt"><% if p.categories.first != nil %> <%= p.categories.first.label %> <% end %></div>
   <!-- <div class="projectstatus">
     <span class="statusconcept">Konzept</span>
     <span class="statussearch">Gesucht</span>
