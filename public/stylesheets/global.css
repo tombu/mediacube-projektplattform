@@ -741,9 +741,8 @@ section {
 }
 
 #projectdetails #media img {
-	width: 100px;
-	height: 100px;
-	margin-right: 10px;
+	margin-right: 7px;
+	margin-bottom: 7px;
 	float: left;
 	background-color: #666;
 }
@@ -1793,3 +1792,9 @@ section {
 
 input[type=text], textarea { border: 1px solid #ccc; }
 input[type=text] { text-indent: 7px; }
+
+/* Upload */
+div#upload_form {
+	background-color: #ccc;
+	max-width: 560px;
+}

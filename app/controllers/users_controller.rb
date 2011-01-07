@@ -12,6 +12,13 @@ class UsersController < ApplicationController
     @user.followers.each do |f|
       @following_projects << f.project
     end
+    
+    @portfolio_projects = %w()
+    @user.projects.each do |p|
+      if(p.status == "finished")
+        @portfolio_projects << p
+      end
+    end
   end
 
   def edit

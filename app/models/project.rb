@@ -8,4 +8,12 @@ class Project < ActiveRecord::Base
   has_many :followers
   has_many :users, :through => :followers
   has_many :stages
+  
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['title LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
 end

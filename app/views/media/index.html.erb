@@ -1,0 +1,17 @@
+<div id="sidebar">
+  
+</div>
+<div id="rightbar">
+
+</div>
+<div id="projectdetails">
+	<%= link_to "neues Medium hochladen", new_project_medium_path %>
+	<div id="media">
+	<h5>Mediadaten</h5>
+	<p>
+		<% @media.each do |m| %>
+	  	<%= link_to image_tag(m.asset.url(:large)), [ @project, m ] %>
+		<% end %>
+	</p>
+	</div>
+</div>
