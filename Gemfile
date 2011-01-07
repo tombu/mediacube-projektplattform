@@ -7,6 +7,11 @@ gem 'rails', '3.0.3'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
+# for upload and image handling
+gem 'flash_cookie_session'
+ gem "paperclip", "~> 2.3", :git => 'git://github.com/thoughtbot/paperclip.git'
+gem 'mini_magick', :git => 'git://github.com/probablycorey/mini_magick.git'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

@@ -1,0 +1,42 @@
+<%= stylesheet_link_tag "plupload.queue"%>
+<%= javascript_include_tag "plupload/plupload.full.min"%>
+<%= javascript_include_tag "plupload/jquery.plupload.queue.min"%>
+
+
+<div id="contentwrapper">
+  
+		<div style="margin-left: 150px;">
+			
+			<h1>Neue Mediadaten hochladen</h1>
+		  <br/>
+			<div id="uploader" style="background: #999; width: 560px; height: 330px;"></div>
+		</div>
+</div>
+
+<script type="text/javascript">  
+ $(function(){  
+	
+	$("#uploader").pluploadQueue({
+			// General settings
+			runtimes : 'html4,html5,flash',
+			url : '/projects/<%= params[:project_id] %>/media',
+			max_file_size : '10mb',
+			chunk_size : '1mb',
+			filters : [
+				{title : "Image files", extensions : "jpg,gif,png"},
+				{title : "Zip files", extensions : "zip"}
+			],
+
+			// Flash settings
+			flash_swf_url : '/javascripts/plupload/plupload.flash.swf',
+
+		  multiple_queues: true,
+		  multipart: true,
+			multipart_params: {  
+				"<%= key = Rails.application.config.session_options[:key] %>" : "<%= cookies[key] %>",
+				"<%= request_forgery_protection_token %>" : "<%= form_authenticity_token %>",
+				"project_cover" : true 
+		   }
+		});
+	});
+</script>

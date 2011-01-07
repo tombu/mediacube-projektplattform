@@ -35,7 +35,7 @@
   <h5>Team</h5>
   <div id="memberlist">
     <div class="member">
-      <%= link_to image_tag("user-40.jpg"), @owner.user %>
+      <%= link_to image_tag(avatar_url(@owner.user)), @owner.user %>
       <p><b><%= link_to @owner.user.name, @owner.user %></b><br><span class="sl"><b style="color:#009ee3;">Gründer</b>, <%=  @owner.job.name %></span></p>
     </div>
     <hr />
@@ -43,7 +43,7 @@
       if r != @owner
      %>
     <div class="member">
-      <%= link_to image_tag("user-40.jpg"), r.user %>
+      <%= link_to image_tag(avatar_url(r.user)), r.user %>
       <p><b><%= link_to r.user.name, r.user %></b><br><span class="sl"><%= r.job.name %></span></p>
     </div>
   <% end end %>	
@@ -53,7 +53,7 @@
       <h5>Beobachter</h5>
       <div id="followerlist">
       <% @project.followers.each do |f| %>
-        <%= link_to image_tag("user-40.jpg", :title=>f.user.name, :class =>"tooltip"), f.user %>
+        <%= link_to image_tag(avatar_url(f.user), :title => f.user.name, :class => "tooltip"), f.user %>
       <% end %>
       </div>
   </div>
@@ -79,10 +79,10 @@
     <p><%= @project.description %></p>
   </div>
   <div id="media">
-	<h5>Mediadaten</h5>
+	<h5><%= link_to "Mediadaten", [ @project, :media ] %></h5>
 	<p>
 		<% @project.media.each do |m| %>
-	  	<%= image_tag m.link %>
+	  	<%= image_tag m.asset.url(:medium) %>
 		<% end %>
 	</p>
   </div>

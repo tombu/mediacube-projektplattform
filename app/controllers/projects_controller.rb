@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   def index
     if !params[:search]
-      @projects = Project.all
+      @projects = Project.where(:isInternal => true)
       @searchQuery = false
     else
       @projects = Project.search params[:search]
@@ -42,5 +42,25 @@ class ProjectsController < ApplicationController
   end
 
   def new
+    @project = Project.new
   end
+  
+  def create
+    # @medium = Medium.create(:label => "", :link => "")
+    
+    @project = Project.new(params[:project])
+    params[:project][:isPublic] == "1" ? @project.isPublic = true : @project.isPublic = false
+    @project.isInternal = true
+    # @project.picture = @medium
+    @project.save
+
+    params[:categories].each do |cat|
+      @project.categories << Category.find(cat[:id]) unless cat[:id].blank?
+    end
+    
+    @job = Job.create(:name => params[:job][:name], :project => @project)
+    @role = Role.create(:role => "owner", :user => User.first, :project => @project, :job => @job)
+    
+  end
+  
 end

@@ -326,7 +326,10 @@ section {
 }
 #sidebar a.active { font-weight: bold; color: #0ab1f0; }
 
-#overview { float: left; }
+#overview { 
+	float: left; 
+	width: 800px;
+}
 
 .boxcontent {
 	width: 250px;
@@ -773,9 +776,8 @@ section {
 }
 
 #projectdetails #media img {
-	width: 100px;
-	height: 100px;
-	margin-right: 10px;
+	margin-right: 7px;
+	margin-bottom: 7px;
 	float: left;
 	background-color: #666;
 }

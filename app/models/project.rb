@@ -8,6 +8,10 @@ class Project < ActiveRecord::Base
   has_many :followers
   has_many :users, :through => :followers
   
+  accepts_nested_attributes_for :categories
+  accepts_nested_attributes_for :jobs
+  accepts_nested_attributes_for :media
+  
   def self.search(search)
     if search
       find(:all, :conditions => ['title LIKE ?', "%#{search}%"])
