@@ -3,22 +3,14 @@
 
 /* Global Settings Start */
 
-html, * {
-	margin: 0;
-	padding: 0;
-}
-
 body {
-	background-color: #e6e6e6;
-	margin: 0;
-	padding: 0;
 	font-family: "Calibri", sans-serif;
-	background-image: url(../images/logo_bg.png);
-	background-repeat: none;
-	background-position: center -400px;
+	background: #e6e6e6 url(../images/logo_bg.png) center -400px no-repeat;
 	font-size: 12px;
 	color: #444;
 }
+
+textarea { font-family: "Calibri", sans-serif; }
 
 #wrapper {
 	width: 100%;
@@ -188,7 +180,7 @@ body {
 	border-radius: 0 7px 0 0;
 }
 
-#menu ul li a:hover, #menu ul li a.active {
+#menu ul li a:hover, #menu ul li.active a{
 	color: #000000;
 	position: relative;
 	z-index: 1000;
@@ -296,7 +288,6 @@ section {
 	text-transform: uppercase;
 	display: block;
 	border-left: 2px solid #0ab1f0;
-	background: #f7f7f7;
 	text-indent: 8px;
 	height: 25px;
 	line-height: 25px;
@@ -317,7 +308,6 @@ section {
 	padding: 5px 0;
 	display: block;
 	text-indent: 8px;
-	border-bottom: 1px solid #ddd;
 }
 #sidebar ul a:hover {
 	color: #0ab1f0;
@@ -326,10 +316,7 @@ section {
 }
 #sidebar a.active { font-weight: bold; color: #0ab1f0; }
 
-#overview { 
-	float: left; 
-	width: 800px;
-}
+#overview { float: left; width: 800px; }
 
 .boxcontent {
 	width: 250px;
@@ -398,9 +385,10 @@ section {
 }
 	
 .projectinfo h3 {
-	margin: 3px 0 10px 0;
+	margin: 0 0 10px 0;
 	padding: 0;
-	font-size: 16px;
+	font-size: 18px;
+	font-weight: normal;
 }
 
 .infotxt {
@@ -561,11 +549,11 @@ section {
 }
 
 #topbar {
-	width: 550px;
+	width: 530px;
 	float: left;
 	margin: 0;
-	padding: 10px 0;
-	border-bottom: 1px solid #ccc;
+	padding: 0 0 10px 0;
+	border-bottom: 1px solid #eee;
 	margin-bottom: 15px;
 }
 
@@ -594,14 +582,12 @@ section {
 	background-image: url(../images/icon_member.png);
 }*/
 
-#projectdetails #projecthead {
-	margin-top: 15px;
-}
+
 
 #projectdetails #projecthead h5 {
-	font-size: 20px;
-	color: #009ee3;
-	font-weight: bold;
+	font-size: 22px;
+	color: #555;
+	font-weight: normal;
 }
 
 #projectdetails #projecthead .category {
@@ -614,49 +600,31 @@ section {
 }
 #projectdetails #projecthead .category li 
 {
-  padding: 3px 6px;
-  border: 1px solid #9ccee4;
-  background: #ecf9ff;
+  padding: 3px 8px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
   float: left;
   margin-right: 3px;
-  color: #086c92;
+  color: #888;
 }
 
-#projectdetails #projecthead .edit, #projectupdates h5 .edit, #media h5 .edit, #teammember h5 .edit, #follower h5 .edit, #searchingmember h5 .edit, #projectprogress h5 .edit {
-	float: right;
-	width: 21px;
-	height: 21px;
-}
-
-#projectupdates h5 .edit, #media h5 .edit, #teammember h5 .edit, #follower h5 .edit, #searchingmember h5 .edit, #projectprogress h5 .edit {
-	margin-top: -5px;
-}
-
-#projectdetails #projecthead .edit a, #projectupdates h5 .edit a, #media h5 .edit a, #teammember h5 .edit a, #follower h5 .edit a, #searchingmember h5 .edit a, #projectprogress h5 .edit a {
-	text-indent: -10000px;
-	/*background-image: url(../images/icon_edit.png);*/
-	height: 21px;
-	width: 21px;
-	background-color: #666;
-	position: absolute;
-}
 
 #projectdetails #projectinfo {
 	float: left;
 	width: 550px;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
 
 #projectdetails #projectinfo img {
-	float: left;
-	margin: 20px 15px 0 0;
-	border-bottom: 5px solid #009ee3;
+	display: block;
 }
 
-#projectdetails #projectinfo p {
+#projectdetails #projectinfo p.desc {
 	font-size: 12px;
-	text-align: justify;
 	margin: 17px 0 0 0;
+	color: #777;
 }
 
 #projectdetails #projectupdates {
@@ -766,14 +734,12 @@ section {
   font-size: 12px;
 	text-transform: uppercase;
 	display: block;
-	border-left: 2px solid #0ab1f0;
-	background: #f7f7f7;
-	text-indent: 8px;
 	height: 25px;
 	line-height: 25px;
 	margin-bottom: 10px;
 	color: #666;
 }
+#projectdetails #media h5 span { font-weight: normal; }
 
 #projectdetails #media img {
 	margin-right: 7px;
@@ -788,23 +754,37 @@ section {
 	float: right;
 }
 
-#rightbar h5 {
+#rightbar h5, #rightbar h2 {
 	font-size: 12px;
 	text-transform: uppercase;
 	display: block;
-	border-left: 2px solid #0ab1f0;
-	background: #f7f7f7;
-	text-indent: 8px;
 	height: 25px;
 	line-height: 25px;
 	margin: 0;
 	color: #666;
 }
+#rightbar h5 span, #rightbar h2 span { font-weight: normal; }
 
 #rightbar #projectprogress {
 	margin-bottom: 35px;
+	overflow: hidden;
 }
-
+#projectprogress .status 
+{ 
+  margin-top: 20px;
+  background: #0ab1f0; 
+  color: White; 
+  font-weight: bold;
+  font-size: 14px; 
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding: 0 10px;
+  height: 25px;
+  line-height: 25px;
+  display: inline-block;
+  text-align: center;
+}
 #rightbar #searchingmember {
 	margin-bottom: 35px;
 	overflow: hidden;
@@ -820,15 +800,16 @@ section {
 }
 #rightbar #searchingmember li {
   padding: 5px 6px;
-  border: 1px solid #9ccee4;
-  background: #ecf9ff;
   margin: 0 3px 3px 0;
-  color: #086c92;
-  display: inline-block;
+  color: #444;
+  font-weight: bold;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
 }
 #rightbar #teammember {
 	margin-bottom: 35px;
 	overflow: hidden;
+	display: block;
 }
 
 #rightbar #teammember #memberlist {
@@ -837,46 +818,58 @@ section {
 
 #rightbar #teammember #memberlist hr {
 	height: 1px;
-	background: #ddd;
+	background: #eee;
 	border: 0;
 	margin-bottom: 10px;
 }
 
 
-#rightbar #teammember .member {
+#rightbar #teammember .member, #rightbar #myproject .project, #rightbar #followprojects .project {
 	width: 230px;
 	float: left;
 	margin-bottom: 10px;
 }
 
-#rightbar #teammember .member p {
+#rightbar #teammember .member p, #rightbar #myproject .project p, #rightbar #followprojects .project p {
 	font-size: 14px;
 	margin: 0;
-	width: 180px;
+	width: 175px;
 	line-height: 14px;
+	display: inline-block;
 }
-#rightbar #teammember .member a 
+#rightbar #teammember .member a, #rightbar #followprojects .project a
 {
   color: #444;
   text-decoration: none;
+  font-weight: bold;
 }
-#rightbar #teammember .member a:hover
+#rightbar #myproject .project a
+{
+  color: #0ab1f0;
+  text-decoration: none;
+  font-weight: bold;
+}
+#rightbar #myproject .project a:hover
+{
+  text-decoration: underline;
+}
+#rightbar #teammember .member a:hover, #rightbar #followprojects .project a:hover
 {
   color: Black;
   text-decoration: underline;
 }
 
-#rightbar #teammember .member p span {
+#rightbar #teammember .member p span, #rightbar #myproject .project p span, #rightbar #followprojects .project p span {
 	font-size: 11px;
 	font-weight: normal;
 	color: #777;
 }
 
-#rightbar #teammember .member p .sl {
+#rightbar #teammember .member p .sl, #rightbar #myproject .project p .sl, #rightbar #followprojects .project p .sl {
 	font-size: 12px;
 }
 
-#rightbar #teammember .member img {
+#rightbar .pic {
 	float: left;
 	width: 40px;
 	height: 40px;
@@ -891,8 +884,7 @@ section {
 #rightbar #follower #followerlist img {
 	width: 30px;
 	height: 30px;
-	margin-right: 4px;
-	margin-bottom: 10px;
+	margin: 0 2px 2px 0;
 	float: left;
 	background-color: #666;
 	border: 2px solid white;
@@ -1099,7 +1091,10 @@ section {
 	margin-bottom: 35px;
 	overflow: hidden;
 }
-
+#myproject h2, #followprojects h2, #dashboardhead h2
+{
+  margin-bottom: 10px;
+}
 #dashboard .project {
 	float: left;
 	margin-bottom: 10px;
@@ -1559,14 +1554,32 @@ section {
 
 .stdBtn
 {
-  height: 23px;
-  line-height: 23px;
-  font-weight: bold;
-  color: #0ab1f0;
+  height: 30px;
+  line-height: 30px;
+  color: #444;
+  text-align: center;
+  padding: 0 8px;
   font-size: 13px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+	border: 1px solid #e7e7e7;
 }
-.stdBtn p { margin-right: 4px; }
-.stdBtn p, .stdBtn img { float: left;}
+.stdBtn p { margin-left: 8px; border-left: 1px solid #e7e7e7; padding-left: 7px; float: right; }
+.stdBtn img { float: left;}
+.stdBtn img { margin-top: 3px; }
+
+.stdBtn.no2 { background: #ec0000; border: 0; color: White; margin-right: 0!important; }
+.stdBtn.no2 p { margin: 0; padding: 0; border: 0; }
+
+#searchingmember .stdBtn, #teammember .stdBtn, #projectinfo .inline .stdBtn { float: left;}
+
+.inline .stdBtn
+{
+  margin: 20px 10px 0 0;
+}
 #stdTooltip
 {
 	position: absolute;
@@ -1583,8 +1596,209 @@ section {
 	box-shadow: 0 2px 10px #888;
 }
 
+.editBtn
+{
+  float: left;
+  margin-right: 7px;
+  background: url('../images/edit.png');
+  text-indent: -9999px;
+  position: relative;
+  width: 2px;
+}
+
+.editBtnHor
+{
+  display: block;
+  background: #0ab1f0 url('../images/edithor.png') no-repeat left top;
+  text-indent: -9999px;
+  position: relative;
+  height: 0;
+}
+#projectinfo .image
+{
+  display: block;
+  float: left;
+  margin: 6px 15px 0 0;
+}
+
+.noedit, #rightbar h2
+{
+  border-left: 2px solid #0ab1f0;
+  text-indent: 6px;
+}
+.clean { float: none; clear: both; }
+
+.pagination
+{
+  margin: 10px 0 0 15px;
+}
+.search .pagination { margin: 20px 0 0 3px; }
+.pagination em
+{
+  color: #ec008c;
+  font-weight: bold;
+  font-style: normal!important;
+  padding: 3px 6px;
+}
+.pagination a
+{
+  padding: 3px 6px;
+  border: 1px solid #ddd;
+  text-decoration: none;
+  color: #555;
+}
+.pagination a:hover
+{
+  background: #ec008c;
+  color: white;
+}
+.pagination .disabled 
+{
+  padding: 3px 6px;
+  color: #ccc;
+}
+.pagination .previous_page { margin-right: 5px; }
+.pagination .next_page { margin-left: 5px; }
+
+
+
+.right { float: right; }
+.left { float: left; }
+
+
+
+#projectinfo .inline .eDescription
+{
+  display: block;
+  width: 536px;
+  height: 130px;
+  padding: 5px;
+  color: #555;
+}
+.inline label
+{
+  width: 80px;
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.inline .eName
+{
+  width: 180px;
+  height: 23px;
+  text-indent: 5px;
+  color: #555;
+}
+#searchingmember .inline .eName { width: 185px; float: left; }
+#searchingmember .add { float: left; margin: 1px 0 0 7px; }
+.del img { display: block; }
+.del { margin: 2px 0 0 5px; }
+#projectinfo .inline #formECat
+{
+  margin: 5px 5px 0 0;
+}
+
+#teammember .editjob
+{
+  width: 130px;
+  height: 20px;
+  float: left;
+  color: #555;
+  text-indent: 5px;
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.mleft { margin-left: 20px; }
+
+.nodisplay
+{
+   margin: 10px 0 0 0; 
+   text-indent: 10px;
+   color: #aaa;
+}
+
+/*#stagebar
+{
+  width: 26px;
+  height: 200px;
+  background: #ace500;
+  border-radius: 13px;
+  margin: 20px 0 0 120px;
+}*/
+
+
+#stagebar 
+{ 
+  margin: 20px 0 15px 0;
+}
+#stagebar li 
+{
+  list-style: decimal inside!important; 
+  padding: 10px 30px 10px 6px;
+  margin: 0 3px 0 0;
+  color: #444;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+#stagebar li.atwork
+{
+  background: url('../images/atwork.png') no-repeat 190px 13px;
+  color: #0ab1f0;
+  font-weight: bold;
+}
+#stagebar li.finished
+{
+  background: url('../images/ready.png') no-repeat 190px 13px;
+  color: #bbb;
+}
+#stagebar li div { display: none; }
+
+#searchresults tr
+{
+  display: block;
+  padding-bottom: 5px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid #eee;
+  width: 796px;
+}
+#searchresults .title
+{
+  width: 250px;
+  border-right: 1px solid #eee;
+}
+
+#searchresults .title a { color: #0ab1f0; text-decoration: none; }
+#searchresults .title h6
+{
+  color: #0ab1f0;
+  font-size: 14px;
+}
+#searchresults .title a:hover { text-decoration: underline; }
+#searchresults .pic
+{
+ width: 50px;
+ padding-top: 3px;
+}
+#searchresults .count 
+{ 
+  padding: 0 15px;
+  border-right: 1px solid #eee; 
+  width: 190px;
+  line-height: 20px;
+}
+#searchresults .count img { float: left; margin: 4px 0 0 0; }
+#searchresults .count span { font-weight: bold; }
+#searchresults .follow { overflow: hidden; }
+#searchresults .follow a { float: left; margin-left: 15px; }
+
+input[type=text], textarea { border: 1px solid #ccc; }
+input[type=text] { text-indent: 7px; }
+
 /* Upload */
 div#upload_form {
 	background-color: #ccc;
 	max-width: 560px;
 }
+
+#rightbar #teammember .pic img { width: 40px; height: 40px; }

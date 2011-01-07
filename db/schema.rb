@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20110106193610) do
     t.boolean  "isPublic"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "currentstage"
   end
 
   create_table "roles", :force => true do |t|
@@ -64,6 +65,15 @@ ActiveRecord::Schema.define(:version => 20110106193610) do
     t.integer "project_id"
     t.integer "user_id"
     t.integer "job_id"
+  end
+
+  create_table "stages", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "position"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

@@ -1,31 +1,5 @@
-<% 
-  if @searchQuery 
-    @warning = @projects.size == 0 ? " warning" : ""
-%>
-  <p class="stdNotice <%= @warning %>"><b><%= @projects.size %></b> Suchergebnis(se) für &#132;<i><%= params[:search] %>&#147;</i></p>
-<% end %>
-<div id="sidebar">
-  <h2>Status</h2>
-	<ul>
-	  <li><a href="#" class="active">Alle</a></li>
-	  <li><a href="#">Ideenfindung</a></li>
-	    <li><a href="#">Konzept</a></li>
-	    <li><a href="#">Durchführung</a></li>
-	    <li><a href="#">Abgeschlossen</a></li>
-	</ul>
-	<h2>Kategorie</h2>
-	<ul>
-	  <li><a href="#" class="active">Alle</a></li>
-	    <li><a href="#">Mediendesign</a></li>
-	    <li><a href="#">Film</a></li>
-	    <li><a href="#">Animation</a></li>
-	    <li><a href="#">Audio</a></li>
-	    <li><a href="#">Gamedesign</a></li>
-	    <li><a href="#">Web</a></li>
-	</ul>	
-</div>
+<%= render 'layouts/sidebar_sorting' %>
 <div id="overview">
-
 <% 
   @projects.each do |p| 
     @owner = p.roles.where(:role => 'owner').first.user
@@ -57,4 +31,6 @@
   </div>
 </div>
 <% end %>
+<br class="clean" />
+<%= will_paginate @projects %>
 </div>

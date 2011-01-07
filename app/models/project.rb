@@ -7,10 +7,7 @@ class Project < ActiveRecord::Base
   has_many :roles
   has_many :followers
   has_many :users, :through => :followers
-  
-  accepts_nested_attributes_for :categories
-  accepts_nested_attributes_for :jobs
-  accepts_nested_attributes_for :media
+  has_many :stages
   
   def self.search(search)
     if search

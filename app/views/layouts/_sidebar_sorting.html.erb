@@ -1,0 +1,1 @@
+﻿<div id="sidebar">  <h2>Status</h2>	<ul>	  <li><a href="#" class="active">Alle</a></li>	<li><a href="#">Idee</a></li>	<li><a href="#">In Arbeit</a></li>	<li><a href="#">Abgeschlossen</a></li>	</ul>	<h2>Kategorie</h2>	<ul>	  <li><a href="#" class="active">Alle</a></li>	<% Category.all.each do |c| %>	  <li><%= link_to c.label, "#" %></li>	<% end %>	</ul>	</div>
