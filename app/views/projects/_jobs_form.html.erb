@@ -1,0 +1,17 @@
+<div class="inline">
+  <%= form_for @project, :remote => true do |f| %>
+  <br /><label>Neuer Job:</label><br />
+  <%= text_field_tag :job, "", :class=>"eName" %>
+  <a class="add"><%= image_tag "details-arrow.png" %></a>
+  <br class="clean" />
+	<ul class="openjobs">
+    <script type="text/javascript">
+    <% @open_jobs.each do |j| %>
+      jobAdd("<%= j.name %>");
+    <% end %>
+    </script>
+  </ul>
+  <a class="stdBtn"><p>Aktualisieren</p><%= image_tag "details-arrow.png" %></a>
+  <a class="stdBtn no2" href="javascript:editing(true, '#searchingmember');"><p>Abbrechen</p></a>
+  <% end %>
+</div>

@@ -7,12 +7,5 @@ class Project < ActiveRecord::Base
   has_many :roles
   has_many :followers
   has_many :users, :through => :followers
-  
-  def self.search(search)
-    if search
-      find(:all, :conditions => ['title LIKE ?', "%#{search}%"])
-    else
-      find(:all)
-    end
-  end
+  has_many :stages
 end

@@ -1,90 +1,41 @@
-﻿<div id="sidebar">
-  <h2>Status</h2>
-  <ul>
-    <li><a href="#" class="active">Alle</a></li>
-    <li><a href="#">Ideenfindung</a></li>
-      <li><a href="#">Konzept</a></li>
-      <li><a href="#">Durchführung</a></li>
-      <li><a href="#">Abgeschlossen</a></li>
-  </ul>
-  <h2>Kategorie</h2>
-  <ul>
-    <li><a href="#" class="active">Alle</a></li>
-      <li><a href="#">Mediendesign</a></li>
-      <li><a href="#">Film</a></li>
-      <li><a href="#">Animation</a></li>
-      <li><a href="#">Audio</a></li>
-      <li><a href="#">Gamedesign</a></li>
-      <li><a href="#">Web</a></li>
-  </ul>	
-</div>
-<div id="rightbar">
-  <div id="projectprogress">
-  <h5>Projektfortschritt</h5>
-  </div>
-  <div id="searchingmember">
-    <h5>Auf der Suche nach</h5>
-    <ul>
-      <% @open_jobs.each do |j| %>
-      <li>» <%= j.name %></li>
-      <% end %>
-    </ul>
-    <a class="stdBtn" href=""><p>Bewerben</p><%= image_tag "details-arrow.png" %></a>
-  </div>
-  <div id="teammember">
-  <h5>Team</h5>
-  <div id="memberlist">
-    <div class="member">
-      <%= link_to image_tag("user-40.jpg"), @owner.user %>
-      <p><b><%= link_to @owner.user.name, @owner.user %></b><br><span class="sl"><b style="color:#009ee3;">Gründer</b>, <%=  @owner.job.name %></span></p>
-    </div>
-    <hr />
-    <% @project.roles.each do |r|
-      if r != @owner
-     %>
-    <div class="member">
-      <%= link_to image_tag("user-40.jpg"), r.user %>
-      <p><b><%= link_to r.user.name, r.user %></b><br><span class="sl"><%= r.job.name %></span></p>
-    </div>
-  <% end end %>	
-  </div>
-  </div>
-  <div id="follower">
-      <h5>Beobachter</h5>
-      <div id="followerlist">
-      <% @project.followers.each do |f| %>
-        <%= link_to image_tag("user-40.jpg", :title=>f.user.name, :class =>"tooltip"), f.user %>
-      <% end %>
-      </div>
-  </div>
-</div>
-
+﻿<% @open_jobs = get_open_jobs @project %>
+<%= render 'layouts/sidebar_sorting' %>
+<%= render 'rightbar.html.erb' %>
 <div id="projectdetails">
+
   <div id="topbar">
-    <div id="editbuttons">
-        <input type="button" name="Statusupdate" value="Statusupdate" />
-        <%= link_to 'Projekt bearbeiten', edit_project_path %>
-    </div>
+    <%= link_to '', :class=>"stdBtn" do %><p>Beobachten</p><%= image_tag "spec.png" %></a><% end %>
+    <%= link_to edit_project_path, :class=>"stdBtn mleft" do %><p>Projekt bearbeiten</p><%= image_tag "details-arrow.png" %></a><% end %>
   </div>
+
   <div id="projectinfo">
-    <img src='../images/projektimg.jpg' alt='' />
-	  <div id="projecthead">
-      <h5><%= @project.title %></h5>
-      <ul class="category">
-        <% @project.categories.each do |c| %>
-          <li><%= c.label %></li>
-        <% end %>
-      </ul>
+    <div class="edit">
+      <div class="image">
+        <img src='../images/projektimg.jpg' alt='' />
+        <%= link_to "Edit", "javascript:editing(false, '#projectinfo');", :class=>"editBtnHor" %>
+      </div>
+      <div id="projecthead">
+        <h5><%= @project.title %></h5>
+        <ul class="category">
+          <% @project.categories.each do |c| %>
+            <li><%= c.label %></li>
+          <% end %>
+        </ul>
+      </div>
+      <p class="desc"><%= @project.description %></p>
     </div>
-    <p><%= @project.description %></p>
+    <%= render 'info_form' %>
   </div>
-  <div id="media">
-	<h5>Mediadaten</h5>
-	<p>
-		<% @project.media.each do |m| %>
-	  	<%= image_tag m.link %>
-		<% end %>
-	</p>
+  
+  <div id="media" class="edit">
+    <h5><%= link_to "Edit", "", :class=>"editBtn" %>Mediadaten</h5>
+    <% if @project.media.first != nil %>
+      <% @project.media.each do |m| %>
+        <%= image_tag m.link %>
+      <% end %>
+    <% else %>
+    <p class="nodisplay"><i>Keine Mediendateien vorhanden &hellip;</i></p>
+    <% end %>
   </div>
 </div>
 
