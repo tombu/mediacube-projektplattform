@@ -2,8 +2,13 @@
 <html>
 <head>
   <title>Projektplattform</title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag "global" %>
   <%= javascript_include_tag :defaults, "jqueryinit" %>
+	<% if params[:action] == "new" %>
+				<%= javascript_include_tag "plupload/plupload.full.min"%>
+				<%= javascript_include_tag "plupload/jquery.plupload.queue.min"%>
+				<%= stylesheet_link_tag "plupload.queue"%>
+	<% end %>
   <%= csrf_meta_tag %>
 </head>
 <body>

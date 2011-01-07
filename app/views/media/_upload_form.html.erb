@@ -1,0 +1,36 @@
+
+			<div id="upload_form"></div>
+
+<script type="text/javascript">  
+ $(function(){  
+	
+	$("#upload_form").pluploadQueue({
+			// General settings
+			runtimes : 'html4,html5,flash',
+			url : '/projects/<%= params[:project_id] %>/media',
+			max_file_size : '10mb',
+			chunk_size : '500kb',
+			filters : [
+				{title : "Image files", extensions : "jpg,gif,png"}
+			],
+
+			// Flash settings
+			flash_swf_url : '/javascripts/plupload/plupload.flash.swf',
+			
+		  multiple_queues: <%= multiple_queues %>,
+		  multipart: true,
+			multipart_params: {  
+				"<%= key = Rails.application.config.session_options[:key] %>" : "<%= cookies[key] %>",
+				"<%= request_forgery_protection_token %>" : "<%= form_authenticity_token %>",
+				"project_cover" : true 
+		   },
+		 	init : {
+				FilesAdded: function() {
+					if (<%= auto_upload %>)
+						this.start();
+				}
+			} 
+		});
+		
+	});
+</script>

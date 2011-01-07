@@ -54,7 +54,10 @@
 	width: 98%;
 }
 
-.plupload_header {background: #2A2C2E url('../images/plupload/backgrounds.gif') repeat-x;}
+.plupload_header {
+	/* background: #2A2C2E url('../images/plupload/backgrounds.gif') repeat-x; */
+	display: none;
+}
 .plupload_header_content {
 	background: url('../images/plupload/backgrounds.gif') no-repeat 0 -317px;
 	min-height: 56px;
@@ -76,9 +79,9 @@
 }
 
 .plupload_scroll .plupload_filelist {
-	height: 185px;
+	min-height: 36px;
+	max-height: 185px;
 	background: #F5F5F5;
-	overflow-y: scroll;
 }
 
 .plupload_filelist li {
@@ -114,6 +117,7 @@
 	width: 16px;
 	height: 16px;
 	margin-left: 15px;
+	margin-right: 17px;
 }
 
 .plupload_file_action * {

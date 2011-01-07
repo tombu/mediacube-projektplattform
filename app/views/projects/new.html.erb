@@ -1,4 +1,6 @@
-﻿			<div id="contentwrapper">
+﻿			
+			<div id="contentwrapper">
+			<div style="float: left;">
 			<div id="npformular">
   <%= form_for @project, :url => { :action => "create" } do |f| %>
 			<h1>Neues Projekt anlegen</h1>
@@ -49,15 +51,16 @@
 				<div class="inputfield">
 					<h2>Titelbild</h2>
 					<p>Titelbild für die Projektübersicht. Datei auf der Festplatte suchen und hochladen.</p>
-						<%= fields_for :medium do |builder| %>
-						  <%= builder.file_field :medium, :class => "titelbild", :placeholder => "Datei auswählen..." %>
-						<% end %>
+						
 				</div>
-
 	<% end %>
 			</div>
+			<br style="clear:both;" />
+			<div style="margin-left: 150px;">
+			  <%= render :partial => 'media/upload_form', :locals => { :multiple_queues => false, :auto_upload => true } %>
+			</div>
+			</div>
 			<div id="dashboard">
-
 				<div id="dashboardhead">
 					<h2>dashboard</h2> 
 					<%= link_to "neues Projekt anlegen", new_project_path %>
