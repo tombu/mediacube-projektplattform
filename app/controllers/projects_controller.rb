@@ -1,13 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-      @projects = Project.paginate(:page => params[:page], :per_page => 3)
-    if !params[:search]
-      @projects = Project.where(:isInternal => true)
-      @searchQuery = false
-    else
-      @projects = Project.search params[:search]
-      @searchQuery = true
-    end
+    @projects = Project.paginate :page => params[:page], :per_page => 6
   end
 
   def show

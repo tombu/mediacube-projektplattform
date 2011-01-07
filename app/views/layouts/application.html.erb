@@ -3,9 +3,7 @@
 <head>
   <title>Projektplattform</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag "jquery.js", "rails.js", "jqueryinit.js" %>
-  <%= stylesheet_link_tag "global" %>
-  <%= javascript_include_tag :defaults, "jqueryinit" %>
+  <%= javascript_include_tag "jquery", "rails", "jqueryinit" %>
 	<% if params[:action] == "new" %>
 				<%= javascript_include_tag "plupload/plupload.full.min"%>
 				<%= javascript_include_tag "plupload/jquery.plupload.queue.min"%>
