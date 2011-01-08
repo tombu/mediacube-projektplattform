@@ -4,9 +4,28 @@
 	});
 });
 
+
 $(document).ready(function () {
   // hide editing fields
-  $("#projectinfo .inline, #searchingmember .inline, #teammember .inline").hide();
+  //$("#projectinfo .inline, #searchingmember .inline, #teammember .inline").hide();
+  
+  // project media slider
+    if($(".mediaslider li").size() >= 5){
+      $(".mediaslider").jCarouselLite({
+          btnNext: ".next",
+          btnPrev: ".prev"
+      });
+    }
+    
+  // lightbox
+  $('.mediaslider li a').lightBox({
+    maxHeight: document.body.clientHeight * 0.6,
+    maxWidth: document.body.clientWidth * 0.6
+  });
+  $('#mediaall li a').lightBox({
+    maxHeight: document.body.clientHeight * 0.6,
+    maxWidth: document.body.clientWidth * 0.6
+  });
 
 
   // calculate Stages
@@ -59,14 +78,14 @@ $(document).ready(function () {
 
 
   // Editing animation
-  $(".edit").hover(function () {
+  /*$(".edit").hover(function () {
     $(this).find(".editBtn").animate({ width: '27px' }, 300);
     $(this).find(".editBtnHor").animate({ height: '25px' }, 300);
   }, function(){
     $(this).find(".editBtn").animate({ width: '2px' }, 300);
     $(this).find(".editBtnHor").animate({ height: '0' }, 300);
   });
-
+*/
 
 
   // status
@@ -94,7 +113,7 @@ function placeholder() {
 }
 
 
-
+/*
 function editing(isOpen, what) {
   $what = what;
   if(isOpen)
@@ -111,7 +130,7 @@ function editing(isOpen, what) {
     });
   }
 }
-
+*/
 
 
 // *** add/delete CATEGORY

@@ -2,11 +2,7 @@ class MediaController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
     @media = @project.media.all
-  end
-
-  def show
-    @project = Project.find(params[:project_id])
-    @medium = @project.media.find(params[:id])
+    @mcount = @project.media.count
   end
 
   def new

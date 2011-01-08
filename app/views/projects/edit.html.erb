@@ -1,4 +1,124 @@
-﻿      <div id="contentwrapper">
+﻿<% @open_jobs = get_open_jobs @project %>
+<%= render 'layouts/sidebar_sorting' %>
+
+<div id="projectdetails">
+  <div id="topbar">
+    <%= link_to @project, :class=>"stdBtn" do %><p>Zurück zum Projekt</p><%= image_tag "back.png" %></a><% end %>
+  </div>
+
+  <div id="projectinfo">
+    <div class="inline">
+      <!--<div class="image">
+      <img src='../images/projektimg.jpg' alt='' />
+      <a href="" class="editBtnHor">Edit</a>
+      </div>-->
+      <div id="projecthead">
+        <%= form_for @project, :remote => true do |f| %>
+        <label>Titel:</label><br />
+        <%= f.text_field :title, :class=>"eName" %>
+        <br /><br /><label>Kategorien:</label><br />
+        <%= select_tag :category, options_from_collection_for_select(Category.all.each, "id", "label"), :class=>"left", :id=>"formECat", :include_blank => 'Auswählen ...' %>
+        <ul class="category">
+        <script type="text/javascript">
+        <% @project.categories.each do |c|
+          cats = Category.where("label = ?", c.label).first.id %>
+          catAdd('<%= cats %>', "<%= c.label %>");
+        <% end %>
+        </script>
+        </ul>
+        <br />
+        </div>
+       <label>Beschreibung:</label><br />
+      <%= f.text_area :description, :class=>"eDescription" %>
+        <a class="stdBtn"><p>Aktualisieren</p><%= image_tag "details-arrow.png" %></a>
+      <a class="stdBtn no2" href="javascript:editing(true, '#projectinfo');"><p>Abbrechen</p></a>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="rightbar">
+
+  <!-- PROGRESS -->
+  <div id="projectprogress">
+    <h5 class="noedit">Projektstatus</h5>
+    <div class="edit">
+      <h4 class="status" rel="<%= @project.status %>"><%= @status_names[@project.status] %></h4>
+    </div>
+    <% if @project.status == "inprogress" %>
+        <ul id="stagebar" currentstage="<%= @project.currentstage %>">
+        <% @project.stages.order("position ASC").each do |s| %>
+          <li position="<%= s.position %>"><%= s.name %>
+          <div><%= s.description %></div>
+          </li>  
+        <% end %>
+        </ul>
+     <% end %>
+  </div>
+
+  <!-- JOBS -->
+  <div id="searchingmember">
+    <h5 class="noedit">Auf der Suche nach <span>(<%= @open_jobs.count %>)</span></h5>
+    <div class="inline">
+      <%= form_for @project, :remote => true do |f| %>
+      <br /><label>Neuer Job:</label><br />
+      <%= text_field_tag :job, "", :class=>"eName" %>
+      <a class="add"><%= image_tag "details-arrow.png" %></a>
+      <br class="clean" />
+      <ul class="openjobs">
+        <script type="text/javascript">
+        <% @open_jobs.each do |j| %>
+          jobAdd("<%= j.name %>");
+        <% end %>
+        </script>
+      </ul>
+      <a class="stdBtn"><p>Aktualisieren</p><%= image_tag "details-arrow.png" %></a>
+      <a class="stdBtn no2" href="javascript:editing(true, '#searchingmember');"><p>Abbrechen</p></a>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div id="teammember">
+    <h5 class="noedit">Team <span>(<%= @project.roles.count %>)</span></h5>
+    <div class="inline">
+      <%= form_for @project, :remote => true do |f| %>
+          <div id="memberlist">
+            <div class="member">
+            <%= link_to image_tag(avatar_url(@owner.user, 40)), @owner.user, :class=>"pic" %>
+            <p><b><%= link_to @owner.user.name, @owner.user %></b><br>
+              <%= text_field_tag :title, @owner.job.name, :class=>"editjob" %>
+            </p>
+            </div>
+            <hr />
+            <% @project.roles.each do |r| if r != @owner %>
+            <div class="member no<%= r.user.id %>">
+              <%= link_to image_tag(avatar_url(r.user, 40)), r.user, :class=>"pic" %>
+              <p><a href="javascript:memberDelete('<%= r.user.id %>');" class="right"><img src="/images/delete.png" /></a>
+              <b><%= link_to r.user.name, r.user %></b><br><%= text_field_tag :title, r.job.name, :class=>"editjob" %>
+  
+              </p>
+            </div>
+            <% end end %>	
+          </div>
+      <a class="stdBtn"><p>Aktualisieren</p><%= image_tag "details-arrow.png" %></a>
+      <a class="stdBtn no2" href="javascript:editing(true, '#teammember');"><p>Abbrechen</p></a>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!--      <div id="contentwrapper">
       <div id="npformular">
  <%= form_for(@project) do |p| %>
       <h1>Projekt bearbeiten</h1>
@@ -93,3 +213,4 @@
       </div>
       </div>
 
+-->

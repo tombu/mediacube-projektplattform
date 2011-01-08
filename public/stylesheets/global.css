@@ -183,7 +183,7 @@ textarea { font-family: "Calibri", sans-serif; }
 #menu ul li a:hover, #menu ul li.active a{
 	color: #000000;
 	position: relative;
-	z-index: 1000;
+	z-index: 10;
 	background-color: #fff;
 }
 
@@ -208,7 +208,7 @@ textarea { font-family: "Calibri", sans-serif; }
 	border-radius: 7px 7px 0 0;
 	padding: 4px;
 	position: relative;
-	z-index: 1000;
+	z-index: 10;
 	background-color: #fff;
 }
 
@@ -224,17 +224,8 @@ textarea { font-family: "Calibri", sans-serif; }
 }
 
 #searchbar form select#category {
-	width: 90px;
+	width: 85px;
 	height: 24px;
-	margin: 0;
-	padding: 3px 0 0 0;
-	border: 0;
-	margin: 0 0 0 -5px;
-	/* background-image: url(../images/search.jpg);
-	background-repeat: no-repeat;*/
-	border-top: 1px solid #bbb;
-	border-bottom: 1px solid #bbb;
-	border-left: 1px solid #bbb;
 	float: left;
 }
 
@@ -392,12 +383,8 @@ section {
 }
 
 .infotxt {
-	font-size: 11px;
-}
-
-.infotxt p {
 	margin: 5px 0 0 0;
-	padding: 0;
+	font-size: 11px;
 }
 
 .follower {
@@ -423,10 +410,11 @@ section {
 .projectadmin {
 	height: 25px;
 	width: 250px;
-	background-color: #f3f3f3;
+	background-color: white;
 	float: left;
 	position: absolute;
 	margin-top: 302px;
+	border-top: 1px solid #eee;
 }
 
 .projectadmin .left, .projectadmin .right {
@@ -547,10 +535,10 @@ section {
   float: left;
   width: 550px;
 }
+#projectdetails.wide { width: 785px; }
 
 #topbar {
-	width: 530px;
-	float: left;
+	display: block;
 	margin: 0;
 	padding: 0 0 10px 0;
 	border-bottom: 1px solid #eee;
@@ -614,7 +602,7 @@ section {
 #projectdetails #projectinfo {
 	float: left;
 	width: 550px;
-	margin-bottom: 30px;
+	margin-bottom: 45px;
 }
 
 #projectdetails #projectinfo img {
@@ -730,7 +718,7 @@ section {
 	overflow: hidden;
 }
 
-#projectdetails #media h5 {
+#projectdetails #media h5, #projectportfolio h5 , #projectdetails h5.hl {
   font-size: 12px;
 	text-transform: uppercase;
 	display: block;
@@ -739,14 +727,7 @@ section {
 	margin-bottom: 10px;
 	color: #666;
 }
-#projectdetails #media h5 span { font-weight: normal; }
-
-#projectdetails #media img {
-	margin-right: 7px;
-	margin-bottom: 7px;
-	float: left;
-	background-color: #666;
-}
+#projectdetails #media h5 span, #projectportfolio h5 span, #projectdetails h5.hl span { font-weight: normal; }
 
 #rightbar {
 	width: 220px;
@@ -890,15 +871,6 @@ section {
 	border: 2px solid white;
 }
 #rightbar #follower #followerlist img:hover { border-color: #0ab1f0; }
-
-#projectdetails #editbuttons {
-	float: right;
-	margin-right: 75px;
-}
-
-#projectdetails #editbuttons input {
-	margin-left: 10px;
-}
 
 /*neues Projekt*/
 
@@ -1249,122 +1221,6 @@ section {
 	padding: 0 5px;
 }
 
-#profildetails #profilhead h5 {
-	font-size: 16px;
-	text-transform: uppercase;
-	color: #000;
-	font-weight: bold;
-	margin: 0;
-	
-	margin-bottom: 30px;
-}
-
-#profildetails #profilinfo {
-	margin-bottom: 35px;
-}
-
-#profildetails #profilinfo p {
-	font-size: 12px;
-}
-
-#profildetails #profilcontact {
-	margin-bottom: 35px;
-	overflow: hidden;
-}
-
-#profildetails #profilcontact h5 {
-	font-size: 12px;
-	text-transform: uppercase;
-	font-weight: normal;
-	display: block;
-	border-bottom: 1px solid #000;
-	padding-bottom: 2px;
-	margin: 0;
-}
-
-#profildetails #profilcontact .contactdiv {
-	float: left;
-	overflow: hidden;
-	width: 550px;
-}
-
-#profildetails #profilcontact .contacttype {
-	display: inline;
-	width: 70px;
-	float: left;
-	font-size: 12px;
-}
-
-#profildetails #profilcontact .contact {
-	width: 300px;
-	float: left;
-	display: inline;
-	font-size: 12px;
-	margin-left: 10px;
-}
-
-#profildetails #profilcontact a {
-	font-size: 12px;
-	color: #000;
-	text-decoration: none;
-}
-
-#profildetails #profilcontact a:hover {
-	text-decoration: underline;
-}
-
-#profildetails #projectportfolio h5 {
-	font-size: 12px;
-	text-transform: uppercase;
-	font-weight: normal;
-	display: block;
-	border-bottom: 1px solid #000;
-	padding-bottom: 2px;
-	margin: 0;
-}
-
-#profildetails .portfolioentry {
-	border-bottom: 1px solid #666;
-	overflow: hidden;
-}
-
-#profildetails .portfolioentry h6 {
-	
-	font-size: 12px;
-	text-transform: uppercase;
-	margin-bottom: 0;
-	margin-top: 20px;
-}
-
-#profildetails .portfolioentry p {
-	font-size: 12px;
-}
-
-#profildetails .portfolioentry a {
-	color: #000;
-	font-size: 12px;
-	text-decoration: none;
-}
-
-#profildetails .portfolioentry a:hover {
-	text-decoration: underline;
-}
-
-#profildetails .portfolioentry .portfolioimg {
-	float: left;
-	overflow: hidden;
-}
-
-#profildetails .portfolioentry img {
-	width: 150px;
-	height: 150px;
-	float: left;
-	background-color: #666;
-	margin-right: 20px;
-	margin-bottom: 20px;
-	text-align: left;
-}
-
 
 /* loginpage */
 
@@ -1540,10 +1396,11 @@ section {
 .stdNotice
 {
   background: #ecffdd;
-  border: 1px solid #97de5d;
-  padding: 10px;
+  border-bottom: 1px solid #97de5d;
+  padding: 12px 15px;
   margin-bottom: 20px;
   color: #439600;
+  font-size: 14px;
 }
 .stdNotice.warning
 {
@@ -1566,6 +1423,7 @@ section {
   -moz-border-radius: 5px;
 	-webkit-border-radius: 5px;	
 	border: 1px solid #e7e7e7;
+	background: white;
 }
 .stdBtn p { margin-left: 8px; border-left: 1px solid #e7e7e7; padding-left: 7px; float: right; }
 .stdBtn img { float: left;}
@@ -1573,6 +1431,9 @@ section {
 
 .stdBtn.no2 { background: #ec0000; border: 0; color: White; margin-right: 0!important; }
 .stdBtn.no2 p { margin: 0; padding: 0; border: 0; }
+
+.stdBtn:hover { color: Black; }
+.stdBtn.no2:hover { color: White; }
 
 #searchingmember .stdBtn, #teammember .stdBtn, #projectinfo .inline .stdBtn { float: left;}
 
@@ -1600,20 +1461,12 @@ section {
 {
   float: left;
   margin-right: 7px;
-  background: url('../images/edit.png');
+  border-left: 2px solid #0ab1f0;
   text-indent: -9999px;
   position: relative;
   width: 2px;
 }
 
-.editBtnHor
-{
-  display: block;
-  background: #0ab1f0 url('../images/edithor.png') no-repeat left top;
-  text-indent: -9999px;
-  position: relative;
-  height: 0;
-}
 #projectinfo .image
 {
   display: block;
@@ -1627,6 +1480,7 @@ section {
   text-indent: 6px;
 }
 .clean { float: none; clear: both; }
+.clean.hide { visibility: hidden; }
 
 .pagination
 {
@@ -1802,3 +1656,136 @@ div#upload_form {
 }
 
 #rightbar #teammember .pic img { width: 40px; height: 40px; }
+
+#searchresults .count ul li
+{
+  float: left;
+  font-style: italic;
+}
+#searchresults .count ul li:before { content: ', '; }
+#searchresults .count ul li:first-child:before { content: ''; }
+
+#resultsuser li
+{
+  float: left;
+  width: 140px;
+  margin: 0 25px 25px 0;
+  background-color: #fff;
+	-moz-box-shadow: 2px 2px 10px #d2d2d2;
+	-webkit-box-shadow: 2px 2px 10px #d2d2d2;
+	box-shadow: 2px 2px 10px #ccc;
+	position: relative;
+}
+#resultsuser li:hover { box-shadow: 2px 2px 10px #aaa; }
+#resultsuser .pic img
+{
+  width: 140px;
+  height: 140px;
+}
+#resultsuser .nomarg { margin-right: 0!important; }
+#resultsuser .name
+{
+  font-size: 14px;
+  color: #0ab1f0;
+  font-weight: bold;
+  text-decoration: none;
+}
+#resultsuser .mail
+{
+  color: #777;
+  text-decoration: none;
+  font-size: 11px;
+}
+#resultsuser .name:hover, #resultsuser .mail:hover { text-decoration: underline; }
+
+#resultsuser li p { padding: 9px 0 0 10px; }
+#resultsuser li div
+{ 
+  background: transparent url('../images/opaq.png') repeat; 
+  display: block; 
+  line-height: 22px; 
+  padding-left: 10px;
+  position: absolute;
+  height: 22px;
+  width: 130px;
+  top: 118px;
+  color: White;
+}
+
+#profilhead 
+{
+  padding-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 25px;
+}
+#profilhead .pic
+{
+  float: left;
+  margin: 6px 15px 0 0;
+}
+#profilhead h5 {
+	font-size: 22px;
+	color: #555;
+	font-weight: normal;
+}
+#profilhead .infos 
+{
+  color: #777;
+  margin-top: 10px;
+}
+#profilhead .infos a
+{
+  color: #0ab1f0;
+  text-decoration: none;
+}
+#profilhead .infos a:hover, #projectportfolio p a:hover { text-decoration: underline; }
+
+#projectportfolio li
+{
+  float: left;
+  margin: 0 14px 14px 0;
+  width: 127px;
+  background-color: #fff;
+	-moz-box-shadow: 2px 2px 10px #d2d2d2;
+	-webkit-box-shadow: 2px 2px 10px #d2d2d2;
+	box-shadow: 2px 2px 10px #ccc;
+	position: relative;
+}
+#projectportfolio li:hover { box-shadow: 2px 2px 10px #aaa; }
+#projectportfolio li p { padding: 9px 0 11px 10px; }
+#projectportfolio li.nomarg { margin-right: 0!important; }
+#projectportfolio p a {
+  color: #0ab1f0;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
+}
+#projectportfolio .pic
+{
+  width: 127px;
+  height: 72px;
+  display: block;
+}
+
+#projectdetails #media { position:relative; }
+.next, .prev
+{
+  position: absolute;
+  top: 66px;
+}
+.prev { left: 0; } .next { right: 0; }
+.mediaslider li 
+{ 
+  width: 90px!important; 
+  height: 90px!important; 
+  margin-right: 5px; 
+  display: block; 
+  float: left;
+}
+
+#mediaall li
+{
+  float: left;
+  margin: 0 10px 10px 0;
+}
+#mediaall li img, #mediaall li { width: 120px; height: 120px; }

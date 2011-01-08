@@ -3,7 +3,7 @@ class DashboardsController < ApplicationController
     @user = User.find(2)
     @active_projects = %w()
     @user.roles.each do |r|
-      @active_projects << r.project
+        @active_projects << r.project
     end
     @following_projects = %w()
     @user.followers.each do |f|
