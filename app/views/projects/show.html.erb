@@ -5,14 +5,13 @@
 <div id="projectdetails">
   <div id="topbar">
     <%= link_to '', :class=>"stdBtn" do %><p>Beobachten</p><%= image_tag "spec.png" %></a><% end %>
-    <%= link_to edit_project_path, :class=>"stdBtn mleft" do %><p>Projekt bearbeiten</p><%= image_tag "details-arrow.png" %></a><% end %>
+    <%= link_to edit_project_path, :class=>"stdBtn mleft" do %><p>Projekt bearbeiten</p><%= image_tag "editit.png" %></a><% end %>
   </div>
 
   <div id="projectinfo">
     <div class="edit">
       <div class="image">
         <%= image_tag @project.cover.asset.url(:cover) %>
-        <%= link_to "Edit", "javascript:editing(false, '#projectinfo');", :class=>"editBtnHor" %>
       </div>
       <div id="projecthead">
         <h5><%= @project.title %></h5>
@@ -24,17 +23,23 @@
       </div>
       <p class="desc"><%= @project.description %></p>
     </div>
-    <%= render 'info_form' %>
   </div>
   
-  <div id="media" class="edit">
-    <h5><%= link_to "Edit", "javascript:editing(false, '#media');", :class=>"editBtn" %>Mediadaten <span>(<%= @project.media.count %>)</span></h5>
-    <% if @project.images.first != nil %>	
+  <div id="media">
+    <h5 class="noedit">Mediadaten <span>(<%= @mcount %>)</span></h5>
+    <% if !@project.images.first.nil? %>
+    <% if @mcount >= 5 %><a href="#" class="prev"><%= image_tag 'left.png' %></a><% end %>
+    <div class="mediaslider">
+    <ul>
       <% @project.images.each do |m| %>
-        <%= image_tag m.asset.url(:medium) %>
+        <li><%= link_to (image_path m.asset.url(:original)) do image_tag m.asset.url(:medium) end %></li>
       <% end %>
+    </ul>
+    </div>
+    <% if @mcount >= 5 %><a href="#" class="next"><%= image_tag 'right.png' %></a><% end %>
+    <br class="clean" /><br />
+    <%= link_to [ @project, :media ], :class=>"stdBtn" do %><p>Alle Mediadaten ansehen</p><%= image_tag "details-arrow.png" %></a><% end %>
     <% end %>
-    <%= link_to "Mediadaten", [ @project, :media ] %>
   </div>
 </div>
 

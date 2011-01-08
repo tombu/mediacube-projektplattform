@@ -3,7 +3,7 @@
 <head>
   <title>Projektplattform</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag "jquery", "rails", "jqueryinit" %>
+	<%= javascript_include_tag "jquery", "rails", "jcarousel", "lightbox", "jqueryinit" %>
 	<%= yield :plupload_header_files %>
   <%= csrf_meta_tag %>
 </head>
@@ -35,7 +35,7 @@
           <% form_tag searchs_path, :method => 'get' do %>
             <p>
               <%= text_field_tag :search, params[:search], :class => "keyword", :placeholder => "Suche nach" %>
-              <%= select_tag "category", options_for_select([['Projekte','projects'],['User','users'],['Job','jobs']]) %>
+              <%= select_tag "category", options_for_select([['Projekte','Projekte'],['User','User'],['Jobs','Jobs']]) %>
               <%= submit_tag "Search", :class => "send" %>
             </p>
           <% end %>

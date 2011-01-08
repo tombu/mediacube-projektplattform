@@ -5,8 +5,12 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @active_projects = %w()
+    @all_projects = %w()
     @user.roles.each do |r|
-      @active_projects << r.project
+      if r.project.status != 'finished'
+        @active_projects << r.project
+      end
+      @all_projects << r.project
     end
     @following_projects = %w()
     @user.followers.each do |f|

@@ -1,4 +1,52 @@
-﻿      <div id="contentwrapper">
+﻿<% @open_jobs = get_open_jobs @project %>
+<%= render 'layouts/sidebar_sorting' %>
+
+<div id="projectdetails">
+  <div id="topbar">
+    <%= link_to @project, :class=>"stdBtn" do %><p>Zurück zum Projekt</p><%= image_tag "back.png" %></a><% end %>
+  </div>
+
+  <div id="projectinfo">
+    <%= render "info_form"%>
+  </div>
+</div>
+
+
+
+<div id="rightbar">
+
+  <!-- PROGRESS -->
+  <div id="projectprogress">
+    <h5 class="noedit">Projektstatus</h5>
+    <div class="edit">
+      <h4 class="status" rel="<%= @project.status %>"><%= @status_names[@project.status] %></h4>
+    </div>
+    <% if @project.status == "inprogress" %>
+        <ul id="stagebar" currentstage="<%= @project.currentstage %>">
+        <% @project.stages.order("position ASC").each do |s| %>
+          <li position="<%= s.position %>"><%= s.name %>
+          <div><%= s.description %></div>
+          </li>  
+        <% end %>
+        </ul>
+     <% end %>
+  </div>
+
+  <!-- JOBS -->
+  <div id="searchingmember">
+    <h5 class="noedit">Auf der Suche nach <span>(<%= @open_jobs.count %>)</span></h5>
+    <%= render "jobs_form"%>
+  </div>
+
+  <!-- TEAM -->
+  <div id="teammember">
+    <h5 class="noedit">Team <span>(<%= @project.roles.count %>)</span></h5>
+    <%= render "team_form"%>
+  </div>
+</div>
+
+
+<!--      <div id="contentwrapper">
       <div id="npformular">
  <%= form_for(@project) do |p| %>
       <h1>Projekt bearbeiten</h1>
@@ -93,3 +141,4 @@
       </div>
       </div>
 
+-->

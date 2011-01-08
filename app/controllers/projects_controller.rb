@@ -6,12 +6,16 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find params[:id]
-    @owner = @project.roles.where(:role => 'owner').first
+    @owner = @project.roles.find_by_role :owner
+    @mcount = @project.media.count
     @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
   end
 
   def edit
-    @project = Project.find params[:id] 
+    @project = Project.find params[:id]
+    @owner = @project.roles.find_by_role :owner
+    @mcount = @project.media.count
+    @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
   end
   
   def update

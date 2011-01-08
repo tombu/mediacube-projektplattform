@@ -1,15 +1,15 @@
-<div id="sidebar">
-  
-</div>
-
-<div id="projectdetails">
-	<%= link_to "neues Medium hochladen", new_project_medium_path %>
-	<div id="media">
-	<h5>Mediadaten</h5>
-	<p>
-		<% @media.each do |m| %>
-	  	<%= link_to image_tag(m.asset.url(:large)), project_media_path %>
-		<% end %>
-	</p>
+﻿<%= render 'layouts/sidebar_sorting' %>
+<div id="projectdetails" class="wide">
+  <div id="topbar">
+	<%= link_to @project, :class=>"stdBtn" do %><p>Zurück zum Projekt</p><%= image_tag "back.png" %></a><% end %>
+	<%= link_to new_project_medium_path, :class=>"stdBtn mleft" do %><p>Medien hochladen</p><%= image_tag "new.png" %></a><% end %>
+  </div>
+	<div id="mediaall">
+    <h5 class="hl noedit">Alle Mediadaten <span>(<%= @mcount %>)</span></h5>
+    <ul>
+    <% @media.each do |m| %>
+      <li><%= link_to (image_path m.asset.url(:original)) do image_tag m.asset.url(:large) end %></li>
+    <% end %>
+    </ul>
 	</div>
 </div>

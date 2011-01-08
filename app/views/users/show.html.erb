@@ -1,86 +1,37 @@
 <%= render 'layouts/sidebar_sorting' %>
 
 <div id="profildetails">
-
-        <div id="profilhead">
-      		<h5><%= @user.name %></h5>
-        </div>
-        
-        <div id="profilinfo">
-            <p>Studiengang: MMA-B2009</p>
-            <p>Fachbereich: Mediendesign</p>
-        </div> 
-        
-        <div id="profilcontact">       
-        	<h5>Kontakt</h5>        
-        	<div class="contactdiv">           
-             <p class="contacttype">E-Mail:</p>                
-             <p class="contact"><%= mail_to @user.mail, @user.mail, :encode => "javascript" %></p>
-          </div>           
-          <div class="contactdiv">           
-            <p class="contacttype">Telefon:</p>
-            <p class="contact"><%= @user.telephone %></p>               
-          </div>
-					<div class="contactdiv">           
-            <p class="contacttype">Web:</p>
-            <p class="contact"><%= link_to @user.web, @user.web %></p>               
-          </div>
-        </div> 
-      
-        <div id="projectportfolio">
-        
-        	<h5>Projektportfolio</h5>
-            
-					<div class="portfolioentry">
-            <h6>Mediacube Projektplattform</h6>
-            <p><a href="#">http://projekte.fh-salzburg.ac.at</a></p>
-            <div class="portfolioimg">
-              <img src="#" />
-              <img src="#" />
-              <img src="#" />
-            </div>
-          </div>
-
-					<div class="portfolioentry">
-            <h6>Mediacube Projektplattform</h6>
-            <p><a href="#">http://projekte.fh-salzburg.ac.at</a></p>
-            <div class="portfolioimg">
-              <img src="#" />
-              <img src="#" />
-              <img src="#" />
-            </div>
-          </div>
-        </div>
-      </div>           
-
-<div id="rightbar">
-
-    <div id="dashboardhead">
-    	<h2>dashboard</h2> 
-			<%= link_to "neues Projekt anlegen", new_project_path %>
-		</div>
-		
-    <div id="myproject">
-        <h2>meine Projekte</h2>
-        <% @active_projects.each do |p| %>
-          <div class="project"><img src="img/projektimgmin.jpg">
-          	<p>
-							<%= link_to p.title, p %> <br />
-							<%= p.roles.count %> Mitarbeiter<br/>
-						</p>
-					</div>
-   			<% end %>
-		</div>
-		
-    <div id="followprojects">
-        <h2>beobachtete Projekte</h2>
-        <% @following_projects.each do |p| %>
-          <div class="project"><img src="img/projektimgmin.jpg">
-          	<p>
-							<%= link_to p.title, p %> <br />
-							<%= p.roles.count %> Mitarbeiter<br/>
-						</p>
-					</div>
-   			<% end %>
+    <div id="profilhead">
+      <%= link_to image_tag(avatar_url(@user, 140)), @user, :class=>"pic" %>
+      <h5><%= @user.name %></h5>
+      <p class="infos">
+        Studiengang: MMA-B2009<br />
+        Fachbereich: Mediendesign<br /><br />
+        <b>E-Mail:</b> <%= mail_to @user.mail, @user.mail, :encode => "javascript" %><br />
+        <b>Telefon:</b> <%= @user.telephone %><br />
+        <b>Web:</b> <%= link_to @user.web, @user.web %>
+      </p>
+      <div class="clean hide"></div>
+    </div> 
+    <div id="projectportfolio">
+      <h5 class="noedit"><%= @user.name %>'s Projekte <span>(<%= @all_projects.count %>)</span></h5>
+      <ul>
+      <% if @active_projects.first != nil %>
+      <% @ind = 0
+      @all_projects.each do |p| %>
+        <% @ind = @ind + 1  %>
+        <li class="<% if @ind % 4 == 0 %>nomarg<% end %>">
+          <%= link_to image_tag('projektimg.jpg', :class=>"pic"), p %>
+          <p>
+            <%= link_to strim(p.title, 16), p %><br />
+            <b>Job:</b> <%= strim(p.roles.where("user_id = #{@user.id}").first.job.name, 15) %>
+          </p>
+        </li>
+      <% end else %>
+      <p class="nodisplay"><i>Keine Projekte &hellip;</i></p>
+      <% end %>
+      </ul>
     </div>
 </div>
+
+<%= render 'dashboards/sidebar' %>

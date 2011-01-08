@@ -2,7 +2,7 @@
   <%= form_for @project, :remote => true do |f| %>
       <div id="memberlist">
         <div class="member">
-        <%= link_to image_tag(avatar_url(@owner.user)), @owner.user, :class=>"pic" %>
+        <%= link_to image_tag(avatar_url(@owner.user, 40)), @owner.user, :class=>"pic" %>
         <p><b><%= link_to @owner.user.name, @owner.user %></b><br>
           <%= text_field_tag :title, @owner.job.name, :class=>"editjob" %>
         </p>
@@ -10,7 +10,7 @@
         <hr />
         <% @project.roles.each do |r| if r != @owner %>
         <div class="member no<%= r.user.id %>">
-          <%= link_to image_tag(avatar_url(r.user)), r.user, :class=>"pic" %>
+          <%= link_to image_tag(avatar_url(r.user, 40)), r.user, :class=>"pic" %>
           <p><a href="javascript:memberDelete('<%= r.user.id %>');" class="right"><img src="/images/delete.png" /></a>
           <b><%= link_to r.user.name, r.user %></b><br><%= text_field_tag :title, r.job.name, :class=>"editjob" %>
             
