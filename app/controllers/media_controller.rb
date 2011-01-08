@@ -10,13 +10,17 @@ class MediaController < ApplicationController
   end
 
   def new
+    @project = Project.find(params[:project_id])
   end
 
   def create
-    @medium = Medium.new(:asset => params[:file], :project_id => params[:project_id])
-    @medium.save
-    if params[:project_cover]
-      # redirect_to :root
+    @project = Project.find(params[:project_id])
+    if params[:project_cover] == true.to_s
+      @cover = Cover.create(:asset => params[:file], :project_id => params[:project_id])
+      @project.cover = @cover
+      @project.save
+    else
+      Image.create(:asset => params[:file], :project_id => params[:project_id])
     end
   end
 

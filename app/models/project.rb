@@ -4,10 +4,12 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_many :jobs
   has_many :media
+  has_many :images
   has_many :roles
   has_many :followers
   has_many :users, :through => :followers
   has_many :stages
+  belongs_to :cover
   
   def self.search(search)
     if search

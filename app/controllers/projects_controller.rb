@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   def index
     @projects = Project.paginate :page => params[:page], :per_page => 6
+    puts @projects
   end
 
   def show
@@ -29,22 +30,28 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
   
-  def create
-    # @medium = Medium.create(:label => "", :link => "")
-    
+  def create    
     @project = Project.new(params[:project])
-    params[:project][:isPublic] == "1" ? @project.isPublic = true : @project.isPublic = false
+    @project.isPublic = (params[:project][:isPublic].to_i.zero? ?  false :  true)
     @project.isInternal = true
-    # @project.picture = @medium
-    @project.save
-
-    params[:categories].each do |cat|
-      @project.categories << Category.find(cat[:id]) unless cat[:id].blank?
+    if @project.save
+      params[:categories].each do |cat|
+        @project.categories << Category.find(cat[:id]) unless cat[:id].blank?
+      end
+    
+      @job = Job.new(:name => params[:job][:name], :project => @project)
+      @role = Role.new(:role => "owner", :user => User.last, :project => @project, :job => @job)
+      if @job.save && @role.save
+        redirect_to new_project_medium_path(@project, :build_cover => true)
+        flash[:notice] = ""
+      else
+        flash[:notice] = ""
+        render :new
+      end
+    else
+      flash[:notice] = ""
+      render :new
     end
-    
-    @job = Job.create(:name => params[:job][:name], :project => @project)
-    @role = Role.create(:role => "owner", :user => User.first, :project => @project, :job => @job)
-    
   end
   
 end

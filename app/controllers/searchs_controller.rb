@@ -14,7 +14,14 @@ class SearchsController < ApplicationController
       when 'projects'
         Project.find :all, :conditions => ["title LIKE ? or description LIKE ?", "%#{q}%", "%#{q}%"]
       when 'jobs'
-        Project.find :all
+        @open_projects = %w()
+        @all_jobs = Job.find :all, :conditions => ["name LIKE ?", "%#{q}%"]
+        @all_jobs.each do |job|
+          if !job.project.roles.include? job.role 
+            @open_projects << job.project 
+          end
+        end
+        @open_projects
       when 'users'
         Project.find :all
       else redirect_to :root

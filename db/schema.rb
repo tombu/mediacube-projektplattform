@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110106193610) do
+ActiveRecord::Schema.define(:version => 20110108022908) do
 
   create_table "categories", :force => true do |t|
     t.text     "label"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20110106193610) do
     t.string   "asset_content_type"
     t.integer  "asset_file_size"
     t.datetime "asset_updated_at"
+    t.string   "type"
   end
 
   create_table "projects", :force => true do |t|
@@ -52,12 +53,12 @@ ActiveRecord::Schema.define(:version => 20110106193610) do
     t.string   "status"
     t.string   "link"
     t.text     "description"
-    t.string   "picture"
     t.boolean  "isInternal"
     t.boolean  "isPublic"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "currentstage"
+    t.integer  "cover_id"
   end
 
   create_table "roles", :force => true do |t|

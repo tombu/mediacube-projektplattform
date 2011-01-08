@@ -4,7 +4,6 @@ class AddAttachmentAssetToMedium < ActiveRecord::Migration
     add_column :media, :asset_content_type, :string
     add_column :media, :asset_file_size, :integer
     add_column :media, :asset_updated_at, :datetime
-    remove_column :media, :link
   end
 
   def self.down
@@ -12,6 +11,5 @@ class AddAttachmentAssetToMedium < ActiveRecord::Migration
     remove_column :media, :asset_content_type
     remove_column :media, :asset_file_size
     remove_column :media, :asset_updated_at
-    add_column :media, :link, :string
   end
 end

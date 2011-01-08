@@ -1,15 +1,21 @@
+<% content_for :plupload_header_files do %>
+  <%= javascript_include_tag "plupload/plupload.min"%>
+	<%= javascript_include_tag "plupload/plupload.html4.min"%>
+	<%= javascript_include_tag "plupload/plupload.html5.min"%>
+	<%= javascript_include_tag "plupload/jquery.plupload.queue.min"%>
+	<%= stylesheet_link_tag "plupload.queue"%>
+<% end %>
 
 			<div id="upload_form"></div>
 
 <script type="text/javascript">  
- $(function(){  
+$(function(){  
 	
 	$("#upload_form").pluploadQueue({
 			// General settings
 			runtimes : 'html4,html5,flash',
-			url : '/projects/<%= params[:project_id] %>/media',
+			url : '/projects/<%= params[:project_id].nil? ? params[:id] : params[:project_id] %>/media',
 			max_file_size : '10mb',
-			chunk_size : '500kb',
 			filters : [
 				{title : "Image files", extensions : "jpg,gif,png"}
 			],
@@ -22,7 +28,7 @@
 			multipart_params: {  
 				"<%= key = Rails.application.config.session_options[:key] %>" : "<%= cookies[key] %>",
 				"<%= request_forgery_protection_token %>" : "<%= form_authenticity_token %>",
-				"project_cover" : true 
+				"project_cover" : <%= build_project_cover %>
 		   },
 		 	init : {
 				FilesAdded: function() {
@@ -30,7 +36,6 @@
 						this.start();
 				}
 			} 
-		});
-		
 	});
+});
 </script>

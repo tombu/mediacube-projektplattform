@@ -1,6 +1,6 @@
 <% @open_jobs = get_open_jobs @project %>
 <%= render 'layouts/sidebar_sorting' %>
-<%= render 'rightbar.html.erb' %>
+<%= render 'rightbar' %>
 
 <div id="projectdetails">
   <div id="topbar">
@@ -11,7 +11,7 @@
   <div id="projectinfo">
     <div class="edit">
       <div class="image">
-        <img src='../images/projektimg.jpg' alt='' />
+        <%= image_tag @project.cover.asset.url(:cover) %>
         <%= link_to "Edit", "javascript:editing(false, '#projectinfo');", :class=>"editBtnHor" %>
       </div>
       <div id="projecthead">
@@ -29,8 +29,8 @@
   
   <div id="media" class="edit">
     <h5><%= link_to "Edit", "javascript:editing(false, '#media');", :class=>"editBtn" %>Mediadaten <span>(<%= @project.media.count %>)</span></h5>
-    <% if @project.media.first != nil %>	
-      <% @project.media.each do |m| %>
+    <% if @project.images.first != nil %>	
+      <% @project.images.each do |m| %>
         <%= image_tag m.asset.url(:medium) %>
       <% end %>
     <% end %>
