@@ -8,4 +8,5 @@ module ProjectsHelper
     end
     return open_jobs
   end
+   
 end

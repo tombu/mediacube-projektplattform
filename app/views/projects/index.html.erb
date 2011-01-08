@@ -8,7 +8,7 @@
       <div class="projectcategory mmt"><% if !p.categories.first.nil? %> <%= p.categories.first.label %> <% end %></div>
       <div class="projectinfo">
         <h3><%= strim p.title, 30 %></h3>
-        <%= link_to image_tag('projektimg.jpg'), p %>
+        <%= link_to image_tag(p.cover_url), p %>
         <p class="infotxt"><%= strim p.description, 225 %></p>
         <%= link_to p, :class =>'details' do image_tag "details-arrow.png" end %>
       </div>
