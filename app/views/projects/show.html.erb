@@ -3,14 +3,16 @@
 
 <div id="projectdetails">
   <div id="topbar">
-    <%= link_to '', :class=>"stdBtn" do %><p>Beobachten</p><%= image_tag "spec.png" %></a><% end %>
+    <%= link_to "", :class=>"stdBtn" do %><p>Beobachten</p><%= image_tag "spec.png" %></a><% end %>
+		<% if permitted_to? :edit, @project %>
     <%= link_to edit_project_path, :class=>"stdBtn mleft" do %><p>Projekt bearbeiten</p><%= image_tag "editit.png" %></a><% end %>
+		<% end %>
   </div>
 
   <div id="projectinfo">
     <div class="edit">
       <div class="image">
-        <%= image_tag @project.cover.asset.url :cover %>
+        <%= image_tag @project.cover_url %>
       </div>
       <div id="projecthead">
         <h5><%= @project.title %></h5>

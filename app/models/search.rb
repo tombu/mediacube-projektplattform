@@ -7,7 +7,7 @@
       when 'Jobs'
         @open_projects = Job.projects_with_open_jobs q
       when 'User'
-        User.find :all, :conditions => ["name LIKE ? or mail LIKE ?", "%#{q}%", "%#{q}%"]
+        User.find :all, :conditions => ["name LIKE ? or email LIKE ?", "%#{q}%", "%#{q}%"]
       else redirect_to :root
     end
   end

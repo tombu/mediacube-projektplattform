@@ -6,8 +6,7 @@ class Project < ActiveRecord::Base
   has_many :media
   has_many :images
   has_many :roles, :order => 'role DESC', :dependent => :destroy
-  has_many :followers
-  has_many :users, :through => :followers
+  has_many :users, :through => :roles
   has_many :stages
   belongs_to :cover
   
@@ -17,5 +16,30 @@ class Project < ActiveRecord::Base
     else
       find(:all)
     end
+  end
+  
+  def cover_url
+    if self.cover.nil?
+      "/images/default_project_cover.jpg"
+    else
+      self.cover.asset.url(:cover)
+    end
+  end
+  
+  def icon_url
+    if self.cover.nil?
+      "/images/default_project_icon.jpg"
+    else
+      self.cover.asset.url(:small)
+    end
+  end
+
+
+  def has_followers
+    self.roles.where(:role => "follower" )
+  end
+  
+  def has_members
+    self.roles.where(:role => [ "owner", "leader", "member" ])
   end
 end

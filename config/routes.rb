@@ -1,4 +1,6 @@
 Projektplattform::Application.routes.draw do
+  devise_for :users
+
   resources :users
   resources :searchs
   resources :dashboards
@@ -8,5 +10,7 @@ Projektplattform::Application.routes.draw do
   end
 
   root :to => "projects#index"
+  
+  # match "profile" => "users#show"
 
 end

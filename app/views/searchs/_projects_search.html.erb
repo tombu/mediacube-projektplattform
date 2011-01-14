@@ -7,13 +7,13 @@
     <table id="searchresults">
       <tbody>
         <tr>
-          <td class="pic"><%= link_to image_tag(p.cover.asset.url :small), p %>
+          <td class="pic"><%= link_to image_tag(p.icon_url), p %>
           </td>
           <td class="title"><%= link_to p do %><h6><%= p.title %></h6><% end %><p>am <b><%= fdate p.created_at %></b></p></td>
           <td class="count">
             <% if @cat == 'Projekte' %>
-              <span><%= p.roles.count %></span> Teammitglied<%= @sinplu %>, 
-              <span><%= p.followers.count %></span> Beobachter<br />
+              <span><%= p.has_members.count %></span> Teammitglied<%= @sinplu %>, 
+              <span><%= p.has_followers.count %></span> Beobachter<br />
             <% end %>
             <% if p.jobs.count > 0 %>
               <span><%= image_tag "jobs.png" %><%= p.jobs.count %></span> 
