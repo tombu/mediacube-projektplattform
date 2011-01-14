@@ -11,4 +11,5 @@ class Cover < Image
     :path => ":rails_root/public/media/projects/images/:style/:id_:filename"
     
   before_create :randomize_file_name
+  
 end

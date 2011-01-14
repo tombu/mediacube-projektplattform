@@ -18,4 +18,20 @@ class Project < ActiveRecord::Base
       find(:all)
     end
   end
+  
+  def cover_url
+    if self.cover.nil?
+      "/images/default_project_cover.jpg"
+    else
+      self.cover.asset.url(:cover)
+    end
+  end
+  
+  def icon_url
+    if self.cover.nil?
+      "/images/default_project_icon.jpg"
+    else
+      self.cover.asset.url(:small)
+    end
+  end
 end
