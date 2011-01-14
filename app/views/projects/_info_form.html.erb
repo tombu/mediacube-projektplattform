@@ -1,29 +1,34 @@
 <div class="inline">
-  <!--<div class="image">
-	<img src='../images/projektimg.jpg' alt='' />
-	<a href="" class="editBtnHor">Edit</a>
-  </div>-->
-	<div id="projecthead">
-	  <%= form_for @project, :remote => true do |f| %>
-	  <label>Titel:</label><br />
-	  <%= f.text_field :title, :class=>"eName" %>
-	  <br /><br /><label>Kategorien:</label><br />
-	  <%= select_tag :category, options_from_collection_for_select(Category.all.each, "id", "label"), :class=>"left", :id=>"formECat", :include_blank => 'Auswählen ...' %>
-	  <ul class="category">
-		<script type="text/javascript">
-		<% @project.categories.each do |c|
-		  cats = Category.where("label = ?", c.label).first.id %>
-		  catAdd('<%= cats %>', "<%= c.label %>");
-		<% end %>
-		</script>
-	  </ul>
-	  <br />
-	</div>
-   <label>Beschreibung:</label><br />
-	<%= f.text_area :description, :class=>"eDescription" %><br/>
-	<label>Cover Bild</label>
-	<%= render :partial => "media/upload_form", :locals => { :multiple_queues => false, :auto_upload => true, :build_project_cover => true } %>
-  	<a class="stdBtn"><p>Aktualisieren</p><%= image_tag "details-arrow.png" %></a>
-	<a class="stdBtn no2" href="javascript:editing(true, '#projectinfo');"><p>Abbrechen</p></a>
-  <% end %>
+  <%= form_for @project, :remote => true, :id=>"infoform" do |f| %>
+    <%= hidden_field_tag 'field', 'info' %>
+    <%= render 'dialog' %>
+    <div id="projecthead">
+      <label>Titel:</label><br />
+      <%= f.text_field :title, :class=>"eName" %>
+      <br /><br /><label>Kategorien:</label><br />
+      <%= select_tag :category, options_from_collection_for_select(Category.all.each, "id", "label"), :class=>"left", :id=>"formECat", :include_blank => 'Auswählen ...' %>
+      <ul class="category">
+      <script type="text/javascript">
+      <% @project.categories.each do |c| %>
+         <% cats = Category.where("label = ?", c.label).first.id %>
+           catAdd('<%= cats %>', "<%= c.label %>");
+         <% end %>
+      </script>
+      </ul>
+      <div class="hide">
+      <% @categories = Category.all
+      @categories.each do |category| %>
+        <div>
+         <%= check_box_tag "project[category_ids][]", category.id, @project.categories.include?(category), :class=>"hiddencat" %>
+        </div>
+      <% end %>
+    </div>
+      <br />
+      </div>
+     <label>Beschreibung:</label><br />
+    <%= f.text_area :description, :class=>"eDescription" %><br/>
+    <!--<label>Cover Bild</label>
+    <%= render :partial => "media/upload_form", :locals => { :multiple_queues => false, :auto_upload => true, :build_project_cover => true } %>-->
+    <%= render 'submit_buttons' %>
+    <% end %>
 </div>

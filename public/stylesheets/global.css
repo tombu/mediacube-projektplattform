@@ -2,7 +2,6 @@
 /* CSS Document */
 
 /* Global Settings Start */
-
 body {
 	font-family: "Calibri", sans-serif;
 	background: #e6e6e6 url(../images/logo_bg.png) center -400px no-repeat;
@@ -603,10 +602,6 @@ section {
 	float: left;
 	width: 550px;
 	margin-bottom: 45px;
-}
-
-#projectdetails #projectinfo img {
-	display: block;
 }
 
 #projectdetails #projectinfo p.desc {
@@ -1418,12 +1413,12 @@ section {
   padding: 0 8px;
   font-size: 13px;
   display: inline-block;
-  cursor: pointer;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-	-webkit-border-radius: 5px;	
+  cursor: pointer;	
 	border: 1px solid #e7e7e7;
 	background: white;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
 }
 .stdBtn p { margin-left: 8px; border-left: 1px solid #e7e7e7; padding-left: 7px; float: right; }
 .stdBtn img { float: left;}
@@ -1435,7 +1430,7 @@ section {
 .stdBtn:hover { color: Black; }
 .stdBtn.no2:hover { color: White; }
 
-#searchingmember .stdBtn, #teammember .stdBtn, #projectinfo .inline .stdBtn { float: left;}
+#searchingmember .stdBtn, #teammember .stdBtn, #projectinfo .inline .stdBtn, #projectprogress .inline .stdBtn { float: left;}
 
 .inline .stdBtn
 {
@@ -1481,6 +1476,7 @@ section {
 }
 .clean { float: none; clear: both; }
 .clean.hide { visibility: hidden; }
+div.hide { display: none; }
 
 .pagination
 {
@@ -1544,7 +1540,7 @@ section {
   color: #555;
 }
 #searchingmember .inline .eName { width: 185px; float: left; }
-#searchingmember .add { float: left; margin: 1px 0 0 7px; }
+#searchingmember .add { float: left; margin: 1px 0 0 7px; cursor: pointer; }
 .del img { display: block; }
 .del { margin: 2px 0 0 5px; }
 #projectinfo .inline #formECat
@@ -1649,12 +1645,6 @@ section {
 input[type=text], textarea { border: 1px solid #ccc; }
 input[type=text] { text-indent: 7px; }
 
-/* Upload */
-div#upload_form {
-	background-color: #ccc;
-	max-width: 560px;
-}
-
 #rightbar #teammember .pic img { width: 40px; height: 40px; }
 
 #searchresults .count ul li
@@ -1717,6 +1707,7 @@ div#upload_form {
   padding-bottom: 25px;
   border-bottom: 1px solid #eee;
   margin-bottom: 25px;
+  overflow: hidden;
 }
 #profilhead .pic
 {
@@ -1760,7 +1751,7 @@ div#upload_form {
   font-size: 14px;
   text-decoration: none;
 }
-#projectportfolio .pic
+#projectportfolio .pic img
 {
   width: 127px;
   height: 72px;
@@ -1772,6 +1763,7 @@ div#upload_form {
 {
   position: absolute;
   top: 66px;
+  cursor: pointer;
 }
 .prev { left: 0; } .next { right: 0; }
 .mediaslider li 
@@ -1789,3 +1781,42 @@ div#upload_form {
   margin: 0 10px 10px 0;
 }
 #mediaall li img, #mediaall li { width: 120px; height: 120px; }
+
+.inline .submit
+{
+  height: 32px!important;
+  line-height: 30px;
+  color: #444;
+  padding: 0 8px 0 47px;
+  font-size: 13px;
+  display: inline-block;
+  cursor: pointer;	
+	border: 1px solid #e7e7e7!important;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+	float: left;
+	margin: 20px 10px 0 0;
+}
+.inline .submit[disabled=true],.inline .submit[disabled=disabled]
+{
+  cursor: default;
+  opacity: 0.5;
+}
+
+.inline { position: relative; overflow: hidden; }
+.ajx
+{
+  position: absolute;
+  top: 0; left: 0;
+  background: transparent url('../images/spa.png') repeat;
+  z-index: 10000;
+  text-align: center;
+  display: none;
+}
+.ajx .con { position: relative; overflow: hidden; width: 200px; margin: 0 auto; }
+
+.ajx .ask .msg { font-size: 14px; font-weight: bold; }
+.ajx .ask input { margin-left: 14px; }
+.edit_project { display: block; }
+#searchingmember { position: relative; }

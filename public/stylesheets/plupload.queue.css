@@ -7,11 +7,11 @@
 	display: inline-block;
 	font: normal 12px sans-serif;
 	text-decoration: none;
-    color: #42454a;
+    color: #777;
     border: 1px solid #bababa;
     padding: 2px 8px 3px 20px;
 	margin-right: 4px;
-    background: #f3f3f3 url('../images/plupload/buttons.png') no-repeat 0 center;
+    background: White url('../images/plupload/buttons.png') no-repeat 0 center;
 	outline: 0;
 
     /* Optional rounded corners for browsers that support it */
@@ -38,7 +38,6 @@
 }
 
 .plupload_wrapper {
-	font: normal 11px Verdana,sans-serif;
 	width: 100%;
 }
 
@@ -50,7 +49,6 @@
 
 .plupload_container input {
 	border: 1px solid #DDD;
-	font: normal 11px Verdana,sans-serif;
 	width: 98%;
 }
 
@@ -59,7 +57,7 @@
 	display: none;
 }
 .plupload_header_content {
-	background: url('../images/plupload/backgrounds.gif') no-repeat 0 -317px;
+	background: url('../images/plupload/backgrounds.gif') no-repeat 0 0;
 	min-height: 56px;
 	padding-left: 60px;
 	color: #FFF;
@@ -178,4 +176,11 @@ li.plupload_droptext {
 	vertical-align: middle;
 	border: 0;
 	line-height: 165px;
+}
+
+/* Upload */
+div#upload_form {
+	background-color: White;
+	border: 1px solid #eee;
+	max-width: 560px;
 }

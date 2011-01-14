@@ -1,13 +1,59 @@
-﻿$(document).ready(function() {
-	$('.delete_post').bind('ajax:success', function() {
-	  $(this).closest('div').fadeOut(500);
-	});
-});
+﻿// AJAX Bindings
+function formBinding(where){
+  $(where+' .edit_project')
+    .bind('ajaxSend', function() {
+      showDialogPart(where+" .inline .ajx", "loading");
+    })
+    .bind('ajaxError', function() {})
+    .bind('ajaxSuccess', function() {
+      showDialogPart(where+" .inline .ajx", "success");
+      setTimeout(function(){
+        closeDialog(where+" .inline .ajx");
+      }, 1500);
+    });
+    
+    $(where+" .inline .asksubmit").click(function(){
+      showDialog(where+" .inline .ajx", "ask");
+    });
+    $(where+" .inline .ajx .close").click(function(){
+      closeDialog(where+" .inline .ajx");
+    });
+}
+
+// AJAX Dialogs
+function showDialogPart(where, what){
+  $(where+' .loading, '+where+' .success, '+where+' .ask').hide();
+  $(where+' .'+what).show();
+}
+function showDialog(where, what){
+  showDialogPart(where, what);
+  $(where).fadeIn(800);
+}
+function closeDialog(where){
+  $(where).fadeOut(400);
+}
+
+// style dialog screens
+function posDialog(where){
+  $(where+" .inline .ajx")
+    .css('width',$(where+" .inline").css('width'))
+    .css('height',$(where+" .inline").css('height'));
+  $top = $(where+" .inline").css('height');
+  $top = parseInt($top) / 2 - 24;
+  $(where+" .inline .ajx .con").css('marginTop', $top);
+}
 
 
 $(document).ready(function () {
-  // hide editing fields
-  //$("#projectinfo .inline, #searchingmember .inline, #teammember .inline").hide();
+  posDialog('#projectinfo');
+  posDialog('#searchingmember');
+  posDialog('#teammember');
+  posDialog('#projectprogress');
+  
+  formBinding('#projectinfo');
+  formBinding('#searchingmember');
+  formBinding('#teammember');
+  formBinding('#projectprogress');
   
   // project media slider
     if($(".mediaslider li").size() >= 5){
@@ -74,33 +120,6 @@ $(document).ready(function () {
 	  .css("top", (e.pageY - yOffset) + "px")
 	  .css("left", (e.pageX + xOffset) + "px");
   });
-
-
-
-  // Editing animation
-  /*$(".edit").hover(function () {
-    $(this).find(".editBtn").animate({ width: '27px' }, 300);
-    $(this).find(".editBtnHor").animate({ height: '25px' }, 300);
-  }, function(){
-    $(this).find(".editBtn").animate({ width: '2px' }, 300);
-    $(this).find(".editBtnHor").animate({ height: '0' }, 300);
-  });
-*/
-
-
-  // status
-  /*var nr = 0;
-  switch ($("#projectprogress .status").attr("rel")) {
-	case 'idea': nr = 1; break;
-	case 'inprogress': nr = 2; break;
-	case 'finished': nr = 3; break;
-  };
-  nr--;
-  $("#projectprogress .status li:eq(" + nr + ")").addClass("active");
-*/
-
-
-  // fixes
 });
 
 function placeholder() {
@@ -111,27 +130,6 @@ function placeholder() {
     }
   });
 }
-
-
-/*
-function editing(isOpen, what) {
-  $what = what;
-  if(isOpen)
-  {
-    $($what+" .inline").fadeToggle(300,function(){
-      $($what+" .edit").fadeToggle();
-    });
-    
-  }
-  else
-  {
-    $($what+" .edit").fadeToggle(300,function(){
-      $($what+" .inline").fadeToggle();
-    });
-  }
-}
-*/
-
 
 // *** add/delete CATEGORY
 $(document).ready(function () {
@@ -147,11 +145,15 @@ $(document).ready(function () {
 
 
 function catDelete(val) {
-  $value = val;
-  $("#formECat option:eq(0)").attr("selected", "selected");
-  //alert('#projectinfo.inline .category li.' + $value);
-  $('#projectinfo .inline .category li.no'+$value).fadeOut(function () { }, function () { $(this).remove() });
-  $("#formECat option[value=" + $value + "]").removeAttr("disabled");
+  if($("#projectinfo .inline .category li").size() > 1)
+  {
+    $value = val;
+    $("#formECat option:eq(0)").attr("selected", "selected");
+    //alert('#projectinfo.inline .category li.' + $value);
+    $('#projectinfo .inline .category li.no'+$value).fadeOut(function () { }, function () { $(this).remove() });
+    $("#formECat option[value=" + $value + "]").removeAttr("disabled");
+    $("#projectinfo .edit_project .hiddencat[value=" + $value + "]").removeAttr("checked");
+  }
 }
 
 function catAdd(val, text) {
@@ -159,6 +161,7 @@ function catAdd(val, text) {
   $value = val;
   $text = text;
   $('#projectinfo .inline .category').append('<li class="no'+$value+'">'+$text+'<a href="javascript:catDelete(' + $value + ');" class="right del"><img src="/images/delete.png" /></a></li>');
+  $("#projectinfo .edit_project .hiddencat[value=" + $value + "]").attr("checked","checked");
 }
 
 function catDisable(val) {
@@ -170,25 +173,42 @@ function catDisable(val) {
 
 // *** add/delete JOB
 $(document).ready(function () {
-  $("#searchingmember .stdBtn.add").click(function () {
-    jobAdd($("#searchingmember #job.eName").val());
+  $("#searchingmember .add").click(function () {
+    $max = 0;
+    for($i = 0; $i < $("#searchingmember .inline .openjobs li").size(); $i++)
+    {
+      $val = $("#searchingmember .inline .openjobs li").eq($i).attr("class");
+      $val = parseInt($val.substring(2));
+      if($val > $max) $max = $val;
+    }
+    $max++;
+    jobAdd($max, $("#searchingmember #job.eName").val(), true);
   });
 });
 
 
-function jobDelete(val) {
+function jobDelete(val, nw) {
   $value = val;
   $('#searchingmember .inline .openjobs li.no'+$value).fadeOut(function () { }, function () { $(this).remove() });
+  $("#searchingmember .edit_project .hiddenjobs[value=" + $value + "]").removeAttr("checked");
+  if(nw) $('#searchingmember .inline .newjobs input[val='+$value+']').remove();
 }
 
-$i = 0;
-function jobAdd(val) {
-  $value = val;
-  $('#searchingmember .inline .openjobs').append('<li class="no'+$i+'">» '+$value+'<a href="javascript:jobDelete(' + $i + ');" class="right del"><img src="/images/delete.png" /></a></li>');
-  $i++;
+function jobAdd(val, text, nw) {
+  $value = val; $text = text; $nw = nw;
+  if($nw)
+  {
+    $('#searchingmember .inline .newjobs').append('<input type="text" name="newjobs[]" val="'+$value+'" value="'+$text+'" />');
+    $newTag = 'new="new"';
+    $delNew = true;
+  }
+  else { $newTag =''; $delNew = false; }
+  $('#searchingmember .inline .openjobs').append('<li '+$newTag+' class="no'+$value+'">» '+$text+'<a href="javascript:jobDelete(' + $value + ','+$delNew+');" class="right del"><img src="/images/delete.png" /></a></li>');
+  //$("#searchingmember .inline .hiddencat[value=" + $value + "]").attr("checked","checked");
 }
 
 function memberDelete(val) {
   $value = val;
   $('#teammember .inline .member.no'+$value).fadeOut(function () { }, function () { $(this).remove() });
+  $('#teammember .inline .hiddenroles[value='+$value+']').removeAttr('checked');
 }

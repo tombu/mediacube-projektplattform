@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110108022908) do
+ActiveRecord::Schema.define(:version => 20110109102903) do
 
   create_table "categories", :force => true do |t|
     t.text     "label"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(:version => 20110108022908) do
     t.string  "role"
     t.integer "project_id"
     t.integer "user_id"
-    t.integer "job_id"
+    t.string  "job"
   end
 
   create_table "stages", :force => true do |t|

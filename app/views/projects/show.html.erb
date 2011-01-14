@@ -1,5 +1,4 @@
-<% @open_jobs = get_open_jobs @project %>
-<%= render 'layouts/sidebar_sorting' %>
+﻿<%= render 'layouts/sidebar_sorting' %>
 <%= render 'rightbar' %>
 
 <div id="projectdetails">
@@ -11,7 +10,7 @@
   <div id="projectinfo">
     <div class="edit">
       <div class="image">
-        <%= image_tag @project.cover.asset.url(:cover) %>
+        <%= image_tag @project.cover.asset.url :cover %>
       </div>
       <div id="projecthead">
         <h5><%= @project.title %></h5>
@@ -28,7 +27,7 @@
   <div id="media">
     <h5 class="noedit">Mediadaten <span>(<%= @mcount %>)</span></h5>
     <% if !@project.images.first.nil? %>
-    <% if @mcount >= 5 %><a href="#" class="prev"><%= image_tag 'left.png' %></a><% end %>
+    <% if @mcount >= 5 %><a class="prev"><%= image_tag 'left.png' %></a><% end %>
     <div class="mediaslider">
     <ul>
       <% @project.images.each do |m| %>
@@ -36,7 +35,7 @@
       <% end %>
     </ul>
     </div>
-    <% if @mcount >= 5 %><a href="#" class="next"><%= image_tag 'right.png' %></a><% end %>
+    <% if @mcount >= 5 %><a class="next"><%= image_tag 'right.png' %></a><% end %>
     <br class="clean" /><br />
     <%= link_to [ @project, :media ], :class=>"stdBtn" do %><p>Alle Mediadaten ansehen</p><%= image_tag "details-arrow.png" %></a><% end %>
     <% end %>

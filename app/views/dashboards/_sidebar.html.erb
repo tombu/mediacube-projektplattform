@@ -10,7 +10,7 @@
 		<% if @active_projects.first != nil %>
 			<% @active_projects.each do |p| %>
 				<div class="project">
-				<%= link_to image_tag("user-40.jpg"), p, :class=>"pic" %>
+				<%= link_to image_tag(p.cover.asset.url :small), p, :class=>"pic" %>
 				<p><%= link_to p.title, p %><br><span class="sl"><%= p.roles.count %> Mitarbeiter</span></p>
 				</div>
 		<% end else %>
@@ -23,7 +23,7 @@
 		<% if @following_projects.first != nil %>
 			<% @following_projects.each do |p| %>
 		  <div class="project">
-			<%= link_to image_tag("user-40.jpg"), p, :class=>"pic" %>
+			<%= link_to image_tag(p.cover.asset.url :small), p, :class=>"pic" %>
 			<p><%= link_to p.title, p %><br><span class="sl"><%= p.roles.count %> Mitarbeiter</span></p>
 		  </div>
 		<% end else %>

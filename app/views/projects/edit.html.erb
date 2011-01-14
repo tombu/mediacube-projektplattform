@@ -1,5 +1,4 @@
-﻿<% @open_jobs = get_open_jobs @project %>
-<%= render 'layouts/sidebar_sorting' %>
+﻿<%= render 'layouts/sidebar_sorting' %>
 
 <div id="projectdetails">
   <div id="topbar">
@@ -11,134 +10,22 @@
   </div>
 </div>
 
-
-
 <div id="rightbar">
-
   <!-- PROGRESS -->
   <div id="projectprogress">
     <h5 class="noedit">Projektstatus</h5>
-    <div class="edit">
-      <h4 class="status" rel="<%= @project.status %>"><%= @status_names[@project.status] %></h4>
-    </div>
-    <% if @project.status == "inprogress" %>
-        <ul id="stagebar" currentstage="<%= @project.currentstage %>">
-        <% @project.stages.order("position ASC").each do |s| %>
-          <li position="<%= s.position %>"><%= s.name %>
-          <div><%= s.description %></div>
-          </li>  
-        <% end %>
-        </ul>
-     <% end %>
+    <%= render "status_form" %>
   </div>
 
   <!-- JOBS -->
   <div id="searchingmember">
-    <h5 class="noedit">Auf der Suche nach <span>(<%= @open_jobs.count %>)</span></h5>
-    <%= render "jobs_form"%>
+    <h5 class="noedit">Auf der Suche nach <span>(<%= @project.jobs.count %>)</span></h5>
+    <%= render "jobs_form" %>
   </div>
 
   <!-- TEAM -->
   <div id="teammember">
     <h5 class="noedit">Team <span>(<%= @project.roles.count %>)</span></h5>
-    <%= render "team_form"%>
+    <%= render "team_form" %>
   </div>
 </div>
-
-
-<!--      <div id="contentwrapper">
-      <div id="npformular">
- <%= form_for(@project) do |p| %>
-      <h1>Projekt bearbeiten</h1>
-
-         <span class="btnabbrechenspeichern"><%= link_to 'Back', @project %><%= p.submit %></span>
-
-        <div class="inputfield">
-          <h2>Projekttitel</h2>
-          <p>Wird in der Projektübersicht angezeigt</p>
-            <%= p.text_field :title, :class=>"projekttitel" %>
-        </div>
-
-        <div class="inputfield">
-          <h2>Beschreibung</h2>
-          <p>Beschreibung zum Projekt Max. 300 Wörter</p>
-            <%= p.text_area :description, :class=>"kurzbeschreibung" %>
-
-        </div>
-
-        <div class="inputfield">
-          <h2>Kategorie</h2>
-          <p>Hauptkategorie für die Projektübersicht</p>
-
-            <select name="category" class="category">
-               <option>Web</option>
-               <option>Print</option>
-               <option>Film</option>
-               <option>Audio</option>
-               <option>3D</option>
-               <option>Game</option>
-            </select>
-
-        </div>
-        <div class="inputfield">
-          <h2>Teammitglieder</h2>
-          <p>Name und Tätigkeit eines bereits bestehenden Teammitgliedes. Profil wird automatisch auf dessen Profil verlinkt.</p>
-
-            <input name="Name" class="name" type="text" placeholder="Name"> <input name="Tätigkeit" class="taetigkeit" type="text" placeholder="Tätigkeit">
-
-          <a href="#" >hinzufügen</a>
-        </div>
-
-        <div class="inputfield">
-          <h2>Titelbild</h2>
-          <p>Titelbild für die Projektübersicht. Entweder die Url eingeben oder auf der Festplatte suchen.</p>
-
-            <input name="titelbild" class="titelbild" type="text" placeholder="URL eingeben">	
-
-        </div>
-
-        <div class="inputfield">
-          <h2>Tags</h2>
-          <p>Stichworte passent zum Projekt für bessere Suchergebnisse</p>
-
-            <input name="tags" class="tags" type="text" placeholder="Stichworte eingeben">
-
-        </div>
-      </div>
-      <div id="dashboard">
-
-        <div id="dashboardhead">
-          <h2>dashboard</h2> 
-          <a href="#" >neues Projekt anlegen</a>
-        </div>
-
-        <div id="myproject">
-          <h2>meine Projekte</h2>
-
-          <div class="project"><img src="img/projektimgmin.jpg">
-          <p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
-
-          <div class="project"><img src="img/projektimgmin.jpg">
-          <p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
-
-          <div class="project"><img src="img/projektimgmin.jpg">
-          <p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
-        </div>
-
-        <div id="followprojects">
-          <h2>beobachtete Projekte</h2>
-
-          <div class="project"><img src="img/projektimgmin.jpg">
-          <p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
-
-          <div class="project"><img src="img/projektimgmin.jpg">
-          <p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
-
-          <div class="project"><img src="img/projektimgmin.jpg">
-          <p>Mediacube Projektplattform <br />4 Mitarbeiter</p></div>
-        </div>
-<% end %>
-      </div>
-      </div>
-
--->

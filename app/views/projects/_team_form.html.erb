@@ -1,24 +1,23 @@
-<div class="inline">
+﻿<div class="inline">
   <%= form_for @project, :remote => true do |f| %>
+    <%= hidden_field_tag 'field', 'team' %>
+    <%= render 'dialog' %>
       <div id="memberlist">
-        <div class="member">
-        <%= link_to image_tag(avatar_url(@owner.user, 40)), @owner.user, :class=>"pic" %>
-        <p><b><%= link_to @owner.user.name, @owner.user %></b><br>
-          <%= text_field_tag :title, @owner.job.name, :class=>"editjob" %>
-        </p>
+        <% @project.roles.each do |r| %>
+          <div class="member no<%= r.id %>">
+            <%= link_to image_tag(avatar_url(r.user, 40)), r.user, :class=>"pic" %>
+            <p>
+              <% if r != @owner %><a href="javascript:memberDelete('<%= r.id %>');" class="right"><img src="/images/delete.png" /></a><% end %>
+              <b><%= r.user.name %></b><br><%= text_field_tag "roles[]",r.job, :class=>"editjob" %>
+            </p>
+          </div>
+        <% end %>	
+        <div class="hide">
+        <% @project.roles.each do |r| %>
+           <%= check_box_tag "project[role_ids][]", r.id, @project.roles.include?(r), :class=>"hiddenroles" %>
+          <% end %>
         </div>
-        <hr />
-        <% @project.roles.each do |r| if r != @owner %>
-        <div class="member no<%= r.user.id %>">
-          <%= link_to image_tag(avatar_url(r.user, 40)), r.user, :class=>"pic" %>
-          <p><a href="javascript:memberDelete('<%= r.user.id %>');" class="right"><img src="/images/delete.png" /></a>
-          <b><%= link_to r.user.name, r.user %></b><br><%= text_field_tag :title, r.job.name, :class=>"editjob" %>
-            
-          </p>
-        </div>
-        <% end end %>	
       </div>
-  <a class="stdBtn"><p>Aktualisieren</p><%= image_tag "details-arrow.png" %></a>
-  <a class="stdBtn no2" href="javascript:editing(true, '#teammember');"><p>Abbrechen</p></a>
+  <%= render 'submit_buttons' %>
   <% end %>
 </div>
