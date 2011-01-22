@@ -5,11 +5,12 @@
 %>
   <% @ind = @ind + 1  %>
   <li class="<% if @ind % 5 == 0 %>nomarg<% end %>">
-    <div><b><%= u.roles.count %></b> Projekt<% if u.roles.count != 1 %>e<% end %></div>
+    <div><b><%= u.is_involved.count %></b> <%= "Projekt".pluralize %></div>
     <%= link_to image_tag(avatar_url(u, 140)), u, :class=>"pic" %><br />
     <p>
       <%= link_to strim(u.name,15), u, :class=>"name" %><br />
-      <%= mail_to strim(u.mail,23), u.mail, :class=>"mail", :encode => "javascript" %><br /><br />
+
+      <%= mail_to u.email, strim(u.email,20), :class=>"mail", :encode => "javascript" %><br /><br />
     </p>
   </li>
 <% end %>

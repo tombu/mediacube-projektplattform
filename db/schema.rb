@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110114123351) do
+ActiveRecord::Schema.define(:version => 20110109155432) do
 
   create_table "categories", :force => true do |t|
     t.text     "label"
@@ -21,11 +21,6 @@ ActiveRecord::Schema.define(:version => 20110114123351) do
   create_table "categories_projects", :id => false, :force => true do |t|
     t.integer "category_id"
     t.integer "project_id"
-  end
-
-  create_table "followers", :force => true do |t|
-    t.integer "project_id"
-    t.integer "user_id"
   end
 
   create_table "jobs", :force => true do |t|
@@ -68,11 +63,6 @@ ActiveRecord::Schema.define(:version => 20110114123351) do
     t.string  "job"
   end
 
-  create_table "searches", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "stages", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -84,13 +74,29 @@ ActiveRecord::Schema.define(:version => 20110114123351) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.string   "mail"
     t.string   "telephone"
-    t.string   "password"
     t.string   "web"
     t.string   "avatar"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email",                               :default => "", :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
+    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "reset_password_token"
+    t.string   "remember_token"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                       :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
+
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

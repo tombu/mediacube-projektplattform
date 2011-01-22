@@ -13,26 +13,37 @@
       <h1 id="logo"><%= link_to image_tag("/images/logo.png", :html => { :alt => "Projektplattform" }), :root %></h1>
       <div id="profilemenu">
         <div id="profilemenuborder">
-          <div class="user">Gregor Sams</div>
+          <div class="user">
+						<%= 
+						if user_signed_in? 
+							link_to current_user.name, current_user 
+						else 
+							link_to("Anmelden", new_user_session_path) + " oder " + link_to("Registrieren", new_user_registration_path)
+						end	%>
+						<%= if !user_signed_in? 
+							current_user.role
+						end %>
+						</div>
           <div class="icons">
               <ul>
                   <li class="message"><a href="#">Nachricht</a></li>
                   <li class="project"><a href="#">Projekte</a></li>
               </ul>
           </div>
-          <div class="logout"><a href="#">Logout</a></div>
+          <div class="logout"><a href="#">
+						<% if user_signed_in? %><%= link_to "Logout", destroy_user_session_path%> <% end %>
+					</a></div>
         </div>
       </div>
       <div id="menubar">
         <div id="menu">
           <ul>
-
-            <li<% if request.request_uri != "/dashboards" %> class="active"<% end %>><%= link_to "Projekte", :root%></li>
-            <li<% if request.request_uri == "/dashboards" %> class="active"<% end %>><%= link_to "Dashboard", :dashboards %></a></li>
+            <li<% if params[:controller] != "dashboards" %> class="active"<% end %>><%= link_to "Projekte", :root%></li>
+            <li<% if params[:controller] == "dashboards" %> class="active"<% end %>><%= link_to "Dashboard", :dashboards %></a></li>
           </ul>
         </div>
         <div id="searchbar">
-          <% form_tag searchs_path, :method => 'get' do %>
+          <%= form_tag searchs_path, :method => 'get' do %>
             <p>
               <%= text_field_tag :search, params[:search], :class => "keyword", :placeholder => "Suche nach" %>
               <%= select_tag "category", options_for_select([['Projekte','Projekte'],['User','User'],['Jobs','Jobs']]) %>

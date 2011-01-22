@@ -164,14 +164,14 @@ $(document).ready(function () {
 
 
 function catDelete(val) {
-  if($("#projectinfo .inline .category li").size() > 1)
+  if($("#projectinfo .inline .category li, #npformular .category li").size() > 1)
   {
     $value = val;
     $("#formECat option:eq(0)").attr("selected", "selected");
     //alert('#projectinfo.inline .category li.' + $value);
-    $('#projectinfo .inline .category li.no'+$value).fadeOut(function () { }, function () { $(this).remove() });
+    $('#projectinfo .inline .category li.no'+$value+', #npformular .category li.no'+$value).fadeOut(function () { }, function () { $(this).remove() });
     $("#formECat option[value=" + $value + "]").removeAttr("disabled");
-    $("#projectinfo .edit_project .hiddencat[value=" + $value + "]").removeAttr("checked");
+    $("#projectinfo .edit_project .hiddencat[value=" + $value + "], #npformular .edit_project .hiddencat[value=" + $value + "]").removeAttr("checked");
   }
 }
 
@@ -179,8 +179,8 @@ function catAdd(val, text) {
   catDisable(val);
   $value = val;
   $text = text;
-  $('#projectinfo .inline .category').append('<li class="no'+$value+'">'+$text+'<a href="javascript:catDelete(' + $value + ');" class="right del"><img src="/images/delete.png" /></a></li>');
-  $("#projectinfo .edit_project .hiddencat[value=" + $value + "]").attr("checked","checked");
+  $('#projectinfo .inline .category, #npformular .category').append('<li class="no'+$value+'">'+$text+'<a href="javascript:catDelete(' + $value + ');" class="right del"><img src="/images/delete.png" /></a></li>');
+  $("#projectinfo .edit_project .hiddencat[value=" + $value + "], #npformular .hiddencat[value=" + $value + "]").attr("checked","checked");
 }
 
 function catDisable(val) {

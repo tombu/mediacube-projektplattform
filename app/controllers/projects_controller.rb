@@ -1,4 +1,13 @@
 class ProjectsController < ApplicationController
+  before_filter :check_user_role
+  filter_resource_access #authorization
+  
+  def check_user_role 
+    if !params[:id].nil? #|| params[:controller] == "media"
+      current_user.current_role = current_user.roles.where(:project_id => params[:id])
+    end
+  end
+  
   def index
     @status_names = { "Idee" => "idea", "In Arbeit" => "inprogress", "Abgeschlossen" => "finished"}
     @status = @status_names[params[:status]]
@@ -16,21 +25,21 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find params[:id]
+    # @project = ... set by authorization
     @owner = @project.roles.find_by_role :owner
-    @mcount = @project.media.count
+    @mcount = @project.images.count
     @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
   end
 
   def edit
-    @project = Project.find params[:id]
+    # @project = ... set by authorization
     @owner = @project.roles.find_by_role :owner
-    @mcount = @project.media.count
+    @mcount = @project.images.count
     @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
   end
   
   def update
-    @project = Project.find params[:id] 
+    # @project = ... set by authorization
     @field = params[:field]
     
     if @field == 'job'
@@ -91,20 +100,21 @@ class ProjectsController < ApplicationController
 
 
   def new
-    @project = Project.new
+    # @project = ... set by authorization
   end
   
   def create    
-    @project = Project.new(params[:project])
+    # @project = ... set by authorization
     @project.isPublic = (params[:project][:isPublic].to_i.zero? ?  false :  true)
     @project.isInternal = true
+    @project.status = "idea"
     if @project.save
       params[:categories].each do |cat|
         @project.categories << Category.find(cat[:id]) unless cat[:id].blank?
       end
     
       @job = Job.new(:name => params[:job][:name], :project => @project)
-      @role = Role.new(:role => "owner", :user => User.first, :project => @project, :job => @job)
+      @role = Role.new(:role => "owner", :user => current_user, :project => @project, :job => @job)
       if @job.save && @role.save
         redirect_to new_project_medium_path(@project, :build_cover => true)
       else

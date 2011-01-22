@@ -8,7 +8,7 @@
 #      user.avatar_url
 #    else
       default_url = "http://artistandarchitects.at/default_user.jpg" #{root_url}images
-      gravatar_id = Digest::MD5.hexdigest(user.mail.downcase)
+      gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
       "http://gravatar.com/avatar/#{gravatar_id}.jpg?s=#{size}&d=#{CGI.escape(default_url)}"
 #    end
   end
@@ -17,4 +17,5 @@
   def strim str, length
     truncate str, :length => length+1, :omission => "…"
   end
+
 end

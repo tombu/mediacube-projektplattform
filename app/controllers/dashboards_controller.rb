@@ -1,14 +1,11 @@
 class DashboardsController < ApplicationController
   def index
-    @user = User.find(2)
-    
-    @active_projects = Array.new
-    @user.roles.each do |r|
+    @active_projects = %w()
+    current_user.is_involved.each do |r|
         @active_projects << r.project
     end
-    
-    @following_projects = Array.new
-    @user.followers.each do |f|
+    @following_projects = %w()
+    current_user.is_following.each do |f|
       @following_projects << f.project
     end
   end
