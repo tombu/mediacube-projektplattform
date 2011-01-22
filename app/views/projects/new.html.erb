@@ -1,61 +1,40 @@
-﻿			
-			<div id="contentwrapper">
-			<div style="float: left;">
-			<div id="npformular">
-  <%= form_for @project, :url => { :action => "create" } do |f| %>
-			<h1>Neues Projekt anlegen</h1>
+﻿<%= form_for @project, :remote => true, :url => { :action => "create" } do |f| %>
+  <h1>Neues Projekt anlegen</h1>
 
-				 <span class="btnabbrechenspeichern"><%= f.submit "Projekt erstellen" %></span>
+  <div class="inputfield">
+    <h2>Projekttitel</h2>
+      <%= f.text_field :title, :class => "projekttitel", :placeholder => "Titel für ihr Projekt eingeben" %>
+  </div>
 
-        <div class="inputfield">
-          <h2>Projekttitel</h2>
-          <p>Wird in der Projektübersicht angezeigt</p>
-            <%= f.text_field :title, :class => "projekttitel", :placeholder => "Titel für ihr Projekt eingeben" %>
-        </div>
+  <div class="inputfield">
+    <h2>Beschreibung</h2>
+      <%= f.text_area :description, :class => "kurzbeschreibung", :placeholder => "Kurzbeschreibung für ihr Projekt eingebenen" %>
+  </div>
 
-        <div class="inputfield">
-          <h2>Beschreibung</h2>
-          <p>Beschreibung zum Projekt Max. 300 Wörter</p>
-            <%= f.text_area :description, :class => "kurzbeschreibung", :placeholder => "Kurzbeschreibung für ihr Projekt eingebenen" %>
-        </div>
-  
-				<div class="inputfield">
-					<h2>Kategorie</h2>
-					<p>Kategorien für das Projekt. <br/>Es ist mindestens <b>1</b> Kategorie erforderlich.</p>
-					<div id="categories_list">
-						<%= fields_for :categories do |builder| %>
-							<%= builder.select(:id, Category.all.collect { |c| [ c.label, c.id ] }, {:include_blank => '[Bitte wählen]'}, { :index => nil, :class => "category" }) %>
-							<%= builder.select(:id, Category.all.collect { |c| [ c.label, c.id ] }, {:include_blank => '[Bitte wählen]'}, { :index => nil, :class => "category" }) %>
-							<%= builder.select(:id, Category.all.collect { |c| [ c.label, c.id ] }, {:include_blank => '[Bitte wählen]'}, { :index => nil, :class => "category" }) %>
-						<% end %>
-					</div>
-					
-				</div>
-				
-				<div class="inputfield">
-					<h2>Sichbarkeit</h2>
-					<p>Entscheide ob das Projekt für alle Nutzer sichtbar ist, oder ob nur die Teammitglieder das Projekt sehen können</p>
-						<%= f.check_box :isPublic, :checked => "checked" %>
-						<%= f.label :isPublic, "Projekt ist für alle sichtbar" %>
-				</div>
-				
-				<div class="inputfield">
-					<h2>Tätigkeit</h2>
-					<p>Deine Tätigkeit(en) im Projektteam.</p>
-						<span class="name">owner name </span>
-						  <%= fields_for :job do |builder| %>
-								<%= builder.text_field :name, :class => "taetigkeit", :placeholder => "Tätigkeit" %>
-							<% end %>
-				</div>
+  <div class="inputfield">
+    <h2>Kategorie</h2>
+    <div id="categories_list">
+      <%= fields_for :categories do |builder| %>
+        <%= builder.select(:id, Category.all.collect { |c| [ c.label, c.id ] }, {:include_blank => '[Bitte wählen]'}, { :index => nil, :class => "category" }) %>
+        <%= builder.select(:id, Category.all.collect { |c| [ c.label, c.id ] }, {:include_blank => '[Bitte wählen]'}, { :index => nil, :class => "category" }) %>
+        <%= builder.select(:id, Category.all.collect { |c| [ c.label, c.id ] }, {:include_blank => '[Bitte wählen]'}, { :index => nil, :class => "category" }) %>
+      <% end %>
+    </div>
 
-				<div class="inputfield">
-					<h2>Titelbild</h2>
-					<p>Titelbild für die Projektübersicht. Datei auf der Festplatte suchen und hochladen.</p>
-						
-				</div>
-	<% end %>
-			</div>
-			<br style="clear:both;" />
-		
-			</div>
-</div>
+  </div>
+
+  <div class="inputfield">
+    <h2>Sichbarkeit</h2>
+      <%= f.check_box :isPublic, :checked => "checked" %>
+      <%= f.label :isPublic, "Projekt ist für alle sichtbar" %>
+  </div>
+
+  <div class="inputfield">
+    <h2>Tätigkeit</h2>
+      <span class="name">owner name </span>
+        <%= fields_for :job do |builder| %>
+          <%= builder.text_field :name, :class => "taetigkeit", :placeholder => "Tätigkeit" %>
+        <% end %>
+  </div>
+  <%= f.submit "Projekt erstellen" %>
+<% end %>

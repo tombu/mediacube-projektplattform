@@ -9,7 +9,7 @@
     <%= link_to image_tag(avatar_url(u, 140)), u, :class=>"pic" %><br />
     <p>
       <%= link_to strim(u.name,15), u, :class=>"name" %><br />
-      <%= mail_to u.mail, u.mail, :class=>"mail", :encode => "javascript" %><br /><br />
+      <%= mail_to strim(u.mail,23), u.mail, :class=>"mail", :encode => "javascript" %><br /><br />
     </p>
   </li>
 <% end %>

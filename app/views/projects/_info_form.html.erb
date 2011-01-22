@@ -8,24 +8,22 @@
       <br /><br /><label>Kategorien:</label><br />
       <%= select_tag :category, options_from_collection_for_select(Category.all.each, "id", "label"), :class=>"left", :id=>"formECat", :include_blank => 'Auswählen ...' %>
       <ul class="category">
-      <script type="text/javascript">
-      <% @project.categories.each do |c| %>
-         <% cats = Category.where("label = ?", c.label).first.id %>
-           catAdd('<%= cats %>', "<%= c.label %>");
-         <% end %>
-      </script>
+        <script type="text/javascript">
+        <% @project.categories.each do |c| %>
+           <% cats = Category.where("label = ?", c.label).first.id %>
+             catAdd('<%= cats %>', "<%= c.label %>");
+           <% end %>
+        </script>
       </ul>
       <div class="hide">
-      <% @categories = Category.all
-      @categories.each do |category| %>
-        <div>
-         <%= check_box_tag "project[category_ids][]", category.id, @project.categories.include?(category), :class=>"hiddencat" %>
-        </div>
-      <% end %>
-    </div>
-      <br />
+        <% @categories = Category.all
+        @categories.each do |category| %>
+          <div><%= check_box_tag "project[category_ids][]", category.id, @project.categories.include?(category), :class=>"hiddencat" %></div>
+        <% end %>
       </div>
-     <label>Beschreibung:</label><br />
+      <br />
+    </div>
+    <label>Beschreibung:</label><br />
     <%= f.text_area :description, :class=>"eDescription" %><br/>
     <!--<label>Cover Bild</label>
     <%= render :partial => "media/upload_form", :locals => { :multiple_queues => false, :auto_upload => true, :build_project_cover => true } %>-->

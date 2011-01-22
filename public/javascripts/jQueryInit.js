@@ -43,7 +43,6 @@ function posDialog(where){
   $(where+" .inline .ajx .con").css('marginTop', $top);
 }
 
-
 $(document).ready(function () {
   posDialog('#projectinfo');
   posDialog('#searchingmember');
@@ -84,16 +83,16 @@ $(document).ready(function () {
   // FORM PLACEHOLDER
   placeholder();
   $("input[type=text], input[type=password], textarea").focusin(function () {
-	var phvalue = $(this).attr("placeholder");
-	if (phvalue == $(this).val()) {
-	  $(this).val("");
-	}
+    var phvalue = $(this).attr("placeholder");
+    if (phvalue == $(this).val()) {
+      $(this).val("");
+    }
   });
   $("input[type=text], input[type=password], textarea").focusout(function () {
-	var phvalue = $(this).attr("placeholder");
-	if ($(this).val() == "") {
-	  $(this).val(phvalue);
-	}
+    var phvalue = $(this).attr("placeholder");
+    if ($(this).val() == "") {
+      $(this).val(phvalue);
+    }
   });
 
 
@@ -121,6 +120,26 @@ $(document).ready(function () {
 	  .css("left", (e.pageX + xOffset) + "px");
   });
 });
+
+
+// SIDEBAR set active class
+$(document).ready(function() {
+  $category = "#sidebar .categories";
+  $status = "#sidebar .status";
+  
+  if ($($category).attr("active") == "") $($category + " li:eq(0) a").addClass("active"); 
+  else
+    $($category + " a").each(function(i){
+      if ($(this).html() == $(this).parent().parent().attr("active")) $(this).addClass("active");
+    });
+  
+  if ($($status).attr("active") == "") $($status + " li:eq(0) a").addClass("active"); 
+  else
+    $($status + " a").each(function(i){
+      if ($(this).html() == $(this).parent().parent().attr("active")) $(this).addClass("active");
+    });
+});
+
 
 function placeholder() {
   $("input[type=text], input[type=password], textarea").each(function () {
@@ -211,4 +230,39 @@ function memberDelete(val) {
   $value = val;
   $('#teammember .inline .member.no'+$value).fadeOut(function () { }, function () { $(this).remove() });
   $('#teammember .inline .hiddenroles[value='+$value+']').removeAttr('checked');
+}
+
+
+// Overlay
+function overlay(id){
+    $.blockUI({ 
+    	css: {
+    		cursor: 'default'
+    	},
+    	overlayCSS:  { 
+    		opacity: 0.7,
+    		cursor: 'default'
+  		}, 
+  		themedCSS: {
+			width:	'500px',
+			top:	'17%',
+			left:	'50%'
+		},
+        theme:     true, 
+        message:   $(id), 
+        timeout:   0,
+	    fadeIn:    400, 
+	    fadeOut:   300,
+	    focusInput: false
+    });     
+    $(id+" .close").click(function() {
+        $.unblockUI(); 
+        return false; 
+    });
+}
+
+
+function submitForm(id){
+  $id = id;
+  $id.click();
 }

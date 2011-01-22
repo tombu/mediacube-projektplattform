@@ -1,11 +1,22 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.where("isPublic = ?", true).paginate :page => params[:page], :per_page => 6
-    puts @projects
+    @status_names = { "Idee" => "idea", "In Arbeit" => "inprogress", "Abgeschlossen" => "finished"}
+    @status = @status_names[params[:status]]
+    
+    if !params[:category].nil? && !params[:status].nil?
+      @projects = Project.joins(:categories).where(:categories => {:label => params[:category]}).where("isPublic = ? AND status = ?", true, @status)
+    elsif !params[:category].nil?
+      @projects = Project.joins(:categories).where(:categories => {:label => params[:category]}).where "isPublic = ?", true
+    elsif !params[:status].nil?
+      @projects = Project.where("isPublic = ? AND status = ?", true, @status)
+    else
+      @projects = Project.where "isPublic = ?", true
+    end
+    @projects = @projects.paginate :page => params[:page], :per_page => 6
   end
 
   def show
-    @project = Project.find(params[:id])
+    @project = Project.find params[:id]
     @owner = @project.roles.find_by_role :owner
     @mcount = @project.media.count
     @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
@@ -93,10 +104,9 @@ class ProjectsController < ApplicationController
       end
     
       @job = Job.new(:name => params[:job][:name], :project => @project)
-      @role = Role.new(:role => "owner", :user => User.last, :project => @project, :job => @job)
+      @role = Role.new(:role => "owner", :user => User.first, :project => @project, :job => @job)
       if @job.save && @role.save
         redirect_to new_project_medium_path(@project, :build_cover => true)
-        flash[:notice] = ""
       else
         flash[:notice] = ""
         render :new

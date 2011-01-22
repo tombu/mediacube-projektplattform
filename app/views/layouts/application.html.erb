@@ -3,8 +3,8 @@
 <head>
   <title>Projektplattform</title>
   <%= stylesheet_link_tag :all %>
-	<%= javascript_include_tag "jquery", "rails", "jcarousel", "lightbox", "jqueryinit" %>
-	<%= yield :plupload_header_files %>
+  <%= javascript_include_tag "jquery", "rails", "jcarousel", "lightbox", "jqueryui", "jqueryinit" %>
+  <%= yield :plupload_header_files %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -26,7 +26,7 @@
       <div id="menubar">
         <div id="menu">
           <ul>
-          
+
             <li<% if request.request_uri != "/dashboards" %> class="active"<% end %>><%= link_to "Projekte", :root%></li>
             <li<% if request.request_uri == "/dashboards" %> class="active"<% end %>><%= link_to "Dashboard", :dashboards %></a></li>
           </ul>
@@ -45,47 +45,17 @@
     <section>
             <div id="topborder">
               <div id="contentwrapper">
-                
-				<%= yield %>
+        <%= yield %>
             </div>
           </div>
     </section>
     <footer>
       <div id="footercontent">
-          <div class="sitemap">
-              <h4>Kategorien</h4>
-              <ul>
-                  <li><a href="#">Mediendesign</a></li>
-                  <li><a href="#">Film</a></li>
-                  <li><a href="#">Animation</a></li>
-                  <li><a href="#">Audio</a></li>
-                  <li><a href="#">Gamedesign</a></li>
-                  <li><a href="#">Web</a></li>
-              </ul>
-            </div>
-            <div class="sitemap">
-              <h4>Profil</h4>
-              <ul>
-                    <li><a href="#">mein Profil anzeigen</a></li>
-                    <li><a href="#">mein Profil bearbeiten</a></li>
-                    <li><a href="#">Profile suchen</a></li>
-                </ul>
-            </div>
-            <div class="sitemap">
-              <h4>Projekte</h4>
-              <ul>
-                    <li><a href="#">Projekte anzeigen</a></li>
-                    <li><a href="#">Projekte suchen</a></li>
-                    <li><a href="#">Projekt neu anlegen</a></li>
-                    <li><a href="#">meine Projekte anzeigen</a></li>
-                    <li><a href="#">Projekt bearbeiten</a></li>
-                </ul>
-            </div>
             <div id="mediacube">
               <ul>
                     <li class="linkmma"><a href="#">MultiMediaArts</a></li>
-                    <li class="linkmmt"><a href="#">MultiMediaTechnologie</a></li>
                     <li class="linkfh"><a href="#">Fachhochschule Salzburg</a></li>
+                    <li class="linkmmt"><a href="#">MultiMediaTechnologie</a></li>
                 </ul>
             </div>
         </div>

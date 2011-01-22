@@ -6,7 +6,7 @@ Projektplattform::Application.routes.draw do
   resources :projects do
     resources :media
   end
-
+  
   root :to => "projects#index"
 
 end
