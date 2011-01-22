@@ -1,7 +1,6 @@
 ﻿<% @results.each do |p| %>
     <%
       # singular/plural
-      @sinplu = p.roles.count > 1 ? "er" : ""
       @spjobs = p.jobs.count != 1 ? "offene Jobs" : "offener Job"
     %>
     <table id="searchresults">
@@ -12,12 +11,12 @@
           <td class="title"><%= link_to p do %><h6><%= p.title %></h6><% end %><p>am <b><%= fdate p.created_at %></b></p></td>
           <td class="count">
             <% if @cat == 'Projekte' %>
-              <span><%= p.has_members.count %></span> Teammitglied<%= @sinplu %>, 
-              <span><%= p.has_followers.count %></span> Beobachter<br />
+              <%= pluralize(p.has_members.count, "Teammitglied") %>, 
+              <%= pluralize(p.has_followers.count, "Beobachter") %><br />
             <% end %>
             <% if p.jobs.count > 0 %>
-              <span><%= image_tag "jobs.png" %><%= p.jobs.count %></span> 
-              <b><%= @spjobs %></b>
+              <span><%= image_tag "jobs.png" %></span> 
+              <b><%= pluralize(p.jobs.count, "Job") %></b>
             <% end %>
             <br />
             <% if @cat == 'Jobs' %>

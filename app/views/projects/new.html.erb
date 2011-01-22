@@ -22,13 +22,23 @@
 				<div class="inputfield">
 					<h2>Kategorie</h2>
 					<p>Kategorien für das Projekt. <br/>Es ist mindestens <b>1</b> Kategorie erforderlich.</p>
-					<div id="categories_list">
-						<%= fields_for :categories do |builder| %>
-							<%= builder.select(:id, Category.all.collect { |c| [ c.label, c.id ] }, {:include_blank => '[Bitte wählen]'}, { :index => nil, :class => "category" }) %>
-							<%= builder.select(:id, Category.all.collect { |c| [ c.label, c.id ] }, {:include_blank => '[Bitte wählen]'}, { :index => nil, :class => "category" }) %>
-							<%= builder.select(:id, Category.all.collect { |c| [ c.label, c.id ] }, {:include_blank => '[Bitte wählen]'}, { :index => nil, :class => "category" }) %>
-						<% end %>
-					</div>
+					<%= select_tag :category, options_from_collection_for_select(Category.all.each, "id", "label"), :id => "formECat", :include_blank => 'Auswählen ...' %><br/>
+					<ul class="category">
+		      <script type="text/javascript">
+		      <% @project.categories.each do |c| %>
+		         <% cats = Category.where("label = ?", c.label).first.id %>
+		           catAdd('<%= cats %>', "<%= c.label %>");
+		         <% end %>
+		      </script>
+		      </ul>
+		      <div class="hide">
+		      <% @categories = Category.all
+		      @categories.each do |category| %>
+		        <div>
+		         <%= check_box_tag "project[category_ids][]", category.id, @project.categories.include?(category), :class => "hiddencat" %>
+		        </div>
+		      <% end %>
+		    </div>
 					
 				</div>
 				

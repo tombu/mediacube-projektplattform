@@ -17,4 +17,5 @@
   def strim str, length
     truncate str, :length => length+1, :omission => "…"
   end
+
 end

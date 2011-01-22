@@ -3,7 +3,7 @@
     <%= hidden_field_tag 'field', 'team' %>
     <%= render 'dialog' %>
       <div id="memberlist">
-        <% @project.roles.each do |r| %>
+        <% @project.has_members.each do |r| %>
           <div class="member no<%= r.id %>">
             <%= link_to image_tag(avatar_url(r.user, 40)), r.user, :class=>"pic" %>
             <p>
@@ -13,8 +13,8 @@
           </div>
         <% end %>	
         <div class="hide">
-        <% @project.roles.each do |r| %>
-           <%= check_box_tag "project[role_ids][]", r.id, @project.roles.include?(r), :class=>"hiddenroles" %>
+        <% @project.has_members.each do |r| %>
+           <%= check_box_tag "project[role_ids][]", r.id, @project.has_members.include?(r), :class=>"hiddenroles" %>
           <% end %>
         </div>
       </div>
