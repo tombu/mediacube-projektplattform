@@ -55,7 +55,7 @@ $(document).ready(function () {
   formBinding('#projectprogress');
   
   // project media slider
-    if($(".mediaslider li").size() >= 5){
+    if($(".mediaslider li").size() > 5){
       $(".mediaslider").jCarouselLite({
           btnNext: ".next",
           btnPrev: ".prev"
