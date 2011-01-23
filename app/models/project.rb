@@ -5,10 +5,11 @@ class Project < ActiveRecord::Base
   has_many :jobs, :dependent => :destroy
   has_many :media
   has_many :images
+  belongs_to :cover
   has_many :roles, :order => 'role DESC', :dependent => :destroy
   has_many :users, :through => :roles
   has_many :stages
-  belongs_to :cover
+  has_many :statusupdates
   
   def self.search(search)
     if search

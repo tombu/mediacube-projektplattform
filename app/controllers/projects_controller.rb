@@ -29,6 +29,7 @@ class ProjectsController < ApplicationController
     @owner = @project.roles.find_by_role :owner
     @mcount = @project.images.count
     @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
+    @statusupdates = @project.statusupdates.order('created_at DESC')
   end
 
   def edit

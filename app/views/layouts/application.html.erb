@@ -20,8 +20,8 @@
 						else 
 							link_to("Anmelden", new_user_session_path) + " oder " + link_to("Registrieren", new_user_registration_path)
 						end	%>
-						<%= if !user_signed_in? 
-							current_user.role
+						<%= if user_signed_in? 
+							# current_user.role
 						end %>
 						</div>
           <div class="icons">

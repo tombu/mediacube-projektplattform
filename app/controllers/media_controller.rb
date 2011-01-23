@@ -1,5 +1,5 @@
 class MediaController < ApplicationController
-  filter_resource_access :nested_in => :projects
+  #filter_resource_access :nested_in => :projects
   
   def index
     @project = Project.find(params[:project_id])

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  content: MyString
+  isPublic: false
+  user: 
+  project: 
+
+two:
+  content: MyString
+  isPublic: false
+  user: 
+  project: 

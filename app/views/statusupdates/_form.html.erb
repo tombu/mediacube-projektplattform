@@ -1,0 +1,6 @@
+<%= form_for :statusupdate, Statusupdate.new, :url => { :controller => :statusupdates, :action => :create} do |f| %>
+	<%= f.text_area :content, :size => "75x3" %><br/>
+	<%= f.hidden_field :project_id, :value => params[:id] %>
+	<%= f.hidden_field :user_id, :value => current_user.id %>
+	<%= f.submit "hinzufügen" %>
+<% end %>

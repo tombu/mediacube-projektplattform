@@ -1,0 +1,9 @@
+<h1>Statusupdates#index</h1>
+<p>Find me in app/views/statusupdates/index.html.erb</p>
+<br/>
+<ul>
+<% @statusupdates.each do |su| %>
+	<li><%= su.content %> <br/>(<%= su.user.name %>)</li><br/>
+<% end %>
+</ul>
+	
