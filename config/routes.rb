@@ -7,6 +7,7 @@ Projektplattform::Application.routes.draw do
   resources :searchs
   resources :dashboards
   resources :statusupdates
+  resources :statustemplates
 
   resources :projects do
     resources :media

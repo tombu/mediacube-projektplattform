@@ -1,0 +1,13 @@
+﻿#user hat neue Medien hochgeladen.
+
+Das Projekt wurde editiert.
+
+Der Projektstatus wurde auf #status gesetzt.
+Das Projekt befindet sich jetzt in der Stage #stage.
+
+Es wurden neue Jobs ausgeschrieben: #jobs
+Folgende Jobs sind nicht mehr verfügbar: #jobs
+
+#user ist ein neues Teammitglied.
+#user hat das Team verlassen.
+

@@ -10,13 +10,10 @@ class Project < ActiveRecord::Base
   has_many :users, :through => :roles
   has_many :stages
   has_many :statusupdates
-  
-  def self.search(search)
-    if search
-      find(:all, :conditions => ['title LIKE ?', "%#{search}%"])
-    else
-      find(:all)
-    end
+
+  def self.parse_status status
+    @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen", "Idee" => "idea", "In Arbeit" => "inprogress", "Abgeschlossen" => "finished" }
+    @status_names[status]
   end
   
   def cover_url

@@ -1,7 +1,7 @@
 authorization do
   
   role :owner do
-    has_permission_on :projects, :to => [:index, :show, :edit, :create]   
+    has_permission_on :projects, :to => [:index, :show, :edit, :create, :update]   
   end
   
   role :leader do

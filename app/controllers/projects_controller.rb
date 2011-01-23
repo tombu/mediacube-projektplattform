@@ -42,6 +42,7 @@ class ProjectsController < ApplicationController
   def update
     # @project = ... set by authorization
     @field = params[:field]
+    puts params
     
     if @field == 'job'
       if !params[:project].nil?
@@ -66,14 +67,21 @@ class ProjectsController < ApplicationController
           @job = Job.create :name => job, :project => @project
         end
       end
+    
+    # update general project infos
     elsif @field == 'info'
       params[:project][:category_ids] ||= {}
       if @project.update_attributes params[:project]
+        # add statusupdate
+        @project.statusupdates << Statusupdate.create(:content => Statustemplate.substitute(:project_edit), :isPublic => true, :user => current_user)
+        
         respond_to do |format|
           format.js { render :nothing => true }
         end 
       else redirect_to project_path
       end
+    
+    # update team members
     elsif @field == 'team'
       params[:project][:role_ids] ||= {}
       if @project.update_attributes params[:project]
@@ -83,14 +91,19 @@ class ProjectsController < ApplicationController
       else redirect_to project_path
       end
       @i = 0
-      params[:roles].each do |jobn|
+      params[:roles].each do |jobnew|
         @temprole = @project.roles.find_by_id(params[:project][:role_ids][@i])
-        @temprole.job = jobn
+        @temprole.job = jobnew
         @temprole.save
         @i = @i+1
       end
+      
+    # update status
     elsif @field == 'status'
       if @project.update_attributes params[:project]
+        # add statusupdate
+        @project.statusupdates << Statusupdate.create(:content => Statustemplate.substitute(:project_status_edit, {"#status" => Project.parse_status(params[:project][:status])}), :isPublic => true, :user => current_user)
+        
         respond_to do |format|
           format.js { render :nothing => true }
         end 
