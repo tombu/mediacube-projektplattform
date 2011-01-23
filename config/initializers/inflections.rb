@@ -11,4 +11,5 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'Beobachter', 'Beobachter'
 #  inflect.irregular 'Follower', 'Follower'
   inflect.irregular 'Mitglied', 'Mitglieder'
+  inflect.irregular 'Ergebnis', 'Ergebnisse'
 end

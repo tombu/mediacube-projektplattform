@@ -1,3 +1,13 @@
 <%= render 'layouts/sidebar_sorting' %>
 
+<br/>
+<ul>
+<% @statusupdates.each do |su| %>
+	<li>
+		<%= link_to image_tag(su.project.icon_url), su.project, :class=>"pic" %><%= su.project.title %><br/>
+		<%= su.content %> <br/>(<%= su.user.name %>)
+	</li><br/>
+<% end %>
+</ul>
+
 <%= render 'sidebar' %>

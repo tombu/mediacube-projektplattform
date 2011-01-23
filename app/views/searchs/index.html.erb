@@ -2,7 +2,7 @@
 <div id="overview" class="search">
 	<% @warning = @results.count == 0 ? " warning" : "" %>
   <p class="stdNotice <%= @warning %>">
-    <b><%= @results.count %></b> Suchergebnis<% if @results.size>1 || @results.size==0%>se<% end %> 
+    <b><%= pluralize @results.size ,"Suchergebnis" %></b>
     für &#132;<i><%= params[:search] %>&#147;</i> 
     in <b><%= @cat %></b>
   </p>

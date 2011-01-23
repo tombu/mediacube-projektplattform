@@ -1,5 +1,6 @@
 class Medium < ActiveRecord::Base
   belongs_to :project
+  belongs_to :statusupdate
   has_one :image
   
   has_attached_file :asset, 

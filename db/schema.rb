@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110109155432) do
+ActiveRecord::Schema.define(:version => 20110122171507) do
 
   create_table "categories", :force => true do |t|
     t.text     "label"
@@ -67,6 +67,15 @@ ActiveRecord::Schema.define(:version => 20110109155432) do
     t.string   "name"
     t.text     "description"
     t.integer  "position"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "statusupdates", :force => true do |t|
+    t.string   "content"
+    t.boolean  "isPublic"
+    t.integer  "user_id"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"

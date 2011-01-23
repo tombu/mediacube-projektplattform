@@ -8,5 +8,7 @@ class DashboardsController < ApplicationController
     current_user.is_following.each do |f|
       @following_projects << f.project
     end
+    
+    @statusupdates = @statusupdates = Statusupdate.joins(:project => {:roles => :user}).where(:users => {:id => current_user.id}).order('created_at DESC')
   end
 end
