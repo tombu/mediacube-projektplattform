@@ -12,4 +12,10 @@ ActiveSupport::Inflector.inflections do |inflect|
 #  inflect.irregular 'Follower', 'Follower'
   inflect.irregular 'Mitglied', 'Mitglieder'
   inflect.irregular 'Ergebnis', 'Ergebnisse'
+  
+# Date Time
+  inflect.irregular 'Sekunde', 'Sekunden'
+  inflect.irregular 'Minute', 'Minuten'
+  inflect.irregular 'Stunde', 'Stunden'
+  inflect.irregular 'Tag', 'Tagen'
 end

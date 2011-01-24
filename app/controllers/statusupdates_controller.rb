@@ -8,6 +8,9 @@ class StatusupdatesController < ApplicationController
   
   def create
     @statusupdate = Statusupdate.new params[:statusupdate]
+    @statusupdate.isPublic = true
+    @statusupdate.html_tmpl_key = "POST"
+    
     if @statusupdate.save
       flash[:notice] = "Statusupdate gespeichert!"
       redirect_to :back

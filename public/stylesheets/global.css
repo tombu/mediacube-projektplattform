@@ -90,17 +90,8 @@ textarea { font-family: "Calibri", sans-serif; }
 .icons ul li a {
 	width: 20px;
 	height: 20px;
-	text-indent: -10000px;
 	float: left;
 }
-/*
-.icons ul li.message {
-	background-image: url(../images/icon_message.png);
-}
-
-.icons ul li.project {
-	background-image: url(../images/icon_project.png);
-}*/
 
 .logout {
 	width: 54px;
@@ -2120,14 +2111,98 @@ input.hide { display: none; }
   text-align: left;
 }
 
-
-
-
-
-
-
-
-
+#statusupdate_content
+{
+  display: block;
+  width: 450px;
+  height: 15px;
+  padding: 5px;
+  color: #a0b0b4;
+  border-color: #bfcdd0;
+}
+#statusupdate_content:focus
+{
+  color: #555;
+}
+.newStatusupdateArea
+{
+  float: left;
+  position: relative;
+  margin-left: 11px;
+}
+.newStatusupdateArea img
+{
+  position: absolute;
+  top: 8px; left: -5px;
+}
+#newStatusupdateForm
+{
+  padding: 10px;
+  background: #fafbfb;
+  border-bottom: 1px solid #dae6e9;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+#newStatusupdateForm #statusupdate_submit
+{
+  width: 23px; height: 23px;
+  background: url('../images/details-arrow.png');
+  border: 0;
+  float: right;
+  margin-top: 1px;
+}
+#stdProjectStatusUpdates li
+{
+  padding: 10px;
+  border-bottom: 1px dotted #cad4d7;
+  overflow: hidden;
+  position: relative;
+}
+/*
+#stdProjectStatusUpdates li sub
+{
+  display: block;
+  clear: both;
+  margin-top: 3px;
+  color: #a0b0b4;
+}*/
+#stdProjectStatusUpdates li sub
+{
+  position: absolute;
+  right: 10px;
+  color: #a0b0b4;
+}
+/*#stdProjectStatusUpdates .line { background: #fafbfb; }*/
+#stdProjectStatusUpdates .line2 span
+{
+  font-weight: bold;
+  padding: 3px 10px;
+  margin: 0 4px;
+  background: #0ab1f0;
+  -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+  color: White;
+}
+#stdProjectStatusUpdates .post .pic
+{
+  float: left;
+  margin-right: 5px;
+}
+#stdProjectStatusUpdates .post p 
+{ 
+  margin-top: -3px; 
+  float: left; 
+  color: #777777;
+  width: 400px;
+}
+#stdProjectStatusUpdates .post a
+{
+  color: #0ab1f0;
+  margin-bottom: 2px;
+  font-weight: bold;
+  text-decoration: none;
+}
 
 
 

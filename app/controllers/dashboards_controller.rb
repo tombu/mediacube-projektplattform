@@ -9,6 +9,8 @@ class DashboardsController < ApplicationController
       @following_projects << f.project
     end
     
-    @statusupdates = @statusupdates = Statusupdate.joins(:project => {:roles => :user}).where(:users => {:id => current_user.id}).order('created_at DESC')
+    @statusupdates = Statusupdate.joins(:project => {:roles => :user}).where(:users => {:id => current_user.id}).order('created_at DESC')
+    
+    @notifications = Notification.where(:receiver_id => current_user.id).order('created_at DESC')
   end
 end

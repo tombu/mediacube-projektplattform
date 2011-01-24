@@ -1,4 +1,6 @@
 Projektplattform::Application.routes.draw do
+  get "notifications/index"
+
   get "statusupdates/index"
 
   devise_for :users

@@ -1,13 +1,18 @@
-﻿#user hat neue Medien hochgeladen.
+﻿MEDIA
+#user hat neue Medien hochgeladen.
 
+LINE
 Das Projekt wurde editiert.
+Es wurden neue Jobs ausgeschrieben: <span>#jobs</span>
+Folgende Jobs sind nicht mehr verfügbar: <span>#jobs</span>
 
-Der Projektstatus wurde auf #status gesetzt.
-Das Projekt befindet sich jetzt in der Stage #stage.
+LINE2
+Der Projektstatus wurde auf <span>#status</span> gesetzt.
+Das Projekt befindet sich jetzt in der Stage <span>#stage</span>.
 
-Es wurden neue Jobs ausgeschrieben: #jobs
-Folgende Jobs sind nicht mehr verfügbar: #jobs
-
-#user ist ein neues Teammitglied.
+USER
+#user (#job) ist ein neues Teammitglied.
 #user hat das Team verlassen.
 
+POST
+Normaler Post ...

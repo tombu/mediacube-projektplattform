@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  content: MyText
+  sender: 
+  receiver: 
+  project: 
+  isNew: false
+
+two:
+  content: MyText
+  sender: 
+  receiver: 
+  project: 
+  isNew: false

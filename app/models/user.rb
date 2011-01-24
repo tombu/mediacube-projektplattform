@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :statusupdates
   has_many :roles
   has_many :projects, :through => :roles
+  has_many :notifications
 
 #  validates :course, :inclusion => { :in => %w( multimediaart multimediatechnology ) }
 #  validates :role, :inclusion => { :in => %w( student lectorer ) }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110123160021) do
+ActiveRecord::Schema.define(:version => 20110124214046) do
 
   create_table "categories", :force => true do |t|
     t.text     "label"
@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(:version => 20110123160021) do
     t.string   "type"
   end
 
+  create_table "notifications", :force => true do |t|
+    t.text     "content"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.integer  "project_id"
+    t.boolean  "isNew"
+    t.string   "html_tmpl_key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.string   "status"
@@ -72,13 +83,6 @@ ActiveRecord::Schema.define(:version => 20110123160021) do
     t.datetime "updated_at"
   end
 
-  create_table "statustemplates", :force => true do |t|
-    t.string   "key"
-    t.string   "template"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "statusupdates", :force => true do |t|
     t.string   "content"
     t.boolean  "isPublic"
@@ -87,6 +91,13 @@ ActiveRecord::Schema.define(:version => 20110123160021) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "html_tmpl_key"
+  end
+
+  create_table "texttemplates", :force => true do |t|
+    t.string   "key"
+    t.text     "text",       :limit => 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

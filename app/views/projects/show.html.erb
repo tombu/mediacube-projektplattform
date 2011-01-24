@@ -44,13 +44,27 @@
   </div>
 
 	<div id="media">
-    <h5 class="noedit">Statusupdates <span>( )</span></h5>
-			<%= render :partial => "statusupdates/form" %>
+    <h5 class="noedit">Statusupdates <span>(<%= @statusupdates.count %>)</span></h5>
+	  <%= render :partial => "statusupdates/form" %>
 		<br/>
-		<ul>
+		<ul id="stdProjectStatusUpdates">
 		  <% @statusupdates.each do |su| %>
-				<li><%= su.content %> <br/><%= link_to image_tag(avatar_url(su.user, 40)), su.user, :class=>"pic" %><%= su.user.name %></li><br/>
+        <% case su.html_tmpl_key %>
+          <% when 'POST' %>
+				    <li class="post">
+              <%= link_to image_tag(avatar_url(su.user, 40)), su.user, :class=>"pic" %>
+              <p><%= link_to su.user.name %><br/><%= su.content %></p>
+              <sub><%= fdate su.created_at, true %></sub>
+            </li>
+          <% when 'LINE' %>
+            <li class="line"><%=raw su.content %><sub><%= fdate su.created_at, true %></sub></li>
+          <% when 'LINE2' %>
+            <li class="line2"><%=raw su.content %><sub><%= fdate su.created_at, true %></sub></li>
+        <% end %>
 			<% end %>
+      <% if @statusupdates.empty? %>
+        <p class="nodisplay"><i>Keine Statusupdates &hellip;</i></p>
+      <% end %>
 		</ul>
   </div>
 	

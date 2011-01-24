@@ -73,7 +73,11 @@ class ProjectsController < ApplicationController
       params[:project][:category_ids] ||= {}
       if @project.update_attributes params[:project]
         # add statusupdate
-        @project.statusupdates << Statusupdate.create(:content => Statustemplate.substitute(:project_edit), :isPublic => true, :user => current_user)
+        @project.statusupdates << Statusupdate.create(
+          :content => Texttemplate.substitute(:project_edit), 
+          :isPublic => true, 
+          :user => current_user,
+          :html_tmpl_key => "LINE")
         
         respond_to do |format|
           format.js { render :nothing => true }
@@ -102,7 +106,11 @@ class ProjectsController < ApplicationController
     elsif @field == 'status'
       if @project.update_attributes params[:project]
         # add statusupdate
-        @project.statusupdates << Statusupdate.create(:content => Statustemplate.substitute(:project_status_edit, {"#status" => Project.parse_status(params[:project][:status])}), :isPublic => true, :user => current_user)
+        @project.statusupdates << Statusupdate.create(
+          :content => Texttemplate.substitute(:project_status_edit, {"#status" => Project.parse_status(params[:project][:status])}), 
+          :isPublic => true, 
+          :user => current_user,
+          :html_tmpl_key => "LINE2")
         
         respond_to do |format|
           format.js { render :nothing => true }

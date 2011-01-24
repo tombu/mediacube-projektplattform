@@ -1,13 +1,28 @@
 <%= render 'layouts/sidebar_sorting' %>
 
 <br/>
-<ul>
+<!--<ul>
 <% @statusupdates.each do |su| %>
 	<li>
 		<%= link_to image_tag(su.project.icon_url), su.project, :class=>"pic" %><%= su.project.title %><br/>
 		<%= su.content %> <br/>(<%= su.user.name %>)
 	</li><br/>
 <% end %>
-</ul>
+</ul>-->
 
 <%= render 'sidebar' %>
+
+<!-- OVERLAY -->
+<div id="overlayNotifications" class="overlay">
+	<h1>Notifications</h1>
+	<a class="close" id="close"><%= image_tag 'close.png' %></a>
+	<div class="content">
+    <ul>
+	  <% @notifications.each do |n| %>
+      <li><%= n.content %><br /><b><%= n.receiver.name %> von <%= n.sender.name %></b><br />
+        <%= fdate n.created_at, true %></li><br/>
+    <% end %>
+    </ul>
+	  <div class="clean"></div>
+	</div>
+</div>

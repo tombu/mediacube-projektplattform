@@ -1,6 +1,12 @@
 <%= form_for :statusupdate, Statusupdate.new, :url => { :controller => :statusupdates, :action => :create} do |f| %>
-	<%= f.text_area :content, :size => "75x3" %><br/>
-	<%= f.hidden_field :project_id, :value => params[:id] %>
-	<%= f.hidden_field :user_id, :value => current_user.id %>
-	<%= f.submit "hinzufügen" %>
+	<div id="newStatusupdateForm">
+    <%= image_tag avatar_url(current_user, 27), :class => "left" %>
+    <%= f.submit "", :class=>"right" %>
+    <div class="newStatusupdateArea">
+      <%= image_tag "arrow-input.png" %>
+      <%= f.text_area :content, :size => "75x3", :placeholder=>"Neues Statusupdate schreiben ..." %>
+    </div>
+    <%= f.hidden_field :project_id, :value => params[:id] %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  </div>
 <% end %>
