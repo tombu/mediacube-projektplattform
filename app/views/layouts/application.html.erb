@@ -3,7 +3,7 @@
 <head>
   <title>Projektplattform</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag "jquery", "rails", "jcarousel", "lightbox", "jqueryui", "jqueryinit" %>
+  <%= javascript_include_tag "jquery", "rails", "jcarousel", "lightbox", "jqueryui", "jqueryelastic", "jqueryinit" %>
   <%= yield :plupload_header_files %>
   <%= csrf_meta_tag %>
 </head>
@@ -12,29 +12,26 @@
     <header>
       <h1 id="logo"><%= link_to image_tag("/images/logo.png", :html => { :alt => "Projektplattform" }), :root %></h1>
       <div id="profilemenu">
-        <div id="profilemenuborder">
           <div class="user">
-						<%= 
-						if user_signed_in? 
-							link_to current_user.name, current_user 
-						else 
-							link_to("Anmelden", new_user_session_path) + " oder " + link_to("Registrieren", new_user_registration_path)
-						end	%>
-						<%= if user_signed_in? 
-							# current_user.role
-						end %>
-						</div>
-          <div class="icons">
-              <ul>
-                  <li class="project"><%= link_to image_tag('icon_project.png'), "javascript:overlay('#overlayNotifications');" %></li>
-                  <li class="message"><%= link_to image_tag('icon_message.png'), '#' %></li>
-              </ul>
-          </div>
-          <div class="logout"><a href="#">
-						<% if user_signed_in? %><%= link_to "Logout", destroy_user_session_path%> <% end %>
-					</a></div>
-        </div>
+            <% if user_signed_in? %>
+              <%= link_to image_tag(avatar_url(current_user, 25), :class => "left"), current_user, :class=>"pic" %>
+							<%= link_to current_user.name, current_user, :class=>"text" %>
+						<% else %>
+							<p class="text"><%= link_to "Anmelden", new_user_session_path %> oder <%= link_to "Registrieren", new_user_registration_path %></p>
+						<% end	%>
+				  </div>
+          <% if user_signed_in? %>
+            <div class="icons">
+                <ul>
+                    <li class="project"><%= link_to image_tag('icon_project.png'), "javascript:overlay('#overlayNotifications');" %></li>
+                    <li class="message"><%= link_to image_tag('icon_message.png'), '#' %></li>
+                </ul>
+                <% if User.count_unread_notifications(current_user) > 0 %><sup class="count"><%= User.count_unread_notifications current_user %></sup><% end %>
+            </div>
+            <div class="logout"><%= link_to "Logout", destroy_user_session_path%></div>
+          <% end %>
       </div>
+      
       <div id="menubar">
         <div id="menu">
           <ul>

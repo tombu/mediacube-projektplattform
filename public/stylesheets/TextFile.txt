@@ -1,12 +1,16 @@
 ﻿MEDIA
 #user hat neue Medien hochgeladen.
 
-LINE
+EDIT
 Das Projekt wurde editiert.
+
+JOBS
 Es wurden neue Jobs ausgeschrieben: <span>#jobs</span>
+
+JOBS_DELETE
 Folgende Jobs sind nicht mehr verfügbar: <span>#jobs</span>
 
-LINE2
+STATUS
 Der Projektstatus wurde auf <span>#status</span> gesetzt.
 Das Projekt befindet sich jetzt in der Stage <span>#stage</span>.
 

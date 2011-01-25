@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110124214046) do
+ActiveRecord::Schema.define(:version => 20110125102716) do
 
   create_table "categories", :force => true do |t|
     t.text     "label"
@@ -50,6 +50,19 @@ ActiveRecord::Schema.define(:version => 20110124214046) do
     t.integer  "project_id"
     t.boolean  "isNew"
     t.string   "html_tmpl_key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "privacy_settings", :force => true do |t|
+    t.boolean  "show_update"
+    t.boolean  "show_update_media"
+    t.boolean  "show_update_edit"
+    t.boolean  "show_update_jobs"
+    t.boolean  "show_update_status"
+    t.boolean  "show_update_user"
+    t.boolean  "show_update_post"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

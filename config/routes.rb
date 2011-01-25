@@ -10,7 +10,8 @@ Projektplattform::Application.routes.draw do
   resources :dashboards
   resources :statusupdates
   resources :statustemplates
-
+  resources :notifications
+  resources :jobs
   resources :projects do
     resources :media
   end

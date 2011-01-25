@@ -26,8 +26,39 @@
     </div>
   </div>
   
-  <div id="media">
-    <h5 class="noedit">Mediadaten <span>(<%= @mcount %>)</span></h5>
+	<div id="updates">
+    <h5 class="noedit">Statusupdates <span>(<%= @statusupdates.count %>)</span></h5>
+	  <%= render :partial => "statusupdates/form" %>
+		<br/>
+		<ul id="stdProjectStatusUpdates">
+		  <% @statusupdates.each do |su| %>
+        <% case su.html_tmpl_key %>
+          <% when 'POST' %>
+				    <li class="post">
+              <%= link_to image_tag(avatar_url(su.user, 40)), su.user, :class=>"pic" %>
+              <p><%= link_to su.user.name, su.user %><br/><%= su.content %></p>
+              <sub><%= fdate su.created_at, true, true %></sub>
+            </li>
+          <% when 'EDIT' %>
+            <li class="line"><%= image_tag 'tny-edit.png' %><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+          <% when 'STATUS' %>
+            <li class="status"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+          <% when 'JOBS' %>
+            <li class="jobs"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+          <% when 'JOBS2' %>
+            <li class="jobs2"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+        <% end %>
+			<% end %>
+      <% if @statusupdates.empty? %>
+        <p class="nodisplay"><i>Keine Statusupdates &hellip;</i></p>
+      <% end %>
+	  </ul>
+    <div class="clean hide"></div>
+    <%= will_paginate @statusupdates %>
+  </div>
+	
+    <div id="media">
+    <h5 class="noedit">Medien <span>(<%= @mcount %>)</span></h5>
     <% if !@project.images.first.nil? %>
         <% if @mcount > 5 %><a class="prev"><%= image_tag 'left.png' %></a><% end %>
         <div class="mediaslider">
@@ -39,33 +70,9 @@
         </div>
         <% if @mcount > 5 %><a class="next"><%= image_tag 'right.png' %></a><% end %>
         <br class="clean" /><br />
-        <%= link_to [ @project, :media ], :class=>"stdBtn" do %><p>Alle Mediadaten ansehen</p><%= image_tag "details-arrow.png" %></a><% end %>
+        <%= link_to [ @project, :media ], :class=>"stdBtn" do %><p>Alle Medien ansehen</p><%= image_tag "details-arrow.png" %></a><% end %>
     <% end %>
   </div>
-
-	<div id="media">
-    <h5 class="noedit">Statusupdates <span>(<%= @statusupdates.count %>)</span></h5>
-	  <%= render :partial => "statusupdates/form" %>
-		<br/>
-		<ul id="stdProjectStatusUpdates">
-		  <% @statusupdates.each do |su| %>
-        <% case su.html_tmpl_key %>
-          <% when 'POST' %>
-				    <li class="post">
-              <%= link_to image_tag(avatar_url(su.user, 40)), su.user, :class=>"pic" %>
-              <p><%= link_to su.user.name %><br/><%= su.content %></p>
-              <sub><%= fdate su.created_at, true %></sub>
-            </li>
-          <% when 'LINE' %>
-            <li class="line"><%=raw su.content %><sub><%= fdate su.created_at, true %></sub></li>
-          <% when 'LINE2' %>
-            <li class="line2"><%=raw su.content %><sub><%= fdate su.created_at, true %></sub></li>
-        <% end %>
-			<% end %>
-      <% if @statusupdates.empty? %>
-        <p class="nodisplay"><i>Keine Statusupdates &hellip;</i></p>
-      <% end %>
-		</ul>
-  </div>
-	
+  
+    
 </div>

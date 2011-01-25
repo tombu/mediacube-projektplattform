@@ -43,5 +43,9 @@ class UsersController < ApplicationController
     flash[:notice] = "Fehler beim Versuch, das Project zu beobachten"
     redirect_to project
   end
+  
+    def open_notifications
+   puts "OOOOOOOOOOOOOOOOOOOOOOOOO"
+  end
 
 end

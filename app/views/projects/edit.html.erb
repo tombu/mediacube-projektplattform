@@ -3,6 +3,7 @@
 <div id="projectdetails">
   <div id="topbar">
     <%= link_to @project, :class=>"stdBtn" do %><p>Zurück zum Projekt</p><%= image_tag "back.png" %></a><% end %>
+    <%= link_to "javascript:overlay('#overlayPrivacy');", :class=>"stdBtn no3" do %><p>Sichtbarkeit</p><%= image_tag "editit.png" %></a><% end %>
   </div>
 
   <div id="projectinfo">
@@ -27,5 +28,19 @@
   <div id="teammember">
     <h5 class="noedit">Team <span>(<%= @project.roles.count %>)</span></h5>
     <%= render "team_form" %>
+  </div>
+</div>
+
+<!-- OVERLAY -->
+<div id="overlayPrivacy" class="overlay">
+  <h1>Sichtbarkeit</h1>
+  <a class="close" id="close"><%= image_tag 'close.png' %></a>
+  <div class="content">
+    <% form_for @project do |f| %>
+          <%= f.check_box :isPublic %><%= f.label :isPublic, "Updates sichtbar?" %>
+          <br />
+      <%= f.submit %>
+    <% end %>
+    <div class="clean"></div>
   </div>
 </div>

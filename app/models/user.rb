@@ -42,4 +42,7 @@ class User < ActiveRecord::Base
     self.roles.where(:role => [ "owner", "leader", "member" ])
   end
 
+  def self.count_unread_notifications user
+    Notification.where(:receiver_id=>user.id, :isNew=>true).count
+  end
 end

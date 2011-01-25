@@ -1,8 +1,9 @@
 class Project < ActiveRecord::Base
-  attr_accessible :title, :status, :link, :description, :picture, :category_ids, :job_ids, :role_ids, :roles
+  attr_accessible :title, :status, :link, :description, :picture, :category_ids, :job_ids, :role_ids, :roles, :privace_setting_id, :show_update
   
   has_and_belongs_to_many :categories
   has_many :jobs, :dependent => :destroy
+  accepts_nested_attributes_for :jobs, :allow_destroy => true
   has_many :media
   has_many :images
   belongs_to :cover
@@ -10,6 +11,7 @@ class Project < ActiveRecord::Base
   has_many :users, :through => :roles
   has_many :stages
   has_many :statusupdates
+  has_one :privacy_setting
 
   def self.parse_status status
     @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen", "Idee" => "idea", "In Arbeit" => "inprogress", "Abgeschlossen" => "finished" }

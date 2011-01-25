@@ -1,11 +1,11 @@
 ﻿// AJAX Bindings
 function formBinding(where){
   $(where+' .edit_project')
-    .bind('ajaxSend', function() {
+    .bind('ajax:send', function() {
       showDialogPart(where+" .inline .ajx", "loading");
     })
-    .bind('ajaxError', function() {})
-    .bind('ajaxSuccess', function() {
+    .bind('ajax:error', function() {})
+    .bind('ajax:success', function() {
       showDialogPart(where+" .inline .ajx", "success");
       setTimeout(function(){
         closeDialog(where+" .inline .ajx");
@@ -54,6 +54,16 @@ $(document).ready(function () {
   formBinding('#teammember');
   formBinding('#projectprogress');
   
+  
+  $('.delete_notification').bind('ajax:success', function() {
+    $(this).closest("li").fadeOut( 200, function () { $(this).remove() });
+  });
+  
+  
+  
+  
+  
+  
   // project media slider
     if($(".mediaslider li").size() > 5){
       $(".mediaslider").jCarouselLite({
@@ -94,6 +104,10 @@ $(document).ready(function () {
       $(this).val(phvalue);
     }
   });
+  
+  
+  // Textarea AUTO-resize
+  $('#statusupdate_content').elastic();
 
 
 

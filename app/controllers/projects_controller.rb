@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
     @owner = @project.roles.find_by_role :owner
     @mcount = @project.images.count
     @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
-    @statusupdates = @project.statusupdates.order('created_at DESC')
+    @statusupdates = @project.statusupdates.order('created_at DESC').paginate :page => params[:page], :per_page => 10
   end
 
   def edit
@@ -37,6 +37,7 @@ class ProjectsController < ApplicationController
     @owner = @project.roles.find_by_role :owner
     @mcount = @project.images.count
     @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
+    @privacy = @project.privacy_setting
   end
   
   def update
@@ -45,27 +46,50 @@ class ProjectsController < ApplicationController
     puts params
     
     if @field == 'job'
-      if !params[:project].nil?
+      if(!params[:project].nil?) 
         params[:project][:job_ids]||={}
-      else
-        @project.jobs.each do |job|
-          job.destroy
-        end
+      else @project.jobs.clear
+      end
+
+      oldJobs = Array.new
+      @project.jobs.each do |j|
+        oldJobs << j.id.to_s
       end
       
-      # update/delete existing jobs
-      if @project.update_attributes params[:project]
-        respond_to do |format|
-          format.js { render :nothing => true }
-        end 
-      else redirect_to project_path
+      if oldJobs != params[:project][:job_ids]
+        deletedJobs = oldJobs - params[:project][:job_ids]
+        
+        deletedJobs.each_with_index do |dj, key|
+          deletedJobs[key] = @project.jobs.find(dj).name
+        end
+  
+        if @project.update_attributes params[:project]
+         # add statusupdate
+         @project.statusupdates << Statusupdate.create(
+           :content => Texttemplate.substitute(:job_delete, {"#jobs" => deletedJobs.join(', ')}), 
+           :isPublic => true, 
+           :user => current_user,
+           :html_tmpl_key => "JOBS2")
+  
+        else redirect_to project_path
+        end
       end
       
       # save new jobs
       if !params[:newjobs].nil?
         params[:newjobs].each do |job|
-          @job = Job.create :name => job, :project => @project
+          Job.create :name => job, :project => @project
         end
+        # add statusupdate
+        @project.statusupdates << Statusupdate.create(
+          :content => Texttemplate.substitute(:job_new, {"#jobs" => params[:newjobs].join(', ')}), 
+          :isPublic => true, 
+          :user => current_user,
+          :html_tmpl_key => "JOBS")
+      end
+      
+      respond_to do |format|
+        format.js { render :nothing => true }
       end
     
     # update general project infos
@@ -77,7 +101,7 @@ class ProjectsController < ApplicationController
           :content => Texttemplate.substitute(:project_edit), 
           :isPublic => true, 
           :user => current_user,
-          :html_tmpl_key => "LINE")
+          :html_tmpl_key => "EDIT")
         
         respond_to do |format|
           format.js { render :nothing => true }
@@ -110,14 +134,19 @@ class ProjectsController < ApplicationController
           :content => Texttemplate.substitute(:project_status_edit, {"#status" => Project.parse_status(params[:project][:status])}), 
           :isPublic => true, 
           :user => current_user,
-          :html_tmpl_key => "LINE2")
+          :html_tmpl_key => "STATUS")
         
         respond_to do |format|
           format.js { render :nothing => true }
         end 
       else redirect_to project_path
       end
-    end 
+    else
+      params[:project][:privacy_setting_id]||={}
+      if @project.update_attributes params[:project][:privacy_setting_id]
+        redirect_to edit_project_path
+      end
+    end
   end
 
 

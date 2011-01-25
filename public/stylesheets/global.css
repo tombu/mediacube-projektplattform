@@ -16,7 +16,6 @@ textarea { font-family: "Calibri", sans-serif; }
 	margin: 0 auto;
 	overflow: hidden;
 }
-
 #wrapper header {
 	width: 960px;
 	height: 200px;
@@ -36,55 +35,58 @@ textarea { font-family: "Calibri", sans-serif; }
 }
 
 #profilemenu {
-	width: 317px;
 	height: 35px;
 	background-color: #ffffff;
-	position: absolute;
-	-moz-border-radius: 0 0 7px 7px;
-	border-radius: 0 0 7px 7px;
-	margin: 0 0 0 645px;
-}
-
-#profilemenuborder {
-	width: 311px;
-	height: 32px;
-	border-bottom: 1px solid #bbb;
-	border-left: 1px solid #bbb;
-	border-right: 1px solid #bbb;
-	margin: 0 2px 2px 2px;
+	float: right;
 	-moz-border-radius: 0 0 7px 7px;
 	border-radius: 0 0 7px 7px;
 }
 
 .user {
 	font-size: 12px;
-	width: 185px;
-	height: 22px;
 	text-align: left;
-	padding-top: 10px;
-	text-indent: 10px;
+	padding: 7px 15px 0 0;
+	text-indent: 5px;
 	border-right: 1px solid #bbb;
 	float: left;
+  height: 28px;
+}
+.user .text
+{
+  line-height: 25px;
+  display: inline-block;
+  height: 25px;
+  margin-top: -2px;
+}
+
+#profilemenu .user a
+{
+  text-decoration: none!important;
+  color: #555;
+  font-weight: bold;
+}
+#profilemenu .user .pic
+{
+  float: left;
+  margin: -3px 0 0 10px;
+}
+#profilemenu .user .pic img
+{
+  width: 25px; height: 25px;
 }
 
 .icons {
-	width: 70px;
-	height: 33px;
+	height: 35px;
 	border-right: 1px solid #bbb;
 	float: left;
-}
-
-.icons ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+  padding-right: 15px;
 }
 
 .icons ul li {
 	width: 20px;
 	float: left;
-	margin-left: 10px;
-	margin-top: 6px;
+	margin-left: 15px;
+	margin-top: 8px;
 }
 
 .icons ul li a {
@@ -92,6 +94,25 @@ textarea { font-family: "Calibri", sans-serif; }
 	height: 20px;
 	float: left;
 }
+
+#profilemenu .count
+{
+  background: #ed1a96;
+  color: White;
+  font-weight: bold;
+  font-size: 11px;
+  width: auto; height: auto;
+  display: inline-block;
+  padding: 1px 3px;
+  -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+  position: absolute;
+  top: 4px;
+  right: 105px;
+}
+
+
 
 .logout {
 	width: 54px;
@@ -305,7 +326,7 @@ section {
 
 #overview { float: left; width: 800px; }
 #overview.start { width: 795px; }
-/* v1
+
 .boxcontent {
 	width: 250px;
 	height: 327px;
@@ -431,10 +452,10 @@ section {
 .projectadmin a:hover {
 	text-decoration: underline;
 }
-*/
 
 
-/* version a³ */
+
+/* version a³
 .boxcontent {
 	width: 250px;
 	height: 300px;
@@ -568,7 +589,7 @@ section {
 }
 
 
-/**/
+*/
 
 #footercontent {
 	width: 950px;
@@ -843,14 +864,14 @@ section {
 	margin: 0;
 }
 
-#projectdetails #media {
+#projectdetails #media, #projectdetails #updates {
 	margin-bottom: 50px;
 	width: 550px;
 	float: left;
 	overflow: hidden;
 }
 
-#projectdetails #media h5, #projectportfolio h5 , #projectdetails h5.hl {
+#projectdetails #media h5, #projectportfolio h5 , #projectdetails h5.hl, #updates h5 {
   font-size: 12px;
 	text-transform: uppercase;
 	display: block;
@@ -859,7 +880,7 @@ section {
 	margin-bottom: 10px;
 	color: #666;
 }
-#projectdetails #media h5 span, #projectportfolio h5 span, #projectdetails h5.hl span { font-weight: normal; }
+#projectdetails #media h5 span, #projectportfolio h5 span, #projectdetails h5.hl span, #updates h5 span { font-weight: normal; }
 
 #rightbar {
 	width: 220px;
@@ -912,7 +933,7 @@ section {
 	overflow: hidden;
 }
 #rightbar #searchingmember li {
-  padding: 5px 6px;
+  padding: 5px 0 5px 6px;
   margin: 0 3px 3px 0;
   color: #444;
   font-weight: bold;
@@ -958,9 +979,8 @@ section {
 }
 #rightbar #myproject .project a
 {
-  color: #0ab1f0;
+  color: Black;
   text-decoration: none;
-  font-weight: bold;
 }
 #rightbar #myproject .project a:hover
 {
@@ -1601,6 +1621,7 @@ section {
 
 .stdBtn.no2 { background: #ec0000; border: 0; color: White; margin-right: 0!important; }
 .stdBtn.no2 p { margin: 0; padding: 0; border: 0; }
+.stdBtn.no3 { margin-left: 20px;}
 
 .stdBtn:hover { color: Black; }
 .stdBtn.no2:hover { color: White; }
@@ -1656,14 +1677,20 @@ div.hide { display: none; }
 .pagination
 {
   margin: 10px 0 0 15px;
+  height: 30px;
 }
 .search .pagination { margin: 20px 0 0 3px; }
 .pagination em
 {
-  color: #ec008c;
-  font-weight: bold;
-  font-style: normal!important;
   padding: 3px 6px;
+  background: #333;
+  color: white;
+  border-color: Black;
+  text-decoration: none;
+  -moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+  font-weight: bold;
 }
 .pagination a
 {
@@ -1671,11 +1698,15 @@ div.hide { display: none; }
   border: 1px solid #ddd;
   text-decoration: none;
   color: #555;
+  -moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
 }
 .pagination a:hover
 {
-  background: #ec008c;
+  background: #333;
   color: white;
+  border-color: Black;
 }
 .pagination .disabled 
 {
@@ -1684,7 +1715,10 @@ div.hide { display: none; }
 }
 .pagination .previous_page { margin-right: 5px; }
 .pagination .next_page { margin-left: 5px; }
-
+#updates .pagination
+{
+  margin: 20px 0 0 0;
+}
 
 
 .right { float: right; }
@@ -2035,20 +2069,24 @@ input.hide { display: none; }
 	-moz-border-radius-topleft: 7px;
 	border-top-right-radius: 7px;
 	border-top-left-radius: 7px;
+  font-weight: normal;
 }
 .overlay #close
 {
 	position: absolute;
-	margin: -37px 0 0 460px;
+	margin: -38px 0 0 460px;
 }
 .overlay .close { cursor: pointer; }
 .overlay .content
 {
 	padding: 15px 0 0 20px;
-	overflow-y: scroll;
   overflow-x: hidden;
-  height: 400px;
+  max-height: 400px;
   width: 480px;
+}
+.overlay .content.scroll
+{
+  overflow-y: scroll;
 }
 .blockOverlay { background: #fff!important;}
 .overlay .text
@@ -2119,6 +2157,7 @@ input.hide { display: none; }
   padding: 5px;
   color: #a0b0b4;
   border-color: #bfcdd0;
+  max-height: 75px;
 }
 #statusupdate_content:focus
 {
@@ -2143,6 +2182,11 @@ input.hide { display: none; }
   overflow: hidden;
   margin-bottom: 10px;
 }
+#newStatusupdateForm .left
+{
+  width: 27px;
+  height: 27px;
+}
 #newStatusupdateForm #statusupdate_submit
 {
   width: 23px; height: 23px;
@@ -2150,6 +2194,7 @@ input.hide { display: none; }
   border: 0;
   float: right;
   margin-top: 1px;
+  cursor: pointer;
 }
 #stdProjectStatusUpdates li
 {
@@ -2169,11 +2214,17 @@ input.hide { display: none; }
 #stdProjectStatusUpdates li sub
 {
   position: absolute;
-  right: 10px;
+  top: 10px; right: 10px;
   color: #a0b0b4;
+  font-size: 10px;
 }
-/*#stdProjectStatusUpdates .line { background: #fafbfb; }*/
-#stdProjectStatusUpdates .line2 span
+#stdProjectStatusUpdates .line img
+{ 
+ /*background: #fafbfb; */
+  float: left;
+  margin: 1px 5px 0 0;
+}
+#stdProjectStatusUpdates .status span
 {
   font-weight: bold;
   padding: 3px 10px;
@@ -2187,33 +2238,76 @@ input.hide { display: none; }
 #stdProjectStatusUpdates .post .pic
 {
   float: left;
-  margin-right: 5px;
+  margin-right: 7px;
+}
+#stdProjectStatusUpdates .post .pic img
+{
+  width: 40px;
+  height: 40px;
 }
 #stdProjectStatusUpdates .post p 
 { 
-  margin-top: -3px; 
+  margin-top: -2px; 
   float: left; 
   color: #777777;
   width: 400px;
 }
 #stdProjectStatusUpdates .post a
 {
-  color: #0ab1f0;
+  color: #555;
   margin-bottom: 2px;
   font-weight: bold;
   text-decoration: none;
 }
-
-
-
-
-
-
-
-
-
-
-
+#stdProjectStatusUpdates .jobs span
+{
+  font-weight: bold;
+  color: #0ab1f0;
+}
+#stdProjectStatusUpdates .jobs2 span
+{
+  font-weight: bold;
+}
+#overlayNotifications li
+{
+  padding: 9px 20px 10px 20px;
+  padding-right: 0;
+  border-bottom: 1px solid #e6eef0;
+  margin: 2px 0;
+  position: relative;
+}
+#overlayNotifications .content
+{
+  padding: 0;
+  width: 500px;
+}
+#overlayNotifications .new
+{
+  background: #fafbfb;
+  border-color: #cad4d7;
+  border-right: 3px solid #ed1a96;
+}
+#overlayNotifications p
+{
+  color: #717f84;
+}
+#overlayNotifications .new p
+{
+  color: Black;
+}
+#overlayNotifications li sub
+{
+  color: #a0b0b4;
+  font-size: 10px;
+}
+#overlayNotifications .delete_notification
+{
+  position: absolute;
+  top: 6px; right: 8px;
+  opacity: 0.3;
+}
+#overlayNotifications .new .delete_notification { right: 5px; }
+#overlayNotifications .delete_notification:hover { opacity: 1.0; }
 
 
 
