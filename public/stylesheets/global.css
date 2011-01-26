@@ -295,6 +295,7 @@ section {
 	line-height: 25px;
 	margin: 0;
 	color: #666;
+  background: #fafbfb;
 }
 
 #sidebar ul {
@@ -896,14 +897,16 @@ section {
 	line-height: 25px;
 	margin: 0;
 	color: #666;
+  background: #fafbfb;
+  text-indent: 8px;
 }
 #rightbar h5 span, #rightbar h2 span { font-weight: normal; }
 
-#rightbar #projectprogress {
+#rightbar #projectprogress, #rightbar #projectstate {
 	margin-bottom: 35px;
 	overflow: hidden;
 }
-#projectprogress .status 
+#projectstate .status, #projectprogress .status
 { 
   margin-top: 20px;
   background: #0ab1f0; 
@@ -1623,10 +1626,11 @@ section {
 .stdBtn.no2 p { margin: 0; padding: 0; border: 0; }
 .stdBtn.no3 { margin-left: 20px;}
 
+
 .stdBtn:hover { color: Black; }
 .stdBtn.no2:hover { color: White; }
 
-#searchingmember .stdBtn, #teammember .stdBtn, #projectinfo .inline .stdBtn, #projectprogress .inline .stdBtn { float: left;}
+#searchingmember .stdBtn, #teammember .stdBtn, #projectinfo .inline .stdBtn, #projectprogress .inline .stdBtn, #projectstate .inline .stdBtn { float: left;}
 
 .inline .stdBtn
 {
@@ -1668,7 +1672,7 @@ section {
 .noedit, #rightbar h2
 {
   border-left: 2px solid #0ab1f0;
-  text-indent: 6px;
+  text-indent: 8px;
 }
 .clean { float: none; clear: both; }
 .clean.hide { visibility: hidden; }
@@ -1748,8 +1752,8 @@ div.hide { display: none; }
   text-indent: 5px;
   color: #555;
 }
-#searchingmember .inline .eName { width: 185px; float: left; }
-#searchingmember .add { float: left; margin: 1px 0 0 7px; cursor: pointer; }
+#searchingmember .inline .eName, #projectprogress .inline .eName { width: 185px; float: left; }
+#searchingmember .add, #projectprogress .add { float: left; margin: 1px 0 0 7px; cursor: pointer; }
 .del img { display: block; }
 .del { margin: 2px 0 0 5px; }
 #projectinfo .inline #formECat
@@ -1759,7 +1763,7 @@ div.hide { display: none; }
 
 #teammember .editjob
 {
-  width: 130px;
+  width: 173px;
   height: 20px;
   float: left;
   color: #555;
@@ -1811,7 +1815,6 @@ div.hide { display: none; }
   background: url('../images/ready.png') no-repeat 190px 13px;
   color: #bbb;
 }
-#stagebar li div { display: none; }
 
 #searchresults tr
 {
@@ -2309,8 +2312,41 @@ input.hide { display: none; }
 #overlayNotifications .new .delete_notification { right: 5px; }
 #overlayNotifications .delete_notification:hover { opacity: 1.0; }
 
-
-
+#projectprogress .inline .text
+{
+  width: 130px;
+  height: 20px;
+  color: #555;
+  text-indent: 5px;
+  font-size: 12px;
+}
+#projectprogress .inline li
+{
+  padding: 7px 0 7px 0;
+  overflow: hidden;
+  position: relative;
+}
+#projectprogress .inline li div
+{
+  cursor: move!important;
+  width: 180px;
+  padding-left: 36px;
+  background: url('/images/drag.png') no-repeat 5px center;
+}
+#projectprogress .inline .delete
+{
+  position: absolute;
+  top: 13px; right: 0;
+}
+#projectprogress .inline .delete img
+{
+  cursor: pointer!important;
+  float: left;
+}
+#projectprogress .inline .placeholder
+{
+  border: 1px dotted red;
+}
 
 
 

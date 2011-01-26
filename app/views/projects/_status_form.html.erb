@@ -5,15 +5,6 @@
       <br /><br />
       <label>Status:</label><br /><%= select "project", "status", options_for_select([[@status_names['idea'],'idea'],[@status_names['inprogress'],'inprogress'],[@status_names['finished'],'finished']], @project.status), :class=>"left", :id=>"formEStatus" %>
       <div class="clean hide"></div>
-      <% if @project.status == "inprogress" %>
-        <ul id="stagebar" currentstage="<%= @project.currentstage %>">
-        <% @project.stages.order("position ASC").each do |s| %>
-          <li position="<%= s.position %>"><%= s.name %>
-          <div><%= s.description %></div>
-          </li>  
-        <% end %>
-        </ul>
-     <% end %>
      
      <%= render 'submit_buttons' %>
    <% end %>

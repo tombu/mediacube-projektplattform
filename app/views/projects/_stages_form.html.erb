@@ -1,0 +1,37 @@
+	<div class="inline">
+    <%= form_for @project, :remote => true do |f| %>
+      <%= hidden_field_tag 'field', 'stages' %>
+      <%= render 'dialog' %>
+      <br /><br />
+    <label>Neue Stage:</label><br />
+    <%= text_field_tag :stage, "", :class=>"eName" %>
+    <a class="add"><%= image_tag "details-arrow.png" %></a>
+    <br class="clean" />
+      <% if @project.status == "inprogress" %>
+        <ul id="stagebar">
+        <% @project.stages.order("position ASC").each do |s| %>
+          <li sid="<%= s.id %>">
+            <div>
+            <%= text_field_tag "stages[name][]",s.name, :class=>"text" %>
+            <%= hidden_field_tag "stages[position][]",s.position, :class=>"pos" %>
+            <%= hidden_field_tag "stages[sid][]",s.id, :class=>"ysid" %>
+            </div>
+            <a class="delete"><%= image_tag("delete.png") %></a>
+          </li>
+        <% end %>
+        </ul>
+        <div class="hide">
+        <% @project.stages.order("position ASC").each do |st| %>
+           <%= check_box_tag "project[stage_ids][]", st.id, @project.stages.include?(st), :class=>"hiddenstages" %>
+          <% end %>
+          <div class="newstages">
+          </div>
+        </div>
+     <% end %>
+     <br />
+   <label>Aktuelle Stage:</label><br /><%= select "project", "status", options_for_select(@project.stages.name), :class=>"left", :id=>"formEStatus" %>
+<div class="clean hide"></div> <br /><br />
+     
+     <%= render 'submit_buttons' %>
+   <% end %>
+	</div>

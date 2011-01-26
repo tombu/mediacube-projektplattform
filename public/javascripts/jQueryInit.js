@@ -1,7 +1,7 @@
 ﻿// AJAX Bindings
 function formBinding(where){
   $(where+' .edit_project')
-    .bind('ajax:send', function() {
+    .bind('ajaxSend', function() {
       showDialogPart(where+" .inline .ajx", "loading");
     })
     .bind('ajax:error', function() {})
@@ -36,32 +36,46 @@ function closeDialog(where){
 // style dialog screens
 function posDialog(where){
   $(where+" .inline .ajx")
-    .css('width',$(where+" .inline").css('width'))
-    .css('height',$(where+" .inline").css('height'));
-  $top = $(where+" .inline").css('height');
+    .css('width',$(where+" .inline").width())
+    .css('height',$(where+" .inline").height());
+  $top = $(where+" .inline").height();
   $top = parseInt($top) / 2 - 24;
   $(where+" .inline .ajx .con").css('marginTop', $top);
 }
 
 $(document).ready(function () {
+  
+  // Positioning Dialogs for AJAX response
   posDialog('#projectinfo');
   posDialog('#searchingmember');
   posDialog('#teammember');
   posDialog('#projectprogress');
+  posDialog('#projectstate');
   
+  // AJAX bindings
   formBinding('#projectinfo');
   formBinding('#searchingmember');
   formBinding('#teammember');
   formBinding('#projectprogress');
-  
-  
+  formBinding('#projectstate');
   $('.delete_notification').bind('ajax:success', function() {
     $(this).closest("li").fadeOut( 200, function () { $(this).remove() });
   });
   
+  // new positioning on height changes
+  $('#projectinfo').live('click', function(e){setTimeout(function(){posDialog('#projectinfo');}, 310);});
+  $('#searchingmember').live('click', function(e){setTimeout(function(){posDialog('#searchingmember');}, 310);});
+  $('#teammember').live('click', function(e){setTimeout(function(){posDialog('#teammember');}, 310);});
+  $('#projectprogress').live('click', function(e){setTimeout(function(){posDialog('#projectprogress');}, 310);});
+  $('#projectstate').live('click', function(e){setTimeout(function(){posDialog('#projectstate');}, 310);
+  });
   
   
   
+  $(".inline #stagebar").dragsort({ 
+    dragSelector: "div",
+    placeHolderTemplate: "<li class='placeholder'><div></div></li>" 
+  });
   
   
   // project media slider
@@ -183,7 +197,7 @@ function catDelete(val) {
     $value = val;
     $("#formECat option:eq(0)").attr("selected", "selected");
     //alert('#projectinfo.inline .category li.' + $value);
-    $('#projectinfo .inline .category li.no'+$value+', #npformular .category li.no'+$value).fadeOut(function () { }, function () { $(this).remove() });
+    $('#projectinfo .inline .category li.no'+$value+', #npformular .category li.no'+$value).fadeOut(300, function () { $(this).remove() });
     $("#formECat option[value=" + $value + "]").removeAttr("disabled");
     $("#projectinfo .edit_project .hiddencat[value=" + $value + "], #npformular .edit_project .hiddencat[value=" + $value + "]").removeAttr("checked");
   }
@@ -222,7 +236,7 @@ $(document).ready(function () {
 
 function jobDelete(val, nw) {
   $value = val;
-  $('#searchingmember .inline .openjobs li.no'+$value).fadeOut(function () { }, function () { $(this).remove() });
+  $('#searchingmember .inline .openjobs li.no'+$value).fadeOut(300, function () { $(this).remove() });
   $("#searchingmember .edit_project .hiddenjobs[value=" + $value + "]").removeAttr("checked");
   if(nw) $('#searchingmember .inline .newjobs input[val='+$value+']').remove();
 }
@@ -242,9 +256,95 @@ function jobAdd(val, text, nw) {
 
 function memberDelete(val) {
   $value = val;
-  $('#teammember .inline .member.no'+$value).fadeOut(function () { }, function () { $(this).remove() });
+  $('#teammember .inline .member.no'+$value).fadeOut(300, function () { $(this).remove() });
   $('#teammember .inline .hiddenroles[value='+$value+']').removeAttr('checked');
 }
+
+
+
+
+
+
+
+$(document).ready(function(){
+  $('#projectprogress .inline .delete').live('click', function(){
+    $e = parseInt($(this).parent().attr("data-itemidx"));
+    $nw = ($(this).parent().attr("new") == "new") ? true : false;
+    $id = $(this).parent().attr("sid");
+    
+    // uncheck box for removed element OR remove hidden new stage entry
+    if(!$nw) $("#projectprogress .inline .hiddenstages[value="+$id+"]").removeAttr("checked");
+    else 
+    {
+      $('#projectprogress .inline .newstages div[sid="'+$id+'"]').remove();
+    }
+    
+    // <li> fades out and is removed
+    $(this).parent().fadeOut(300, function () { 
+      $(this).remove();
+      
+      // set new position for all elements
+      $('#projectprogress .inline #stagebar').children().each(function(j) { 
+        $(this).attr("data-itemIdx", j); 
+        $("#projectprogress .inline li[data-itemidx="+j+"] .pos").attr("value", j+1);
+      });
+      
+      // set new position for all HIDDEN elements
+      $('#projectprogress .inline #stagebar li[new="new"]').each(function(k) {
+        var value = $(this).attr("sid");
+        var from = "#projectprogress .inline .newstages .hidd[sid='"+value+"']";
+        $to = $(this).find('.pos').val();
+        $(from).attr("value", $to);
+      });
+    });
+  });
+  
+  $("#projectprogress .add").live('click', function () {
+    $max = 0;
+    for($i = 0; $i < $("#projectprogress .inline #stagebar li").size(); $i++)
+    {
+      $val = $("#projectprogress .inline #stagebar li:eq("+$i+") .pos").val();
+      $val = parseInt($val);
+      if($val > $max) $max = $val;
+    }
+    $max++;
+    stageAdd($max, $("#projectprogress #stage.eName").val(), true);
+  });
+  
+  
+  $('#projectprogress .inline #stagebar li[new="new"] .text').live('change', function() {
+    $sidd = $(this).parent().parent().attr("sid");
+    $('#projectprogress .inline .newstages div[sid="'+$sidd+'"] .midd').attr("value", $(this).val());
+  });
+});
+
+function stageAdd(position, text, nw) {
+  $position = position; $text = text; $nw = nw;
+  $size = $("#projectprogress .inline #stagebar li").size();
+  
+  // get highest SID
+  $highestId = 0;
+  $('#projectprogress .inline #stagebar li').each(function(j) { 
+    $highestId = (parseInt($(this).attr("sid")) > $highestId) ? parseInt($(this).attr("sid")) : $highestId;
+  });
+  $highestId++;
+  
+  if($nw)
+  {
+    $('#projectprogress .inline .newstages').append('<div sid="'+$highestId+'"><input sid="'+$highestId+'" type="text" class="midd" name="newstages[name][]" position="'+$position+'" value="'+$text+'" /><input sid="'+$highestId+'" type="text" class="hidd" name="newstages[position][]" position="'+$position+'" value="'+$position+'" /></div>');
+    $newTag = 'new="new"';
+    $delNew = true;
+  }
+  else { $newTag =''; $delNew = false; }
+  $('#projectprogress .inline #stagebar').append('<li sid="'+$highestId+'" data-itemidx="'+$size+'" '+$newTag+'><div style="cursor: pointer"><input class="text" id="stages_name_" name="stages[name][]" type="text" value="'+$text+'"><input class="pos" id="stages_position_" name="stages[position][]" type="hidden" value="'+$position+'"><input class="ysid" id="stages_sid_" name="stages[sid][]" type="hidden" value="-1"></div><a href="#" class="delete"><img alt="Delete" src="/images/delete.png?1294147242"></a></li>');
+  
+  //$("#searchingmember .inline .hiddencat[value=" + $value + "]").attr("checked","checked");
+}
+
+
+
+
+
 
 
 // Overlay

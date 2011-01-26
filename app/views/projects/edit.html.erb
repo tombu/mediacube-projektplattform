@@ -12,10 +12,16 @@
 </div>
 
 <div id="rightbar">
-  <!-- PROGRESS -->
-  <div id="projectprogress">
+  <!-- STATUS -->
+  <div id="projectstate">
     <h5 class="noedit">Projektstatus</h5>
     <%= render "status_form" %>
+  </div>
+  
+  <!-- PROGRESS -->
+  <div id="projectprogress">
+    <h5 class="noedit">Stages</h5>
+    <%= render "stages_form" %>
   </div>
 
   <!-- JOBS -->
