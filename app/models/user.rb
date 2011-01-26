@@ -34,6 +34,22 @@ class User < ActiveRecord::Base
     end
   end
   
+  def running_projects
+    Project.joins(:roles).where(:roles => { :role => [ "owner", "leader", "member" ], :user_id => self.id }, :projects => { :status => [ "idea", "inprogress" ] })
+  end
+  
+  def finished_projects
+    Project.joins(:roles).where(:roles => { :user_id => self.id }, :projects => { :status => "finished" })
+  end
+  
+  def involved_projects
+    Project.joins(:roles).where(:roles => { :role => [ "owner", "leader", "member" ], :user_id => self.id })
+  end
+  
+  def following_projects
+    Project.joins(:roles).where(:roles => { :role => "follower", :user_id => self.id })
+  end
+  
   def is_following
     self.roles.where(:role => "follower")
   end

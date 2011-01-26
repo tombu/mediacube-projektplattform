@@ -13,25 +13,7 @@
       </p>
       <div class="clean hide"></div>
     </div> 
-    <div id="projectportfolio">
-      <h5 class="noedit"><%= @user.name %>'s Projekte <span>(<%= @all_projects.count %>)</span></h5>
-      <ul>
-      <% if !@active_projects.first.nil? %>
-      <% @ind = 0
-      @all_projects.each do |p| %>
-        <% @ind = @ind + 1  %>
-        <li class="<% if @ind % 4 == 0 %>nomarg<% end %>">
-          <%= link_to image_tag(p.cover_url, :class=>"pic"), p %>
-          <p>
-            <%= link_to strim(p.title, 16), p %><br />
-            <b>Job:</b> <%= strim(p.has_members.where("user_id = #{@user.id}").first.job, 13) %>
-          </p>
-        </li>
-      <% end else %>
-      <p class="nodisplay"><i>Keine Projekte &hellip;</i></p>
-      <% end %>
-      </ul>
-    </div>
+  
 </div>
 
 <%= render 'dashboards/sidebar' %>

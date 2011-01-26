@@ -36,13 +36,15 @@
   def avatar_url user, size
     default_url = (size<=40) ? "http://artistandarchitects.at/default_user_small.jpg" : "http://artistandarchitects.at/default_user.jpg"
     
-      gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
-      "http://gravatar.com/avatar/#{gravatar_id}.jpg?s=#{size}&d=#{CGI.escape(default_url)}"
+    gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
+    "http://gravatar.com/avatar/#{gravatar_id}.jpg?s=#{size}&d=#{CGI.escape(default_url)}"
   end
   
   def external_url url
-    if url
+    if url && url[0..7] != "http://"
       "http://" + url.to_s
+    else
+      url.to_s
     end
   end
   
