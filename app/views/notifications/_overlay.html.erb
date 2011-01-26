@@ -1,0 +1,17 @@
+<!-- OVERLAY -->
+<div id="overlayNotifications" class="overlay">
+	<h1>Notifications</h1>
+	<a class="close" id="close"><%= image_tag 'close.png' %></a>
+	<div class="content scroll">
+	<ul>
+	  <% @notifications.each do |n| %>
+	  <li <% if n.isNew %>class="new"<% end %>>
+		<%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
+		  <p><%= n.content %></p>
+		<sub class="date"><%= fdate n.created_at, true, true %></sub>
+		</li>
+	<% end %>
+	</ul>
+	  <div class="clean"></div>
+	</div>
+</div>

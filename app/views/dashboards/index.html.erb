@@ -1,31 +1,34 @@
 <%= render 'layouts/sidebar_sorting' %>
 
-<br/>
-<!--<ul>
-<% @statusupdates.each do |su| %>
-	<li>
-		<%= link_to image_tag(su.project.icon_url), su.project, :class=>"pic" %><%= su.project.title %><br/>
-		<%= su.content %> <br/>(<%= su.user.name %>)
-	</li><br/>
-<% end %>
-</ul>-->
+<div id="dashboardarea">
+		<ul id="stdProjectStatusUpdates">
+	  <% @statusupdates.each do |su| %>
+			<% case su.html_tmpl_key %>
+        <% when 'POST' %>
+            <li class="post">
+          <%= link_to image_tag(avatar_url(su.user, 40)), su.user, :class=>"pic" %>
+          <p><%= link_to su.user.name, su.user %><br/><%= su.content %></p>
+          <sub><%= fdate su.created_at, true, true %></sub>
+        </li>
+        <% when 'EDIT' %>
+          <li class="line"><%= image_tag 'tny-edit.png' %><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+        <% when 'STATUS' %>
+          <li class="status"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+        <% when 'JOBS' %>
+          <li class="jobs"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+        <% when 'JOBS2' %>
+          <li class="jobs2"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+        <% when 'MEDIA' %>
+          <li class="line2"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+		  <% end %>
+		<% end %>
+	  </ul>
+	  <% if @statusupdates.empty? %>
+		  <p class="nodisplay"><i>Keine Statusupdates &hellip;</i></p>
+	  <% end %>
+    <div class="clean hide"></div>
+    <%= will_paginate @statusupdates %>
+</div>
 
 <%= render 'sidebar' %>
-
-<!-- OVERLAY -->
-<div id="overlayNotifications" class="overlay">
-	<h1>Notifications</h1>
-	<a class="close" id="close"><%= image_tag 'close.png' %></a>
-	<div class="content scroll">
-    <ul>
-	  <% @notifications.each do |n| %>
-      <li <% if n.isNew %>class="new"<% end %>>
-        <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
-	  	  <p><%= n.content %></p>
-        <sub class="date"><%= fdate n.created_at, true, true %></sub>
-	    </li>
-    <% end %>
-    </ul>
-	  <div class="clean"></div>
-	</div>
-</div>
+<%= render 'notifications/overlay' %>

@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :title, :status, :link, :description, :picture, :category_ids, :job_ids, :role_ids, :roles, :privace_setting_id, :show_update, :stage_ids
+  attr_accessible :title, :status, :link, :description, :picture, :category_ids, :job_ids, :role_ids, :roles, :privace_setting_id, :show_update, :stage_ids, :isPublic
   
   has_and_belongs_to_many :categories
   has_many :jobs, :dependent => :destroy

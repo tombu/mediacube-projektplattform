@@ -13,7 +13,7 @@
 
   <%
 	@projects.each do |p| 
-	@owner = p.roles.where(:role => 'owner').first.user
+		@owner = p.roles.where(:role => 'owner').first.user
   %>
 	<div class="boxcontent">
 	  <div class="projectcategory mmt"><% if !p.categories.first.nil? %> <%= p.categories.first.label %> <% end %></div>

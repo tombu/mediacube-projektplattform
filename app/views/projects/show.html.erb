@@ -1,99 +1,102 @@
 ﻿<%= render 'layouts/sidebar_sorting' %>
-<%= render 'rightbar' %>
 
-<div id="projectdetails">
+<div id="projectdetails" class="wide">
+  <div class="center">
+    <div id="projectinfo">
+      <div class="edit">
+        <div class="image">
+          <%= image_tag @project.cover_url %>
+        </div>
+        <div id="projecthead">
+          <h5><%= @project.title %></h5>
+          <ul class="category">
+            <% @project.categories.each do |c| %>
+              <li><%= c.label %></li>
+            <% end %>
+          </ul>
+        </div>
+        <p class="desc"><%= @project.description %></p>
+      </div>
+    </div>
+  </div>
   <div id="topbar">
-		<% if permitted_to? :follow, @project %>
+    <% if permitted_to? :follow, @project %>
       <%= link_to follow_project_path(@project), :method => :put, :class=>"stdBtn" do %>
         <p>Beobachten</p><%= image_tag "spec.png" %>
       <% end %>
     <% end %>
-		<% if permitted_to? :unfollow, @project %>
-		  <%= link_to unfollow_project_path(@project), :method => :delete, :class=>"stdBtn" do %>
-		    <p>nicht mehr Beobachten</p><%= image_tag "spec.png" %>
-		  <% end %>
-		<% end %>
-		<% if permitted_to? :leave, @project %>
-		  <%= link_to leave_project_path(@project), :method => :delete, :class=>"stdBtn" do %>
-		    <p>Projekt verlassen</p><%= image_tag "spec.png" %>
-		  <% end %>
-		<% end %>
-		<% if permitted_to? :join, @project %>
-		  <%= link_to join_project_path(@project), :method => :put, :class=>"stdBtn" do %>
-		    <p>Projekt beitreten</p><%= image_tag "spec.png" %>
-		  <% end %>
-		<% end %>
-		<% if permitted_to? :edit, @project %>
-      <%= link_to edit_project_path, :class=>"stdBtn mleft" do %><p>Projekt bearbeiten</p><%= image_tag "editit.png" %><% end %>
-		<% end %>
+    <% if permitted_to? :unfollow, @project %>
+      <%= link_to unfollow_project_path(@project), :method => :delete, :class=>"stdBtn" do %>
+        <p>nicht mehr Beobachten</p><%= image_tag "spec.png" %>
+      <% end %>
+    <% end %>
+    <% if permitted_to? :leave, @project %>
+      <%= link_to leave_project_path(@project), :method => :delete, :class=>"stdBtn" do %>
+        <p>Projekt verlassen</p><%= image_tag "spec.png" %>
+      <% end %>
+    <% end %>
+    <% if permitted_to? :join, @project %>
+      <%= link_to join_project_path(@project), :method => :put, :class=>"stdBtn" do %>
+        <p>Projekt beitreten</p><%= image_tag "spec.png" %>
+      <% end %>
+    <% end %>
+    <% if permitted_to? :edit, @project %>
+      <%= link_to edit_project_path, :class=>"stdBtn" do %><p>Projekt bearbeiten</p><%= image_tag "editit.png" %><% end %>
+    <% end %>
+    <%= link_to new_project_medium_path(@project), :class=>"stdBtn mleft" do %><p>Medien hochladen</p><%= image_tag "new.png" %></a><% end %>
   </div>
-
-  <div id="projectinfo">
-    <div class="edit">
-      <div class="image">
-        <%= image_tag @project.cover_url %>
-      </div>
-      <div id="projecthead">
-        <h5><%= @project.title %></h5>
-        <ul class="category">
-          <% @project.categories.each do |c| %>
-            <li><%= c.label %></li>
+  <div class="getleft">
+    <div id="updates">
+      <h5 class="noedit">Statusupdates <span>(<%= @statusupdates.count %>)</span></h5>
+      <% if permitted_to? :new, Statusupdate.new %>
+        <%= render :partial => "statusupdates/form" %>
+      <% end %>
+      <br/>
+      <ul id="stdProjectStatusUpdates">
+        <% @statusupdates.each do |su| %>
+              <% case su.html_tmpl_key %>
+            <% when 'POST' %>
+              <li class="post">
+                <%= link_to image_tag(avatar_url(su.user, 40)), su.user, :class=>"pic" %>
+                <p><%= link_to su.user.name, su.user %><br/><%= su.content %></p>
+                <sub><%= fdate su.created_at, true, true %></sub>
+              </li>
+            <% when 'EDIT' %>
+              <li class="line"><%= image_tag 'tny-edit.png' %><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+            <% when 'STATUS' %>
+              <li class="status"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+            <% when 'JOBS' %>
+              <li class="jobs"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+            <% when 'JOBS2' %>
+              <li class="jobs2"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+            <% when 'MEDIA' %>
+              <li class="line2"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
           <% end %>
-        </ul>
-      </div>
-      <p class="desc"><%= @project.description %></p>
+        <% end %>
+        <% if @statusupdates.empty? %>
+          <p class="nodisplay"><i>Keine Statusupdates &hellip;</i></p>
+        <% end %>
+      </ul>
+      <div class="clean hide"></div>
+      <%= will_paginate @statusupdates %>
+    </div>
+  
+      <div id="media">
+      <h5 class="noedit">Medien <span>(<%= @mcount %>)</span></h5>
+      <% if !@project.images.first.nil? %>
+          <% if @mcount > 5 %><a class="prev"><%= image_tag 'left.png' %></a><% end %>
+          <div class="mediaslider">
+          <ul>
+            <% @project.images.each do |m| %>
+              <li><%= link_to (image_path m.asset.url(:original)) do image_tag m.asset.url(:medium) end %></li>
+            <% end %>
+          </ul>
+          </div>
+          <% if @mcount > 5 %><a class="next"><%= image_tag 'right.png' %></a><% end %>
+          <br class="clean" /><br />
+          <%= link_to [ @project, :media ], :class=>"stdBtn" do %><p>Alle Medien ansehen</p><%= image_tag "details-arrow.png" %></a><% end %>
+      <% end %>
     </div>
   </div>
-  
-	<div id="updates">
-    <h5 class="noedit">Statusupdates <span>(<%= @statusupdates.count %>)</span></h5>
-    <% if permitted_to? :new, Statusupdate.new %>
-	    <%= render :partial => "statusupdates/form" %>
-		<% end %>
-		<br/>
-		<ul id="stdProjectStatusUpdates">
-		  <% @statusupdates.each do |su| %>
-        <% case su.html_tmpl_key %>
-          <% when 'POST' %>
-				    <li class="post">
-              <%= link_to image_tag(avatar_url(su.user, 40)), su.user, :class=>"pic" %>
-              <p><%= link_to su.user.name, su.user %><br/><%= su.content %></p>
-              <sub><%= fdate su.created_at, true, true %></sub>
-            </li>
-          <% when 'EDIT' %>
-            <li class="line"><%= image_tag 'tny-edit.png' %><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
-          <% when 'STATUS' %>
-            <li class="status"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
-          <% when 'JOBS' %>
-            <li class="jobs"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
-          <% when 'JOBS2' %>
-            <li class="jobs2"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
-        <% end %>
-			<% end %>
-      <% if @statusupdates.empty? %>
-        <p class="nodisplay"><i>Keine Statusupdates &hellip;</i></p>
-      <% end %>
-	  </ul>
-    <div class="clean hide"></div>
-    <%= will_paginate @statusupdates %>
-  </div>
-	
-    <div id="media">
-    <h5 class="noedit">Medien <span>(<%= @mcount %>)</span></h5>
-    <% if !@project.images.first.nil? %>
-        <% if @mcount > 5 %><a class="prev"><%= image_tag 'left.png' %></a><% end %>
-        <div class="mediaslider">
-        <ul>
-          <% @project.images.each do |m| %>
-            <li><%= link_to (image_path m.asset.url(:original)) do image_tag m.asset.url(:medium) end %></li>
-          <% end %>
-        </ul>
-        </div>
-        <% if @mcount > 5 %><a class="next"><%= image_tag 'right.png' %></a><% end %>
-        <br class="clean" /><br />
-        <%= link_to [ @project, :media ], :class=>"stdBtn" do %><p>Alle Medien ansehen</p><%= image_tag "details-arrow.png" %></a><% end %>
-    <% end %>
-  </div>
-  
-    
+  <%= render 'rightbar' %>
 </div>

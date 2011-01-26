@@ -23,13 +23,13 @@ class MediaController < ApplicationController
       @project.save
     else
       Image.create(:asset => params[:file], :project_id => params[:project_id])
+      # add statusupdate
+      @project.statusupdates << Statusupdate.create(
+        :content => Texttemplate.substitute(:media_new, {"#user" => current_user.name}), 
+        :isPublic => true, 
+        :user => current_user,
+        :html_tmpl_key => "MEDIA")
     end
-    # add statusupdate
-    @project.statusupdates << Statusupdate.create(
-      :content => Texttemplate.substitute(:media_new, {"#user" => current_user.name}), 
-      :isPublic => true, 
-      :user => current_user,
-      :html_tmpl_key => "LINE2")
   end
 
   def destroy

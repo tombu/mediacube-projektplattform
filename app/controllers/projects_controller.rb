@@ -186,13 +186,9 @@ class ProjectsController < ApplicationController
 
   def create    
   # @project = ... set by authorization
-  @project.isPublic = (params[:project][:isPublic].to_i.zero? ?  false :  true)
   @project.isInternal = true
   @project.status = "idea"
   if @project.save
-    params[:project][:category_ids].each do |cat_id|
-      @project.categories << Category.find(cat_id)
-    end
 
     @role = Role.new(:role => "owner", :user => current_user, :project => @project, :job => params[:job][:name])
     if @role.save

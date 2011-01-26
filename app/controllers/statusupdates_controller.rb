@@ -15,10 +15,11 @@ class StatusupdatesController < ApplicationController
     
     if @statusupdate.save
       flash[:notice] = "Statusupdate gespeichert!"
-      redirect_to :back
     else
       flash[:notice] = "Fehler beim Speichern des Statusupdates!"
-      redirect_to :back
+    end
+    respond_to do |format|
+      format.js { render :nothing => true }
     end
   end
   

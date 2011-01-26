@@ -1,10 +1,8 @@
 <div id="rightbar">
 	<div id="dashboardhead"> 
 	  <h2>Aktionen</h2>
-	   <%= link_to new_project_path, :class=>"stdBtn" do %><p>Neues Projekt anlegen</p><%= image_tag "new.png" %> <% end %><br /><br />
-	<% if permitted_to? :manage, @user %>
-	   <%= link_to new_project_path, :class=>"stdBtn" do %><p>Profil bearbeiten</p><%= image_tag "editit.png" %><% end %>
-	<% end %>
+	   <%= link_to new_project_path, :class=>"stdBtn" do %><%= image_tag "new.png" %> <% end %>
+	   <%= link_to new_project_path, :class=>"stdBtn" do %><%= image_tag "editit.png" %><% end %>
 	</div>
 
 	<div id="myproject">
