@@ -1,4 +1,4 @@
-<%= form_for :statusupdate, Statusupdate.new, :url => { :controller => :statusupdates, :action => :create} do |f| %>
+<%= form_for Statusupdate.new, :url => { :controller => :statusupdates, :action => :create} do |f| %>
 	<div id="newStatusupdateForm">
     <%= image_tag avatar_url(current_user, 27), :class => "left" %>
     <%= f.submit "", :class=>"right" %>

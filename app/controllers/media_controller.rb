@@ -12,6 +12,7 @@ class MediaController < ApplicationController
   end
 
   def create
+    puts params
     @project = Project.find(params[:project_id])
     if params[:project_cover] == true.to_s
       if !@project.cover.nil?

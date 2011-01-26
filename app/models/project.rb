@@ -34,6 +34,17 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def owner
+    User.joins(:roles).where(:roles => { :role => "owner", :project_id => self.id }).first
+  end
+  
+  def team
+    User.joins(:roles).where(:roles => { :role => ["member", "leader"], :project_id => self.id })
+  end
+  
+  def followers
+    User.joins(:roles).where(:roles => { :role => "follower", :project_id => self.id })
+  end
 
   def has_followers
     self.roles.where(:role => "follower" )

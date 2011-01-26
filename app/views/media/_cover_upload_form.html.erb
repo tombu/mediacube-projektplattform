@@ -1,0 +1,132 @@
+<!--<div class="inline">    
+	<%= form_for [@project, Medium.new], :html => { :multipart => true, :id => "coverUpload" } do |f| %>
+		<%= hidden_field_tag :format, 'js' %>
+		<%= hidden_field_tag :project_cover, 'true' %>
+    <%= render 'dialog' %>
+		<%= f.label :file, "Cover Bild" %><br/>
+		<%= f.file_field :file, :class => "eCoverUpload" %><br/>
+    <%= render 'submit_buttons' %>
+  <% end %>
+</div>-->
+
+<% content_for :plupload_header_files do %>
+  <%= javascript_include_tag "plupload/plupload.min"%>
+  <%= javascript_include_tag "plupload/plupload.html4.min"%>
+<% end %>
+
+<script type="text/javascript">
+// Custom example logic
+$(function() {
+	var uploader = new plupload.Uploader({
+		runtimes : 'html4',
+		browse_button : 'pickfiles',
+		container : 'container',
+		max_file_size : '10mb',
+		url : 'media',
+		filters : [
+			{title : "Image files", extensions : "jpg,gif,png"},
+		],
+		multipart_params: {  
+			"<%= key = Rails.application.config.session_options[:key] %>" : "<%= cookies[key] %>",
+			"<%= request_forgery_protection_token %>" : "<%= form_authenticity_token %>",
+			"project_cover" : "true"
+	   },
+	});
+
+	uploader.bind('Init', function() {
+		$('#filelist').html("<div>Im Moment ist keine Datei ausgewählt!</div>");
+	});
+
+	$('#uploadfiles').click(function(e) {
+		uploader.start();
+		showDialogPart("#projectcover .inline .ajx", "loading");
+		e.preventDefault();
+	});
+
+	uploader.init();
+
+	uploader.bind('FilesAdded', function(up, files) {
+		$.each(files, function(i, file) {
+			$('#filelist').html(
+				'<div id="' + file.id + '">' +
+				file.name + ' (Größe: ' + plupload.formatSize(file.size) + ') <b></b>' +
+			'</div>');
+		});
+	});
+
+	/*uploader.bind('UploadProgress', function(up, file) {
+		$('#' + file.id + " b").html(file.percent + "%");
+	});
+*/
+	uploader.bind('Error', function(up, err) {
+		$('#filelist').html("<div>Error: " + err.code +
+			", Message: " + err.message +
+			(err.file ? ", File: " + err.file.name : "") +
+			"</div>"
+		);
+	});
+
+	uploader.bind('FileUploaded', function(up, file) {
+		showDialogPart("#projectcover .inline .ajx", "success");
+	      setTimeout(function(){
+	        closeDialog("#projectcover .inline .ajx");
+	      }, 1500);
+		$('#' + file.id + " b").html("100%");
+	});
+});
+</script>
+<style type="text/css">
+#container {
+	width: 526px;
+	border: 1px solid #ccc;
+	position: relative;
+	height: 22px;
+	margin: 7px 0;
+}
+
+#container form {
+	top: 0;
+}
+
+#filelist {
+	width: 410px;
+	padding: 4px 8px;
+	float: left;
+}
+
+#filelist b {
+	color: green;
+}
+
+a#pickfiles {
+	display: block;
+	width: 95px;
+	text-align: center;
+	border-right: 1px solid #ccc;
+	background-color: #dfdfdf;
+	padding: 3px 0;
+	height: 16px;
+	text-decoration: none;
+	float: left;
+}
+</style>
+<div class="inline">
+	<div class="ajx"><div class="con">
+	  <div class="loading"><%= image_tag "loading.gif" %></div>
+	  <div class="ask">
+	    <p class="msg">Änderungen übernehmen?</p>
+	    <a class="stdBtn" id="uploadfiles">Übernehmen</a>
+	    <a class="stdBtn no2 close"><p>Abbrechen</p></a>
+	  </div>
+	  <div class="success"><%= image_tag "ok.png" %></div>
+	</div></div>
+	<b>Cover Bild hochladen</b>
+	<div id="container">
+	  <a id="pickfiles" href="">Datei wählen...</a>
+		<div id="filelist">No runtime found.</div>
+		<div class="clean hide"></div>
+	</div>
+  <div class="clean hide"></div>
+	<a class="stdBtn asksubmit"><p>Speichern</p><%= image_tag "saveit.png" %></a>
+  <a class="stdBtn no2" href="javascript:editing(true, '#projectinfo');"><p>Zurücksetzen</p></a>
+</div>

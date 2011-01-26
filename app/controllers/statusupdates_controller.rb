@@ -1,4 +1,6 @@
 class StatusupdatesController < ApplicationController
+  # :filter_access_to 
+  
   def index
     @statusupdates = Statusupdate.joins(:project => {:roles => :user}).where(:users => {:id => current_user.id}).order('created_at DESC')
   end

@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
   def is_involved
     self.roles.where(:role => [ "owner", "leader", "member" ])
   end
+  
+  def does_follow_project? project
+    project.followers.include?(self)
+  end
 
   def self.count_unread_notifications user
     Notification.where(:receiver_id=>user.id, :isNew=>true).count

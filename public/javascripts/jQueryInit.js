@@ -20,6 +20,7 @@ function formBinding(where){
     });
 }
 
+
 // AJAX Dialogs
 function showDialogPart(where, what){
   $(where+' .loading, '+where+' .success, '+where+' .ask').hide();
@@ -47,6 +48,7 @@ $(document).ready(function () {
   
   // Positioning Dialogs for AJAX response
   posDialog('#projectinfo');
+  posDialog('#projectcover');
   posDialog('#searchingmember');
   posDialog('#teammember');
   posDialog('#projectprogress');
@@ -54,6 +56,7 @@ $(document).ready(function () {
   
   // AJAX bindings
   formBinding('#projectinfo');
+  formBinding('#projectcover');
   formBinding('#searchingmember');
   formBinding('#teammember');
   formBinding('#projectprogress');

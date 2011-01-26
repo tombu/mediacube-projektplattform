@@ -1,7 +1,6 @@
+# encoding: utf-8
 class UsersController < ApplicationController
-  def index
-  end
-
+  
   def show
     @user = User.find(params[:id])
     @active_projects = %w()
@@ -25,27 +24,17 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
+    @user = current_user
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Die Änderungen wurden erfolgreich übernommen."
+      redirect_to user_path(current_user) and return
+    end
+    flash[:notice] = "Fehler beim Aktualisieren. Die Änderungen konnten nicht übernommen werden."
+    redirect_to :back
   end
 
   def destroy
   end
   
-  def follow project
-    @role = Role.new(:role => "follower", :user => current_user, :project => project, :job => nil)
-    if @role.save
-      flash[:notice] = "Du beobachtest dieses Projekt. Aktuelle Statusupdates findest du in deinem Dashboard."
-      redirect_to project and return
-    end
-    flash[:notice] = "Fehler beim Versuch, das Project zu beobachten"
-    redirect_to project
-  end
-  
-    def open_notifications
-   puts "OOOOOOOOOOOOOOOOOOOOOOOOO"
-  end
-
 end

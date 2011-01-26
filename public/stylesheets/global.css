@@ -757,7 +757,7 @@ section {
 }
 
 
-#projectdetails #projectinfo {
+#projectdetails #projectinfo, #projectdetails #projectcover  {
 	float: left;
 	width: 550px;
 	margin-bottom: 45px;
@@ -1622,7 +1622,7 @@ section {
 .stdBtn img { float: left;}
 .stdBtn img { margin-top: 3px; }
 
-.stdBtn.no2 { background: #ec0000; border: 0; color: White; margin-right: 0!important; }
+.stdBtn.no2 { background: #ec0000; border: 0; color: White; margin-right: 0!important; height: 31px;}
 .stdBtn.no2 p { margin: 0; padding: 0; border: 0; }
 .stdBtn.no3 { margin-left: 20px;}
 
@@ -1630,7 +1630,12 @@ section {
 .stdBtn:hover { color: Black; }
 .stdBtn.no2:hover { color: White; }
 
-#searchingmember .stdBtn, #teammember .stdBtn, #projectinfo .inline .stdBtn, #projectprogress .inline .stdBtn, #projectstate .inline .stdBtn { float: left;}
+
+#searchingmember .stdBtn, #teammember .stdBtn, #projectinfo .inline .stdBtn, #projectprogress .inline .stdBtn, 
+#projectcover .inline .stdBtn, #projectstate .inline .stdBtn 
+{
+	float: left;
+}
 
 .inline .stdBtn
 {
@@ -1752,8 +1757,19 @@ div.hide { display: none; }
   text-indent: 5px;
   color: #555;
 }
+
 #searchingmember .inline .eName, #projectprogress .inline .eName { width: 185px; float: left; }
 #searchingmember .add, #projectprogress .add { float: left; margin: 1px 0 0 7px; cursor: pointer; }
+
+#projectcover .inline .eCoverUpload
+{
+  	color: #555;
+	display: block;
+	border: 1px solid #ccc;
+	padding: 5px;
+	width: 536px;
+}
+
 .del img { display: block; }
 .del { margin: 2px 0 0 5px; }
 #projectinfo .inline #formECat

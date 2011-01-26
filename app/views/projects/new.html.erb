@@ -1,4 +1,5 @@
-﻿<%= form_for @project, :remote => true, :url => { :action => "create" } do |f| %>
+﻿<div id="npformular">
+<%= form_for @project, :url => { :action => "create" } do |f| %>
   <h1>Neues Projekt anlegen</h1>
 
   <div class="inputfield">
@@ -6,10 +7,6 @@
       <%= f.text_field :title, :class => "projekttitel", :placeholder => "Titel für ihr Projekt eingeben" %>
   </div>
 
-  <div class="inputfield">
-    <h2>Beschreibung</h2>
-      <%= f.text_area :description, :class => "kurzbeschreibung", :placeholder => "Kurzbeschreibung für ihr Projekt eingebenen" %>
-  </div>
         <div class="inputfield">
           <h2>Beschreibung</h2>
           <p>Beschreibung zum Projekt Max. 300 Wörter</p>
@@ -49,26 +46,13 @@
 				<div class="inputfield">
 					<h2>Tätigkeit</h2>
 					<p>Deine Tätigkeit(en) im Projektteam.</p>
-						<span class="name">owner name </span>
+						<span class="name"><%= current_user.name %></span>
 						  <%= fields_for :job do |builder| %>
 								<%= builder.text_field :name, :class => "taetigkeit", :placeholder => "Tätigkeit" %>
 							<% end %>
 				</div>
 
-  </div>
-
-  <div class="inputfield">
-    <h2>Sichbarkeit</h2>
-      <%= f.check_box :isPublic, :checked => "checked" %>
-      <%= f.label :isPublic, "Projekt ist für alle sichtbar" %>
-  </div>
-
-  <div class="inputfield">
-    <h2>Tätigkeit</h2>
-      <span class="name">owner name </span>
-        <%= fields_for :job do |builder| %>
-          <%= builder.text_field :name, :class => "taetigkeit", :placeholder => "Tätigkeit" %>
-        <% end %>
-  </div>
   <%= f.submit "Projekt erstellen" %>
 <% end %>
+  </div>
+

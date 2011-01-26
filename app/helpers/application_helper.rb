@@ -40,6 +40,11 @@
       "http://gravatar.com/avatar/#{gravatar_id}.jpg?s=#{size}&d=#{CGI.escape(default_url)}"
   end
   
+  def external_url url
+    if url
+      "http://" + url.to_s
+    end
+  end
   
   def strim str, length
     truncate str, :length => length+1, :omission => "…"

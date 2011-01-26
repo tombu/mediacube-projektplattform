@@ -3,9 +3,28 @@
 
 <div id="projectdetails">
   <div id="topbar">
-    <%= link_to "", :class=>"stdBtn" do %><p>Beobachten</p><%= image_tag "spec.png" %></a><% end %>
+		<% if permitted_to? :follow, @project %>
+      <%= link_to follow_project_path(@project), :method => :put, :class=>"stdBtn" do %>
+        <p>Beobachten</p><%= image_tag "spec.png" %>
+      <% end %>
+    <% end %>
+		<% if permitted_to? :unfollow, @project %>
+		  <%= link_to unfollow_project_path(@project), :method => :delete, :class=>"stdBtn" do %>
+		    <p>nicht mehr Beobachten</p><%= image_tag "spec.png" %>
+		  <% end %>
+		<% end %>
+		<% if permitted_to? :leave, @project %>
+		  <%= link_to leave_project_path(@project), :method => :delete, :class=>"stdBtn" do %>
+		    <p>Projekt verlassen</p><%= image_tag "spec.png" %>
+		  <% end %>
+		<% end %>
+		<% if permitted_to? :join, @project %>
+		  <%= link_to join_project_path(@project), :method => :put, :class=>"stdBtn" do %>
+		    <p>Projekt beitreten</p><%= image_tag "spec.png" %>
+		  <% end %>
+		<% end %>
 		<% if permitted_to? :edit, @project %>
-    <%= link_to edit_project_path, :class=>"stdBtn mleft" do %><p>Projekt bearbeiten</p><%= image_tag "editit.png" %></a><% end %>
+      <%= link_to edit_project_path, :class=>"stdBtn mleft" do %><p>Projekt bearbeiten</p><%= image_tag "editit.png" %><% end %>
 		<% end %>
   </div>
 
@@ -28,7 +47,9 @@
   
 	<div id="updates">
     <h5 class="noedit">Statusupdates <span>(<%= @statusupdates.count %>)</span></h5>
-	  <%= render :partial => "statusupdates/form" %>
+    <% if permitted_to? :new, Statusupdate.new %>
+	    <%= render :partial => "statusupdates/form" %>
+		<% end %>
 		<br/>
 		<ul id="stdProjectStatusUpdates">
 		  <% @statusupdates.each do |su| %>

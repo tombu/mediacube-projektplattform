@@ -190,14 +190,13 @@ class ProjectsController < ApplicationController
   @project.isInternal = true
   @project.status = "idea"
   if @project.save
-    params[:categories].each do |cat|
-    @project.categories << Category.find(cat[:id]) unless cat[:id].blank?
+    params[:project][:category_ids].each do |cat_id|
+      @project.categories << Category.find(cat_id)
     end
 
-    @job = Job.new(:name => params[:job][:name], :project => @project)
-    @role = Role.new(:role => "owner", :user => current_user, :project => @project, :job => @job)
-    if @job.save && @role.save
-    redirect_to new_project_medium_path(@project, :build_cover => true)
+    @role = Role.new(:role => "owner", :user => current_user, :project => @project, :job => params[:job][:name])
+    if @role.save
+      redirect_to project_path(@project)
     else
     flash[:notice] = ""
     render :new
@@ -206,6 +205,52 @@ class ProjectsController < ApplicationController
     flash[:notice] = ""
     render :new
   end
+  end
+  
+  def follow
+    @project = Project.find params[:id]
+    @role = Role.new(:role => "follower", :user => current_user, :project => @project, :job => nil)
+    if @role.save
+      flash[:notice] = "Du beobachtest dieses Projekt. Aktuelle Statusupdates findest du in deinem Dashboard."
+      redirect_to @project and return
+    end
+    flash[:notice] = "Fehler beim Versuch, das Project zu beobachten."
+    redirect_to @project
+  end
+  
+  def unfollow
+    @project = Project.find params[:id]
+    @role = Role.where(:role => "follower", :user_id => current_user.id, :project_id => @project.id).first
+    if @role.destroy
+      flash[:notice] = "Du beobachtest dieses Projekt nun nicht mehr. Die Statusupdates wurden von deinem Dashboard entfernt."
+      redirect_to @project and return
+    end
+    flash[:notice] = "Fehler beim Versuch..."
+    redirect_to @project
+  end
+  
+  def leave
+    @project = Project.find params[:id]
+    @role = Role.where(:user_id => current_user.id, :project_id => @project.id).first
+    if @role.destroy
+      flash[:notice] = "Du hast das Projekt verlassen."
+      redirect_to :back and return
+    end
+    flash[:notice] = "Fehler beim Versuch, das Projekt zu verlassen."
+    redirect_to :back
+  end
+  
+  def join
+    @project = Project.find params[:id]
+    @old_role = Role.where(:user_id => current_user.id, :project_id => @project.id).first
+    @old_role ? @old_role.destroy : nil
+    @role = Role.new(:role => "member", :user => current_user, :project => @project, :job => "Tester")
+    if @role.save
+      flash[:notice] = "Du nun Mitglied des Projektteams."
+      redirect_to :back and return
+    end
+    #flash[:notice] = "Fehler beim Versuch, das Projekt zu verlassen."
+    redirect_to :back
   end
 
 end

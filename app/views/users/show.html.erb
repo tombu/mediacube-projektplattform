@@ -9,7 +9,7 @@
         Fachbereich: Mediendesign<br /><br />
         <b>E-Mail:</b> <%= mail_to @user.email, @user.email, :encode => "javascript" %><br />
         <b>Telefon:</b> <%= @user.telephone %><br />
-        <b>Web:</b> <%= link_to @user.web, @user.web %>
+        <b>Web:</b> <%= link_to @user.web.to_s, external_url(@user.web), :target => "_blank" %>
       </p>
       <div class="clean hide"></div>
     </div> 

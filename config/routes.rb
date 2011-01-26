@@ -4,7 +4,7 @@ Projektplattform::Application.routes.draw do
   get "statusupdates/index"
 
   devise_for :users
-
+  
   resources :users
   resources :searchs
   resources :dashboards
@@ -12,12 +12,17 @@ Projektplattform::Application.routes.draw do
   resources :statustemplates
   resources :notifications
   resources :jobs
+    
   resources :projects do
+    member do
+      put :follow
+      delete :unfollow
+      delete :leave
+      put :join
+    end
     resources :media
   end
   
   root :to => "projects#index"
-  
-  # match "profile" => "users#show"
 
 end
