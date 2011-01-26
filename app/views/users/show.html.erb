@@ -10,7 +10,7 @@
           Fachbereich: Mediendesign<br /><br />
           <b>E-Mail:</b> <%= mail_to @user.email, @user.email, :encode => "javascript", :class=>"link" %><br />
           <b>Telefon:</b> <%= @user.telephone %><br />
-          <b>Web:</b> <%= link_to @user.web.to_s, external_url(@user.web), :target => "_blank", :class=>"link" %>
+          <b>Web:</b> <%= link_to @user.web, external_url(@user.web), :target => "_blank", :class=>"link" %>
         </p>
       </div>
       <%= link_to "#", :class=>"stdBtn right" do %>
@@ -21,17 +21,17 @@
     <div id="projectportfolio">
       <h5 class="noedit"><%= @user.name %>'s Projekte <span>(<%= @all_projects.count %>)</span></h5>
       <ul>
-      <% if !@active_projects.first.nil? %>
-         <% @all_projects.each_with_index do |p, idx| %>
-           <li class="<% if (idx+1) % 5 == 0 %>nomarg<% end %>">
-             <%= link_to image_tag(p.cover_url, :class=>"pic"), p %>
-             <p>
-               <%= link_to strim(p.title, 20), p %><br />
-               <b>Job:</b> <%= strim(p.has_members.where("user_id = #{@user.id}").first.job, 13) %>
-             </p>
-           </li>
-         <% end else %>
-         <p class="nodisplay"><i>Keine Projekte &hellip;</i></p>
+      <% if @user.running_projects.any? %>
+      <% @user.involved_projects.each_with_index do |p, idx| %>
+        <li class="<% if (idx+1) % 5 == 0 %>nomarg<% end %>">
+          <%= link_to image_tag(p.cover_url, :class=>"pic"), p %>
+          <p>
+            <%= link_to strim(p.title, 20), p %><br />
+            <b>Job:</b> <%= strim(p.has_members.where("user_id = #{@user.id}").first.job, 13) %>
+          </p>
+        </li>
+      <% end else %>
+      <p class="nodisplay"><i>Keine Projekte &hellip;</i></p>
       <% end %>
       </ul>
     </div>
