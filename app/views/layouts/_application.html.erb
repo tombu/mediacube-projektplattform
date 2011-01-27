@@ -46,8 +46,9 @@
   <section>
           <div id="topborder">
             <div id="contentwrapper">
-<p class="notice"><%= notice %> <%= flash[:error] %></p>
-      <%= yield %>
+                <% @error = (!flash[:error].nil?) ? " error" : "" %>
+                <p class="notice<%=@error%>"><%= notice %><%= flash[:error] %></p>
+                    <%= yield %>
           </div>
         </div>
   </section>

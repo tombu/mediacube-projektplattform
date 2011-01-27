@@ -5,9 +5,11 @@ class NotificationsController < ApplicationController
 
   def destroy
     @notification = Notification.find(params[:id])
-    @receiver = @notification.sender
+    @receiver = @notification.sender_id
     @notification.destroy
-    
+    puts params
+    puts "--------------"
+    puts @receiver
     if !params[:notify].nil?
       @project = Project.find_by_id params[:project_id]
       
@@ -24,5 +26,15 @@ class NotificationsController < ApplicationController
     respond_to do |format|
       format.js { render :nothing => true }
     end
+  end
+  
+  def mark_as_read
+    puts params
+    unread_notifications = Notification.where(:receiver_id=>current_user.id)
+    unread_notifications.each do |n|
+        n.isNew = false
+        n.save
+    end
+    redirect_to :back
   end
 end

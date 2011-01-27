@@ -9,7 +9,11 @@ Projektplattform::Application.routes.draw do
   resources :searchs
   resources :dashboards
   resources :statusupdates
-  resources :notifications
+  resources :notifications do
+    collection do
+      put :mark_as_read
+    end
+  end
   resources :jobs
     
   resources :projects do

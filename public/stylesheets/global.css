@@ -112,7 +112,7 @@ textarea { font-family: "Calibri", sans-serif; }
 
 .icons .count, #dashboardhead .count
 {
-  background: #ed1a96;
+  background: #0ab1f0;
   color: White;
   font-weight: bold;
   font-size: 11px;
@@ -1752,6 +1752,7 @@ section {
 .stdBtn.no2 { background: #333 url('/images/bgdark.png') repeat-x; border: 1px solid #333; color: White; margin-right: 0!important; height: 30px;}
 .stdBtn.no2 p { margin: 0; padding: 0; border: 0; }
 .stdBtn.no3 { margin-left: 20px;}
+.stdBtn.ov { margin: 5px 20px;}
 
 #dashboardhead .stdBtn { float: left; margin-right: 10px;}
 #dashboardhead .stdBtn img
@@ -2228,6 +2229,10 @@ input.hide { display: none; }
 	box-shadow: 0 2px 10px #ccc;
   overflow: hidden;
 }
+.overlay.nbtm
+{
+  padding-bottom: 10px;
+}
 .overlay h1
 {
 	width: 460px;
@@ -2669,5 +2674,12 @@ input[type=file] { cursor:pointer!important; margin-left: -15px; }
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
   color: White;
+  z-index: 10000;
+}
+.notice.error
+{
+  background: #f80000;
+  color: White;
+  font-weight: bold;
 }
 

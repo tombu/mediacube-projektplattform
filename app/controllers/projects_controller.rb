@@ -5,6 +5,8 @@ class ProjectsController < ApplicationController
   def check_user_role 
     if !params[:id].nil?
       current_user.current_role = current_user.roles.where(:project_id => params[:id])
+    elsif params[:controller] == "media"
+      current_user.current_role = current_user.roles.where(:project_id => params[:project_id])
     end
   end
 
@@ -21,25 +23,25 @@ class ProjectsController < ApplicationController
   else
     @projects = Project.where "isPublic = ?", true
   end
-  @projects = @projects.paginate :page => params[:page], :per_page => 6
+  @projects = @projects.paginate :page => params[:page], :per_page => 9
   end
 
   def show
-  # @project = ... set by authorization
-  @owner = @project.roles.find_by_role :owner
-  @mcount = @project.images.count
-  @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
-  @statusupdates = @project.statusupdates.order('created_at DESC')
-  @countupdates = @statusupdates.count
-  @statusupdates = @statusupdates.paginate :page => params[:page], :per_page => 10
+    # @project = ... set by authorization
+    @owner = @project.roles.find_by_role :owner
+    @mcount = @project.images.count
+    @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
+    @statusupdates = @project.statusupdates.order('created_at DESC')
+    @countupdates = @statusupdates.count
+    @statusupdates = @statusupdates.paginate :page => params[:page], :per_page => 10
   end
 
   def edit
-  # @project = ... set by authorization
-  @owner = @project.roles.find_by_role :owner
-  @mcount = @project.images.count
-  @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
-  @privacy = @project.privacy_setting
+    # @project = ... set by authorization
+    @owner = @project.roles.find_by_role :owner
+    @mcount = @project.images.count
+    @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
+    @privacy = @project.privacy_setting
   end
 
   def update
@@ -218,28 +220,23 @@ class ProjectsController < ApplicationController
   @project.isInternal = true
   @project.status = "idea"
   if @project.save
-
-    @role = Role.new(:role => "owner", :user => current_user, :project => @project, :job => params[:job][:name])
+    @role = Role.new(:role => "owner", :user => current_user, :project => @project, :job => params[:project][:role][:job])
     if @role.save
-      redirect_to project_path(@project)
-    else
-    flash[:notice] = ""
-    render :new
+      redirect_to @project, :notice=>"Projekt wurde erfolgreich erstellt!"
+      return
     end
-  else
-    flash[:notice] = ""
-    render :new
   end
+  redirect_to :back, :error=>"Projekt konnte nicht erstellt werden!"
   end
   
   def follow
     @project = Project.find params[:id]
     @role = Role.new(:role => "follower", :user => current_user, :project => @project, :job => nil)
     if @role.save
-      flash[:notice] = "Du beobachtest dieses Projekt. Aktuelle Statusupdates findest du in deinem Dashboard."
+      flash[:notice] = "Du beobachtest nun dieses Projekt. Aktuelle Statusupdates findest du in deinem Dashboard."
       redirect_to @project and return
     end
-    flash[:notice] = "Fehler beim Versuch, das Project zu beobachten."
+    flash[:notice] = "Es ist ein Fehler aufgetreten!"
     redirect_to @project
   end
   
@@ -247,7 +244,7 @@ class ProjectsController < ApplicationController
     @project = Project.find params[:id]
     @role = Role.where(:role => "follower", :user_id => current_user.id, :project_id => @project.id).first
     if @role.destroy
-      flash[:notice] = "Du beobachtest dieses Projekt nun nicht mehr. Die Statusupdates wurden von deinem Dashboard entfernt."
+      flash[:notice] = "Du beobachtest dieses Projekt nun nicht mehr!"
       redirect_to @project and return
     end
     flash[:notice] = "Fehler beim Versuch..."
@@ -258,7 +255,6 @@ class ProjectsController < ApplicationController
     @project = Project.find params[:id]
     @role = Role.where(:user_id => current_user.id, :project_id => @project.id).first
     if @role.destroy
-      flash[:notice] = "Du hast das Projekt verlassen."
       @project.team.each do |member|
           Notification.create(
               :sender_id=>current_user.id,
@@ -274,7 +270,7 @@ class ProjectsController < ApplicationController
           :user_id => current_user.id,
           :project_id => @project.id,
           :html_tmpl_key => "TEAM_DELETE")
-      redirect_to :back and return
+      redirect_to :back, :notice => "Du hast das Projekt verlassen!" and return
     end
     flash[:notice] = "Fehler beim Versuch, das Projekt zu verlassen."
     redirect_to :back
@@ -321,8 +317,10 @@ class ProjectsController < ApplicationController
         :user_id => user_id,
         :project_id => @project.id,
         :html_tmpl_key => "TEAM")
-        
-       redirect_to :back
+       
+       redirect_to :back and return
+     else
+       redirect_to :back, :error => "Es ist ein Fehler aufgetreten!"
      end
   end
   
@@ -334,9 +332,9 @@ class ProjectsController < ApplicationController
         :isNew=>true,
         :html_tmpl_key=>"DECISION_TO_OWNER"
       )
-      redirect_to :back, :notice => "Die Bewerbung wurde an den Projektleiter geschickt." and return
+      redirect_to :back, :notice => "Die Bewerbung wurde verschickt!" and return
     end
-    redirect_to :back, :notice => "Fehler beim Versuch, die Bewerbung an den Projektleiter zu schicken."
+    redirect_to :back, :error => "Die Bewerbung konnte leider nicht verschickt werden!"
   end
   
 end

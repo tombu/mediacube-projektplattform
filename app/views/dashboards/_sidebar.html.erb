@@ -18,7 +18,7 @@
         <div class="hide tool">Notifications<%= image_tag "arrdown.png" %></div>
       <% end %>
       
-      <%= link_to new_project_path, :class=>"stdBtn tip" do %>
+      <%= link_to "javascript:overlay('#overlayCreateProject');", :class=>"stdBtn tip" do %>
         <%= image_tag "new.png" %>
         <div class="hide tool">Neues Projekt<%= image_tag "arrdown.png" %></div>
       <% end %>

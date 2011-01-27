@@ -3,7 +3,7 @@
 	<a class="close" id="close"><%= image_tag 'close.png' %></a>
 	<div class="content">
 	<div id="npformular">
-<%= form_for Project.new, :url => { :action => "create" } do |f| %>
+<%= form_for Project.new, :url => { :controller => "projects", :action => "create" } do |f| %>
 			  <div class="inputfield">
 			    <%= f.label :title, "Titel" %><br/>
 			    <%= f.text_field :title, :class => "stdInpt", :placeholder => "Titel für ihr Projekt eingeben" %>

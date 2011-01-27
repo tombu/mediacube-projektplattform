@@ -1,7 +1,9 @@
 ﻿<!-- OVERLAY -->
-<div id="overlayNotifications" class="overlay">
+<div id="overlayNotifications" class="overlay nbtm">
 	<h1>Notifications</h1>
-	<a class="close" id="close"><%= image_tag 'close.png' %></a>
+  <%= link_to mark_as_read_notifications_path(@notifications), :method => :put, :id=>"close" do %>
+        <%= image_tag 'close.png' %>
+    <% end %>
 	<div class="content scroll">
   <% if @notifications.nil? %><p class="no">keine Notifications vorhanden &hellip;</p><% end %>
 	<ul>
@@ -48,7 +50,7 @@
               <div class="project">
                 <%= image_tag "arrup.png", :class=>"arr" %><%= image_tag n.project.icon_url, :class=>"pic" %>
                 <h6><%= n.project.title %></h6>
-                <p><b><%= n.project.team(true).count %></b> Mitarbeiter<br /><span><%= strim @categories.join(', '), 25 %></span></p>
+                <p><span><%= strim @categories.join(', '), 25 %></span></p>
               </div>
               <sub class="date"><%= fdate n.created_at, true, true %></sub>
             </div>

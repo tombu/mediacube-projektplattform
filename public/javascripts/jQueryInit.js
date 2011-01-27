@@ -190,7 +190,7 @@ $(document).ready(function() {
   });
   
   // show notices/warnings
-  if($(".notice").html() != " ")
+  if($(".notice").html() != "")
   {
     $(".notice").show();
     setTimeout(function(){$(".notice").fadeOut(500);}, 5000);

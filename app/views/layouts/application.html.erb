@@ -28,9 +28,8 @@
 <body>
   <% if user_signed_in? %>
     <%= render 'layouts/application' %>
-	<% else %>
-	  <%= render 'layouts/login_pages' %>
-	<% end %>
-
+ <% else %>
+   <%= render 'layouts/login_pages' %>
+ <% end %>
 </body>
 </html>
