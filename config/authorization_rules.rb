@@ -6,10 +6,11 @@ authorization do
     has_permission_on :statusupdates, :to => :delete do
       if_attribute :user => is { user }
     end   
+    has_permission_on :media, :to => [ :read, :create, :destroy ]
   end
   
   role :leader do
-    has_permission_on :projects, :to => [ :manage, :leave ]
+    has_permission_on :projects, :to => [ :manage, :leave, :join ]
   end
   
   role :member do
@@ -18,21 +19,23 @@ authorization do
     has_permission_on :statusupdates, :to => :delete do
       if_attribute :user => is { user }
     end
+    has_permission_on :media, :to => [ :read, :create ]
   end
   
   role :follower do
-    has_permission_on :projects, :to => [ :show, :unfollow, :join ]
+    has_permission_on :projects, :to => [ :show, :unfollow, :apply ]
     has_permission_on :statusupdates, :to => :read
   end
   
   role :guest do
-    has_permission_on :projects, :to => [ :read, :follow, :join ] do
+    has_permission_on :projects, :to => [ :read, :follow, :apply ] do
       if_attribute :isPublic => is { true }
     end
     has_permission_on :projects, :to => :create
     has_permission_on :users, :to => :manage do
       if_attribute :id => is { user.id }
     end
+    has_permission_on :users, :to => :read
     
   end
   

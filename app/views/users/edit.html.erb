@@ -1,19 +1,37 @@
 <%= render 'layouts/sidebar_sorting' %>
 
-<div id="profildetails">
+<div id="profiledit">
     <div id="profilhead">
-      <%= link_to image_tag(avatar_url(@user, 140)), @user, :class=>"pic" %>
-      <h5><%= @user.name %></h5>
-      <p class="infos">
-        Studiengang: MMA-B2009<br />
-        Fachbereich: Mediendesign<br /><br />
-        <b>E-Mail:</b> <%= mail_to @user.email, @user.email, :encode => "javascript" %><br />
-        <b>Telefon:</b> <%= @user.telephone %><br />
-        <b>Web:</b> <%= link_to @user.web, @user.web %>
-      </p>
-      <div class="clean hide"></div>
-    </div> 
-  
+			<h2>Profil editieren</h2>
+	    <%= form_for @user, :method => :put do |f| %>
+			<div class="head">
+			  <%= image_tag avatar_url(@user, 175), :class => "pic" %>
+				<%= f.submit "Änderungen Speichern", :class => "stdBtn asksubmit", :id => "submitButton" %>
+				<div class="infos">
+			  	<div>
+				  <%= f.label :name, "Name" %>
+		      <%= f.text_field :name, :class => "stdInpt" %>
+					</div>
+					<div>
+		      <%= f.label :email, "Email" %>
+		      <%= f.text_field :email, :class => "stdInpt" %>
+					</div>
+					<div>
+					<%= f.label :telephone, "Telefon" %>
+		      <%= f.text_field :telephone, :class => "stdInpt" %>
+					</div>
+					<div>
+					<%= f.label :web, "Web" %>
+		      <%= f.text_field :web, :class => "stdInpt" %>
+					</div>					
+				</div>				
+			</div>
+			<div id="projectportfolio">
+				<h5 class="noedit">Anmerkungen / Statement</h5>
+	      <%= f.text_area :statement %>
+			</div>
+			<% end %>			
+    </div>
 </div>
 
 <%= render 'dashboards/sidebar' %>

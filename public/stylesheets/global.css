@@ -175,15 +175,15 @@ textarea { font-family: "Calibri", sans-serif; }
 	float: left;
 	text-align: center;
 	background-color: #ffffff;
-	-moz-border-radius: 7px 0 0 0;
-	border-radius: 7px 0 0 0;
+	-moz-border-radius: 9px 0 0 0;
+	border-radius: 9px 0 0 0;
 	padding: 2px 2px 0 2px;
 }
 
 #menu ul li+li {
 	margin-left: 2px;
-	-moz-border-radius: 0 7px 0 0;
-	border-radius: 0 7px 0 0;
+	-moz-border-radius: 0 9px 0 0;
+	border-radius: 0 9px 0 0;
 }
 
 #menu ul li a {
@@ -220,8 +220,8 @@ textarea { font-family: "Calibri", sans-serif; }
 	height: 33px;
 	padding: 2px 2px 0 2px;
 	background-color: #ffffff;
-	-moz-border-radius: 7px 7px 0 0;
-	border-radius: 7px 7px 0 0;
+	-moz-border-radius: 9px 9px 0 0;
+	border-radius: 9px 9px 0 0;
 }
 
 #searchbar form {
@@ -230,9 +230,9 @@ textarea { font-family: "Calibri", sans-serif; }
 	border-top: 1px solid #bbb;
 	border-right: 1px solid #bbb;
 	border-left: 1px solid #bbb;
+	padding: 4px;
 	-moz-border-radius: 7px 7px 0 0;
 	border-radius: 7px 7px 0 0;
-	padding: 4px;
 	position: relative;
 	z-index: 10;
 	background-color: #fff;
@@ -253,6 +253,12 @@ textarea { font-family: "Calibri", sans-serif; }
 	width: 85px;
 	height: 24px;
 	float: left;
+	border: 1px solid #bbb;
+	border-left: none;
+	border-right: none;
+	color: #444;
+	font-weight: bold;
+	text-align: center;
 }
 
 #searchbar form input.send {
@@ -889,7 +895,7 @@ section {
 	overflow: hidden;
 }
 
-#projectdetails #media h5, #projectportfolio h5 , #projectdetails h5.hl, #updates h5, .inline h5 {
+#projectdetails #media h5, #projectportfolio h5, #profilstatement h5 , #projectdetails h5.hl, #updates h5, .inline h5 {
   font-size: 12px;
 	text-transform: uppercase;
 	display: block;
@@ -925,6 +931,35 @@ section {
   text-indent: 8px;
 }
 #rightbar h5 span, #rightbar h2 span { font-weight: normal; }
+
+#coveruploadform #container 
+{
+	width: 526px;
+	border: 1px solid #ccc;
+	position: relative;
+	height: 22px;
+	margin: 7px 0;
+}
+#coveruploadform #container form { top: 0; }
+#coveruploadform #filelist 
+{
+	width: 410px;
+	padding: 4px 8px;
+	float: left;
+}
+#coveruploadform #filelist b { color: green; }
+#coveruploadform a#pickfiles 
+{
+	display: block;
+	width: 95px;
+	text-align: center;
+	border-right: 1px solid #ccc;
+	background-color: #dfdfdf;
+	padding: 3px 0;
+	height: 16px;
+	text-decoration: none;
+	float: left;
+}
 
 #rightbar #projectprogress, #rightbar #projectstate {
 	margin-bottom: 35px;
@@ -1432,9 +1467,61 @@ section {
 #profildetails {
 	float: left;
 	width: 785px;
-  margin-left: 15px;
+    margin-left: 15px;
 }
 
+#profilstatement div {
+	margin: 0 9px 10px;
+}
+
+/* Profil editieren */
+#profiledit {
+	float: left;
+	width: 551px;
+	margin-left: 10px;	
+}
+
+#profiledit .head {
+	overflow:hidden;
+	margin-bottom: 25px;
+}
+
+#profiledit h2 {
+	font-size: 18px;
+	margin: 5px 0 10px;
+}
+
+#profiledit .infos {
+	margin-top: 63px;
+}
+
+#profiledit .infos div {
+	margin: 3px 0;
+}
+
+#profiledit input#submitButton {
+	position: absolute;
+	top: 15px;
+	right: 5px;
+}
+
+#profiledit .infos label {
+	display: inline-block;
+	font-weight: bold;
+	font-size: 1.1em;
+	width: 90px;
+}
+
+#profiledit textarea {
+	width: 534px;
+	height: 170px;
+	padding: 7px;
+	overflow: scroll-y;
+}
+
+#profiledit #profilhead {
+	border: none;
+}
 
 /* loginpage */
 
@@ -1910,8 +1997,9 @@ div.hide { display: none; }
 #searchresults .follow { overflow: hidden; }
 #searchresults .follow a { float: left; margin-left: 15px; }
 
-input[type=text], textarea { border: 1px solid #ccc; }
-input[type=text] { text-indent: 7px; }
+input[type=text], textarea, input.stdInpt { border: 1px solid #ccc; }
+input[type=text], input.stdInpt { text-indent: 7px; }
+input.stdInpt { background-color: white; height: 23px; width: 265px; }
 
 #rightbar #teammember .pic img { width: 40px; height: 40px; }
 
@@ -1983,17 +2071,24 @@ input[type=text] { text-indent: 7px; }
   float: left;
   margin: 0 15px 0 0;
 }
-#profilhead h5 {
+#profilhead h4 
+{
 	font-size: 22px;
 	color: #555;
 	font-weight: normal;
-  margin-top: -5px;
+  	margin-top: -5px;
 }
 #profilhead .infos { float: left; }
 #profilhead .infos p
 {
   color: #777;
   margin-top: 10px;
+}
+#profilhead .infos p span 
+{
+	display: inline-block;
+	font-weight: bold;
+	width: 55px;
 }
 #profilhead .infos .link
 {

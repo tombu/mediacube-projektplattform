@@ -3,9 +3,11 @@ class ProjectsController < ApplicationController
   filter_resource_access #authorization
 
   def check_user_role 
-  if !params[:id].nil? #|| params[:controller] == "media"
-    current_user.current_role = current_user.roles.where(:project_id => params[:id])
-  end
+    if !params[:id].nil?
+      current_user.current_role = current_user.roles.where(:project_id => params[:id])
+    elsif params[:controller] == "media"
+      current_user.current_role = current_user.roles.where(:project_id => params[:project_id])
+    end
   end
 
   def index
@@ -303,4 +305,18 @@ class ProjectsController < ApplicationController
        redirect_to :back
      end
   end
+  
+  def apply
+    if Notification.create(
+        :sender_id=>current_user.id,
+        :receiver_id=>@project.owner.id,
+        :project_id=>@project.id,
+        :isNew=>true,
+        :html_tmpl_key=>"DECISION_TO_OWNER"
+      )
+      redirect_to :back, :notice => "Die Bewerbung wurde an den Projektleiter geschickt." and return
+    end
+    redirect_to :back, :notice => "Fehler beim Versuch, die Bewerbung an den Projektleiter zu schicken."
+  end
+  
 end

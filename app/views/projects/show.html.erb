@@ -35,15 +35,17 @@
         <p>Projekt verlassen</p><%= image_tag "spec.png" %>
       <% end %>
     <% end %>
-    <% if permitted_to? :join, @project %>
-      <%= link_to join_project_path(@project), :method => :put, :class=>"stdBtn" do %>
-        <p>Projekt beitreten</p><%= image_tag "spec.png" %>
+    <% if permitted_to? :apply, @project %>
+      <%= link_to apply_project_path(@project), :method => :post, :class=>"stdBtn" do %>
+        <p>Bewerben</p><%= image_tag "spec.png" %>
       <% end %>
     <% end %>
     <% if permitted_to? :edit, @project %>
       <%= link_to edit_project_path, :class=>"stdBtn" do %><p>Projekt bearbeiten</p><%= image_tag "editit.png" %><% end %>
     <% end %>
-    <%= link_to new_project_medium_path(@project), :class=>"stdBtn mleft" do %><p>Medien hochladen</p><%= image_tag "new.png" %></a><% end %>
+    <% if permitted_to? :create, @project.media.new %>
+      <%= link_to new_project_medium_path(@project), :class=>"stdBtn mleft" do %><p>Medien hochladen</p><%= image_tag "new.png" %></a><% end %>
+    <% end %>
   </div>
   <div class="getleft">
     <div id="updates">
