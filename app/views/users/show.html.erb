@@ -4,24 +4,30 @@
     <div id="profilhead">
       <%= link_to image_tag(avatar_url(@user, 140)), @user, :class=>"pic" %>
       <div class="infos">
-        <h5><%= @user.name %></h5>
+        <h4><%= @user.name %></h4>
         <p>
-          Studiengang: MMA-B2009<br />
-          Fachbereich: Mediendesign<br /><br />
-          <b>E-Mail:</b> <%= mail_to @user.email, @user.email, :encode => "javascript", :class=>"link" %><br />
-          <b>Telefon:</b> <%= @user.telephone %><br />
-          <b>Web:</b> <%= link_to @user.web, external_url(@user.web), :target => "_blank", :class=>"link" %>
+          <br />
+          <br /><br />
+          <span>E-Mail:</span> <%= mail_to @user.email, @user.email, :encode => "javascript", :class=>"link" %><br />
+          <span>Telefon:</span> <%= @user.telephone %><br />
+          <span>Web:</span> <%= link_to @user.web, external_url(@user.web), :target => "_blank", :class=>"link" %>
         </p>
       </div>
       <%= link_to "#", :class=>"stdBtn right" do %>
         <p>Nachricht schicken</p><%= image_tag "details-arrow.png" %>
       <% end %>
       <div class="clean hide"></div>
-    </div> 
+    </div>
+ 		<% if !@user.statement.nil? %>
+    <div id="profilstatement">
+			<h5 class="noedit">Statement</h5>
+			<div><%= @user.statement %></div>
+	  </div>
+	  <% end %>
     <div id="projectportfolio">
-      <h5 class="noedit"><%= @user.name %>'s Projekte <span>(<%= @all_projects.count %>)</span></h5>
+      <h5 class="noedit"><%= @user.name %>'s Projekte <span>(<%= @user.involved_projects.count %>)</span></h5>
       <ul>
-      <% if @user.running_projects.any? %>
+      <% if @user.involved_projects.any? %>
       <% @user.involved_projects.each_with_index do |p, idx| %>
         <li class="<% if (idx+1) % 5 == 0 %>nomarg<% end %>">
           <%= link_to image_tag(p.cover_url, :class=>"pic"), p %>

@@ -41,7 +41,7 @@
   end
   
   def external_url url
-    if url && url[0..7] != "http://"
+    if url && url[0..6] != "http://"
       "http://" + url.to_s
     else
       url.to_s

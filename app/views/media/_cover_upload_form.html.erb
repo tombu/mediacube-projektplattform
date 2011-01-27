@@ -1,18 +1,6 @@
-<!--<div class="inline">    
-	<%= form_for [@project, Medium.new], :html => { :multipart => true, :id => "coverUpload" } do |f| %>
-		<%= hidden_field_tag :format, 'js' %>
-		<%= hidden_field_tag :project_cover, 'true' %>
-    <%= render 'dialog' %>
-		<%= f.label :file, "Cover Bild" %><br/>
-		<%= f.file_field :file, :class => "eCoverUpload" %><br/>
-    <%= render 'submit_buttons' %>
-  <% end %>
-</div>-->
-
 <% content_for :plupload_header_files do %>
   <%= javascript_include_tag "plupload/plupload.min"%>
   <%= javascript_include_tag "plupload/plupload.html4.min"%>
-<% end %>
 
 <script type="text/javascript">
 // Custom example logic
@@ -75,42 +63,9 @@ $(function() {
 	});
 });
 </script>
-<style type="text/css">
-#container {
-	width: 526px;
-	border: 1px solid #ccc;
-	position: relative;
-	height: 22px;
-	margin: 7px 0;
-}
+<% end %>
 
-#container form {
-	top: 0;
-}
-
-#filelist {
-	width: 410px;
-	padding: 4px 8px;
-	float: left;
-}
-
-#filelist b {
-	color: green;
-}
-
-a#pickfiles {
-	display: block;
-	width: 95px;
-	text-align: center;
-	border-right: 1px solid #ccc;
-	background-color: #dfdfdf;
-	padding: 3px 0;
-	height: 16px;
-	text-decoration: none;
-	float: left;
-}
-</style>
-<div class="inline">
+<div class="inline" id="coveruploadform">
 	<div class="ajx"><div class="con">
 	  <div class="loading"><%= image_tag "loading.gif" %></div>
 	  <div class="ask">

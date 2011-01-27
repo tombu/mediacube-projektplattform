@@ -9,7 +9,6 @@ Projektplattform::Application.routes.draw do
   resources :searchs
   resources :dashboards
   resources :statusupdates
-  resources :statustemplates
   resources :notifications
   resources :jobs
     
@@ -19,6 +18,7 @@ Projektplattform::Application.routes.draw do
       delete :unfollow
       delete :leave
       put :join
+      post :apply
     end
     resources :media
   end

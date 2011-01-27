@@ -1,5 +1,5 @@
 class MediaController < ApplicationController
-  #filter_resource_access :nested_in => :projects
+  filter_resource_access :nested_in => :projects
   
   def index
     @project = Project.find(params[:project_id])
@@ -11,9 +11,7 @@ class MediaController < ApplicationController
     @project = Project.find(params[:project_id])
   end
 
-  def create
-    puts params
-    
+  def create    
     @project = Project.find(params[:project_id])
     distance = ((Time.now.to_time - @project.media.last.created_at.to_time).abs).round
     

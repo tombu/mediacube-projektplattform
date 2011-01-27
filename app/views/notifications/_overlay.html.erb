@@ -31,12 +31,12 @@
             <div class="decision">
               <p>Du wurdest in das Projekt <%= link_to n.project.title, n.project %> eingeladen.</p>
               <%= link_to "JOIN", join_project_path(n.project, :notification_id=>n.id), :method=>:put %>
-              <%= link_to "ABLEHNEN", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED", :project_id=>n.project.id}, :remote=>true %>
+              <%= link_to "ABLEHNEN", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED", :project_id=>n.project.id}, :method => :delete, :class=>"delete_notification", :remote=>true %>
            <% when 'DECISION_TO_OWNER' %>
             <div class="decision">
               <p><%= link_to n.sender.name, n.sender %> möchte dem Projekt <%= link_to n.project.title, n.project %> beitreten.</p>
               <%= link_to "JOIN", join_project_path(n.project, :receiver_id=>n.sender.id, :notification_id=>n.id), :method=>:put %>
-              <%= link_to "ABLEHNEN", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED_TO_USER", :project_id=>n.project.id}, :remote=>true %>
+              <%= link_to "ABLEHNEN", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED_TO_USER", :project_id=>n.project.id}, :method => :delete, :class=>"delete_notification", :remote=>true %>
           <% end %>
               <sub class="date"><%= fdate n.created_at, true, true %></sub>
             </div>
