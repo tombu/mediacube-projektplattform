@@ -43,13 +43,13 @@
 				
 				<div>
 					<%= f.label :job, "Tätigkeit" %><br/>
-					<span class="name"><%= current_user.name %></span>
+					<span class="username"><%= current_user.name %></span>
 					<%= f.fields_for :role do |rf| %>
-					  <%= rf.text_field :job, :class => "taetigkeit", :placeholder => "Tätigkeit" %>
+					  <%= rf.text_field :job, :class => "stdInpt job", :placeholder => "Job"  %>
 					<% end %>
 				</div>
 
-  <%= f.submit "Projekt erstellen" %>
+  <%= f.submit "Projekt erstellen", :class => "stdBtn no2" %>
 <% end %>
 </div>
 	  <div class="clean"></div>

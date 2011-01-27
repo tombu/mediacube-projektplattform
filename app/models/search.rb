@@ -3,7 +3,7 @@
     q = search[:search]
     case search[:category]
       when 'Projekte'
-        Project.find :all, :conditions => ["title LIKE ? or description LIKE ?", "%#{q}%", "%#{q}%"]
+        Project.find :all, :conditions => ["isPublic = ? AND (title LIKE ? OR description LIKE ?)", true, "%#{q}%", "%#{q}%"]
       when 'Jobs'
         Job.projects_with_open_jobs q
       when 'User'

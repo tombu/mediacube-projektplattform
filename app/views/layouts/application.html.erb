@@ -3,7 +3,7 @@
 <head>
   <title>Projektplattform</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag "jquery", "rails", "jcarousel", "lightbox", "jqueryui", "jqueryelastic", "jquerydragsort", "jqueryinit" %>
+  <%= javascript_include_tag "jquery", "rails", "jcarousel", "lightbox", "jqueryui", "jqueryelastic", "jquerydragsort", "jqueryautocomplete", "jqueryinit" %>
   <%= yield :plupload_header_files %>
   <!--<link rel="shortcut icon" href="../favicon.ico" />-->
   <%= csrf_meta_tag %>
@@ -31,5 +31,6 @@
 	<% else %>
 	  <%= render 'layouts/login_pages' %>
 	<% end %>
+
 </body>
 </html>

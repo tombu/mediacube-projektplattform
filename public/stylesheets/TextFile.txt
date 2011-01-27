@@ -12,7 +12,6 @@ Folgende Jobs sind nicht mehr verfügbar: <span>#jobs</span>
 
 STATUS
 Der Projektstatus wurde auf <span>#status</span> gesetzt.
-Das Projekt befindet sich jetzt in der Stage <span>#stage</span>.
 
 USER
 #user (#job) ist ein neues Teammitglied.
@@ -20,3 +19,17 @@ USER
 
 POST
 Normaler Post ...
+
+
+
+
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+
+
+
+
+

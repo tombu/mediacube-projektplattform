@@ -166,8 +166,9 @@ function placeholder() {
   });
 }
 
-// SIDEBAR set active class
+
 $(document).ready(function() {
+  // SIDEBAR set active class
   $category = "#sidebar .categories";
   $status = "#sidebar .status";
   
@@ -182,6 +183,27 @@ $(document).ready(function() {
     $($status + " a").each(function(i){
       if ($(this).html() == $(this).parent().parent().attr("active")) $(this).addClass("active");
     });
+  
+  // clear inputs after submit (for adding)
+  $(".add").click(function(){
+    $(this).prev(".eName").val("");
+  });
+  
+  // show notices/warnings
+  if($(".notice").html() != " ")
+  {
+    $(".notice").show();
+    setTimeout(function(){$(".notice").fadeOut(500);}, 5000);
+  }
+  
+  // show project tooltips
+  $(".projectover").hover(function(){
+    $div = $(this).parent().next(".project");
+    $offset = $(this).position().left;
+    $div.css("left", $offset).fadeIn(300);
+  }, function(){
+    $(this).parent().next(".project").fadeOut(300);
+  });
 });
 
 

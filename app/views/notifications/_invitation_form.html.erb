@@ -1,0 +1,23 @@
+<!-- OVERLAY -->
+<div id="overlaySendInvitation" class="overlay">
+	<h1>Team erweitern - User einladen</h1>
+	<a class="close" id="close"><%= image_tag 'close.png' %></a>
+	<div class="content">
+		<%= form_for Notification.new, :html => { :id => "invitation_form" }, :remote => :true do |f| %>
+		  <%= text_field_tag :username, "", :class => "stdInpt" %>
+		  <%= f.submit "Einladung schicken", :class => "stdBtn no2" %>
+		<% end %>
+	  <div class="clean"></div>
+	</div>
+</div>
+<% 
+@usernames = Array.new 
+User.all.each do |u|
+	@usernames << u.name
+end
+%>
+<script type="text/javascript">
+$(function() {
+	$('#invitation_form .stdInpt').autocomplete(<%=raw @usernames %>);	
+});
+</script>
