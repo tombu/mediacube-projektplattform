@@ -3,6 +3,7 @@
 	<h1>Notifications</h1>
 	<a class="close" id="close"><%= image_tag 'close.png' %></a>
 	<div class="content scroll">
+  <% if @notifications.nil? %><p class="no">keine Notifications vorhanden &hellip;</p><% end %>
 	<ul>
 	  <% @notifications.each do |n| %>
       <li <% if n.isNew %>class="new"<% end %>>

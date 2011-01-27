@@ -38,8 +38,12 @@ class Project < ActiveRecord::Base
     User.joins(:roles).where(:roles => { :role => "owner", :project_id => self.id }).first
   end
   
-  def team
-    User.joins(:roles).where(:roles => { :role => ["member", "leader"], :project_id => self.id })
+  def team owner=false
+    if owner
+      User.joins(:roles).where(:roles => { :role => ["member", "leader", "owner"], :project_id => self.id })
+    else
+      User.joins(:roles).where(:roles => { :role => ["member", "leader"], :project_id => self.id })
+    end
   end
   
   def followers

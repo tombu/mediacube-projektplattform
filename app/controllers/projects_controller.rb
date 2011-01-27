@@ -261,6 +261,21 @@ class ProjectsController < ApplicationController
     @role = Role.where(:user_id => current_user.id, :project_id => @project.id).first
     if @role.destroy
       flash[:notice] = "Du hast das Projekt verlassen."
+      @project.team.each do |member|
+          Notification.create(
+              :sender_id=>current_user.id,
+              :receiver_id=>member.id,
+              :project_id=>@project.id,
+              :isNew=>true,
+              :html_tmpl_key=>"USER_LEAVE"
+            )
+        end
+        Statusupdate.create(
+          :content => Texttemplate.substitute(:team_delete, {"#user" => current_user.name}),
+          :isPublic => true,
+          :user_id => current_user.id,
+          :project_id => @project.id,
+          :html_tmpl_key => "TEAM_DELETE")
       redirect_to :back and return
     end
     flash[:notice] = "Fehler beim Versuch, das Projekt zu verlassen."
@@ -294,6 +309,13 @@ class ProjectsController < ApplicationController
             :html_tmpl_key=>"USER_NEW"
           )
        end
+       Notification.create(
+            :sender_id=>@project.owner.id,
+            :receiver_id=>user_id,
+            :project_id=>@project.id,
+            :isNew=>true,
+            :html_tmpl_key=>"ACCEPTED_TO_USER"
+          )
 
       Statusupdate.create(
         :content => Texttemplate.substitute(:team_new),

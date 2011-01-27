@@ -166,8 +166,9 @@ function placeholder() {
   });
 }
 
-// SIDEBAR set active class
+
 $(document).ready(function() {
+  // SIDEBAR set active class
   $category = "#sidebar .categories";
   $status = "#sidebar .status";
   
@@ -182,6 +183,11 @@ $(document).ready(function() {
     $($status + " a").each(function(i){
       if ($(this).html() == $(this).parent().parent().attr("active")) $(this).addClass("active");
     });
+  
+  // clear inputs after submit (for adding)
+  $(".add").click(function(){
+    $(this).prev(".eName").val("");
+  });
 });
 
 

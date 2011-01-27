@@ -27,17 +27,17 @@
     <% end %>
     <% if permitted_to? :unfollow, @project %>
       <%= link_to unfollow_project_path(@project), :method => :delete, :class=>"stdBtn" do %>
-        <p>nicht mehr Beobachten</p><%= image_tag "spec.png" %>
+        <p>nicht mehr Beobachten</p><%= image_tag "nospec.png" %>
       <% end %>
     <% end %>
     <% if permitted_to? :leave, @project %>
       <%= link_to leave_project_path(@project), :method => :delete, :class=>"stdBtn" do %>
-        <p>Projekt verlassen</p><%= image_tag "spec.png" %>
+        <p>Projekt verlassen</p><%= image_tag "noapply.png" %>
       <% end %>
     <% end %>
     <% if permitted_to? :apply, @project %>
       <%= link_to apply_project_path(@project), :method => :post, :class=>"stdBtn" do %>
-        <p>Bewerben</p><%= image_tag "spec.png" %>
+        <p>Bewerben</p><%= image_tag "apply.png" %>
       <% end %>
     <% end %>
     <% if permitted_to? :edit, @project %>

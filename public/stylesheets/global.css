@@ -110,7 +110,7 @@ textarea { font-family: "Calibri", sans-serif; }
   position: relative;
 }
 
-.icons .count
+.icons .count, #dashboardhead .count
 {
   background: #ed1a96;
   color: White;
@@ -1307,11 +1307,79 @@ section {
 	background-color: #666;
 	margin-right: 10px;
 }
-
-#myproject, #followprojects, #dashboardhead {
+#dashboardhead .countme { position: relative; overflow: visible; }
+#dashboardhead .count 
+{ 
+  top: -3px; right: -4px;
+  display: block;
+  height: 13px!important;
+  line-height: 12px;
+  background: #0ab1f0;
+}
+#dashboardhead .tip:hover .tool
+{
+  display: block;
+}
+#dashboardhead .tool
+{
+  position: absolute;
+  background: url('/images/bgdark.png') repeat-x;
+  height: 30px;
+  line-height: 30px;
+  color: White;
+  font-weight: bold;
+  text-shadow: 2px 1px 1px Black;
+  padding: 0 8px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+	border-radius: 5px;
+  margin: -31px 0 0 -13px;
+}
+#dashboardhead .tool img
+{
+  position: absolute;
+  top: 24px; left: 20px;
+}
+#dashboardhead .me, #dashboardhead .inf
+{
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  overflow: hidden;
+}
+#dashboardhead .me .left { margin-right: 6px; padding-right: 6px; border-right: 1px solid #eee; }
+#dashboardhead .me .name 
+{
+  font-size: 15px;
+  color: #0ab1f0;
+  text-decoration: none;
+  font-weight: bold;
+  margin: -3px 0 8px 0;
+  display: block;
+  float: left;
+  display: block;
+  width: 151px;
+}
+#dashboardhead .inf sub
+{
+  font-size: 11px;
+  font-weight: bold;
+}
+#dashboardhead .inf sub span
+{
+  font-size: 12px;
+  font-weight: normal;
+}
+#dashboardhead .me img
+{
+  width: 56px; height: 56px;
+  float: left;
+}
+#myproject, #followprojects {
 	margin-bottom: 35px;
 	overflow: hidden;
 }
+#dashboardhead { margin-bottom: 35px;}
 #myproject h2, #followprojects h2, #dashboardhead h2
 {
   margin-bottom: 10px;
@@ -1743,7 +1811,7 @@ section {
 .stdBtn p { border-left: 2px solid White; padding-left: 7px; float: right; }
 .stdBtn img { float: left; margin-top: 0; border-right: 1px solid #dae3e6; display: block; padding: 4px 8px 5px 0; }
 
-.stdBtn.no2 { background: #333; background-image: none; border: 1px solid #333; color: White; margin-right: 0!important; height: 30px;}
+.stdBtn.no2 { background: #333 url('/images/bgdark.png') repeat-x; border: 1px solid #333; color: White; margin-right: 0!important; height: 30px;}
 .stdBtn.no2 p { margin: 0; padding: 0; border: 0; }
 .stdBtn.no3 { margin-left: 20px;}
 
@@ -2449,7 +2517,7 @@ input.hide { display: none; }
   float: left;
   margin: -3px 8px 0 0;
 }
-#stdProjectStatusUpdates .team2 .pic img
+#stdProjectStatusUpdates .team2 .pic img, #stdProjectStatusUpdates .team .pic img
 {
   width: 20px; height: 20px;
 }
@@ -2494,7 +2562,10 @@ input.hide { display: none; }
 }
 
 
-
+#overlayNotifications .no
+{
+  padding: 9px 20px 10px 20px;
+}
 #overlayNotifications li
 {
   padding: 9px 20px 10px 20px;
