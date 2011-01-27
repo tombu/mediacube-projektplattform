@@ -35,11 +35,22 @@ textarea { font-family: "Calibri", sans-serif; }
 }
 
 #profilemenu {
-	height: 35px;
+	height: 37px;
 	background-color: #ffffff;
 	float: right;
-	-moz-border-radius: 0 0 7px 7px;
+	-moz-border-radius: 0 0 9px 9px;
+	border-radius: 0 0 9px 9px;
+  width: 313px;
+}
+#profilemenu > div
+{
+  border: 1px solid #bbb;
+  border-top: 0;
+  -moz-border-radius: 0 0 7px 7px;
 	border-radius: 0 0 7px 7px;
+  width: 307px;
+  height: 33px;
+  margin: 0 0 0 2px;
 }
 
 .user {
@@ -47,9 +58,8 @@ textarea { font-family: "Calibri", sans-serif; }
 	text-align: left;
 	padding: 7px 15px 0 0;
 	text-indent: 5px;
-	border-right: 1px solid #bbb;
-	float: left;
-  height: 28px;
+	float: right;
+  height: 26px;
 }
 .user .text
 {
@@ -67,8 +77,8 @@ textarea { font-family: "Calibri", sans-serif; }
 }
 #profilemenu .user .pic
 {
-  float: left;
-  margin: -3px 0 0 10px;
+  float: right;
+  margin: -3px 0 0 5px;
 }
 #profilemenu .user .pic img
 {
@@ -76,9 +86,10 @@ textarea { font-family: "Calibri", sans-serif; }
 }
 
 .icons {
-	height: 35px;
-	border-right: 1px solid #bbb;
-	float: left;
+	height: 33px;
+	border: 1px solid #bbb;
+  border-top: 0; border-bottom: 0;
+	float: right;
   padding-right: 15px;
 }
 
@@ -94,8 +105,12 @@ textarea { font-family: "Calibri", sans-serif; }
 	height: 20px;
 	float: left;
 }
+.icons .project
+{
+  position: relative;
+}
 
-#profilemenu .count
+.icons .count
 {
   background: #ed1a96;
   color: White;
@@ -108,15 +123,15 @@ textarea { font-family: "Calibri", sans-serif; }
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
   position: absolute;
-  top: 4px;
-  right: 105px;
+  top: -6px;
+  right: -7px;
 }
 
 
 
 .logout {
 	width: 54px;
-	float: left;
+	float: right;
 	height: 22px;
 	text-align: center;
 	font-size: 11px;
@@ -723,26 +738,11 @@ section {
 	float: left;
 }
 
-.icon {
-	text-indent: -10000px;
+.icon 
+{
 	float: left;
-	width: 21px;
-	height: 21px;
-	background-color: #000;
+  margin: 10px 0 0 9px;
 }
-/*
-.idea {
-	background-image: url(../images/icon_idea.png);
-}
-
-.concept {
-	background-image: url(../images/icon_concept.png);
-}
-
-.member {
-	background-image: url(../images/icon_member.png);
-}*/
-
 
 
 #projectdetails #projecthead h5 {
@@ -783,6 +783,7 @@ section {
 	font-size: 12px;
 	margin: 17px 0 0 0;
 	color: #777;
+  text-align: justify;
 }
 
 #projectdetails #projectupdates {
@@ -1645,11 +1646,12 @@ section {
 	-webkit-border-radius: 7px;
 	border-radius: 7px;
   text-decoration: none;
+  overflow: hidden;
 }
 .stdBtn p { border-left: 2px solid White; padding-left: 7px; float: right; }
 .stdBtn img { float: left; margin-top: 0; border-right: 1px solid #dae3e6; display: block; padding: 4px 8px 5px 0; }
 
-.stdBtn.no2 { background: #ec0000; background-image: none; border: 0; color: White; margin-right: 0!important; height: 31px;}
+.stdBtn.no2 { background: #333; background-image: none; border: 1px solid #333; color: White; margin-right: 0!important; height: 30px;}
 .stdBtn.no2 p { margin: 0; padding: 0; border: 0; }
 .stdBtn.no3 { margin-left: 20px;}
 
@@ -2261,6 +2263,7 @@ input.hide { display: none; }
   overflow: hidden;
   position: relative;
 }
+#stdProjectStatusUpdates .dash:first-child { padding-top: 0; }
 
 /*
 #stdProjectStatusUpdates li sub
@@ -2327,6 +2330,66 @@ input.hide { display: none; }
 {
   font-weight: bold;
 }
+#stdProjectStatusUpdates .team .pic
+{
+  width: 20px; height: 20px;
+  float: left;
+  margin: -3px 8px 0 0;
+}
+#stdProjectStatusUpdates .team a
+{
+  text-decoration: none;
+  color: #0ab1f0;
+  font-weight: bold;
+}
+#stdProjectStatusUpdates .team2 .pic
+{
+  width: 20px; height: 20px;
+  float: left;
+  margin: -3px 8px 0 0;
+}
+#stdProjectStatusUpdates .team2 a
+{
+  text-decoration: none;
+  color: #222;
+  font-weight: bold;
+}
+/* FOR DASHBOARD */
+#stdProjectStatusUpdates .dash .proj .pic
+{
+  float: left;
+  margin: 3px 5px 0 0;
+  width: 40px; height: 40px;
+}
+#stdProjectStatusUpdates .dash .proj .title
+{
+  color: #222;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 13px;
+}
+#stdProjectStatusUpdates .dash .proj > div
+{
+  margin-top: 2px;
+  color: #777;
+}
+#stdProjectStatusUpdates .dash .post p 
+{ 
+  float: left; 
+  color: #777;
+  width: 400px;
+  margin-top: 0;
+}
+#stdProjectStatusUpdates .dash .post a
+{
+  color: #777;
+  margin-bottom: 2px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+
+
 #overlayNotifications li
 {
   padding: 9px 20px 10px 20px;

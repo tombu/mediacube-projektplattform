@@ -3,24 +3,32 @@
 <div id="dashboardarea">
 		<ul id="stdProjectStatusUpdates">
 	  <% @statusupdates.each do |su| %>
-			<% case su.html_tmpl_key %>
+      <li class="dash">
+        <div class="proj">
+           <%= link_to su.project.title, su.project, :class=>"title" %>
+           <%= link_to image_tag(su.project.icon_url), su.project, :class=>"pic" %><br />
+		  <% case su.html_tmpl_key %>
         <% when 'POST' %>
-            <li class="post">
-          <%= link_to image_tag(avatar_url(su.user, 40)), su.user, :class=>"pic" %>
-          <p><%= link_to su.user.name, su.user %><br/><%= su.content %></p>
-          <sub><%= fdate su.created_at, true, true %></sub>
-        </li>
+          <div class="post">
+            <p><%= link_to su.user.name, su.user %>: &#132;<%= su.content %>&#147;</p>
         <% when 'EDIT' %>
-          <li class="line"><%= image_tag 'tny-edit.png' %><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+          <div class="line"><%= image_tag 'tny-edit.png' %><%=raw su.content %>
         <% when 'STATUS' %>
-          <li class="status"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+          <div class="status"><%=raw su.content %>
         <% when 'JOBS' %>
-          <li class="jobs"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+          <div class="jobs"><%=raw su.content %>
         <% when 'JOBS2' %>
-          <li class="jobs2"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+          <div class="jobs2"><%=raw su.content %>
         <% when 'MEDIA' %>
-          <li class="line2"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+          <div class="line2"><%=raw su.content %>
+        <% when 'TEAM' %>
+          <div class="team"><%= link_to su.user.name, su.user %> <%=raw su.content %>
+        <% when 'TEAM_DELETE' %>
+          <div class="team2"><%= link_to su.user.name, su.user %> <%=raw su.content %>
 		  <% end %>
+        <sub><%= fdate su.created_at, true, true %></sub>
+		</div></div>
+      </li>
 		<% end %>
 	  </ul>
 	  <% if @statusupdates.empty? %>

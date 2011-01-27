@@ -122,6 +122,11 @@ $(document).ready(function () {
     }
   });
   
+  $("input[type=submit]").click(function(){
+    $(this).closest("form").find("textarea, input[type=text], input[type=password]").each(function(){
+      if($(this).val() == $(this).attr("placeholder")) $(this).val("");
+    });
+  });
   
   // Textarea AUTO-resize
   $('#statusupdate_content').elastic();
@@ -152,6 +157,14 @@ $(document).ready(function () {
   });
 });
 
+function placeholder() {
+  $("input[type=text], input[type=password], textarea").each(function () {
+    if ($(this).attr("value") == "") {
+      var phvalue = $(this).attr("placeholder");
+      $(this).val(phvalue);
+    }
+  });
+}
 
 // SIDEBAR set active class
 $(document).ready(function() {
@@ -172,14 +185,6 @@ $(document).ready(function() {
 });
 
 
-function placeholder() {
-  $("input[type=text], input[type=password], textarea").each(function () {
-    if ($(this).attr("value") == "") {
-      var phvalue = $(this).attr("placeholder");
-      $(this).val(phvalue);
-    }
-  });
-}
 
 // *** add/delete CATEGORY
 $(document).ready(function () {

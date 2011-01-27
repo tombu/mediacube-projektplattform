@@ -1,16 +1,47 @@
-<!-- OVERLAY -->
+﻿<!-- OVERLAY -->
 <div id="overlayNotifications" class="overlay">
 	<h1>Notifications</h1>
 	<a class="close" id="close"><%= image_tag 'close.png' %></a>
 	<div class="content scroll">
 	<ul>
 	  <% @notifications.each do |n| %>
-	  <li <% if n.isNew %>class="new"<% end %>>
-		<%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
-		  <p><%= n.content %></p>
-		<sub class="date"><%= fdate n.created_at, true, true %></sub>
-		</li>
-	<% end %>
+      <li <% if n.isNew %>class="new"<% end %>>
+        <% case n.html_tmpl_key %>
+          <% when 'DECLINED' %>
+            <div class="declined">
+              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
+              <p><%= link_to n.sender.name, n.sender %> hat die Einladung für das Projekt <%= link_to n.project.title, n.project %> abgelehnt.</p>
+          <% when 'ACCEPTED_TO_USER' %>
+            <div class="accepted">
+              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
+              <p>Deine Bewerbung für das Projekt <%= link_to n.project.title, n.project %> wurde angenommen.</p>
+           <% when 'DECLINED_TO_USER' %>
+            <div class="declined">
+              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
+              <p>Deine Bewerbung für das Projekt <%= link_to n.project.title, n.project %> wurde leider abgelehnt.</p>
+           <% when 'USER_NEW' %>
+            <div class="accepted">
+              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
+              <p><%= link_to n.sender.name, n.sender %> ist neues Mitglied im Projekt <%= link_to n.project.title, n.project %>.</p>
+           <% when 'USER_LEAVE' %>
+            <div class="declined">
+              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
+              <p><%= link_to n.sender.name, n.sender %> hat das Projekt <%= link_to n.project.title, n.project %> verlassen.</p>
+           <% when 'DECISION_TO_USER' %>
+            <div class="decision">
+              <p>Du wurdest in das Projekt <%= link_to n.project.title, n.project %> eingeladen.</p>
+              <%= link_to "JOIN", join_project_path(n.project, :notification_id=>n.id), :method=>:put %>
+              <%= link_to "ABLEHNEN", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED", :project_id=>n.project.id}, :remote=>true %>
+           <% when 'DECISION_TO_OWNER' %>
+            <div class="decision">
+              <p><%= link_to n.sender.name, n.sender %> möchte dem Projekt <%= link_to n.project.title, n.project %> beitreten.</p>
+              <%= link_to "JOIN", join_project_path(n.project, :receiver_id=>n.sender.id, :notification_id=>n.id), :method=>:put %>
+              <%= link_to "ABLEHNEN", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED_TO_USER", :project_id=>n.project.id}, :remote=>true %>
+          <% end %>
+              <sub class="date"><%= fdate n.created_at, true, true %></sub>
+            </div>
+      </li>
+	  <% end %>
 	</ul>
 	  <div class="clean"></div>
 	</div>

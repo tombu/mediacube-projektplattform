@@ -29,7 +29,9 @@ class ProjectsController < ApplicationController
   @owner = @project.roles.find_by_role :owner
   @mcount = @project.images.count
   @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
-  @statusupdates = @project.statusupdates.order('created_at DESC').paginate :page => params[:page], :per_page => 10
+  @statusupdates = @project.statusupdates.order('created_at DESC')
+  @countupdates = @statusupdates.count
+  @statusupdates = @statusupdates.paginate :page => params[:page], :per_page => 10
   end
 
   def edit
@@ -47,32 +49,32 @@ class ProjectsController < ApplicationController
 
   if @field == 'job'
     if(!params[:project].nil?) 
-    params[:project][:job_ids]||={}
+      params[:project][:job_ids]||={}
     else @project.jobs.clear
     end
 
     oldJobs = Array.new
-    @project.jobs.each do |j|
+      @project.jobs.each do |j|
     oldJobs << j.id.to_s
     end
-
+    
     if oldJobs != params[:project][:job_ids]
-    deletedJobs = oldJobs - params[:project][:job_ids]
-
-    deletedJobs.each_with_index do |dj, key|
-      deletedJobs[key] = @project.jobs.find(dj).name
-    end
-
-    if @project.update_attributes params[:project]
-     # add statusupdate
-     @project.statusupdates << Statusupdate.create(
-       :content => Texttemplate.substitute(:job_delete, {"#jobs" => deletedJobs.join(', ')}), 
-       :isPublic => true, 
-       :user => current_user,
-       :html_tmpl_key => "JOBS2")
-
-    else redirect_to project_path
-    end
+      deletedJobs = oldJobs - params[:project][:job_ids]
+  
+      deletedJobs.each_with_index do |dj, key|
+        deletedJobs[key] = @project.jobs.find(dj).name
+      end
+  
+      if @project.update_attributes params[:project]
+       # add statusupdate
+       @project.statusupdates << Statusupdate.create(
+         :content => Texttemplate.substitute(:job_delete, {"#jobs" => deletedJobs.join(', ')}), 
+         :isPublic => true, 
+         :user => current_user,
+         :html_tmpl_key => "JOBS2")
+  
+      else redirect_to project_path
+      end
     end
 
     # save new jobs
@@ -89,7 +91,7 @@ class ProjectsController < ApplicationController
     end
 
     respond_to do |format|
-    format.js { render :nothing => true }
+      format.js { render :nothing => true }
     end
 
   # update general project infos
@@ -111,18 +113,43 @@ class ProjectsController < ApplicationController
 
   # update team members
   elsif @field == 'team'
+    oldTeam = Array.new
+    @project.team.each do |j|
+      oldTeam << j.id.to_s
+    end
+    
     params[:project][:role_ids] ||= {}
     if @project.update_attributes params[:project]
-    respond_to do |format|
-      format.js { render :nothing => true }
-    end 
+      @deleted_members = oldTeam - params[:project][:role_ids]
+      @deleted_members.each do |deleted_member|
+        @project.team.each do |member|
+          Notification.create(
+              :sender_id=>deleted_member,
+              :receiver_id=>member.id,
+              :project_id=>@project.id,
+              :isNew=>true,
+              :html_tmpl_key=>"USER_LEAVE"
+            )
+        end
+        Statusupdate.create(
+          :content => Texttemplate.substitute(:team_delete, {"#user" => User.find(deleted_member).name}),
+          :isPublic => true,
+          :user_id => deleted_member,
+          :project_id => @project.id,
+          :html_tmpl_key => "TEAM_DELETE")
+      end
+      
+      respond_to do |format|
+        format.js { render :nothing => true }
+      end 
     else redirect_to project_path
     end
     params[:roles].each_with_index do |jobnew, key|
-    @temprole = @project.roles.find_by_id(params[:project][:role_ids][key])
-    @temprole.job = jobnew
-    @temprole.save
+      @temprole = @project.roles.find_by_id(params[:project][:role_ids][key])
+      @temprole.job = jobnew
+      @temprole.save
     end
+    
 
   # update stages
   elsif @field == 'stages'
@@ -237,16 +264,41 @@ class ProjectsController < ApplicationController
   end
   
   def join
+    user_id = (params[:receiver_id].nil?) ? current_user.id : params[:receiver_id]
+    success = false
     @project = Project.find params[:id]
-    @old_role = Role.where(:user_id => current_user.id, :project_id => @project.id).first
-    @old_role ? @old_role.destroy : nil
-    @role = Role.new(:role => "member", :user => current_user, :project => @project, :job => "Tester")
-    if @role.save
-      flash[:notice] = "Du nun Mitglied des Projektteams."
-      redirect_to :back and return
+    @old_role = Role.where(:user_id => user_id, :project_id => @project.id, :role => "follower").first
+    if @old_role.nil?
+      if Role.create(:role => "member", :user_id => user_id, :project => @project)
+        success = true
+      end
+    else
+      if @old_role.update_attributes :role => "member"
+        success = true
+      end
     end
-    #flash[:notice] = "Fehler beim Versuch, das Projekt zu verlassen."
-    redirect_to :back
-  end
+    
+    if success
+      Notification.find(params[:notification_id]).destroy
+      
+      @project.team.where("user_id != ?", user_id).each do |member|
+        Notification.create(
+            :sender_id=>user_id,
+            :receiver_id=>member.id,
+            :project_id=>@project.id,
+            :isNew=>true,
+            :html_tmpl_key=>"USER_NEW"
+          )
+       end
 
+      Statusupdate.create(
+        :content => Texttemplate.substitute(:team_new),
+        :isPublic => true,
+        :user_id => user_id,
+        :project_id => @project.id,
+        :html_tmpl_key => "TEAM")
+        
+       redirect_to :back
+     end
+  end
 end

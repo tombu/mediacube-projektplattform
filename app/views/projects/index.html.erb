@@ -16,7 +16,8 @@
 		@owner = p.roles.where(:role => 'owner').first.user
   %>
 	<div class="boxcontent">
-	  <div class="projectcategory mmt"><% if !p.categories.first.nil? %> <%= p.categories.first.label %> <% end %></div>
+	  <div class="projectcategory mmt"><% if p.categories.any? %> <%= p.categories.first.label %> <% end %></div>
+	  <div class="icon"><% if p.jobs.any? %><%= image_tag "statussearch.png" %><% end %></div>
 	  <div class="projectinfo">
 		<%= link_to image_tag(p.cover_url), p, :class=>"cover" %>
 		<h3><%= strim p.title, 30 %></h3>

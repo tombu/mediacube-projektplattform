@@ -47,7 +47,7 @@
   </div>
   <div class="getleft">
     <div id="updates">
-      <h5 class="noedit">Statusupdates <span>(<%= @statusupdates.count %>)</span></h5>
+      <h5 class="noedit">Statusupdates <span>(<%= @countupdates %>)</span></h5>
       <% if permitted_to? :new, Statusupdate.new %>
         <%= render :partial => "statusupdates/form" %>
       <% end %>
@@ -58,7 +58,7 @@
             <% when 'POST' %>
               <li class="post">
                 <%= link_to image_tag(avatar_url(su.user, 40)), su.user, :class=>"pic" %>
-                <p><%= link_to su.user.name, su.user %><br/><%= su.content %></p>
+                <p><%= link_to su.user.name, su.user %><br/>&#132;<%= su.content %>&#147;</p>
                 <sub><%= fdate su.created_at, true, true %></sub>
               </li>
             <% when 'EDIT' %>
@@ -71,6 +71,10 @@
               <li class="jobs2"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
             <% when 'MEDIA' %>
               <li class="line2"><%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+            <% when 'TEAM' %>
+              <li class="team"><%= link_to image_tag(avatar_url(su.user, 20)), su.user, :class=>"pic" %><%= link_to su.user.name, su.user %> <%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
+            <% when 'TEAM_DELETE' %>
+              <li class="team2"><%= link_to image_tag(avatar_url(su.user, 20)), su.user, :class=>"pic" %><%= link_to su.user.name, su.user %> <%=raw su.content %><sub><%= fdate su.created_at, true, true %></sub></li>
           <% end %>
         <% end %>
         <% if @statusupdates.empty? %>

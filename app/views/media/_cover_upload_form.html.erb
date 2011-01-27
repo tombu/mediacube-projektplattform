@@ -119,14 +119,12 @@ a#pickfiles {
 	    <a class="stdBtn no2 close"><p>Abbrechen</p></a>
 	  </div>
 	  <div class="success"><%= image_tag "ok.png" %></div>
-	</div></div>
+	</div></div><br /><br /><br />
 	<b>Cover Bild hochladen</b>
 	<div id="container">
 	  <a id="pickfiles" href="">Datei wählen...</a>
 		<div id="filelist">No runtime found.</div>
 		<div class="clean hide"></div>
 	</div>
-  <div class="clean hide"></div>
-	<a class="stdBtn asksubmit"><p>Speichern</p><%= image_tag "saveit.png" %></a>
-  <a class="stdBtn no2" href="javascript:editing(true, '#projectinfo');"><p>Zurücksetzen</p></a>
+  <%= render 'projects/submit_buttons' %>
 </div>
