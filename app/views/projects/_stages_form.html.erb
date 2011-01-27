@@ -5,9 +5,8 @@
       <br /><br />
     <label>Neue Stage:</label><br />
     <%= text_field_tag :stage, "", :class=>"eName" %>
-    <a class="add"><%= image_tag "details-arrow.png" %></a>
+    <a class="add"><%= image_tag "vor.png" %></a>
     <br class="clean" />
-      <% if @project.status == "inprogress" %>
         <ul id="stagebar">
         <% @project.stages.order("position ASC").each do |s| %>
           <li sid="<%= s.id %>">
@@ -27,10 +26,10 @@
           <div class="newstages">
           </div>
         </div>
-     <% end %>
      <br />
-   <label>Aktuelle Stage:</label><br /><%= select "project", "status", options_for_select(@project.stages.name), :class=>"left", :id=>"formEStatus" %>
-<div class="clean hide"></div> <br /><br />
+   <label>Aktuelle Stage:</label><br />
+   <%= select_tag "crrent", options_for_select(@project.stages.collect{ |s| [s.name, s.position, :sid=>s.id] }, @project.currentstage) %>
+<div class="clean hide"></div>
      
      <%= render 'submit_buttons' %>
    <% end %>

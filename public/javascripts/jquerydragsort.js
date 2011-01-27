@@ -218,6 +218,7 @@
             var from = "#projectprogress .inline .newstages .hidd[sid='"+value+"']";
             $to = parseInt($(this).find('.pos').val());
             $(from).attr("value", $to);
+			$("#crrent option[sid='"+value+"']").attr("value", $to);
           });
           
           

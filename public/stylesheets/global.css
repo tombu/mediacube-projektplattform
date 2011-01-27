@@ -773,9 +773,9 @@ section {
 }
 
 
-#projectdetails #projectinfo, #projectdetails #projectcover  {
+#projectdetails #projectinfo, #projectdetails #projectinfo.edit, #projectdetails #projectcover
+{
 	float: left;
-	width: 785px;
   overflow: hidden;
 }
 
@@ -889,7 +889,7 @@ section {
 	overflow: hidden;
 }
 
-#projectdetails #media h5, #projectportfolio h5 , #projectdetails h5.hl, #updates h5 {
+#projectdetails #media h5, #projectportfolio h5 , #projectdetails h5.hl, #updates h5, .inline h5 {
   font-size: 12px;
 	text-transform: uppercase;
 	display: block;
@@ -899,6 +899,11 @@ section {
 	color: #666;
   background: #fafbfb;
   text-indent: 8px;
+}
+.inline h5.cover
+{
+  width: 545px;
+  margin-bottom: 30px;
 }
 #projectdetails #media h5 span, #projectportfolio h5 span, #projectdetails h5.hl span, #updates h5 span { font-weight: normal; }
 
@@ -2093,6 +2098,7 @@ input[type=text] { text-indent: 7px; }
 
 .ajx .ask .msg { font-size: 14px; font-weight: bold; }
 .ajx .ask input { margin-left: 14px; }
+#uploadfiles { margin-left: 14px;}
 .edit_project { display: block; }
 #searchingmember { position: relative; }
 
@@ -2347,6 +2353,10 @@ input.hide { display: none; }
   width: 20px; height: 20px;
   float: left;
   margin: -3px 8px 0 0;
+}
+#stdProjectStatusUpdates .team2 .pic img
+{
+  width: 20px; height: 20px;
 }
 #stdProjectStatusUpdates .team2 a
 {

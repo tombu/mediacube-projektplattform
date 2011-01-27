@@ -286,15 +286,18 @@ $(document).ready(function(){
     {
       $('#projectprogress .inline .newstages div[sid="'+$id+'"]').remove();
     }
+    $("#crrent option[sid='"+$id+"']").remove();
     
     // <li> fades out and is removed
     $(this).parent().fadeOut(300, function () { 
       $(this).remove();
       
       // set new position for all elements
-      $('#projectprogress .inline #stagebar').children().each(function(j) { 
+      $('#projectprogress .inline #stagebar').children().each(function(j) {
         $(this).attr("data-itemIdx", j); 
+        var value = $(this).attr("sid");
         $("#projectprogress .inline li[data-itemidx="+j+"] .pos").attr("value", j+1);
+        $("#crrent option[sid='"+value+"']").attr("value", j+1);
       });
       
       // set new position for all HIDDEN elements
@@ -346,7 +349,7 @@ function stageAdd(position, text, nw) {
   else { $newTag =''; $delNew = false; }
   $('#projectprogress .inline #stagebar').append('<li sid="'+$highestId+'" data-itemidx="'+$size+'" '+$newTag+'><div style="cursor: pointer"><input class="text" id="stages_name_" name="stages[name][]" type="text" value="'+$text+'"><input class="pos" id="stages_position_" name="stages[position][]" type="hidden" value="'+$position+'"><input class="ysid" id="stages_sid_" name="stages[sid][]" type="hidden" value="-1"></div><a href="#" class="delete"><img alt="Delete" src="/images/delete.png?1294147242"></a></li>');
   
-  //$("#searchingmember .inline .hiddencat[value=" + $value + "]").attr("checked","checked");
+  $("#crrent").append('<option value="'+$position+'" sid="'+$highestId+'">'+$text+'</option>');
 }
 
 
