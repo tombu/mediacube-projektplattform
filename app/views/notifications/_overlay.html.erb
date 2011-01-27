@@ -6,6 +6,12 @@
   <% if @notifications.nil? %><p class="no">keine Notifications vorhanden &hellip;</p><% end %>
 	<ul>
 	  <% @notifications.each do |n| %>
+      <% 
+        @categories = Array.new
+        n.project.categories.each do |c|
+          @categories << c.label
+        end 
+      %>
       <li <% if n.isNew %>class="new"<% end %>>
         <% case n.html_tmpl_key %>
           <% when 'DECLINED' %>
@@ -15,7 +21,15 @@
           <% when 'ACCEPTED_TO_USER' %>
             <div class="accepted">
               <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
-              <p>Deine Bewerbung für das Projekt <%= link_to n.project.title, n.project %> wurde angenommen.</p>
+              <p>Deine Bewerbung für das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> wurde angenommen.</p>
+              <div class="project">
+                <%= image_tag "arrup.png", :class=>"arr" %>
+                <%= image_tag n.project.icon_url, :class=>"pic" %>
+                <h6><%= n.project.title %></h6>
+                <p>
+                  <%= @categories.join(', ') %>
+                </p>
+              </div>
            <% when 'DECLINED_TO_USER' %>
             <div class="declined">
               <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>

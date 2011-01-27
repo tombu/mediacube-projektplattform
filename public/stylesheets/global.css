@@ -2583,7 +2583,7 @@ input.hide { display: none; }
 {
   background: #fafbfb;
   border-color: #cad4d7;
-  border-right: 3px solid #ed1a96;
+  border-right: 3px solid #0ab1f0;
 }
 #overlayNotifications p
 {
@@ -2598,6 +2598,7 @@ input.hide { display: none; }
   color: #a0b0b4;
   font-size: 10px;
 }
+#overlayNotifications li > div { position: relative; }
 #overlayNotifications .delete_notification
 {
   position: absolute;
@@ -2606,6 +2607,44 @@ input.hide { display: none; }
 }
 #overlayNotifications .new .delete_notification { right: 5px; }
 #overlayNotifications .delete_notification:hover { opacity: 1.0; }
+
+/* SINGLE NOTIFICATIONS */
+#overlayNotifications .project
+{
+  position: absolute;
+  display: none;
+  z-index: 9999;
+  background: #222;
+  padding: 5px 8px 5px 5px;
+  -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+  color: White;
+  top: 20px;
+}
+#overlayNotifications .project .pic
+{
+  float: left; margin-right: 7px;
+  width: 40px; height: 40px;
+}
+#overlayNotifications .project .arr
+{
+  position: absolute;
+  top: -5px;
+  left: 20px;
+}
+#overlayNotifications .project h6
+{
+  font-size: 13px;
+  font-weight: bold;
+}
+#overlayNotifications .accepted a, #overlayNotifications .declined a
+{
+  text-decoration: none;
+  color: #0ab1f0;
+  font-weight: bold;
+}
+
 
 #projectprogress .inline .text
 {
@@ -2652,4 +2691,18 @@ a#pickfiles
 input[type=file] { cursor:pointer!important; margin-left: -15px; }
 
 
+
+/** NOTICE **/
+.notice
+{
+  display: none;
+  position: fixed;
+  bottom: 20px; left: 20px;
+  background: #333;
+  padding: 15px 10px;
+  -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+  color: White;
+}
 
