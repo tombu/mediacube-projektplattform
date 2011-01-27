@@ -1319,6 +1319,7 @@ section {
 #dashboardhead .tip:hover .tool
 {
   display: block;
+  opacity: 0.7;
 }
 #dashboardhead .tool
 {
@@ -2280,9 +2281,9 @@ input.hide { display: none; }
 	-webkit-border-radius: 7px;
 	border-radius: 7px;
   padding-bottom: 40px;
-  -moz-box-shadow: 2px 2px 10px #ccc;
-	-webkit-box-shadow: 2px 2px 10px #ccc;
-	box-shadow: 2px 2px 10px #ccc;
+  -moz-box-shadow: 0 2px 10px #ccc;
+	-webkit-box-shadow: 0 2px 10px #ccc;
+	box-shadow: 0 2px 10px #ccc;
   overflow: hidden;
 }
 .overlay h1
@@ -2576,7 +2577,7 @@ input.hide { display: none; }
 }
 #overlayNotifications .content
 {
-  padding: 0;
+  padding: 0 0 35px 0;
   width: 500px;
 }
 #overlayNotifications .new
@@ -2585,28 +2586,20 @@ input.hide { display: none; }
   border-color: #cad4d7;
   border-right: 3px solid #0ab1f0;
 }
-#overlayNotifications p
-{
-  color: #717f84;
-}
-#overlayNotifications .new p
-{
-  color: Black;
-}
 #overlayNotifications li sub
 {
   color: #a0b0b4;
   font-size: 10px;
 }
 #overlayNotifications li > div { position: relative; }
-#overlayNotifications .delete_notification
+#overlayNotifications .delete_notification.wcs
 {
   position: absolute;
   top: 6px; right: 8px;
   opacity: 0.3;
 }
-#overlayNotifications .new .delete_notification { right: 5px; }
-#overlayNotifications .delete_notification:hover { opacity: 1.0; }
+#overlayNotifications .new .delete_notification.wcs { right: 5px; }
+#overlayNotifications .delete_notification.wcs:hover { opacity: 1.0; }
 
 /* SINGLE NOTIFICATIONS */
 #overlayNotifications .project
@@ -2615,12 +2608,24 @@ input.hide { display: none; }
   display: none;
   z-index: 9999;
   background: #222;
-  padding: 5px 8px 5px 5px;
+  padding: 5px 12px 5px 5px;
   -moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
   color: White;
   top: 20px;
+  opacity: 0.9;
+}
+#overlayNotifications .project p
+{
+  color: White; 
+  line-height: 12px;
+  font-size: 11px;
+}
+#overlayNotifications .project p span
+{
+  color: #717f84;
+  
 }
 #overlayNotifications .project .pic
 {
@@ -2635,16 +2640,34 @@ input.hide { display: none; }
 }
 #overlayNotifications .project h6
 {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
+  margin-top: -2px;
 }
-#overlayNotifications .accepted a, #overlayNotifications .declined a
+#overlayNotifications a
 {
+  color: #222;
   text-decoration: none;
+}
+#overlayNotifications .new a
+{
   color: #0ab1f0;
   font-weight: bold;
 }
 
+#overlayNotifications .accepted a, #overlayNotifications .declined a
+{
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#overlayNotifications .accepted .left
+{
+  margin-right: 5px;
+}
+#overlayNotifications .decision .stdBtn { color: #444; margin-top: 8px; margin-left: 5px; }
+#overlayNotifications .decision .stdBtn:hover { color: Black; }
+#overlayNotifications .decision .stdBtn.no2 { color: White; margin-left: 0;  }
 
 #projectprogress .inline .text
 {

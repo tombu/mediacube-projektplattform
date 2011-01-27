@@ -16,43 +16,40 @@
         <% case n.html_tmpl_key %>
           <% when 'DECLINED' %>
             <div class="declined">
-              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
-              <p><%= link_to n.sender.name, n.sender %> hat die Einladung für das Projekt <%= link_to n.project.title, n.project %> abgelehnt.</p>
+              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
+              <p><%= link_to n.sender.name, n.sender, :class=>"name" %> hat die Einladung für das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> abgelehnt.</p>
           <% when 'ACCEPTED_TO_USER' %>
             <div class="accepted">
-              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
-              <p>Deine Bewerbung für das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> wurde angenommen.</p>
-              <div class="project">
-                <%= image_tag "arrup.png", :class=>"arr" %>
-                <%= image_tag n.project.icon_url, :class=>"pic" %>
-                <h6><%= n.project.title %></h6>
-                <p>
-                  <%= @categories.join(', ') %>
-                </p>
-              </div>
+              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
+              <p><%= image_tag "okmini.png", :class=>"left" %>Deine Bewerbung für das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> wurde angenommen.</p>
            <% when 'DECLINED_TO_USER' %>
             <div class="declined">
-              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
-              <p>Deine Bewerbung für das Projekt <%= link_to n.project.title, n.project %> wurde leider abgelehnt.</p>
+              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
+              <p>Deine Bewerbung für das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> wurde leider abgelehnt.</p>
            <% when 'USER_NEW' %>
             <div class="accepted">
-              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
-              <p><%= link_to n.sender.name, n.sender %> ist neues Mitglied im Projekt <%= link_to n.project.title, n.project %>.</p>
+              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
+              <p><%= image_tag "usermini.png", :class=>"left" %><%= link_to n.sender.name, n.sender, :class=>"name" %> ist neues Mitglied im Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %>.</p>
            <% when 'USER_LEAVE' %>
             <div class="declined">
-              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification", :remote=>true %>
-              <p><%= link_to n.sender.name, n.sender %> hat das Projekt <%= link_to n.project.title, n.project %> verlassen.</p>
+              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
+              <p><%= link_to n.sender.name, n.sender, :class=>"name" %> hat das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> verlassen.</p>
            <% when 'DECISION_TO_USER' %>
             <div class="decision">
-              <p>Du wurdest in das Projekt <%= link_to n.project.title, n.project %> eingeladen.</p>
-              <%= link_to "JOIN", join_project_path(n.project, :notification_id=>n.id), :method=>:put %>
-              <%= link_to "ABLEHNEN", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED", :project_id=>n.project.id}, :method => :delete, :class=>"delete_notification", :remote=>true %>
+              <p>Du wurdest in das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> eingeladen.</p>
+              <%= link_to "Bestätigen", join_project_path(n.project, :notification_id=>n.id), :method=>:put, :class=>"stdBtn no2" %>
+              <%= link_to "Ablehnen", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED", :project_id=>n.project.id}, :method => :delete, :class=>"delete_notification stdBtn", :remote=>true %><br />
            <% when 'DECISION_TO_OWNER' %>
             <div class="decision">
-              <p><%= link_to n.sender.name, n.sender %> möchte dem Projekt <%= link_to n.project.title, n.project %> beitreten.</p>
-              <%= link_to "JOIN", join_project_path(n.project, :receiver_id=>n.sender.id, :notification_id=>n.id), :method=>:put %>
-              <%= link_to "ABLEHNEN", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED_TO_USER", :project_id=>n.project.id}, :method => :delete, :class=>"delete_notification", :remote=>true %>
+              <p><%= link_to n.sender.name, n.sender, :class=>"name" %> möchte dem Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> beitreten.</p>
+              <%= link_to "Akzeptieren", join_project_path(n.project, :receiver_id=>n.sender.id, :notification_id=>n.id), :method=>:put, :class=>"stdBtn no2" %>
+              <%= link_to "Ablehnen", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED_TO_USER", :project_id=>n.project.id}, :method => :delete, :class=>"delete_notification stdBtn", :remote=>true %><br />
           <% end %>
+              <div class="project">
+                <%= image_tag "arrup.png", :class=>"arr" %><%= image_tag n.project.icon_url, :class=>"pic" %>
+                <h6><%= n.project.title %></h6>
+                <p><b><%= n.project.team(true).count %></b> Mitarbeiter<br /><span><%= strim @categories.join(', '), 25 %></span></p>
+              </div>
               <sub class="date"><%= fdate n.created_at, true, true %></sub>
             </div>
       </li>

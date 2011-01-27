@@ -198,11 +198,11 @@ $(document).ready(function() {
   
   // show project tooltips
   $(".projectover").hover(function(){
-    $div = $(this).parent().next(".project");
+    $div = $(this).parent().parent().children(".project");
     $offset = $(this).position().left;
     $div.css("left", $offset).fadeIn(300);
   }, function(){
-    $(this).parent().next(".project").fadeOut(300);
+     $(this).parent().parent().children(".project").fadeOut(300);
   });
 });
 
@@ -387,7 +387,7 @@ function overlay(id){
     		cursor: 'default'
     	},
     	overlayCSS:  { 
-    		opacity: 0.7,
+    		opacity: 0.8,
     		cursor: 'default'
   		}, 
   		themedCSS: {
