@@ -1,7 +1,7 @@
 <div id="rightbar">
 	<div id="dashboardhead"> 
 	  <h2>Aktionen</h2>
-	   <%= link_to new_project_path, :class=>"stdBtn" do %><%= image_tag "new.png" %> <% end %>
+	   <%= link_to "javascript:overlay('#overlayCreateProject');", :class=>"stdBtn" do %><%= image_tag "new.png" %> <% end %>
 	<% if permitted_to? :manage, @user %>
 	   <%= link_to edit_user_path(current_user), :class=>"stdBtn" do %><%= image_tag "editit.png" %><% end %>
 	<% end %>

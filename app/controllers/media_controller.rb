@@ -1,5 +1,10 @@
 class MediaController < ApplicationController
+  before_filter :check_user_role
   filter_resource_access :nested_in => :projects
+  
+  def check_user_role 
+    current_user.current_role = current_user.roles.where(:project_id => params[:project_id])
+  end
   
   def index
     @project = Project.find(params[:project_id])

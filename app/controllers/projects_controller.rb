@@ -5,8 +5,6 @@ class ProjectsController < ApplicationController
   def check_user_role 
     if !params[:id].nil?
       current_user.current_role = current_user.roles.where(:project_id => params[:id])
-    elsif params[:controller] == "media"
-      current_user.current_role = current_user.roles.where(:project_id => params[:project_id])
     end
   end
 
