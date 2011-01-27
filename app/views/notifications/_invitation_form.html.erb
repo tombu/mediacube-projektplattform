@@ -3,7 +3,9 @@
 	<h1>Team erweitern - User einladen</h1>
 	<a class="close" id="close"><%= image_tag 'close.png' %></a>
 	<div class="content">
-		<%= form_for Notification.new, :html => { :id => "invitation_form" }, :remote => :true do |f| %>
+		<%= form_for Notification.new, :method => :post, :html => { :id => "invitation_form" } do |f| %>
+			<%= hidden_field_tag :invitation, true %>
+			<%= hidden_field_tag :project_id, @project.id %>
 		  <%= text_field_tag :username, "", :class => "stdInpt" %>
 		  <%= f.submit "Einladung schicken", :class => "stdBtn no2" %>
 		<% end %>

@@ -6,7 +6,7 @@
 	    <%= form_for @user, :method => :put do |f| %>
 			<div class="head">
 			  <%= image_tag avatar_url(@user, 175), :class => "pic" %>
-				<%= f.submit "Änderungen Speichern", :class => "stdBtn asksubmit", :id => "submitButton" %>
+				<%= f.submit "Änderungen speichern", :class => "stdBtn no2", :id => "submitButton" %>
 				<div class="infos">
 			  	<div>
 				  <%= f.label :name, "Name" %>

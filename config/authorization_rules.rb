@@ -23,12 +23,12 @@ authorization do
   end
   
   role :follower do
-    has_permission_on :projects, :to => [ :show, :unfollow, :apply ]
+    has_permission_on :projects, :to => [ :show, :unfollow, :apply, :join ]
     has_permission_on :statusupdates, :to => :read
   end
   
   role :guest do
-    has_permission_on :projects, :to => [ :read, :follow, :apply ] do
+    has_permission_on :projects, :to => [ :read, :follow, :apply, :join ] do
       if_attribute :isPublic => is { true }
     end
     has_permission_on :projects, :to => :create
