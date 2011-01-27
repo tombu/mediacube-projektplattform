@@ -183,12 +183,7 @@ $(document).ready(function() {
     $($status + " a").each(function(i){
       if ($(this).html() == $(this).parent().parent().attr("active")) $(this).addClass("active");
     });
-  
-  // clear inputs after submit (for adding)
-  $(".add").click(function(){
-    $(this).prev(".eName").val("");
-  });
-  
+
   // show notices/warnings
   if($(".notice").html() != "")
   {
@@ -205,7 +200,6 @@ $(document).ready(function() {
      $(this).parent().parent().children(".project").fadeOut(300);
   });
 });
-
 
 
 // *** add/delete CATEGORY
@@ -281,7 +275,8 @@ function jobAdd(val, text, nw) {
   }
   else { $newTag =''; $delNew = false; }
   $('#searchingmember .inline .openjobs').append('<li '+$newTag+' class="no'+$value+'">» '+$text+'<a href="javascript:jobDelete(' + $value + ','+$delNew+');" class="right del"><img src="/images/delete.png" /></a></li>');
-  //$("#searchingmember .inline .hiddencat[value=" + $value + "]").attr("checked","checked");
+  
+  $("#searchingmember .inline .eName").val("");
 }
 
 function memberDelete(val) {
@@ -342,6 +337,7 @@ $(document).ready(function(){
     }
     $max++;
     stageAdd($max, $("#projectprogress #stage.eName").val(), true);
+    $("#projectprogress .inline .eName").val("");
   });
   
   

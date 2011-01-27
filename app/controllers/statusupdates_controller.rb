@@ -14,12 +14,9 @@ class StatusupdatesController < ApplicationController
     @statusupdate.html_tmpl_key = "POST"
     
     if @statusupdate.save
-      flash[:notice] = "Statusupdate gespeichert!"
+      redirect_to :back, :notice => "Statusupdate gespeichert!"
     else
-      flash[:notice] = "Fehler beim Speichern des Statusupdates!"
-    end
-    respond_to do |format|
-      format.js { render :nothing => true }
+      redirect_to :back, :notice => "Fehler beim Speichern des Statusupdates!"
     end
   end
   

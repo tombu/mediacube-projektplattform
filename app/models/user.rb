@@ -23,15 +23,15 @@ class User < ActiveRecord::Base
   def current_role=(roles)
     @current_role = roles
   end
-  
-  def role
-    @current_role.inspect
-  end
-  
+
   def role_symbols
     (@current_role || []).map do |role| 
       role.role.to_sym
     end
+  end
+  
+  def notifications
+    Notification.where(:receiver_id => self.id).order('created_at DESC')
   end
   
   def running_projects

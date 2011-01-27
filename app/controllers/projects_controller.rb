@@ -116,17 +116,21 @@ class ProjectsController < ApplicationController
   # update team members
   elsif @field == 'team'
     oldTeam = Array.new
-    @project.team.each do |j|
-      oldTeam << j.id.to_s
+    @project.team(true).each do |j|
+      oldTeam << j.id
     end
-    
+    newTeam = Array.new
+    params[:project][:role_ids].each do |r|
+      newTeam << Role.find(r).user_id
+    end
+
     params[:project][:role_ids] ||= {}
     if @project.update_attributes params[:project]
-      @deleted_members = oldTeam - params[:project][:role_ids]
-      @deleted_members.each do |deleted_member|
+      @deleted_members = oldTeam - newTeam
+      @deleted_members.each do |del_id|
         @project.team.each do |member|
           Notification.create(
-              :sender_id=>deleted_member,
+              :sender_id=>del_id,
               :receiver_id=>member.id,
               :project_id=>@project.id,
               :isNew=>true,
@@ -134,9 +138,9 @@ class ProjectsController < ApplicationController
             )
         end
         Statusupdate.create(
-          :content => Texttemplate.substitute(:team_delete, {"#user" => User.find(deleted_member).name}),
+          :content => Texttemplate.substitute(:team_delete, {"#user" => User.find(del_id).name}),
           :isPublic => true,
-          :user_id => deleted_member,
+          :user_id => del_id,
           :project_id => @project.id,
           :html_tmpl_key => "TEAM_DELETE")
       end
@@ -255,7 +259,7 @@ class ProjectsController < ApplicationController
     @project = Project.find params[:id]
     @role = Role.where(:user_id => current_user.id, :project_id => @project.id).first
     if @role.destroy
-      @project.team.each do |member|
+      @project.team(true).each do |member|
           Notification.create(
               :sender_id=>current_user.id,
               :receiver_id=>member.id,
@@ -270,7 +274,7 @@ class ProjectsController < ApplicationController
           :user_id => current_user.id,
           :project_id => @project.id,
           :html_tmpl_key => "TEAM_DELETE")
-      redirect_to :back, :notice => "Du hast das Projekt verlassen!" and return
+      redirect_to :back and return
     end
     flash[:notice] = "Fehler beim Versuch, das Projekt zu verlassen."
     redirect_to :back
@@ -294,7 +298,7 @@ class ProjectsController < ApplicationController
     if success
       Notification.find(params[:notification_id]).destroy
       
-      @project.team.where("user_id != ?", user_id).each do |member|
+      @project.team(true).where("user_id != ?", user_id).each do |member|
         Notification.create(
             :sender_id=>user_id,
             :receiver_id=>member.id,
@@ -303,13 +307,15 @@ class ProjectsController < ApplicationController
             :html_tmpl_key=>"USER_NEW"
           )
        end
-       Notification.create(
-            :sender_id=>@project.owner.id,
-            :receiver_id=>user_id,
-            :project_id=>@project.id,
-            :isNew=>true,
-            :html_tmpl_key=>"ACCEPTED_TO_USER"
-          )
+       if(!params[:dtu])
+         Notification.create(
+              :sender_id=>@project.owner.id,
+              :receiver_id=>user_id,
+              :project_id=>@project.id,
+              :isNew=>true,
+              :html_tmpl_key=>"ACCEPTED_TO_USER"
+            )
+        end
 
       Statusupdate.create(
         :content => Texttemplate.substitute(:team_new),

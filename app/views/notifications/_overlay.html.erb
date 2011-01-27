@@ -31,7 +31,7 @@
            <% when 'USER_NEW' %>
             <div class="accepted">
               <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
-              <p><%= image_tag "usermini.png", :class=>"left" %><%= link_to n.sender.name, n.sender, :class=>"name" %> ist neues Mitglied im Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %>.</p>
+              <p><%= image_tag "usermini.png", :class=>"left" %><%= link_to n.sender.name, n.sender, :class=>"name" %> ist jetzt Mitglied im Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %>.</p>
            <% when 'USER_LEAVE' %>
             <div class="declined">
               <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
@@ -39,7 +39,7 @@
            <% when 'DECISION_TO_USER' %>
             <div class="decision">
               <p>Du wurdest in das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> eingeladen.</p>
-              <%= link_to "Bestätigen", join_project_path(n.project, :notification_id=>n.id), :method=>:put, :class=>"stdBtn no2" %>
+              <%= link_to "Bestätigen", join_project_path(n.project, :dtu=>true, :notification_id=>n.id), :method=>:put, :class=>"stdBtn no2" %>
               <%= link_to "Ablehnen", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED", :project_id=>n.project.id}, :method => :delete, :class=>"delete_notification stdBtn", :remote=>true %><br />
            <% when 'DECISION_TO_OWNER' %>
             <div class="decision">
