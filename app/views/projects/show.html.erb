@@ -35,7 +35,7 @@
         <p>Projekt verlassen</p><%= image_tag "noapply.png" %>
       <% end %>
     <% end %>
-    <% if permitted_to? :apply, @project %>
+    <% if (permitted_to? :apply, @project) && (current_user.can_apply? @project) %>
       <%= link_to apply_project_path(@project), :method => :post, :class=>"stdBtn" do %>
         <p>Bewerben</p><%= image_tag "apply.png" %>
       <% end %>
