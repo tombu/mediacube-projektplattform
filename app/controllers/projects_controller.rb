@@ -57,10 +57,10 @@ class ProjectsController < ApplicationController
 
     oldJobs = Array.new
       @project.jobs.each do |j|
-    oldJobs << j.id.to_s
-    end
+        oldJobs << j.id.to_s
+      end
     
-    if oldJobs != params[:project][:job_ids]
+    if oldJobs.any? && oldJobs != params[:project][:job_ids]
       deletedJobs = oldJobs - params[:project][:job_ids]
   
       deletedJobs.each_with_index do |dj, key|
