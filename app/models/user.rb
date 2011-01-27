@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
     end
   end
   
+  def can_apply? project
+    Notification.where(:project_id => project.id, :sender_id => self.id, :html_tmpl_key => "DECISION_TO_OWNER").any? || Notification.where(:project_id => project.id, :receiver_id => self.id, :html_tmpl_key => "DECISION_TO_USER").any? ? false : true
+  end
+  
   def notifications
     Notification.where(:receiver_id => self.id).order('created_at DESC')
   end

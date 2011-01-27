@@ -115,10 +115,9 @@ class ProjectsController < ApplicationController
   elsif @field == 'team'
     oldTeam = Array.new
     @project.team.each do |j|
-      oldTeam << j.id.to_s
+      oldTeam << j.id
     end
     
-    params[:project][:role_ids] ||= {}
     if @project.update_attributes params[:project]
       @deleted_members = oldTeam - params[:project][:role_ids]
       @deleted_members.each do |deleted_member|
