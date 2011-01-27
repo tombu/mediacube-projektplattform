@@ -1,0 +1,58 @@
+﻿<div id="overlayCreateProject" class="overlay">
+	<h1>Neues Projekt erstellen</h1>
+	<a class="close" id="close"><%= image_tag 'close.png' %></a>
+	<div class="content">
+	<div id="npformular">
+<%= form_for Project.new, :url => { :action => "create" } do |f| %>
+			  <div class="inputfield">
+			    <%= f.label :title, "Titel" %><br/>
+			    <%= f.text_field :title, :class => "stdInpt", :placeholder => "Titel für ihr Projekt eingeben" %>
+			  </div>
+
+        <div>
+          <%= f.label :description, "Beschreibung" %>
+          <%= f.text_area :description, :class => "description", :placeholder => "Kurzbeschreibung für ihr Projekt eingebenen" %>
+        </div>
+  
+				<div>
+					<%= f.label :category, "Kategorie" %><br/>
+					<%= select_tag :category, options_from_collection_for_select(Category.all.each, "id", "label"), :id => "formECat", :include_blank => 'Auswählen ...' %><br/>
+					<ul class="category">
+		      <script type="text/javascript">
+		      <% Project.new.categories.each do |c| %>
+		         <% cats = Category.where("label = ?", c.label).first.id %>
+		           catAdd('<%= cats %>', "<%= c.label %>");
+		         <% end %>
+		      </script>
+		      </ul>
+		      <div class="hide">
+		      <% @categories = Category.all
+		      @categories.each do |category| %>
+		        <div>
+		         <%= check_box_tag "project[category_ids][]", category.id, Project.new.categories.include?(category), :class => "hiddencat" %>
+		        </div>
+		      <% end %>
+		    	</div>
+					
+				</div>
+				
+				<div>
+					<%= f.label :isPublic, "Sichtbarkeit" %><br/>
+					<%= f.check_box :isPublic, :checked => "checked", :class => "stdInpt" %> Projekt ist für alle sichtbar
+				</div>
+				
+				<div>
+					<%= f.label :job, "Tätigkeit" %><br/>
+					<span class="username"><%= current_user.name %></span>
+					<%= f.fields_for :role do |rf| %>
+					  <%= rf.text_field :job, :class => "stdInpt job", :placeholder => "Job"  %>
+					<% end %>
+				</div>
+
+  <%= f.submit "Projekt erstellen", :class => "stdBtn no2" %>
+<% end %>
+</div>
+	  <div class="clean"></div>
+	</div>
+</div>
+

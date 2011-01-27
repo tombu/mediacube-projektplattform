@@ -2,7 +2,9 @@
 <div id="projectdetails" class="wide">
   <div id="topbar">
 	<%= link_to @project, :class=>"stdBtn" do %><p>Zurück zum Projekt</p><%= image_tag "back.png" %></a><% end %>
-	<%= link_to new_project_medium_path, :class=>"stdBtn mleft" do %><p>Medien hochladen</p><%= image_tag "new.png" %></a><% end %>
+	<% if permitted_to? :create, @project.media.new %>
+    <%= link_to "javascript:overlay('#overlayMediaUpload');", :class=>"stdBtn mleft" do %><p>Medien hochladen</p><%= image_tag "new.png" %></a><% end %>
+  <% end %>
   </div>
 	<div id="mediaall">
     <h5 class="hl noedit">Alle Mediadaten <span>(<%= @icount %>)</span></h5>
@@ -13,3 +15,8 @@
     </ul>
 	</div>
 </div>
+
+<!-- UPLOAD OVERLAY-->
+<% if permitted_to? :create, @project.media.new %>
+  <%= render :partial => 'upload_form', :locals => { :multiple_queues => true } %>
+<% end %>

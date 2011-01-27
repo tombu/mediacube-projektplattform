@@ -1,0 +1,65 @@
+<div id="wrapper">
+  <header>
+    <h1 id="logo"><%= link_to image_tag("logo.png", :html => { :alt => "Projektplattform" }), :root %></h1>
+    <div id="profilemenu">
+      <div>
+        <% if user_signed_in? %>
+          <div class="logout"><%= link_to "Logout", destroy_user_session_path%></div>
+          <div class="icons">
+              <ul>
+                  <li class="project">
+                    <%= link_to image_tag('icon_project.png'), "javascript:overlay('#overlayNotifications');" %>
+                    <% if User.count_unread_notifications(current_user) > 0 %><sup class="count"><%= User.count_unread_notifications current_user %></sup><% end %>
+                  </li>
+                  <li class="editprofile"><%= link_to image_tag('edittop.png'), edit_user_path(current_user) %></li>
+              </ul>
+          </div>
+        <% end %>
+        <div class="user">
+          <% if user_signed_in? %>
+						<%= link_to current_user.name, current_user, :class=>"text" %>
+					<% else %>
+						<p class="text"><%= link_to "Anmelden", new_user_session_path %> oder <%= link_to "Registrieren", new_user_registration_path %></p>
+					<% end	%>
+			  </div>
+      </div>
+    </div>
+    
+    <div id="menubar">
+      <div id="menu">
+        <ul>
+          <li<% if params[:controller] != "dashboards" %> class="active"<% end %>><%= link_to "Projekte", :root%></li>
+          <li<% if params[:controller] == "dashboards" %> class="active"<% end %>><%= link_to "Dashboard", :dashboards %></a></li>
+        </ul>
+      </div>
+      <div id="searchbar">
+        <%= form_tag searchs_path, :method => 'get' do %>
+          <p>
+            <%= text_field_tag :search, params[:search], :class => "keyword", :placeholder => "Suche nach" %>
+            <%= select_tag "category", options_for_select([['Projekte','Projekte'],['User','User'],['Jobs','Jobs']]) %>
+            <%= submit_tag "Search", :class => "send" %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </header>
+  <section>
+          <div id="topborder">
+            <div id="contentwrapper">
+<p class="notice"><%= notice %> <%= flash[:error] %></p>
+      <%= yield %>
+          </div>
+        </div>
+  </section>
+  <footer>
+    <div id="footercontent">
+          <div id="mediacube">
+            <ul>
+                  <li class="linkmma"><a href="#">MultiMediaArts</a></li>
+                  <li class="linkfh"><a href="#">Fachhochschule Salzburg</a></li>
+                  <li class="linkmmt"><a href="#">MultiMediaTechnologie</a></li>
+              </ul>
+          </div>
+      </div>
+  </footer>
+</div>
