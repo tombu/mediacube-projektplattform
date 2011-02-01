@@ -2218,7 +2218,6 @@ input.hide { display: none; }
 {
 	width: 500px;
 	display: none;
-	margin-left: -250px;
   background: white;
   -moz-border-radius: 7px;
 	-webkit-border-radius: 7px;
