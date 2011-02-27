@@ -32,12 +32,19 @@ GEM
     bcrypt-ruby (2.1.4)
     bcrypt-ruby (2.1.4-x86-mingw32)
     builder (2.1.2)
+    capistrano (2.5.19)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.0.0)
     declarative_authorization (0.5.2)
     devise (1.1.7)
       bcrypt-ruby (~> 2.1.2)
       warden (~> 1.0.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    highline (1.6.1)
     i18n (0.5.0)
     json (1.5.1)
     json (1.5.1-x86-mingw32)
@@ -47,6 +54,15 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    mysql2 (0.2.6)
+    mysql2 (0.2.6-x86-mingw32)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.1.0)
+    net-ssh-gateway (1.0.1)
+      net-ssh (>= 1.99.1)
     paperclip (2.3.8)
       activerecord
       activesupport
@@ -89,9 +105,11 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  capistrano
   declarative_authorization
   devise
   json
+  mysql2
   paperclip (~> 2.3)
   rails (= 3.0.3)
   sinatra (= 1.0)
