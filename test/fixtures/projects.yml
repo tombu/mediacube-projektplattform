@@ -5,7 +5,8 @@ one:
   status: 
   link: 
   description: 
-  picture: 
+  cover: 
+  currentstage: 
   isInternal: 
   isPublic: false
 
@@ -14,6 +15,7 @@ two:
   status: 
   link: 
   description: 
-  picture: 
+  cover: 
+  currentstage: 
   isInternal: 
   isPublic: false
