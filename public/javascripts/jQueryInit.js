@@ -389,9 +389,9 @@ function overlay(id){
     		cursor: 'default'
   		}, 
   		themedCSS: {
-			width:	'500px',
 			top:	'17%',
-			left:	'50%'
+			left:	'50%',
+      marginLeft: '-250px'
 		},
         theme:     true, 
         message:   $(id), 

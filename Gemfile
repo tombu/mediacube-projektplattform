@@ -10,22 +10,28 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # for authentication and authorization
 gem 'devise'
 gem 'declarative_authorization'
+
 gem 'will_paginate', '~> 3.0.beta'
 
 gem "json"
 gem "sinatra", "= 1.0"
 
+# Deploy with Capistrano
+gem 'capistrano'
 
 # for upload and image handling
 gem "paperclip", "~> 2.3" #, :git => 'git://github.com/thoughtbot/paperclip.git'
+
+group :production do
+  gem 'mysql2'
+end
+
+
 # gem 'flash_cookie_session'
 # gem 'mini_magick', :git => 'git://github.com/probablycorey/mini_magick.git'
 
 # Use unicorn as the web server
 # gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'

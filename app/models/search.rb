@@ -1,4 +1,4 @@
-﻿class Search < ActiveRecord::Base
+﻿class Search
   def self.search search
     q = search[:search]
     case search[:category]
