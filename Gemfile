@@ -22,9 +22,9 @@ gem 'capistrano'
 # for upload and image handling
 gem "paperclip", "~> 2.3" #, :git => 'git://github.com/thoughtbot/paperclip.git'
 
-group :production do
-  gem 'mysql2'
-end
+# group :production do
+#   gem 'mysql2'
+# end
 
 
 # gem 'flash_cookie_session'

@@ -1,4 +1,6 @@
-﻿// AJAX Bindings
+﻿// jquery
+
+// AJAX Bindings
 function formBinding(where){
   $(where+' .edit_project')
     .bind('ajaxSend', function() {
