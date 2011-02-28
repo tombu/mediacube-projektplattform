@@ -1,7 +1,7 @@
 authorization do
   
   role :owner do
-    has_permission_on :projects, :to => [:manage, :join]
+    has_permission_on :projects, :to => [ :manage, :join ]
     has_permission_on :statusupdates, :to => [ :read, :new, :create ]
     has_permission_on :statusupdates, :to => :delete do
       if_attribute :user => is { user }
@@ -14,7 +14,7 @@ authorization do
   end
   
   role :member do
-    has_permission_on :projects, :to => [ :read, :leave ]
+    has_permission_on :projects, :to => [ :read, :leave, :join ]
     has_permission_on :statusupdates, :to => [ :read, :new, :create ]
     has_permission_on :statusupdates, :to => :delete do
       if_attribute :user => is { user }
@@ -36,7 +36,6 @@ authorization do
       if_attribute :id => is { user.id }
     end
     has_permission_on :users, :to => :read
-    
   end
   
 end
