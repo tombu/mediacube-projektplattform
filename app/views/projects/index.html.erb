@@ -20,8 +20,8 @@
 	  <div class="icon"><% if p.jobs.any? %><%= image_tag "statussearch.png" %><% end %></div>
 	  <div class="projectinfo">
 		<%= link_to image_tag(p.cover_url), p, :class=>"cover" %>
-		<h3><%= strim p.title, 30 %></h3>
-		<p class="infotxt"><%= strim p.description, 225 %></p>
+		<h3><%= trimString p.title, 30 %></h3>
+		<p class="infotxt"><%= trimString p.description, 225 %></p>
 		<% #link_to p, :class =>'details' do image_tag "details-arrow.png" end %>
 	  </div>
 	  <div class="projectadmin">

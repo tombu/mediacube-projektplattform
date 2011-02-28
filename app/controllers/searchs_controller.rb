@@ -1,4 +1,4 @@
-class SearchsController < ApplicationController
+﻿class SearchsController < ApplicationController
   def index
     @cat = params[:category]
     params[:search].lstrip!

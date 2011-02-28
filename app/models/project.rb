@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   attr_accessible :title, :status, :link, :description, :picture, :category_ids, :job_ids, :role_ids, :roles, :privace_setting_id, :show_update, :stage_ids, :isPublic
   
+  
   has_and_belongs_to_many :categories
   has_many :jobs, :dependent => :destroy
   accepts_nested_attributes_for :jobs, :allow_destroy => true
@@ -12,10 +13,40 @@ class Project < ActiveRecord::Base
   has_many :stages, :dependent => :destroy
   has_many :statusupdates
   has_one :privacy_setting
-
+  
+  
+  scope :is_public, where("isPublic = ?", true)
+  scope :category, lambda { |category_label|
+    joins(:categories).
+    where(:categories => {:label => category_label}) 
+  }
+  scope :status, lambda { |status| 
+    where(:status=>parse_status(status))
+  }
+  scope :sorted, order('created_at DESC')
+  
   def self.parse_status status
-    @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen", "Idee" => "idea", "In Arbeit" => "inprogress", "Abgeschlossen" => "finished" }
+    @status_names = { 
+      "idea"          => "Idee", 
+      "inprogress"    => "In Arbeit", 
+      "finished"      => "Abgeschlossen", 
+      "Idee"          => "idea", 
+      "In Arbeit"     => "inprogress", 
+      "Abgeschlossen" => "finished" 
+    }
     @status_names[status]
+  end
+  
+  # filter projects by category or status
+  def self.filter_projects category, status
+    if !category.nil? && !status.nil?
+     return Project.category(category).status(status)
+    elsif !category.nil?
+     return Project.category(category)
+    elsif !status.nil?
+      return Project.status(status)
+    else return Project
+    end
   end
   
   def cover_url

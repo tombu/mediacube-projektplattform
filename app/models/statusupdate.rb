@@ -3,4 +3,5 @@ class Statusupdate < ActiveRecord::Base
   belongs_to :user
   has_many :media
   
+  scope :sorted, order('created_at DESC')
 end

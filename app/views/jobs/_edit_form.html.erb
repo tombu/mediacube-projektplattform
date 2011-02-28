@@ -1,5 +1,5 @@
 ﻿<div class="inline">
-  <%= form_for @project, :remote => true do |f| %>
+<%= form_for @project, :url => {:action=>"update",:controller=>"jobs"}, :remote => true do |f| %>
     <%= render 'dialog' %>
     <%= hidden_field_tag 'field', 'job' %>
     <br /><label>Neuer Job:</label><br />

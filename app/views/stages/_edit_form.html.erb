@@ -1,5 +1,5 @@
-	<div class="inline">
-    <%= form_for @project, :remote => true do |f| %>
+﻿  <div class="inline">
+    <%= form_for @project, :url => {:action=>"update",:controller=>"stages"}, :remote => true do |f| %>
       <%= hidden_field_tag 'field', 'stages' %>
       <%= render 'dialog' %>
       <br /><br />
@@ -26,11 +26,13 @@
           <div class="newstages">
           </div>
         </div>
+   <div id="currentStageDropdown">
      <br />
-   <label>Aktuelle Stage:</label><br />
-   <%= select_tag "crrent", options_for_select(@project.stages.collect{ |s| [s.name, s.position, :sid=>s.id] }, @project.currentstage) %>
+     <label>Aktuelle Stage:</label><br />
+     <%= select_tag "crrent", options_for_select(@project.stages.collect{ |s| [s.name, s.position, :sid=>s.id] }, @project.currentstage) %>
+   </div>
 <div class="clean hide"></div>
-     
+
      <%= render 'submit_buttons' %>
    <% end %>
-	</div>
+  </div>

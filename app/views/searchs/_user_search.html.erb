@@ -1,17 +1,12 @@
 ﻿<ul id="resultsuser">
-<% 
-  @ind = 0
-  @results.each do |u| 
-%>
-  <% @ind = @ind + 1  %>
-  <li class="<% if @ind % 5 == 0 %>nomarg<% end %>">
-    <div><b><%= u.is_involved.count %></b> <%= "Projekt".pluralize %></div>
-    <%= link_to image_tag(avatar_url(u, 140)), u, :class=>"pic" %><br />
-    <p>
-      <%= link_to strim(u.name,15), u, :class=>"name" %><br />
-
-      <%= mail_to u.email, strim(u.email,20), :class=>"mail", :encode => "javascript" %><br /><br />
-    </p>
-  </li>
-<% end %>
+  <% @results.each_with_index do |u, id| %>
+    <li<% if (id+1) % 5 == 0 %> class="nomarg"<% end %>>
+      <div><b><%= u.is_involved.count %></b> <%= "Projekt".pluralize %></div>
+      <%= link_to image_tag(avatar_url(u, 140)), u, :class=>"pic" %><br />
+      <p>
+        <%= link_to trimString(u.name,15), u, :class=>"name" %><br />
+        <%= mail_to u.email, trimString(u.email,20), :class=>"mail", :encode => "javascript" %><br /><br />
+      </p>
+    </li>
+  <% end %>
 </ul>

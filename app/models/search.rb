@@ -1,6 +1,8 @@
-﻿class Search < ActiveRecord::Base
+﻿class Search
   def self.search search
     q = search[:search]
+    
+    # search through chosen category
     case search[:category]
       when 'Projekte'
         Project.find :all, :conditions => ["isPublic = ? AND (title LIKE ? OR description LIKE ?)", true, "%#{q}%", "%#{q}%"]

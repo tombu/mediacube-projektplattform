@@ -5,9 +5,7 @@ class Job < ActiveRecord::Base
     @open_projects = %w()
     @all_jobs = Job.find :all, :conditions => ["name LIKE ?", "%#{query}%"]
     @all_jobs.each do |job|
-      if !@open_projects.include? job.project
-        @open_projects << job.project
-      end
+      @open_projects << job.project if !@open_projects.include? job.project
     end
     @open_projects
   end

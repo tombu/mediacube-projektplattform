@@ -1,6 +1,5 @@
 Projektplattform::Application.routes.draw do
   get "notifications/index"
-
   get "statusupdates/index"
 
   devise_for :users
@@ -9,6 +8,8 @@ Projektplattform::Application.routes.draw do
   resources :searchs
   resources :dashboards
   resources :statusupdates
+  resources :roles
+  resources :stages
   resources :notifications do
     collection do
       put :mark_as_read
