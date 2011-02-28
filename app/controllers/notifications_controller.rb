@@ -20,9 +20,7 @@ class NotificationsController < ApplicationController
     @notification = Notification.find(params[:id])
     @receiver = @notification.sender_id
     @notification.destroy
-    puts params
-    puts "--------------"
-    puts @receiver
+
     if !params[:notify].nil?
       @project = Project.find_by_id params[:project_id]
       
@@ -34,7 +32,6 @@ class NotificationsController < ApplicationController
         :html_tmpl_key=>params[:notify]
       )
     end
-    
     
     respond_to do |format|
       format.js { render :nothing => true }

@@ -9,7 +9,7 @@ class MediaController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
     @images = @project.images.all
-    @icount = @project.images.count
+    @numImages = @project.images.count
   end
 
   def new
@@ -18,27 +18,29 @@ class MediaController < ApplicationController
 
   def create    
     @project = Project.find(params[:project_id])
-    distance = ((Time.now.to_time - @project.media.last.created_at.to_time).abs).round
-    
+        
     if params[:project_cover] == true.to_s
-      if !@project.cover.nil?
+      if @project.cover.any?
         @project.cover.destroy
       end
-      @cover = Cover.create(:asset => params[:file], :project_id => params[:project_id])
-      @project.cover = @cover
-      @project.save
+      @cover = @project.cover.create(:asset => params[:file])
     else
-      Image.create(:asset => params[:file], :project_id => params[:project_id])
+      if @project.media.any?
+        distance = ((Time.now.to_time - @project.media.last.created_at.to_time).abs).round
+      else
+        distance = 1000
+      end
+      
+      @project.images.create(:asset => params[:file])
       
       # add statusupdate
       if distance > 60
-        @project.statusupdates << Statusupdate.create(
+        @project.statusupdates.create(
           :content => Texttemplate.substitute(:media_new, {"#user" => current_user.name}), 
           :isPublic => true,
           :user => current_user,
           :html_tmpl_key => "MEDIA")
       end
-      
     end
   end
 
