@@ -36,7 +36,7 @@
         <%= form_tag searchs_path, :method => 'get' do %>
           <p>
             <%= text_field_tag :search, params[:search], :class => "keyword", :placeholder => "Suche nach" %>
-            <%= select_tag "category", options_for_select([['Projekte','Projekte'],['User','User'],['Jobs','Jobs']]) %>
+            <%= select_tag "category", options_for_select([['Projekte','Projekte'],['User','User'],['Jobs','Jobs']], params[:category]) %>
             <%= submit_tag "Search", :class => "send" %>
           </p>
         <% end %>

@@ -24,19 +24,19 @@
   <!-- PROGRESS -->
   <div id="projectprogress">
     <h5 class="noedit">Stages</h5>
-    <%= render "stages_form" %>
+    <%= render "stages/edit_form" %>
   </div>
 
   <!-- JOBS -->
   <div id="searchingmember">
     <h5 class="noedit">Auf der Suche nach <span>(<%= @project.jobs.count %>)</span></h5>
-    <%= render "jobs_form" %>
+    <%= render "jobs/edit_form" %>
   </div>
 
   <!-- TEAM -->
   <div id="teammember">
     <h5 class="noedit">Team <span>(<%= @project.has_members.count %>)</span></h5>
-    <%= render "team_form" %>
+    <%= render "roles/edit_form" %>
   </div>
 </div>
 

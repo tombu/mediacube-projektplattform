@@ -26,7 +26,7 @@
         <% when 'TEAM_DELETE' %>
           <div class="team2"><%= link_to su.user.name, su.user %> <%=raw su.content %>
 		  <% end %>
-        <sub><%= fdate su.created_at, true, true %></sub>
+        <sub><%= formatDate su.created_at, true, true %></sub>
 		</div></div>
       </li>
 		<% end %>

@@ -7,8 +7,8 @@
       </div>
       <div class="inf">
         <p>
-          <sub>LETZTER LOGIN:<br/><span><%= fdate current_user.last_sign_in_at, true %></span></sub><br/><br/>
-          <sub>DABEI SEIT:<br/><span><%= fdate current_user.created_at %></span></sub>
+          <sub>LETZTER LOGIN:<br/><span><%= formatDate current_user.last_sign_in_at, true %></span></sub><br/><br/>
+          <sub>DABEI SEIT:<br/><span><%= formatDate current_user.created_at %></span></sub>
         </p>
       </div>
       <div class="clean"></div>

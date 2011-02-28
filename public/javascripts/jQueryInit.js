@@ -269,16 +269,19 @@ function jobDelete(val, nw) {
 
 function jobAdd(val, text, nw) {
   $value = val; $text = text; $nw = nw;
-  if($nw)
+  if($text != "")
   {
-    $('#searchingmember .inline .newjobs').append('<input type="text" name="newjobs[]" val="'+$value+'" value="'+$text+'" />');
-    $newTag = 'new="new"';
-    $delNew = true;
-  }
-  else { $newTag =''; $delNew = false; }
-  $('#searchingmember .inline .openjobs').append('<li '+$newTag+' class="no'+$value+'">» '+$text+'<a href="javascript:jobDelete(' + $value + ','+$delNew+');" class="right del"><img src="/images/delete.png" /></a></li>');
+    if($nw)
+    {
+      $('#searchingmember .inline .newjobs').append('<input type="text" name="newjobs[]" val="'+$value+'" value="'+$text+'" />');
+      $newTag = 'new="new"';
+      $delNew = true;
+    }
+    else { $newTag =''; $delNew = false; }
+    $('#searchingmember .inline .openjobs').append('<li '+$newTag+' class="no'+$value+'">» '+$text+'<a href="javascript:jobDelete(' + $value + ','+$delNew+');" class="right del"><img src="/images/delete.png" /></a></li>');
   
-  $("#searchingmember .inline .eName").val("");
+    $("#searchingmember .inline .eName").val("");
+  }
 }
 
 function memberDelete(val) {
@@ -294,6 +297,8 @@ function memberDelete(val) {
 
 
 $(document).ready(function(){
+  isStages();
+  
   $('#projectprogress .inline .delete').live('click', function(){
     $e = parseInt($(this).parent().attr("data-itemidx"));
     $nw = ($(this).parent().attr("new") == "new") ? true : false;
@@ -327,27 +332,50 @@ $(document).ready(function(){
         $(from).attr("value", $to);
       });
     });
+    isStages();
   });
   
   $("#projectprogress .add").live('click', function () {
     $max = 0;
-    for($i = 0; $i < $("#projectprogress .inline #stagebar li").size(); $i++)
+    $value = $("#projectprogress #stage.eName").val();
+    
+    if($value != "")
     {
-      $val = $("#projectprogress .inline #stagebar li:eq("+$i+") .pos").val();
-      $val = parseInt($val);
-      if($val > $max) $max = $val;
+      for($i = 0; $i < $("#projectprogress .inline #stagebar li").size(); $i++)
+      {
+        $val = $("#projectprogress .inline #stagebar li:eq("+$i+") .pos").val();
+        $val = parseInt($val);
+        if($val > $max) $max = $val;
+      }
+      $max++;
+      stageAdd($max, $value, true);
+      $("#projectprogress .inline .eName").val("");
+      isStages();
     }
-    $max++;
-    stageAdd($max, $("#projectprogress #stage.eName").val(), true);
-    $("#projectprogress .inline .eName").val("");
   });
   
   
   $('#projectprogress .inline #stagebar li[new="new"] .text').live('change', function() {
-    $sidd = $(this).parent().parent().attr("sid");
-    $('#projectprogress .inline .newstages div[sid="'+$sidd+'"] .midd').attr("value", $(this).val());
+    if($(this).val() != "")
+    {
+      $sidd = $(this).parent().parent().attr("sid");
+      $('#projectprogress .inline .newstages div[sid="'+$sidd+'"] .midd').attr("value", $(this).val());
+    }
+  });
+  
+  $('#projectprogress .inline #stagebar .text').live('change', function() {
+    if($(this).val() != "")
+    {
+      $sidd = $(this).parent().parent().attr("sid");
+      $('#projectprogress .inline #crrent option[sid="'+$sidd+'"]').html($(this).val());
+    }
   });
 });
+
+function isStages() {
+  if($('#projectprogress .inline #crrent option').size()==0) $('#currentStageDropdown').hide();
+  else $('#currentStageDropdown').show();
+}
 
 function stageAdd(position, text, nw) {
   $position = position; $text = text; $nw = nw;

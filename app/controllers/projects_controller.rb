@@ -2,235 +2,53 @@ class ProjectsController < ApplicationController
   before_filter :check_user_role
   filter_resource_access #authorization
 
-  def check_user_role 
-    if !params[:id].nil?
-      current_user.current_role = current_user.roles.where(:project_id => params[:id])
-    elsif params[:controller] == "media"
-      current_user.current_role = current_user.roles.where(:project_id => params[:project_id])
-    end
-  end
-
   def index
-  @status_names = { "Idee" => "idea", "In Arbeit" => "inprogress", "Abgeschlossen" => "finished"}
-  @status = @status_names[params[:status]]
-
-  if !params[:category].nil? && !params[:status].nil?
-    @projects = Project.joins(:categories).where(:categories => {:label => params[:category]}).where("isPublic = ? AND status = ?", true, @status)
-  elsif !params[:category].nil?
-    @projects = Project.joins(:categories).where(:categories => {:label => params[:category]}).where "isPublic = ?", true
-  elsif !params[:status].nil?
-    @projects = Project.where("isPublic = ? AND status = ?", true, @status)
-  else
-    @projects = Project.where "isPublic = ?", true
-  end
-  @projects = @projects.paginate :page => params[:page], :per_page => 9
+    @status = Project.parse_status params[:status]
+    # filter by category or status and sort
+    @projects = Project.filter_projects(params[:category], params[:status]).is_public.sorted.paginate(:page => params[:page], :per_page => 15)
   end
 
   def show
-    # @project = ... set by authorization
     @owner = @project.roles.find_by_role :owner
-    @mcount = @project.images.count
-    @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
-    @statusupdates = @project.statusupdates.order('created_at DESC')
-    @countupdates = @statusupdates.count
-    @statusupdates = @statusupdates.paginate :page => params[:page], :per_page => 10
+    @count_images = @project.images.count
+    @statusupdates = @project.statusupdates.sorted.paginate :page => params[:page], :per_page => 10
   end
 
   def edit
-    # @project = ... set by authorization
-    @owner = @project.roles.find_by_role :owner
-    @mcount = @project.images.count
-    @status_names = { "idea" => "Idee", "inprogress" => "In Arbeit", "finished" => "Abgeschlossen"}
     @privacy = @project.privacy_setting
   end
 
   def update
-  # @project = ... set by authorization
-  @field = params[:field]
-  puts params
-
-  if @field == 'job'
-    if(!params[:project].nil?) 
-      params[:project][:job_ids]||={}
-    else @project.jobs.clear
-    end
-
-    oldJobs = Array.new
-      @project.jobs.each do |j|
-        oldJobs << j.id.to_s
-      end
-    
-    if oldJobs.any? && oldJobs != params[:project][:job_ids]
-      deletedJobs = oldJobs - params[:project][:job_ids]
-  
-      deletedJobs.each_with_index do |dj, key|
-        deletedJobs[key] = @project.jobs.find(dj).name
-      end
-  
-      if @project.update_attributes params[:project]
-       # add statusupdate
-       @project.statusupdates << Statusupdate.create(
-         :content => Texttemplate.substitute(:job_delete, {"#jobs" => deletedJobs.join(', ')}), 
-         :isPublic => true, 
-         :user => current_user,
-         :html_tmpl_key => "JOBS2")
-  
-      else redirect_to project_path
-      end
-    end
-
-    # save new jobs
-    if !params[:newjobs].nil?
-    params[:newjobs].each do |job|
-      Job.create :name => job, :project => @project
-    end
-    # add statusupdate
-    @project.statusupdates << Statusupdate.create(
-      :content => Texttemplate.substitute(:job_new, {"#jobs" => params[:newjobs].join(', ')}), 
-      :isPublic => true, 
-      :user => current_user,
-      :html_tmpl_key => "JOBS")
-    end
-
-    respond_to do |format|
-      format.js { render :nothing => true }
-    end
-
-  # update general project infos
-  elsif @field == 'info'
-    params[:project][:category_ids] ||= {}
-    if @project.update_attributes params[:project]
-    # add statusupdate
-    @project.statusupdates << Statusupdate.create(
-      :content => Texttemplate.substitute(:project_edit), 
-      :isPublic => true, 
-      :user => current_user,
-      :html_tmpl_key => "EDIT")
-
-    respond_to do |format|
-      format.js { render :nothing => true }
-    end 
-    else redirect_to project_path
-    end
-
-  # update team members
-  elsif @field == 'team'
-    oldTeam = Array.new
-    @project.team(true).each do |j|
-      oldTeam << j.id
-    end
-    newTeam = Array.new
-    params[:project][:role_ids].each do |r|
-      newTeam << Role.find(r).user_id
-    end
-
-    params[:project][:role_ids] ||= {}
-    if @project.update_attributes params[:project]
-      @deleted_members = oldTeam - newTeam
-      @deleted_members.each do |del_id|
-        @project.team.each do |member|
-          Notification.create(
-              :sender_id=>del_id,
-              :receiver_id=>member.id,
-              :project_id=>@project.id,
-              :isNew=>true,
-              :html_tmpl_key=>"USER_LEAVE"
-            )
+    case params[:field]
+      when 'info'
+        params[:project][:category_ids] ||= {}
+        if @project.update_attributes params[:project]
+          @project.statusupdates << Statusupdate.create(
+            :content => Texttemplate.substitute(:project_edit), :isPublic => true, 
+            :user => current_user, :html_tmpl_key => "EDIT")
         end
-        Statusupdate.create(
-          :content => Texttemplate.substitute(:team_delete, {"#user" => User.find(del_id).name}),
-          :isPublic => true,
-          :user_id => del_id,
-          :project_id => @project.id,
-          :html_tmpl_key => "TEAM_DELETE")
-      end
-      
-      respond_to do |format|
-        format.js { render :nothing => true }
-      end 
-    else redirect_to project_path
-    end
-    params[:roles].each_with_index do |jobnew, key|
-      @temprole = @project.roles.find_by_id(params[:project][:role_ids][key])
-      @temprole.job = jobnew
-      @temprole.save
-    end
-    
-
-  # update stages
-  elsif @field == 'stages'
-    # cast hash or delete all stages if empty
-    if(!params[:project].nil?)
-      params[:project][:stage_ids]||={}
-      @project.update_attributes params[:project]
-    else @project.stages.clear
-    end
-
-    # save new stages
-    if !params[:newstages].nil?
-      params[:newstages][:name].each_with_index do |s, key|
-        Stage.create :name => params[:newstages][:name][key], :position => params[:newstages][:position][key], :project => @project
-      end
-    end
-
-    if !params[:stages].nil?
-      params[:stages][:name].each_with_index do |stage_name, key|
-        @tempstage = @project.stages.find_by_id params[:stages][:sid][key]
-        if !@tempstage.nil?
-        @tempstage.name = stage_name
-        @tempstage.position = params[:stages][:position][key]
-        @tempstage.save
+      when 'status'
+        if @project.update_attributes params[:project]
+          @project.statusupdates << Statusupdate.create(
+            :content => Texttemplate.substitute(:project_status_edit, {"#status" => Project.parse_status(params[:project][:status])}), 
+            :isPublic => true, :user => current_user, :html_tmpl_key => "STATUS")
         end
-      end
     end
-    
-    @project.currentstage = params[:crrent]
-    @project.save
-
-    respond_to do |format|
-    format.js { render :nothing => true }
-    end
-
-  # update status
-  elsif @field == 'status'
-    if @project.update_attributes params[:project]
-    # add statusupdate
-    @project.statusupdates << Statusupdate.create(
-      :content => Texttemplate.substitute(:project_status_edit, {"#status" => Project.parse_status(params[:project][:status])}), 
-      :isPublic => true, 
-      :user => current_user,
-      :html_tmpl_key => "STATUS")
     respond_to do |format|
       format.js { render :nothing => true }
-    end 
-    else redirect_to project_path
-    end
-
-  else
-    params[:project][:privacy_setting_id]||={}
-    if @project.update_attributes params[:project][:privacy_setting_id]
-    redirect_to edit_project_path
     end
   end
-  end
 
-
-  def new
-  # @project = ... set by authorization
-  end
-
-  def create    
-  # @project = ... set by authorization
-  @project.isInternal = true
-  @project.status = "idea"
-  if @project.save
-    @role = Role.new(:role => "owner", :user => current_user, :project => @project, :job => params[:project][:role][:job])
-    if @role.save
-      redirect_to @project, :notice=>"Projekt wurde erfolgreich erstellt!"
-      return
+  def create
+    @project.isInternal = true
+    @project.status = "idea"
+    if @project.save
+      @role = Role.new(:role => "owner", :user => current_user, :project => @project, :job => params[:project][:role][:job])
+      if @role.save
+        redirect_to @project, :notice=>"Projekt wurde erfolgreich erstellt!" and return
+      end
     end
-  end
-  redirect_to :back, :error=>"Projekt konnte nicht erstellt werden!"
+    redirect_to :back, :error=>"Projekt konnte nicht erstellt werden!"
   end
   
   def follow
@@ -238,10 +56,10 @@ class ProjectsController < ApplicationController
     @role = Role.new(:role => "follower", :user => current_user, :project => @project, :job => nil)
     if @role.save
       flash[:notice] = "Du beobachtest nun dieses Projekt. Aktuelle Statusupdates findest du in deinem Dashboard."
-      redirect_to @project and return
+    else 
+      flash[:notice] = "Es ist ein Fehler aufgetreten!" 
     end
-    flash[:notice] = "Es ist ein Fehler aufgetreten!"
-    redirect_to @project
+    redirect_to @project and return
   end
   
   def unfollow
@@ -249,10 +67,10 @@ class ProjectsController < ApplicationController
     @role = Role.where(:role => "follower", :user_id => current_user.id, :project_id => @project.id).first
     if @role.destroy
       flash[:notice] = "Du beobachtest dieses Projekt nun nicht mehr!"
-      redirect_to @project and return
+    else 
+      flash[:notice] = "Es ist ein Fehler aufgetreten!"
     end
-    flash[:notice] = "Fehler beim Versuch..."
-    redirect_to @project
+    redirect_to @project and return
   end
   
   def leave
@@ -260,24 +78,17 @@ class ProjectsController < ApplicationController
     @role = Role.where(:user_id => current_user.id, :project_id => @project.id).first
     if @role.destroy
       @project.team(true).each do |member|
-          Notification.create(
-              :sender_id=>current_user.id,
-              :receiver_id=>member.id,
-              :project_id=>@project.id,
-              :isNew=>true,
-              :html_tmpl_key=>"USER_LEAVE"
-            )
-        end
-        Statusupdate.create(
-          :content => Texttemplate.substitute(:team_delete, {"#user" => current_user.name}),
-          :isPublic => true,
-          :user_id => current_user.id,
-          :project_id => @project.id,
-          :html_tmpl_key => "TEAM_DELETE")
-      redirect_to :back and return
+        Notification.create( 
+          :sender_id=>current_user.id, :receiver_id=>member.id, :project_id=>@project.id,
+          :isNew=>true, :html_tmpl_key=>"USER_LEAVE")
+      end
+      Statusupdate.create(
+        :content => Texttemplate.substitute(:team_delete, {"#user" => current_user.name}), :isPublic => true, :user_id => current_user.id,
+        :project_id => @project.id, :html_tmpl_key => "TEAM_DELETE")
+    else 
+      flash[:notice] = "Fehler beim Versuch, das Projekt zu verlassen."
     end
-    flash[:notice] = "Fehler beim Versuch, das Projekt zu verlassen."
-    redirect_to :back
+    redirect_to :back and return
   end
   
   def join
@@ -300,47 +111,39 @@ class ProjectsController < ApplicationController
       
       @project.team(true).where("user_id != ?", user_id).each do |member|
         Notification.create(
-            :sender_id=>user_id,
-            :receiver_id=>member.id,
-            :project_id=>@project.id,
-            :isNew=>true,
-            :html_tmpl_key=>"USER_NEW"
-          )
-       end
-       if(!params[:dtu])
-         Notification.create(
-              :sender_id=>@project.owner.id,
-              :receiver_id=>user_id,
-              :project_id=>@project.id,
-              :isNew=>true,
-              :html_tmpl_key=>"ACCEPTED_TO_USER"
-            )
-        end
-
+          :sender_id=>user_id, :receiver_id=>member.id, :project_id=>@project.id,
+          :isNew=>true, :html_tmpl_key=>"USER_NEW")
+      end
+      if(!params[:dtu])
+        Notification.create(
+          :sender_id=>@project.owner.id, :receiver_id=>user_id, :project_id=>@project.id,
+          :isNew=>true, :html_tmpl_key=>"ACCEPTED_TO_USER")
+      end
+      
       Statusupdate.create(
-        :content => Texttemplate.substitute(:team_new),
-        :isPublic => true,
-        :user_id => user_id,
-        :project_id => @project.id,
-        :html_tmpl_key => "TEAM")
+        :content => Texttemplate.substitute(:team_new), :isPublic => true, :user_id => user_id,
+        :project_id => @project.id, :html_tmpl_key => "TEAM")
        
-       redirect_to :back and return
-     else
-       redirect_to :back, :error => "Es ist ein Fehler aufgetreten!"
-     end
+      redirect_to :back and return
+    else
+      redirect_to :back, :error => "Es ist ein Fehler aufgetreten!"
+    end
   end
   
   def apply
     if Notification.create(
-        :sender_id=>current_user.id,
-        :receiver_id=>@project.owner.id,
-        :project_id=>@project.id,
-        :isNew=>true,
-        :html_tmpl_key=>"DECISION_TO_OWNER"
-      )
+        :sender_id=>current_user.id, :receiver_id=>@project.owner.id, :project_id=>@project.id,
+        :isNew=>true, :html_tmpl_key=>"DECISION_TO_OWNER")
       redirect_to :back, :notice => "Die Bewerbung wurde verschickt!" and return
     end
     redirect_to :back, :error => "Die Bewerbung konnte leider nicht verschickt werden!"
   end
   
+  def check_user_role
+    if !params[:id].nil?
+      current_user.current_role = current_user.roles.where(:project_id => params[:id])
+    elsif params[:controller] == "media"
+      current_user.current_role = current_user.roles.where(:project_id => params[:project_id])
+    end
+  end
 end
