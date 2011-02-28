@@ -2,10 +2,9 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3-ruby', :require => 'sqlite3'
+group :development, :test do
+	gem 'sqlite3-ruby', :require => 'sqlite3'
+end
 
 # for authentication and authorization
 gem 'devise'
@@ -30,6 +29,8 @@ gem "paperclip", "~> 2.3" #, :git => 'git://github.com/thoughtbot/paperclip.git'
 # gem 'flash_cookie_session'
 # gem 'mini_magick', :git => 'git://github.com/probablycorey/mini_magick.git'
 
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
 # Use unicorn as the web server
 # gem 'unicorn'
 
