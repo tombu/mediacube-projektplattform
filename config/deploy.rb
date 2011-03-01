@@ -6,7 +6,7 @@ set :user, "fhs31453"
 set :use_sudo, false
 
 set :scm, :git
-set :branch, "v2"
+set :branch, "master"
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
