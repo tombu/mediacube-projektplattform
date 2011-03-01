@@ -12,14 +12,9 @@
 	  <div class="clean"></div>
 	</div>
 </div>
-<% 
-@usernames = Array.new
-User.all.each do |u|
-	@usernames << u.name
-end
-%>
+
 <script type="text/javascript">
   $(function() {
-    $('#invitation_form .stdInpt').autocomplete(<%=raw @usernames %>);
+    $('#invitation_form .stdInpt').autocomplete(<%=raw User.all.map { |u| u.name } %>);
   });
 </script>
