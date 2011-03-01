@@ -22,18 +22,11 @@ class ProjectsController < ApplicationController
     case params[:field]
       when 'info'
         params[:project][:category_ids] ||= {}
-        if @project.update_attributes params[:project]
-          @project.statusupdates << Statusupdate.create(
-            :content => Texttemplate.substitute(:project_edit), :isPublic => true, 
-            :user => current_user, :html_tmpl_key => "EDIT")
-        end
+        @project.update_attributes params[:project]
       when 'status'
-        if @project.update_attributes params[:project]
-          @project.statusupdates << Statusupdate.create(
-            :content => Texttemplate.substitute(:project_status_edit, {"#status" => Project.parse_status(params[:project][:status])}), 
-            :isPublic => true, :user => current_user, :html_tmpl_key => "STATUS")
-        end
+        @project.update_attributes params[:project]
     end
+    
     respond_to do |format|
       format.js { render :nothing => true }
     end
@@ -97,13 +90,9 @@ class ProjectsController < ApplicationController
     @project = Project.find params[:id]
     @old_role = Role.where(:user_id => user_id, :project_id => @project.id, :role => "follower").first
     if @old_role.nil?
-      if Role.create(:role => "member", :user_id => user_id, :project => @project)
-        success = true
-      end
+      success = true if Role.create(:role => "member", :user_id => user_id, :project => @project)
     else
-      if @old_role.update_attributes :role => "member"
-        success = true
-      end
+      success = true if @old_role.update_attributes :role => "member"
     end
     
     if success
@@ -114,7 +103,7 @@ class ProjectsController < ApplicationController
           :sender_id=>user_id, :receiver_id=>member.id, :project_id=>@project.id,
           :isNew=>true, :html_tmpl_key=>"USER_NEW")
       end
-      if(!params[:dtu])
+      if !params[:dtu]
         Notification.create(
           :sender_id=>@project.owner.id, :receiver_id=>user_id, :project_id=>@project.id,
           :isNew=>true, :html_tmpl_key=>"ACCEPTED_TO_USER")
@@ -138,7 +127,7 @@ class ProjectsController < ApplicationController
     end
     redirect_to :back, :error => "Die Bewerbung konnte leider nicht verschickt werden!"
   end
-  
+    
   def check_user_role
     if !params[:id].nil?
       current_user.current_role = current_user.roles.where(:project_id => params[:id])

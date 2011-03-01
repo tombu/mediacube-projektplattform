@@ -13,7 +13,9 @@ class Project < ActiveRecord::Base
   has_many :stages, :dependent => :destroy
   has_many :statusupdates
   has_one :privacy_setting
-  
+
+  after_update :post_statusupdate
+
   scope :is_public, where("isPublic = ?", true)
   scope :category, lambda { |category_label|
     joins(:categories).
@@ -39,12 +41,13 @@ class Project < ActiveRecord::Base
   # filter projects by category or status
   def self.filter_projects category, status
     if !category.nil? && !status.nil?
-     return Project.category(category).status(status)
+      Project.category(category).status(status)
     elsif !category.nil?
-     return Project.category(category)
+      Project.category(category)
     elsif !status.nil?
-      return Project.status(status)
-    else return Project
+      Project.status(status)
+    else 
+      Project
     end
   end
   
@@ -86,5 +89,18 @@ class Project < ActiveRecord::Base
   
   def has_members
     self.roles.where(:role => [ "owner", "leader", "member" ])
+  end
+  
+private
+  def post_statusupdate
+    if self.title_changed? || self.description_changed?
+      self.statusupdates.create(
+        :content => Texttemplate.substitute(:project_edit), :isPublic => true, 
+        :user => nil, :html_tmpl_key => "EDIT")
+    elsif self.status_changed?
+      self.statusupdates.create(
+        :content => Texttemplate.substitute(:project_status_edit, {"#status" => Project.parse_status(params[:project][:status])}), 
+        :isPublic => true, :user => nil, :html_tmpl_key => "STATUS")
+    end
   end
 end

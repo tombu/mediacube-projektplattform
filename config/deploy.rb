@@ -1,7 +1,7 @@
 set :application, "MediaCube Projektplattform"
 set :repository,  "ssh://fhs31453@repos.mediacube.at/opt/git/projektplattform.git/"
 
-set :deploy_to, "/var/www/virthosts/projekte.mediacube.at/test/"
+set :deploy_to, "/var/www/virthosts/projekte.mediacube.at/"
 set :user, "fhs31453"
 set :use_sudo, false
 
@@ -27,6 +27,6 @@ namespace :deploy do
 end
 
 require "bundler/capistrano"
-# set :bundle_flags,       "--quiet"
+set :bundle_flags,       "--quiet"
 
 after "deploy:update_code", "deploy:copy_config"
