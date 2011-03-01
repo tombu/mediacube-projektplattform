@@ -26,6 +26,12 @@ class Project < ActiveRecord::Base
   }
   scope :sorted, order('created_at DESC')
   
+  @params
+  
+  def params= parameter
+    @params = parameter
+  end
+  
   def self.parse_status status
     @status_names = { 
       "idea"          => "Idee", 
@@ -99,7 +105,7 @@ private
         :user => nil, :html_tmpl_key => "EDIT")
     elsif self.status_changed?
       self.statusupdates.create(
-        :content => Texttemplate.substitute(:project_status_edit, {"#status" => Project.parse_status(params[:project][:status])}), 
+        :content => Texttemplate.substitute(:project_status_edit, {"#status" => Project.parse_status(@params[:status])}), 
         :isPublic => true, :user => nil, :html_tmpl_key => "STATUS")
     end
   end
