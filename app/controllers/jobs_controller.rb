@@ -28,8 +28,6 @@ class JobsController < ApplicationController
          @project.statusupdates << Statusupdate.create(
            :content => Texttemplate.substitute(:job_delete, {"#jobs" => deletedJobs.join(', ')}), :isPublic => true, 
            :user => current_user, :html_tmpl_key => "JOBS2")
-      else 
-        redirect_to project_path
       end
     end
 

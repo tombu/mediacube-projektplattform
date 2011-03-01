@@ -1,9 +1,8 @@
-# encoding: utf-8
-class UsersController < ApplicationController
+﻿class UsersController < ApplicationController
   filter_resource_access
   
   def show
-    @user = User.find(params[:id])
+    @user = User.find params[:id]
   end
   
   def edit

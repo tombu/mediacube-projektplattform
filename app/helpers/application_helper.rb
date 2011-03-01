@@ -1,27 +1,24 @@
 ﻿module ApplicationHelper
   def formatDate date, includeTime = false, includeFormat = false
+    
     distance = ((Time.now.to_time - date.to_time).abs).round
     options = [[1.day,"Tag"],[1.hour,"Stunde"],[1.minute,"Minute"],[1.second,"Sekunde"]]
-    
+
     if !includeFormat
-      if !includeTime
-        date.strftime("%d. %B %Y")
-      else date.strftime("%d. %B %Y, %H:%M Uhr")
-    end
+      !includeTime ? date.strftime("%d. %B %Y") : date.strftime("%d. %B %Y, %H:%M Uhr")
     else
-      if distance >= 3.day # 3 days
+      if distance >= 3.day
         date.strftime("%d. %B %Y")
       else
-        if distance >= 1.day # 1 day
+        if distance >= 1.day
           selection = 0
-        elsif distance >= 1.hour # 1 hour
+        elsif distance >= 1.hour
           selection = 1
-        elsif distance >= 1.minute # 1 minute
+        elsif distance >= 1.minute
           selection = 2
-        elsif distance >= 10.second # 10 seconds
+        elsif distance >= 10.second
           selection = 3
-        else 
-          return "gerade eben"
+        else return "gerade eben"
         end
         
         count = (distance/options[selection][0]).round

@@ -44,24 +44,18 @@
     </div>
   </header>
   <section>
-          <div id="topborder">
-            <div id="contentwrapper">
-                <% @error = (!flash[:error].nil?) ? " error" : "" %>
-                <p class="notice<%=@error%>"><%= notice %><%= flash[:error] %></p>
-                    <%= yield %>
-          </div>
-        </div>
+    <div id="topborder"><div id="contentwrapper">
+      <% @error = (!flash[:error].nil?) ? " error" : "" %>
+      <p class="notice<%=@error%>"><%= notice %><%= flash[:error] %></p>
+      <%= yield %>
+    </div></div>
   </section>
   <footer>
-    <div id="footercontent">
-          <div id="mediacube">
-            <ul>
-                  <li class="linkmma"><a href="#">MultiMediaArts</a></li>
-                  <li class="linkfh"><a href="#">Fachhochschule Salzburg</a></li>
-                  <li class="linkmmt"><a href="#">MultiMediaTechnologie</a></li>
-              </ul>
-          </div>
-      </div>
+    <div id="footercontent"><div id="mediacube"><ul>
+      <li class="linkmma"><a href="#">MultiMediaArts</a></li>
+      <li class="linkfh"><a href="#">Fachhochschule Salzburg</a></li>
+      <li class="linkmmt"><a href="#">MultiMediaTechnologie</a></li>
+    </ul></div></div>
   </footer>
 </div>
 <!-- Overlay for Notifications -->

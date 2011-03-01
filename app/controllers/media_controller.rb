@@ -9,7 +9,6 @@ class MediaController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
     @images = @project.images.all
-    @numImages = @project.images.count
   end
 
   def new
@@ -20,10 +19,11 @@ class MediaController < ApplicationController
     @project = Project.find(params[:project_id])
         
     if params[:project_cover] == true.to_s
-      if @project.cover.any?
+      if !@project.cover.nil?
         @project.cover.destroy
       end
-      @cover = @project.cover.create(:asset => params[:file])
+      @project.cover = Cover.create(:asset => params[:file], :project_id => params[:project_id])
+      @project.save
     else
       if @project.media.any?
         distance = ((Time.now.to_time - @project.media.last.created_at.to_time).abs).round

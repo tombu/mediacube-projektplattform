@@ -88,7 +88,7 @@
       <%= will_paginate @statusupdates %>
     </div>
   
-      <div id="media">
+    <div id="media">
       <h5 class="noedit">Medien <span>(<%= @count_images %>)</span></h5>
       <% if !@project.images.first.nil? %>
           <% if @count_images > 5 %><a class="prev"><%= image_tag 'left.png' %></a><% end %>

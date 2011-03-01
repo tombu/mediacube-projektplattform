@@ -1,11 +1,11 @@
-	<div class="inline">
-    <%= form_for @project, :remote => true do |f| %>
-      <%= hidden_field_tag 'field', 'status' %>
-      <%= render 'dialog' %>
-      <br /><br />
-      <label>Status:</label><br /><%= select "project", "status", options_for_select([[Project.parse_status('idea'),'idea'],[Project.parse_status('inprogress'),'inprogress'],[Project.parse_status('finished'),'finished']], @project.status), :class=>"left", :id=>"formEStatus" %>
-      <div class="clean hide"></div>
-     
-     <%= render 'submit_buttons' %>
-   <% end %>
-	</div>
+<div class="inline">
+  <%= form_for @project, :remote => true do |f| %>
+    <%= hidden_field_tag 'field', 'status' %>
+    <%= render 'dialog' %>
+    <br /><br />
+    <label>Status:</label><br />
+    <%= select "project", "status", options_for_select([['Idee','idea'],['In Arbeit','inprogress'],['Abgeschlossen','finished']], @project.status), :class=>"left", :id=>"formEStatus" %>
+    <div class="clean hide"></div>
+    <%= render 'submit_buttons' %>
+  <% end %>
+</div>

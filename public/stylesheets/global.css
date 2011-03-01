@@ -1120,7 +1120,7 @@ section {
 #npformular form textarea.description {
 	border: 1px solid #bbb;
 	width: 430px;
-	height: 130px;
+	height: 90px;
 	padding: 7px;
 	font-family: "Lucida Sans Unicode","Lucida Grande", sans-serif;
 	font-size: 11px;
@@ -2541,7 +2541,8 @@ input.hide { display: none; }
 #overlayNotifications .delete_notification.wcs
 {
   position: absolute;
-  top: 6px; right: 8px;
+  z-index: 999;
+  top: 16px; right: 8px;
   opacity: 0.3;
 }
 #overlayNotifications .new .delete_notification.wcs { right: 5px; }
@@ -2594,6 +2595,7 @@ input.hide { display: none; }
 {
   color: #222;
   text-decoration: none;
+  font-weight: bold;
 }
 #overlayNotifications .new a
 {
@@ -2601,19 +2603,19 @@ input.hide { display: none; }
   font-weight: bold;
 }
 
-#overlayNotifications .accepted a, #overlayNotifications .declined a
+#overlayNotifications .ACCEPTED_TO_USER a,#overlayNotifications .USER_NEW a, #overlayNotifications .DECLINED a, #overlayNotifications .DECLINED_TO_USER a, #overlayNotifications .USER_LEAVE a
 {
   text-decoration: none;
   font-weight: bold;
 }
 
-#overlayNotifications .accepted .left
+#overlayNotifications .ACCEPTED_TO_USER .left,#overlayNotifications .USER_NEW .left
 {
   margin-right: 5px;
 }
-#overlayNotifications .decision .stdBtn { color: #444; margin-top: 8px; margin-left: 5px; }
-#overlayNotifications .decision .stdBtn:hover { color: Black; }
-#overlayNotifications .decision .stdBtn.no2 { color: White; margin-left: 0;  }
+#overlayNotifications .DECISION_TO_USER .stdBtn, #overlayNotifications .DECISION_TO_OWNER .stdBtn { color: #444; margin-top: 8px; margin-left: 5px; }
+#overlayNotifications .DECISION_TO_USER .stdBtn:hover, #overlayNotifications .DECISION_TO_OWNER .stdBtn:hover { color: Black; }
+#overlayNotifications .DECISION_TO_USER .stdBtn.no2, #overlayNotifications .DECISION_TO_OWNER .stdBtn.no2 { color: White; margin-left: 0;  }
 
 #projectprogress .inline .text
 {

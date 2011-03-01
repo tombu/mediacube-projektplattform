@@ -13,13 +13,13 @@
 	</div>
 </div>
 <% 
-@usernames = Array.new 
+@usernames = Array.new
 User.all.each do |u|
 	@usernames << u.name
 end
 %>
 <script type="text/javascript">
-$(function() {
-	$('#invitation_form .stdInpt').autocomplete(<%=raw @usernames %>);	
-});
+  $(function() {
+    $('#invitation_form .stdInpt').autocomplete(<%=raw @usernames %>);
+  });
 </script>

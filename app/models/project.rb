@@ -14,7 +14,6 @@ class Project < ActiveRecord::Base
   has_many :statusupdates
   has_one :privacy_setting
   
-  
   scope :is_public, where("isPublic = ?", true)
   scope :category, lambda { |category_label|
     joins(:categories).

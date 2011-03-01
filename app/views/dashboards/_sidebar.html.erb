@@ -6,18 +6,15 @@
           <%= link_to "Mein Profil", current_user, :class=>"stdBtn" %>
       </div>
       <div class="inf">
-        <p>
-          <sub>LETZTER LOGIN:<br/><span><%= formatDate current_user.last_sign_in_at, true %></span></sub><br/><br/>
-          <sub>DABEI SEIT:<br/><span><%= formatDate current_user.created_at %></span></sub>
-        </p>
+        <p><sub>LETZTER LOGIN:<br/><span><%= formatDate current_user.last_sign_in_at, true %></span></sub><br/><br/>
+        <sub>DABEI SEIT:<br/><span><%= formatDate current_user.created_at %></span></sub></p>
       </div>
       <div class="clean"></div>
       <%= link_to "javascript:overlay('#overlayNotifications');", :class=>"stdBtn countme tip" do %>
         <%= image_tag "not.png" %>
-        <% if User.count_unread_notifications(current_user) > 0 %><sup class="count"><%= User.count_unread_notifications current_user %></sup><% end %>
+        <% if User.count_unread_notifications(current_user)  > 0 %><sup class="count"><%= User.count_unread_notifications current_user %></sup><% end %>
         <div class="hide tool">Notifications<%= image_tag "arrdown.png" %></div>
       <% end %>
-      
       <%= link_to "javascript:overlay('#overlayCreateProject');", :class=>"stdBtn tip" do %>
         <%= image_tag "new.png" %>
         <div class="hide tool">Neues Projekt<%= image_tag "arrdown.png" %></div>

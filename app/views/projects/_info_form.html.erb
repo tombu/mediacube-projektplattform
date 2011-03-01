@@ -16,8 +16,7 @@
         </script>
       </ul>
       <div class="hide">
-        <% @categories = Category.all
-        @categories.each do |category| %>
+        <% Category.all.each do |category| %>
           <div><%= check_box_tag "project[category_ids][]", category.id, @project.categories.include?(category), :class=>"hiddencat" %></div>
         <% end %>
       </div>
@@ -26,5 +25,5 @@
     <label>Beschreibung:</label><br />
     <%= f.text_area :description, :class=>"eDescription" %>
     <%= render 'submit_buttons' %>
-    <% end %>
+  <% end %>
 </div>

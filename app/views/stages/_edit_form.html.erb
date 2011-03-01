@@ -1,38 +1,35 @@
-﻿  <div class="inline">
-    <%= form_for @project, :url => {:action=>"update",:controller=>"stages"}, :remote => true do |f| %>
-      <%= hidden_field_tag 'field', 'stages' %>
-      <%= render 'dialog' %>
-      <br /><br />
+﻿<div class="inline">
+  <%= form_for @project, :url => {:action=>"update",:controller=>"stages"}, :remote => true do |f| %>
+    <%= hidden_field_tag 'field', 'stages' %>
+    <%= render 'dialog' %>
+    <br /><br />
     <label>Neue Stage:</label><br />
     <%= text_field_tag :stage, "", :class=>"eName" %>
     <a class="add"><%= image_tag "vor.png" %></a>
     <br class="clean" />
-        <ul id="stagebar">
-        <% @project.stages.order("position ASC").each do |s| %>
-          <li sid="<%= s.id %>">
-            <div>
-            <%= text_field_tag "stages[name][]",s.name, :class=>"text" %>
-            <%= hidden_field_tag "stages[position][]",s.position, :class=>"pos" %>
-            <%= hidden_field_tag "stages[sid][]",s.id, :class=>"ysid" %>
-            </div>
-            <a class="delete"><%= image_tag("delete.png") %></a>
-          </li>
-        <% end %>
-        </ul>
-        <div class="hide">
-        <% @project.stages.order("position ASC").each do |st| %>
-           <%= check_box_tag "project[stage_ids][]", st.id, @project.stages.include?(st), :class=>"hiddenstages" %>
-          <% end %>
-          <div class="newstages">
-          </div>
+    <ul id="stagebar">
+    <% @project.stages.order("position ASC").each do |s| %>
+      <li sid="<%= s.id %>">
+        <div>
+        <%= text_field_tag "stages[name][]",s.name, :class=>"text" %>
+        <%= hidden_field_tag "stages[position][]",s.position, :class=>"pos" %>
+        <%= hidden_field_tag "stages[sid][]",s.id, :class=>"ysid" %>
         </div>
-   <div id="currentStageDropdown">
-     <br />
-     <label>Aktuelle Stage:</label><br />
-     <%= select_tag "crrent", options_for_select(@project.stages.collect{ |s| [s.name, s.position, :sid=>s.id] }, @project.currentstage) %>
-   </div>
-<div class="clean hide"></div>
-
-     <%= render 'submit_buttons' %>
-   <% end %>
-  </div>
+        <a class="delete"><%= image_tag("delete.png") %></a>
+      </li>
+    <% end %>
+    </ul>
+    <div class="hide">
+      <% @project.stages.order("position ASC").each do |st| %>
+        <%= check_box_tag "project[stage_ids][]", st.id, @project.stages.include?(st), :class=>"hiddenstages" %>
+      <% end %>
+      <div class="newstages"></div>
+    </div>
+    <div id="currentStageDropdown">
+      <br /><label>Aktuelle Stage:</label><br />
+      <%= select_tag "crrent", options_for_select(@project.stages.collect{ |s| [s.name, s.position, :sid=>s.id] }, @project.currentstage) %>
+    </div>
+    <div class="clean hide"></div>
+    <%= render 'submit_buttons' %>
+  <% end %>
+</div>

@@ -1,28 +1,23 @@
 ﻿<div class="inline">
-<%= form_for @project, :url => {:action=>"update",:controller=>"jobs"}, :remote => true do |f| %>
+  <%= form_for @project, :url => {:action=>"update",:controller=>"jobs"}, :remote => true do |f| %>
     <%= render 'dialog' %>
-    <%= hidden_field_tag 'field', 'job' %>
+  
     <br /><label>Neuer Job:</label><br />
     <%= text_field_tag :job, "", :class=>"eName" %>
     <a class="add"><%= image_tag "vor.png" %></a>
     <br class="clean" />
     <ul class="openjobs">
-      <script type="text/javascript">
-      <% @project.jobs.each do |j| %>
-        jobAdd("<%= j.id %>", "<%= j.name %>", false);
-      <% end %>
-      </script>
+      <script type="text/javascript"><% @project.jobs.each do |j| %>jobAdd("<%= j.id %>", "<%= j.name %>", false);<% end %></script>
     </ul>
-     <div class="hide">
-     <% @project.jobs.each do |job| %>
+    <div class="hide">
+      <% @project.jobs.each do |job| %>
         <div>
          <%= check_box_tag "project[job_ids][]", job.id, @project.jobs, :class=>"hiddenjobs" %>
          <%= job.name %>
         </div>
       <% end %>
-      <div class="newjobs">
-      </div>
-     </div>
+      <div class="newjobs"></div>
+    </div>
     <%= render 'submit_buttons' %>
   <% end %>
 </div>

@@ -2,37 +2,38 @@
 
 <div id="overview" class="start">
   <% if !params[:category].nil? || !params[:status].nil? %>
-	<p class="stdNotice info">
-	  <%= link_to image_tag("close-notice.png"), Project, :class=>"right" %>
-	  <% if !params[:category].nil? %><%= params[:category] %><%= image_tag "arrow-notice.png" %><% end %>
-	  <% if !params[:status].nil? %><%= params[:status] %></i><%= image_tag "arrow-notice.png" %><% end %>
-	  <b><%= @projects.count %></b> Projekt<% if @projects.size>1 || @projects.size==0%>e<% end %>
-	</p>
+    <p class="stdNotice info">
+      <%= link_to image_tag("close-notice.png"), Project, :class=>"right" %>
+      <% if !params[:category].nil? %>
+        <%= params[:category] %>
+        <%= image_tag "arrow-notice.png" %>
+      <% end %>
+      <% if !params[:status].nil? %>
+        <%= params[:status] %>
+        <%= image_tag "arrow-notice.png" %>
+      <% end %>
+      <b><%= @projects.count %></b> Projekt<% if @projects.size>1 || @projects.size==0 %>e<% end %>
+    </p>
   <% end %>
 
-
-  <%
-	@projects.each do |p| 
-		@owner = p.roles.where(:role => 'owner').first.user
-  %>
+  <% @projects.each do |p| %>
 	<div class="boxcontent">
 	  <div class="projectcategory mmt"><% if p.categories.any? %> <%= p.categories.first.label %> <% end %></div>
 	  <div class="icon"><% if p.jobs.any? %><%= image_tag "statussearch.png" %><% end %></div>
 	  <div class="projectinfo">
-		<%= link_to image_tag(p.cover_url), p, :class=>"cover" %>
-		<h3><%= trimString p.title, 30 %></h3>
-		<p class="infotxt"><%= trimString p.description, 225 %></p>
-		<% #link_to p, :class =>'details' do image_tag "details-arrow.png" end %>
+      <%= link_to image_tag(p.cover_url), p, :class=>"cover" %>
+      <h3><%= trimString p.title, 30 %></h3>
+      <p class="infotxt"><%= trimString p.description, 225 %></p>
+      <% link_to p, :class =>'details' do image_tag "details-arrow.png" end %>
 	  </div>
 	  <div class="projectadmin">
-		<p class="left">von <%= link_to @owner.name, @owner %></p>
-		<p class="right"><b><%= p.has_followers.count %></b> Beobachter</p>
+      <p class="left">von <%= link_to p.owner.name, p.owner %></p>
+      <p class="right"><b><%= p.has_followers.count %></b> Beobachter</p>
 	  </div>
 	</div>
   <% end %>
   <div class="clean hide"></div>
   <%= will_paginate @projects %>
-
 
   <% if @projects.empty? %>
 	<p class="nodisplay"><i>Keine Projekte vorhanden &hellip;</i></p>

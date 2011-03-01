@@ -1,7 +1,7 @@
 <%= render 'layouts/sidebar_sorting' %>
 
 <div id="dashboardarea">
-		<ul id="stdProjectStatusUpdates">
+	<ul id="stdProjectStatusUpdates">
 	  <% @statusupdates.each do |su| %>
       <li class="dash">
         <div class="proj">
@@ -30,12 +30,12 @@
 		</div></div>
       </li>
 		<% end %>
-	  </ul>
-	  <% if @statusupdates.empty? %>
-		  <p class="nodisplay"><i>Keine Statusupdates &hellip;</i></p>
-	  <% end %>
-    <div class="clean hide"></div>
-    <%= will_paginate @statusupdates %>
+  </ul>
+  <% if @statusupdates.empty? %>
+    <p class="nodisplay"><i>Keine Statusupdates &hellip;</i></p>
+  <% end %>
+  <div class="clean hide"></div>
+  <%= will_paginate @statusupdates %>
 </div>
 
 <%= render 'sidebar' %>

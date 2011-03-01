@@ -1,17 +1,17 @@
 ﻿<%= render 'layouts/sidebar_sorting' %>
 <div id="projectdetails" class="wide">
   <div id="topbar">
-	<%= link_to @project, :class=>"stdBtn" do %><p>Zurück zum Projekt</p><%= image_tag "back.png" %></a><% end %>
-	<% if permitted_to? :create, @project.media.new %>
-    <%= link_to "javascript:overlay('#overlayMediaUpload');", :class=>"stdBtn mleft" do %><p>Medien hochladen</p><%= image_tag "new.png" %></a><% end %>
-  <% end %>
+    <%= link_to @project, :class=>"stdBtn" do %><p>Zurück zum Projekt</p><%= image_tag "back.png" %></a><% end %>
+    <% if permitted_to? :create, @project.media.new %>
+      <%= link_to "javascript:overlay('#overlayMediaUpload');", :class=>"stdBtn mleft" do %><p>Medien hochladen</p><%= image_tag "new.png" %></a><% end %>
+    <% end %>
   </div>
 	<div id="mediaall">
-    <h5 class="hl noedit">Alle Mediadaten <span>(<%= @numImages %>)</span></h5>
+    <h5 class="hl noedit">Alle Mediadaten <span>(<%= @project.images.count %>)</span></h5>
     <ul>
-    <% @images.each do |img| %>
-      <li><%= link_to (image_path img.asset.url(:original)) do image_tag img.asset.url(:large) end %></li>
-    <% end %>
+      <% @images.each do |img| %>
+        <li><%= link_to (image_path img.asset.url(:original)) do image_tag img.asset.url(:large) end %></li>
+      <% end %>
     </ul>
 	</div>
 </div>

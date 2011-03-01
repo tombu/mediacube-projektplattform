@@ -3,33 +3,27 @@
 <head>
   <title>Projektplattform</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag "jquery", "rails", "jcarousel", "lightbox", "jqueryui", "jqueryelastic", "jquerydragsort", "jqueryautocomplete", "jqueryinit" %>
+  <%= javascript_include_tag "jquery","rails","jcarousel","lightbox","jqueryui","jqueryelastic","jquerydragsort","jqueryautocomplete", "jqueryinit" %>
   <%= yield :plupload_header_files %>
   <!--<link rel="shortcut icon" href="../favicon.ico" />-->
   <%= csrf_meta_tag %>
-  <!-- VERY IMPORTANT : The code below allows MSIE to handle the new HTML5 tags -->
-    <!--[if IE]>
-        <script type="text/javascript">
-            document.createElement("header");
-            document.createElement("footer");
-            document.createElement("nav");
-            document.createElement("article");
-            document.createElement("section");
-            document.createElement("hgroup");
-            document.createElement("aside");
-        </script>
-    <![endif]-->
-    <style>
-    header, hgroup, section, footer, aside, nav, article {
-        display: block;
-    }
-    </style>
+  <!--[if IE]>
+      <script type="text/javascript">
+          document.createElement("header");
+          document.createElement("footer");
+          document.createElement("nav");
+          document.createElement("article");
+          document.createElement("section");
+          document.createElement("hgroup");
+          document.createElement("aside");
+      </script>
+  <![endif]-->
 </head>
 <body>
   <% if user_signed_in? %>
     <%= render 'layouts/application' %>
- <% else %>
-   <%= render 'layouts/login_pages' %>
- <% end %>
+  <% else %>
+    <%= render 'layouts/login_pages' %>
+  <% end %>
 </body>
 </html>

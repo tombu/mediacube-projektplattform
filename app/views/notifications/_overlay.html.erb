@@ -1,62 +1,52 @@
-﻿<!-- OVERLAY -->
-<div id="overlayNotifications" class="overlay nbtm">
+﻿<div id="overlayNotifications" class="overlay nbtm">
 	<h1>Notifications</h1>
   <%= link_to mark_as_read_notifications_path(@notifications), :method => :put, :id=>"close" do %>
-        <%= image_tag 'close.png' %>
-    <% end %>
+    <%= image_tag 'close.png' %>
+  <% end %>
 	<div class="content scroll">
-  <% if @notifications.nil? %><p class="no">keine Notifications vorhanden &hellip;</p><% end %>
-	<ul>
-	  <% @notifications.each do |n| %>
-      <% 
-        @categories = Array.new
-        n.project.categories.each do |c|
-          @categories << c.label
-        end 
-      %>
-      <li <% if n.isNew %>class="new"<% end %>>
-        <% case n.html_tmpl_key %>
-          <% when 'DECLINED' %>
-            <div class="declined">
-              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
-              <p><%= link_to n.sender.name, n.sender, :class=>"name" %> hat die Einladung für das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> abgelehnt.</p>
-          <% when 'ACCEPTED_TO_USER' %>
-            <div class="accepted">
-              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
-              <p><%= image_tag "okmini.png", :class=>"left" %>Deine Bewerbung für das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> wurde angenommen.</p>
-           <% when 'DECLINED_TO_USER' %>
-            <div class="declined">
-              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
-              <p>Deine Bewerbung für das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> wurde leider abgelehnt.</p>
-           <% when 'USER_NEW' %>
-            <div class="accepted">
-              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
-              <p><%= image_tag "usermini.png", :class=>"left" %><%= link_to n.sender.name, n.sender, :class=>"name" %> ist jetzt Mitglied im Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %>.</p>
-           <% when 'USER_LEAVE' %>
-            <div class="declined">
-              <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
-              <p><%= link_to n.sender.name, n.sender, :class=>"name" %> hat das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> verlassen.</p>
-           <% when 'DECISION_TO_USER' %>
-            <div class="decision">
-              <p>Du wurdest in das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> eingeladen.</p>
-              <%= link_to "Bestätigen", join_project_path(n.project, :dtu=>true, :notification_id=>n.id), :method=>:put, :class=>"stdBtn no2" %>
-              <%= link_to "Ablehnen", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED", :project_id=>n.project.id}, :method => :delete, :class=>"delete_notification stdBtn", :remote=>true %><br />
-           <% when 'DECISION_TO_OWNER' %>
-            <div class="decision">
-              <p><%= link_to n.sender.name, n.sender, :class=>"name" %> möchte dem Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> beitreten.</p>
-              <%= link_to "Akzeptieren", join_project_path(n.project, :receiver_id=>n.sender.id, :notification_id=>n.id), :method=>:put, :class=>"stdBtn no2" %>
-              <%= link_to "Ablehnen", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED_TO_USER", :project_id=>n.project.id}, :method => :delete, :class=>"delete_notification stdBtn", :remote=>true %><br />
+    <% if @notifications.nil? %><p class="no">keine Notifications vorhanden &hellip;</p><% end %>
+    <ul>
+  
+      <% @notifications.each do |n| %>
+        <li <% if n.isNew %>class="new"<% end %>>
+          <!-- delete notification button -->
+          <% if n.html_tmpl_key != 'DECISION_TO_USER' && n.html_tmpl_key != 'DECISION_TO_OWNER' %>
+            <%= link_to image_tag('close-notice.png'), n, :method=>:delete, :class=>"delete_notification wcs", :remote=>true %>
           <% end %>
-              <div class="project">
-                <%= image_tag "arrup.png", :class=>"arr" %><%= image_tag n.project.icon_url, :class=>"pic" %>
-                <h6><%= n.project.title %></h6>
-                <p><span><%= trimString @categories.join(', '), 25 %></span></p>
-              </div>
-              <sub class="date"><%= formatDate n.created_at, true, true %></sub>
-            </div>
+  
+          <div class="<%= n.html_tmpl_key %>"><p>
+          <% case n.html_tmpl_key %>
+            <% when 'DECLINED' %>
+                <%= link_to n.sender.name, n.sender, :class=>"name" %> hat die Einladung für das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> abgelehnt.</p>
+            <% when 'ACCEPTED_TO_USER' %>
+                <%= image_tag "okmini.png", :class=>"left" %>Deine Bewerbung für das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> wurde angenommen.</p>
+             <% when 'DECLINED_TO_USER' %>
+                Deine Bewerbung für das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> wurde leider abgelehnt.</p>
+             <% when 'USER_NEW' %>
+                <%= image_tag "usermini.png", :class=>"left" %><%= link_to n.sender.name, n.sender, :class=>"name" %> ist jetzt Mitglied im Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %>.</p>
+             <% when 'USER_LEAVE' %>
+                <%= link_to n.sender.name, n.sender, :class=>"name" %> hat das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> verlassen.</p>
+             <% when 'DECISION_TO_USER' %>
+                Du wurdest in das Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> eingeladen.</p>
+                <%= link_to "Bestätigen", join_project_path(n.project, :dtu=>true, :notification_id=>n.id), :method=>:put, :class=>"stdBtn no2" %>
+                <%= link_to "Ablehnen", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED", :project_id=>n.project.id}, :method => :delete, :class=>"delete_notification stdBtn", :remote=>true %><br />
+             <% when 'DECISION_TO_OWNER' %>
+                <%= link_to n.sender.name, n.sender, :class=>"name" %> möchte dem Projekt <%= link_to n.project.title, n.project, :class=>"projectover" %> beitreten.</p>
+                <%= link_to "Akzeptieren", join_project_path(n.project, :receiver_id=>n.sender.id, :notification_id=>n.id), :method=>:put, :class=>"stdBtn no2" %>
+                <%= link_to "Ablehnen", {:controller=>:notifications, :action=>:destroy, :id=>n.id, :notify=>"DECLINED_TO_USER", :project_id=>n.project.id}, :method => :delete, :class=>"delete_notification stdBtn", :remote=>true %><br />
+            <% end %>
+            
+          <!-- additional informations for project -->
+          <div class="project">
+            <%= image_tag "arrup.png", :class=>"arr" %><%= image_tag n.project.icon_url, :class=>"pic" %>
+            <h6><%= n.project.title %></h6>
+            <p><span><%= trimString n.categories.join(', '), 25 %></span></p>
+          </div>
+          <sub class="date"><%= formatDate n.created_at, true, true %></sub>
+        </div>
       </li>
-	  <% end %>
-	</ul>
-	  <div class="clean"></div>
-	</div>
+    <% end %>
+  </ul>
+  <div class="clean"></div>
+  </div>
 </div>
