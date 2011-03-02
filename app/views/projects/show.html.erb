@@ -1,52 +1,53 @@
 ﻿<%= render 'layouts/sidebar_sorting' %>
 
-<div id="projectdetails" class="wide">
+<div id="projectdetails">
+  <div id="topbar">
+    <% if @project.jobs.any? %><%= image_tag "statussearch.png", :class=>"left" %><% end %>
+    <div class="btns">
+      <% if permitted_to? :follow, @project %>
+        <%= link_to follow_project_path(@project), :method => :put, :class=>"stdBtn" do %>
+          <p>Beobachten</p><%= image_tag "spec.png" %>
+        <% end %>
+      <% end %>
+      <% if permitted_to? :unfollow, @project %>
+        <%= link_to unfollow_project_path(@project), :method => :delete, :class=>"stdBtn" do %>
+          <p>nicht mehr Beobachten</p><%= image_tag "nospec.png" %>
+        <% end %>
+      <% end %>
+      <% if permitted_to? :leave, @project %>
+        <%= link_to leave_project_path(@project), :method => :delete, :class=>"stdBtn" do %>
+          <p>Projekt verlassen</p><%= image_tag "noapply.png" %>
+        <% end %>
+      <% end %>
+      <% if (permitted_to? :apply, @project) && (current_user.can_apply? @project) %>
+        <%= link_to apply_project_path(@project), :method => :post, :class=>"stdBtn" do %>
+          <p>Bewerben</p><%= image_tag "apply.png" %>
+        <% end %>
+      <% end %>
+      <% if permitted_to? :edit, @project %>
+        <%= link_to edit_project_path, :class=>"stdBtn" do %><p>Bearbeiten</p><%= image_tag "editit.png" %><% end %>
+        <%= link_to "javascript:overlay('#overlaySendInvitation');", :class=>"stdBtn" do %><p>User einladen</p><%= image_tag "apply.png" %></a><% end %>
+      <% end %>
+      <% if permitted_to? :create, @project.media.new %>
+        <%= link_to "javascript:overlay('#overlayMediaUpload');", :class=>"stdBtn" do %><p>Medien hochladen</p><%= image_tag "new.png" %></a><% end %>
+      <% end %>
+    </div>
+  </div>
   <div class="center">
     <div id="projectinfo">
       <div class="edit">
-        <div class="image">
-          <%= image_tag @project.cover_url %>
-        </div>
         <div id="projecthead">
           <h5><%= @project.title %></h5>
-          <ul class="category">
+        </div>
+        <%= image_tag @project.cover_url, :class=>"image" %>
+        <ul class="category">
             <% @project.categories.each do |c| %>
               <li><%= c.label %></li>
             <% end %>
           </ul>
-        </div>
-        <p class="desc"><%= @project.description %></p>
+        <div class="desc"><%= simple_format @project.description %></div>
       </div>
     </div>
-  </div>
-  <div id="topbar">
-    <% if permitted_to? :follow, @project %>
-      <%= link_to follow_project_path(@project), :method => :put, :class=>"stdBtn" do %>
-        <p>Beobachten</p><%= image_tag "spec.png" %>
-      <% end %>
-    <% end %>
-    <% if permitted_to? :unfollow, @project %>
-      <%= link_to unfollow_project_path(@project), :method => :delete, :class=>"stdBtn" do %>
-        <p>nicht mehr Beobachten</p><%= image_tag "nospec.png" %>
-      <% end %>
-    <% end %>
-    <% if permitted_to? :leave, @project %>
-      <%= link_to leave_project_path(@project), :method => :delete, :class=>"stdBtn" do %>
-        <p>Projekt verlassen</p><%= image_tag "noapply.png" %>
-      <% end %>
-    <% end %>
-    <% if (permitted_to? :apply, @project) && (current_user.can_apply? @project) %>
-      <%= link_to apply_project_path(@project), :method => :post, :class=>"stdBtn" do %>
-        <p>Bewerben</p><%= image_tag "apply.png" %>
-      <% end %>
-    <% end %>
-    <% if permitted_to? :edit, @project %>
-      <%= link_to edit_project_path, :class=>"stdBtn" do %><p>Projekt bearbeiten</p><%= image_tag "editit.png" %><% end %>
-      <%= link_to "javascript:overlay('#overlaySendInvitation');", :class=>"stdBtn" do %><p>User ins Team holen</p><%= image_tag "new.png" %></a><% end %>
-    <% end %>
-    <% if permitted_to? :create, @project.media.new %>
-      <%= link_to "javascript:overlay('#overlayMediaUpload');", :class=>"stdBtn mleft" do %><p>Medien hochladen</p><%= image_tag "new.png" %></a><% end %>
-    <% end %>
   </div>
   <div class="getleft">
     <div id="updates">
@@ -90,11 +91,11 @@
   
     <div id="media">
       <h5 class="noedit">Medien <span>(<%= @count_images %>)</span></h5>
-      <% if !@project.images.first.nil? %>
+      <% if @project.images.any? %>
           <% if @count_images > 5 %><a class="prev"><%= image_tag 'left.png' %></a><% end %>
           <div class="mediaslider">
           <ul>
-            <% @project.images.each do |m| %>
+            <% @project.images.sorted.each do |m| %>
               <li><%= link_to (image_path m.asset.url(:original)) do image_tag m.asset.url(:medium) end %></li>
             <% end %>
           </ul>
@@ -105,8 +106,8 @@
       <% end %>
     </div>
   </div>
-  <%= render 'rightbar' %>
 </div>
+<%= render 'rightbar' %>
 <!-- UPLOAD OVERLAY-->
 <% if permitted_to? :create, @project.media.new %>
   <%= render :partial => 'media/upload_form', :locals => { :multiple_queues => true } %>

@@ -8,7 +8,7 @@ class MediaController < ApplicationController
   
   def index
     @project = Project.find(params[:project_id])
-    @images = @project.images.all
+    @images = @project.images.sorted.all
   end
 
   def new

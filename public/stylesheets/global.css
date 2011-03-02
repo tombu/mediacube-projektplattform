@@ -9,6 +9,8 @@ body {
 	color: #444;
 }
 
+
+
 textarea { font-family: "Calibri", sans-serif; }
 
 #wrapper {
@@ -280,15 +282,15 @@ section {
 	background-color: #ffffff;
 	float: left;
 	position: relative;
-	z-index: 1;
-	margin-top: -4px;
+	margin: -4px 0 0 0;
 }
 
 #topborder {
 	width: 100%;
 	border-top: 1px solid #bbb;
-	margin-top: 2px;
+	margin: 2px 0 5px;
 	overflow: hidden;
+  border-bottom: 5px solid #666;
 }
 
 #contentwrapper {
@@ -301,22 +303,21 @@ section {
 }
 
 #sidebar {
-	width: 150px;
+	width: 138px;
 	padding: 0;
 	float: left;
 }
 
 #sidebar h2 {
-	font-size: 12px;
+	font-size: 14px;
 	text-transform: uppercase;
 	display: block;
-	border-left: 2px solid #0ab1f0;
 	text-indent: 8px;
 	height: 25px;
 	line-height: 25px;
 	margin: 0;
-	color: #666;
-  background: #fafbfb;
+	color: #333;
+  border-bottom: 1px solid #333;
 }
 
 #sidebar ul {
@@ -346,7 +347,7 @@ section {
   background: url('../images/arrow-sidebar.png') no-repeat 9px center;
 }
 
-#overview { float: left; width: 800px; }
+#overview { float: left; width: 800px; margin-left: 12px; }
 #overview.start { width: 795px; }
 
 .boxcontent {
@@ -710,7 +711,7 @@ section {
 
 #projectdetails, #dashboardarea
 {
-  margin-left: 15px;
+  margin-left: 13px;
   float: left;
   width: 550px;
 }
@@ -718,7 +719,6 @@ section {
 #projectdetails .center
 {
   overflow: hidden;
-  border-bottom: 1px solid #eeeeee;
   padding-bottom: 20px;
 }
 #projectdetails .getleft
@@ -728,17 +728,17 @@ section {
 }
 #topbar {
   overflow: hidden;
-	border-bottom: 1px solid #eee;
-  padding: 10px 0 8px 0;
+  padding: 5px 0 8px 0;
   margin-bottom: 20px;
   /*background: #2c2c2c;*/
 }
 #topbar .stdBtn {
-  margin-left: 20px;
+  margin-left: 10px;
+  float: left;
 }
-#topbar .stdBtn:first-child {
-  margin-left: 0;
-}
+#topbar .left { margin-top: 4px; }
+#topbar .stdBtn:first-child  { margin-left: 0; }
+#topbar .btns { float: right; }
 #projectstatus {
 	width: 200px;
 	float: left;
@@ -755,10 +755,10 @@ section {
 	font-size: 22px;
 	color: #555;
 	font-weight: normal;
-  margin-top: -5px;
+    margin: -3px 10px 10px 0;
 }
 
-#projectdetails #projecthead .category, #npformular .category {
+#projectdetails .category, #npformular .category {
 	font-size: 12px;
 	color: black;
 	font-weight: normal;
@@ -766,7 +766,7 @@ section {
 	list-style: none;
 	overflow: hidden;
 }
-#projectdetails #projecthead .category li, #npformular .category li 
+#projectdetails .category li, #npformular .category li 
 {
   padding: 3px 8px;
   border: 1px solid #eee;
@@ -781,31 +781,22 @@ section {
 
 #projectdetails #projectinfo, #projectdetails #projectinfo.edit, #projectdetails #projectcover
 {
-	float: left;
   overflow: hidden;
 }
-
-#projectdetails #projectinfo p.desc {
+#projectdetails #projectinfo { position: relative; }
+#projectdetails #projectinfo .desc {
 	font-size: 12px;
 	margin: 17px 0 0 0;
 	color: #777;
   text-align: justify;
+  width: 300px;
+  padding-left: 245px;
 }
-
+#projectdetails #projectinfo .desc p { margin-bottom: 10px; }
 #projectdetails #projectupdates {
 	float: left;
 	width: 550px;
 	margin-bottom: 50px;
-}
-
-#projectdetails #projectupdates h5 {
-	font-size: 12px;
-	text-transform: uppercase;
-	font-weight: normal;
-	display: block;
-	border-bottom: 1px solid #000;
-	padding-bottom: 2px;
-	margin: 0;
 }
 
 #projectdetails #projectupdates .update {
@@ -896,14 +887,14 @@ section {
 }
 
 #projectdetails #media h5, #projectportfolio h5, #profilstatement h5 , #projectdetails h5.hl, #updates h5, .inline h5 {
-  font-size: 12px;
+  font-size: 14px;
 	text-transform: uppercase;
 	display: block;
 	height: 25px;
 	line-height: 25px;
 	margin-bottom: 10px;
-	color: #666;
-  background: #fafbfb;
+	border-bottom: 1px solid #333;
+	color: #333;
   text-indent: 8px;
 }
 .inline h5.cover
@@ -920,15 +911,15 @@ section {
 }
 
 #rightbar h5, #rightbar h2 {
-	font-size: 12px;
+	font-size: 14px;
 	text-transform: uppercase;
 	display: block;
 	height: 25px;
 	line-height: 25px;
 	margin: 0;
-	color: #666;
-  background: #fafbfb;
+	color: #333;
   text-indent: 8px;
+  border-bottom: 1px solid #333;
 }
 #rightbar h5 span, #rightbar h2 span { font-weight: normal; }
 
@@ -1730,11 +1721,11 @@ section {
 }
 .stdBtn
 {
-  height: 31px;
-  line-height: 31px;
+  height: 29px;
+  line-height: 29px;
   color: #444;
   text-align: center;
-  padding: 0 8px;
+  padding: 0 8px 0 6px;
   font-size: 13px;
   display: inline-block;
   cursor: pointer;	
@@ -1747,7 +1738,7 @@ section {
   overflow: hidden;
 }
 .stdBtn p { border-left: 2px solid White; padding-left: 7px; float: right; }
-.stdBtn img { float: left; margin-top: 0; border-right: 1px solid #dae3e6; display: block; padding: 4px 8px 5px 0; }
+.stdBtn img { float: left; margin-top: 0; border-right: 1px solid #dae3e6; display: block; padding: 3px 5px 3px 0; }
 
 .stdBtn.no2 { background: #333 url('/images/bgdark.png') repeat-x; border: 1px solid #333; color: White; margin-right: 0!important; height: 30px;}
 .stdBtn.no2 p { margin: 0; padding: 0; border: 0; }
@@ -1808,11 +1799,7 @@ section {
   margin: 0 15px 0 0;
 }
 
-.noedit, #rightbar h2
-{
-  border-left: 2px solid #0ab1f0;
-  text-indent: 8px;
-}
+
 .clean { float: none; clear: both; }
 .clean.hide { visibility: hidden; }
 div.hide { display: none; }
@@ -2379,6 +2366,7 @@ input.hide { display: none; }
   overflow: hidden;
   position: relative;
 }
+#dashboardarea #stdProjectStatusUpdates li { padding-left: 0; }
 #stdProjectStatusUpdates .dash:first-child { padding-top: 0; }
 
 /*

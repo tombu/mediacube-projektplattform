@@ -1,5 +1,5 @@
 class Image < Medium
-  
+
   has_attached_file :asset, :whiny => false,
     :styles => { 
       :large => "130x130#",

@@ -7,6 +7,8 @@ class Medium < ActiveRecord::Base
     :url => "/media/projects/images/:style/:id_:filename",
     :path => ":rails_root/public/media/projects/images/:style/:id_:filename"
   
+  scope :sorted, order('created_at DESC')
+  
   protected
 
     def randomize_file_name

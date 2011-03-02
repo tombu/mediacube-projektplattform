@@ -42,19 +42,19 @@ class User < ActiveRecord::Base
   end
   
   def running_projects
-    Project.joins(:roles).where(:roles => { :role => [ "owner", "leader", "member" ], :user_id => self.id }, :projects => { :status => [ "idea", "inprogress" ] })
+    Project.joins(:roles).where(:roles => { :role => [ "owner", "leader", "member" ], :user_id => self.id }, :projects => { :status => [ "idea", "inprogress" ] }).sorted
   end
   
   def finished_projects
-    Project.joins(:roles).where(:roles => { :user_id => self.id }, :projects => { :status => "finished" })
+    Project.joins(:roles).where(:roles => { :user_id => self.id }, :projects => { :status => "finished" }).sorted
   end
   
   def involved_projects
-    Project.joins(:roles).where(:roles => { :role => [ "owner", "leader", "member" ], :user_id => self.id })
+    Project.joins(:roles).where(:roles => { :role => [ "owner", "leader", "member" ], :user_id => self.id }).sorted
   end
   
   def following_projects
-    Project.joins(:roles).where(:roles => { :role => "follower", :user_id => self.id })
+    Project.joins(:roles).where(:roles => { :role => "follower", :user_id => self.id }).sorted
   end
   
   def is_following

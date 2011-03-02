@@ -23,7 +23,7 @@
             </td>
             <td class="follow">
               <%= link_to p, :class=>"stdBtn" do %><p>Ansehen</p><%= image_tag "details-arrow.png" %></a><% end %>
-              <% if !p.followers.include? current_user %>
+              <% if (!p.followers.include? current_user) && (!p.team(true).include? current_user) %>
                 <%= link_to follow_project_path(p), :method => :put, :class=>"stdBtn" do %><p>Beobachten</p><%= image_tag "spec.png" %></a><% end %>
               <% end %>
             </td>
