@@ -347,6 +347,7 @@ section {
 
 #overview { float: left; width: 800px; }
 #overview.start { width: 815px; }
+#overview.search { margin-left: 15px; }
 
 .boxcontent {
 	width: 250px;
