@@ -1,4 +1,4 @@
-﻿// jquery
+// jquery
 
 // AJAX Bindings
 function formBinding(where){
@@ -278,7 +278,7 @@ function jobAdd(val, text, nw) {
       $delNew = true;
     }
     else { $newTag =''; $delNew = false; }
-    $('#searchingmember .inline .openjobs').append('<li '+$newTag+' class="no'+$value+'">» '+$text+'<a href="javascript:jobDelete(' + $value + ','+$delNew+');" class="right del"><img src="/images/delete.png" /></a></li>');
+    $('#searchingmember .inline .openjobs').append('<li '+$newTag+' class="no'+$value+'">� '+$text+'<a href="javascript:jobDelete(' + $value + ','+$delNew+');" class="right del"><img src="/images/delete.png" /></a></li>');
   
     $("#searchingmember .inline .eName").val("");
   }
