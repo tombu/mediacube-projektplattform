@@ -13,15 +13,12 @@
           <span>Web:</span> <%= link_to @user.web, external_url(@user.web), :target => "_blank", :class=>"link" %>
         </p>
       </div>
-      <%= link_to "#", :class=>"stdBtn right" do %>
-        <p>Nachricht schicken</p><%= image_tag "details-arrow.png" %>
-      <% end %>
       <div class="clean hide"></div>
     </div>
  		<% if !@user.statement.nil? %>
     <div id="profilstatement">
 			<h5 class="noedit">Statement</h5>
-			<div><%= @user.statement %></div>
+			<div><%= simple_format @user.statement %></div>
 	  </div>
 	  <% end %>
     <div id="projectportfolio">

@@ -4,23 +4,21 @@
     <div id="profilemenu">
       <div>
         <% if user_signed_in? %>
-          <div class="logout"><%= link_to "Logout", destroy_user_session_path%></div>
+          <div class="logout"><%= link_to "Logout", destroy_user_session_path %></div>
           <div class="icons">
               <ul>
                   <li class="project">
                     <%= link_to image_tag('icon_project.png'), "javascript:overlay('#overlayNotifications');" %>
                     <% if User.count_unread_notifications(current_user) > 0 %><sup class="count"><%= User.count_unread_notifications current_user %></sup><% end %>
                   </li>
-                  <li class="editprofile"><%= link_to image_tag('edittop.png'), edit_user_path(current_user) %></li>
+                  <li class="editprofile">
+									  <%= link_to image_tag('edittop.png'), edit_user_path(current_user) %>
+									</li>
               </ul>
           </div>
         <% end %>
         <div class="user">
-          <% if user_signed_in? %>
-						<%= link_to current_user.name, current_user, :class=>"text" %>
-					<% else %>
-						<p class="text"><%= link_to "Anmelden", new_user_session_path %> oder <%= link_to "Registrieren", new_user_registration_path %></p>
-					<% end	%>
+					<%= link_to current_user.name, current_user, :class=>"text" %>
 			  </div>
       </div>
     </div>
@@ -51,12 +49,37 @@
     </div></div>
   </section>
   <footer id="foot">
-    <div id="footercontent"><div id="mediacube"><ul>
-      <li class="linkmma"><a href="#">MultiMediaArts</a></li>
-      <li class="linkfh"><a href="#">Fachhochschule Salzburg</a></li>
-      <li class="linkmmt"><a href="#">MultiMediaTechnologie</a></li>
-    </ul></div></div>
+    <div id="footercontent">
+      	<div class="sitemap wide">
+          	<h4>Kategorien</h4>
+          	<ul id="categories-footer">
+							<% Category.sorted_asc.each do |c| %>
+            		<li><%= link_to c.label, projects_path(:category=>c.label) %></li>
+            	<% end %>
+            </ul>
+        </div>
+        <div class="sitemap">
+          	<h4>Profil</h4>
+          	<ul>
+            		<li><%= link_to "mein Profil anzeigen", user_path(current_user) %></li>
+            		<li><%= link_to "mein Profil bearbeiten", edit_user_path(current_user) %></li>
+            </ul>
+						<h4>Projekte</h4>
+          	<ul>
+            		<li><%= link_to "Projekte anzeigen", projects_path %></li>
+            		<li><%= link_to("neues Projekt anlegen", "javascript:overlay('#overlayCreateProject');") %></li>
+            </ul>
+       	</div>
+      	<div id="mediacube">
+        		<ul>
+            		<li class="linkmma"><a href="#">MultiMediaArts</a></li>
+            		<li class="linkmmt"><a href="#">MultiMediaTechnologie</a></li>
+            		<li class="linkfh"><a href="#">Fachhochschule Salzburg</a></li>
+            </ul>
+        </div>
+  	</div>
   </footer>
 </div>
 <!-- Overlay for Notifications -->
 <%= render 'notifications/overlay' %>
+<%= render 'projects/overlay_form' %>

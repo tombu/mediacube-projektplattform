@@ -370,6 +370,10 @@ $(document).ready(function(){
       $('#projectprogress .inline #crrent option[sid="'+$sidd+'"]').html($(this).val());
     }
   });
+
+	$('#categories-footer').easyListSplitter({ 
+			colNumber: 2,
+	});
 });
 
 function isStages() {
@@ -400,12 +404,6 @@ function stageAdd(position, text, nw) {
   $("#crrent").append('<option value="'+$position+'" sid="'+$highestId+'">'+$text+'</option>');
 }
 
-
-
-
-
-
-
 // Overlay
 function overlay(id){
     $.blockUI({ 
@@ -433,7 +431,6 @@ function overlay(id){
         return false; 
     });
 }
-
 
 function submitForm(id){
   $id = id;

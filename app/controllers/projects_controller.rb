@@ -24,7 +24,6 @@ class ProjectsController < ApplicationController
         params[:project][:category_ids] ||= {}
         @project.update_attributes params[:project]
       when 'status'
-        @project.params = params[:project]
         @project.update_attributes params[:project]
     end
     
