@@ -2,14 +2,8 @@ class RolesController < ApplicationController
   def update
     @project = Project.find params[:id]
 
-    oldTeam = Array.new
-    @project.team(true).each do |j|
-      oldTeam << j.id
-    end
-    newTeam = Array.new
-    params[:project][:role_ids].each do |r|
-      newTeam << Role.find(r).user_id
-    end
+    oldTeam = @project.team(true).map { |j| j.id }
+    newTeam = params[:project][:role_ids].map { |r| Role.find(r).user_id }
 
     params[:project][:role_ids] ||= {}
     if @project.update_attributes params[:project]
@@ -31,7 +25,7 @@ class RolesController < ApplicationController
     else redirect_to project_path
     end
     params[:roles].each_with_index do |jobnew, key|
-      @temprole = @project.roles.find_by_id(params[:project][:role_ids][key])
+      @temprole = @project.roles.find(params[:project][:role_ids][key])
       @temprole.job = jobnew
       @temprole.save
     end

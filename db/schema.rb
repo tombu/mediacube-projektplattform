@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20110126191243) do
 
   create_table "media", :force => true do |t|
     t.string   "label"
+    t.string   "link"
     t.integer  "project_id"
     t.integer  "statusupdate_id"
     t.datetime "created_at"

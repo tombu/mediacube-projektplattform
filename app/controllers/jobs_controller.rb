@@ -10,11 +10,7 @@ class JobsController < ApplicationController
     end
 
     # collect old jobs (before update)
-    oldJobs = Array.new
-    @project.jobs.each do |j|
-      oldJobs << j.id.to_s
-    end
-
+    oldJobs = @project.jobs.map { |j| j.id.to_s }
 
     if oldJobs.any? && oldJobs != params[:project][:job_ids]
       # get deleted jobs
@@ -25,7 +21,7 @@ class JobsController < ApplicationController
 
       if @project.update_attributes params[:project]
          # add statusupdate
-         @project.statusupdates << Statusupdate.create(
+         @project.statusupdates.create(
            :content => Texttemplate.substitute(:job_delete, {"#jobs" => deletedJobs.join(', ')}), :isPublic => true, 
            :user => current_user, :html_tmpl_key => "JOBS2")
       end
@@ -38,7 +34,7 @@ class JobsController < ApplicationController
     end
 
     # add statusupdate
-    @project.statusupdates << Statusupdate.create(
+    @project.statusupdates.create(
       :content => Texttemplate.substitute(:job_new, {"#jobs" => params[:newjobs].join(', ')}),  :isPublic => true, 
       :user => current_user, :html_tmpl_key => "JOBS")
     end

@@ -91,7 +91,7 @@ class Project < ActiveRecord::Base
     self.roles.where(:role => [ "owner", "leader", "member" ])
   end
   
-private
+protected
   def post_statusupdate
     if self.title_changed? || self.description_changed?
       self.statusupdates.create(
@@ -99,7 +99,7 @@ private
         :user => nil, :html_tmpl_key => "EDIT")
     elsif self.status_changed?
       self.statusupdates.create(
-        :content => Texttemplate.substitute(:project_status_edit, {"#status" => Project.parse_status(params[:project][:status])}), 
+        :content => Texttemplate.substitute(:project_status_edit, {"#status" => Project.parse_status(status)}), 
         :isPublic => true, :user => nil, :html_tmpl_key => "STATUS")
     end
   end
