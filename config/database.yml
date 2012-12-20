@@ -14,12 +14,3 @@ test:
   database: db/test.sqlite3
   pool: 5
   timeout: 5000
-
-production:
-  adapter: mysql2
-  encoding: utf8
-  reconnet: false
-  database: fhs31453_production
-  pool: 5
-  username: fhs31453
-  password: X4PBWq
